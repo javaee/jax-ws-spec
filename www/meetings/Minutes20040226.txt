@@ -1,0 +1,133 @@
+1. Roll Call, scribe for minutes selected from attached list.
+
+N	ATG	Jim Frost
+Y	BEA Systems 	Manoj Cheenath 
+N	DevelopMentor	Kevin Jones
+Y	IBM	Russell Butek
+N	IONA Technologies PLC 	Daniel Kulp 
+N	Motorola 	Rahul Sharma 
+N	Nokia	Srividya Natarajan
+Y	Novell, Inc. 	Bjarne Rasmussen 
+N	NTT Data Corp	Toshiyuki Kimura 
+Y	Oracle	Sunil Kunisetty
+N	Pramati	Rajiv Shivane
+N	SAP AG 	Chavdar Baikov 
+N	SeeBeyond Technology Corp. 	Ugo Corda
+R	Sonic	Glen Daniels
+R	Sosnoski Software	Dennis Sosnoski
+Y	Sun	Marc Hadley
+R	Sun	Roberto Chinnici
+Y	Sun	Doug Kohlert
+Y	Tmax Soft	Changshin Lee
+N	WebMethods Corporation 	Christopher St. John
+
+Bjarne to scribe.
+
+2. Agenda Review and AOB
+
+No other business.
+
+3. Approval of Feb 19th telcon minutes
+
+Approved.
+
+4. Review action items
+
+- Glen to circulate alternate proposal for dealing with protocol 
+specific fault information on client and server side
+
+Done.
+
+- Marc to think about how faults fit in with DII
+
+Pending; note in last draft; consider in light of Glenn's proposal.
+
+- Sunil to provide use case / message processing flow to explain why 
+calling handleClosure in addition to handleFault/handleResponse is 
+preferable
+
+Done; no particular use case.
+
+Action: Marc to send tentative agenda for F2F
+
+Weekly meeting on for next week.
+
+5. Proposal for Handlers
+
+Starting at 3.2.4.3.1, p19:
+
+Richard: behaviour on RuntimeException from handleRequest on client
+Marc: generate SOAP fault message? no
+Russell: just throw RemoteException with whatever information
+Richard: skip handleClosure on throwing handler
+Doug: backwards compatibility?
+
+Poll: what do people do in their implementation:
+  - what happens when handleRequest throws RuntimeException (client side)
+  - 3.2.4.3.1, bullet 2: "starting with handler instance preceding ..." - 
+    backwards compatibility?
+
+Action: Marc to poll
+
+Richard: problems with nested handler chains: developers will get
+handleResponse and need to know which handlers to call, backing up from
+a certain point, need to maintain state
+Richard: handleClosure is only invoked if handleRequest is previously invoked
+Russell: handleRequest "wakes up" the handler
+Marc: developers responsibility, developer can do what he likes in
+chain, no need to comply with rules
+Russell: must follow same rules
+Richard: handler chain expects to be managed as specified
+Richard: only issue when handler chain can be deployed as handler
+Marc: good to have self-contained handler chains, composable
+Richard: flag to determine behavior?
+Richard: if using handler registry (deprecated), automatically wrap to
+get old behavior?
+Doug: wrapping could allow old-style handlers without handleClosure
+All: need to think about this a bit more
+
+Richard: p20 typo: H2.handleFault will not be called in new framework
+(unless wrapped)
+
+3.2.4.3.2, p20:
+
+Richard: bullet 3: same issue on client with RuntimeException
+
+3.2.4.3.3, p21:
+
+Richard: if handleResponse changes soap body to be a fault, next time
+handleFault is called
+Bjarne: expensive
+Marc: agree
+Richard: implied in JAX-RPC 1.x?
+Richard: client won't be able to tell what happended if server-side
+handler misbehaves
+Marc: handlers can do so many things, what can you do? very expensive to
+monitor message changes
+Bjarne: what if handler changes to soap fault and then encrypts? can't
+prevent anyway
+Marc: say in spec that handlers "should not" do that
+Russell: must include that in spec
+Richard: can live with that
+Richard: handler must throw exception rather than modifying the message
+to be a soap fault
+Marc: we generally agreed on this on the last call
+
+3.2.4.3.4:
+
+Marc: make explicit that handleClosure is only called if handleRequest
+was previously invoked and returned true
+sunil: if just one handler and handleRequest return false?
+Richard: then handleClosure is not called, handleRequest must do the clean-up
+sunil: clean-up code in too many places
+Richard: returning false means handler is done, handler can call
+handleClosure before returning false
+sunil: still think handleClosure should be called if handleRequest was
+called, clean-up mechanism
+Richard: handlers should only be called twice, avoid unnecessary calls
+Richard: vendors could provide wrapper that calls handleClosure as appropriate
+Marc: either way as long as the spec is very clear
+
+Marc: do we need another call to go through the rest, or refresh doc first?
+Richard: need to look at last week's meeting notes, then decide
+Marc: would like to get other things on agenda for next week
