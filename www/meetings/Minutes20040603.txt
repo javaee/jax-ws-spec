@@ -1,0 +1,131 @@
+Minutes for the JSR 224 telcon on 3rd June, 2004.
+
+1. Roll Call, scribe for minutes selected from attached list.
+
+n	ATG	Jim Frost
+n	BEA Systems 	Manoj Cheenath 
+n	Cap Gemini	Alastair Harwood 
+n	DevelopMentor	Kevin Jones
+n	IBM	Richard Sitze
+n	IBM	Russell Butek
+n	Intalio	Sebastien Sahuc 
+n	IONA Technologies PLC 	Daniel Kulp 
+n	Motorola 	Rahul Sharma 
+n	Nokia	Srividya Natarajan
+R	Novell, Inc. 	Bjarne Rasmussen 
+n	NTT Data Corp	Toshiyuki Kimura 
+y	Oracle	Sunil Kunisetty
+n	Pramati	Rajiv Shivane
+n	SAP AG 	Chavdar Baikov 
+n	SeeBeyond Technology Corp. 	Ugo Corda
+y	Sonic	Glen Daniels
+n	Sosnoski Software	Dennis Sosnoski
+y	Sun	Marc Hadley
+y	Sun	Roberto Chinnici
+y	Sun	Doug Kohlert
+n	Tmax Soft	Changshin Lee
+n	Trifork	Claus Nyhus Christensen 
+n	WebMethods Corporation 	Christopher St. John
+
+Marc to scribe
+
+2. Agenda Review and AOB
+
+AOB: Interest in an informal get together at JavaOne ? Perhaps arrange around the JAX-RPC BOF. Marc will send details to EG mailing list.
+
+
+3. Approval of May 27th telcon minutes
+
+See https://jsr224.dev.java.net/meetings/Minutes20040527.txt
+
+Approved.
+
+
+4. Review action items
+
+See https://jsr224.dev.java.net/
+
+None at present
+
+
+5. Review of latest draft
+
+See https://jsr224.dev.java.net/drafts/spec20040520.pdf
+and https://jsr224.dev.java.net/drafts/javadoc20040520.zip
+
+Comments from Bjarne:
+
+- Section 3.3, 5th bullet: do we need this restriction? We could
+alternatively just say these are not mapped.
+
+Will create an issue for this.
+
+- Chapter 3: I think we miss describing how wsdl:service is created?
+
+Will create an issue for this but not chnage current draft.
+
+- Section 4.1.1: I think we need a property capacity. As an aside, I
+personally dislike having system properties as the sole mechanism for
+factories since it assumes that everything that uses a particular
+classloader uses the same factory. We have several cases where this is
+not the case. I'd rather have a version of newInstance that takes
+properties, and where one of the properties could in fact be
+javax.xml.rpc.ServiceFactory. With only a system property available, you
+can't use multiple factories in a thread-safe manner unless you
+hard-code the implementation class.
+
+Already a note in the spec about this, will revisit after early draft
+review comments.
+
+- Can we add a comment after the examples in 4.7.6.3 and 4.7.6.4 that
+this could also be done using data binding?
+
+Will add these comments prior to draft publication
+
+- Chapter 5: Didn't we at some point have an API to extract a header
+in a type-safe manner? Something like this in LogicalMessageContext:
+   Source getHeader(QName header);
+   Object getHeader(QName header, JAXBContext context);
+   
+These were overlooked, will add these prior to publication
+
+- Can we rename closeMEP to close? (my eyes hurt ...)
+
+Agreed to rename to "close" prior to publication
+
+Comments from Glen
+
+- Concern re requiring J2SE 1.5. Glen will look back though message
+archive and meeting minutes to review previous discussion of this.
+
+- Handler ordering. Would be useful to be able to intersperse logical
+handlers with protocol handlers.
+
+Marc/Roberto explained reason for current ordering is to allow
+integration with JSR 208.
+
+Will add note to draft requesting feedback on the current ordering
+proposal and noting the desire to be able to mix types.
+
+- Handler ordering. Might be easier to understand if order was different
+on client and server - i.e. on client first handler is first for
+outbound messages and last for inbound but on server first handler is
+first for inbound messages and last for outbound messages.
+
+Some discussion about whether this was easier to understand or not,
+particularly with respect to more complex message exchange patterns.
+
+Will leave as is for now.
+
+- Multiple messages in the message context. Might be easier for handlers
+if the message context contained both request and response messages
+rather than just a single message.
+
+Will create an issue for this.
+
+Marc will produce two versions of draft incorporating all agreed chnages
+to date. One version will contain chnagebars from May 20 draft, the
+other will be a clean version.
+
+No objection to submitting clean version to JCP for early draft review.
+
