@@ -253,39 +253,78 @@ similar to the proposal from Sunil if you substitute PollHandler for
 AsyncResponse, CallbackHandler for CallAsyncHandler and AsyncResponse
 for CallResponse.
 
-public interface CallAsync extends Call {
-    // polling versions of invoke methods
-    AsyncResponse<CallResponse> startInvoke(
-        java.lang.String operationName,
-        Object[] params) throws java.rmi.RemoteException;
-    AsyncResponse<CallResponse> startInvoke(
-        Object[] params) throws java.rmi.RemoteException;
-    // do we need async variation of invokeOneWay ?
-
-    // callback version of invoke methods
-    AsyncResponse<CallResponse> startInvoke(
-        java.lang.String operationName,
-        Object[] params,
-        CallAsyncHandler h) throws java.rmi.RemoteException;
-    AsyncResponse<CallResponse> startInvoke(
-        Object[] params,
-        CallAsyncHandler h) throws java.rmi.RemoteException;
-}
-
 public interface CallAsyncHandler {
     void endCall(CallResponse r);
     void handleFault(java.lang.Exception e);
 }
 
-public interface CallResponse {
-    java.util.Map getOutputParams();
-    java.util.List getOutputValues();
-    java.lang.Object getReturnValue();
-    QName getParameterTypeByName(String paramName);
-    QName getReturnType();
-    QName getOperationName();
-    QName getPortTypeName();
+interface CallResult {
+       java.util.Map getOutputParams();
+       java.util.List getOutputValues();
+       java.lang.Object getReturnValue();
 }
 
-We may want to consider refactoring the Call interfaces to extract
-common methods from Call and CallResponse.
+interface CallInspect {
+       boolean isParameterAndReturnSpecRequired(QName operationName);
+       String getTargetEndpointAddress();
+       Object getProperty(String name);
+       java.util.Iterator getPropertyNames();
+       QName getParameterTypeByName(String paramName);
+       QName getReturnType();
+       QName getOperationName();
+       QName getPortTypeName();
+}
+
+interface CallSetup {
+       void addParameter(String paramName,
+               QName xmlType,
+               ParameterMode parameterMode);
+       void addParameter(String paramName,
+               QName xmlType,
+               Class javaType,
+               ParameterMode parameterMode);
+       void setReturnType(QName xmlType);
+       void setReturnType(QName xmlType, Class javaType);
+       void setProperty(String name, Object value);
+       void removeAllParameters();
+       void setOperationName(QName operationName);
+       void setPortTypeName(QName portType);
+       void setTargetEndpointAddress(String address);
+       void removeProperty(String name);
+}
+
+interface Call extends CallSetup extends CallInspect extends CallResult
+{
+       Object invoke(Object[] inputParams)
+               throws java.rmi.RemoteException;
+       Object invoke(QName operationName,
+               Object[] inputParams)
+               throws java.rmi.RemoteException;
+       void invokeOneWay(Object[] inputParams);
+}
+
+interface CallResponse extends CallInspect extends CallResult{}
+
+interface CallAsync extends CallSetup extends CallInspect {
+       // polling versions of invoke methods
+       AsyncResponse<CallResponse> startInvoke(
+               java.lang.String operationName,
+               Object[] params) throws java.rmi.RemoteException;
+       AsyncResponse<CallResponse> startInvoke(
+               Object[] params) throws java.rmi.RemoteException;
+       // do we need async variation of invokeOneWay ?
+
+       // callback version of invoke methods
+       AsyncResponse<?> startInvoke(
+               java.lang.String operationName,
+               Object[] params,
+               CallAsyncHandler h) throws java.rmi.RemoteException;
+       AsyncResponse<?> startInvoke(
+               Object[] params,
+               CallAsyncHandler h) throws java.rmi.RemoteException;
+}
+
+The object backing the CallResponse would be required to be a snapshot
+of the object backing the CallAsync at the time of the invoke. Use of
+the CallSetup methods of the CallAsync object after an invoke wouldn't
+change the values returned from the CallResponse getters.
