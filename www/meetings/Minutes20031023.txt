@@ -125,13 +125,13 @@ JAX-B.
 Decision:  make this issue more general - where do we draw the line between
 JAX-B/JAX-RPC?
 
-?(sorry, I didn't catch your name):  no way to check fault string/fault
+Chavdar:  no way to check fault string/fault
 code from server-specific soap fault exception.
 Roberto:  There is some tension here between making less dependence on SOAP
 and tying JAX-RPC closer to SOAP with this suggestion.  We have to make
 choices.
 
-ACTION ITEM:  ? will summarize this issue on the mailing list.
+ACTION ITEM:  Chavdar will summarize this issue on the mailing list.
 
 Marc:  This is a new issue beyond #7.
 
