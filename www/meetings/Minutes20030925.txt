@@ -1,0 +1,142 @@
+JSR 224 EG Meeting Minutes 9/25
+
+1. Roll call
+
+Present
+
+Manoj Cheenath 	BEA Systems
+Russell Butek	IBM
+Daniel Kulp 	IONA Technologies PLC
+Bjarne Rasmussen 	Novell, Inc.
+Sunil Kunisetty	Oracle
+Chavdar Baikov 	SAP AG
+Dennis Sosnoski	Individual
+Marc Hadley	Sun
+Roberto Chinicci	Sun
+Doug Kohlert	Sun
+Prasad Yendluri 	WebMethods Corporation
+
+Regrets
+
+JaeWoong Chung (TMaxSoft)
+
+Absent
+
+Jim Frost	ATG
+Rahul Sharma 	Motorola
+Rajiv Shivane	Pramati
+Alan Davies 	SeeBeyond Technology Corp.
+Glen Daniels	Sonic
+
+2. Agenda bashing and AOB
+
+No AOB
+
+3. Introductions
+
+Those present introduced themselves.
+
+4. JCP process and milestones
+
+Brief description of the JCP process, see http://www.jcp.org/en/procedures/jcp2#1.
+    
+
+5. EG interactions
+
+  - Meeting arrangements and etiquette
+
+Weekly meeting at 12 noon pacific on Thursdays.
+No meeting next week becuase of clash with JCP training.
+Send regrets to the mailing list when unable to attend.
+Assign alternate if protracted absence
+Identify yourself before speaking while we learn each others voices
+One speaker at a time
+Rotating secretary duties
+
+  - Use of mailing list
+
+Conduct main business on jcp.org mailing list
+Don't wait for telcons to raise issues, give feedback etc
+We'll try to air all issues on the mailing list before discussing in meetings - make faster progress that way.
+
+  - Java.net: Have a private JSR 224 project there.
+  
+each EG member to create java.net account and send Marc their user ID (got to www.java.net and click the register link in the top left of the page).
+we'll manage an issues list there (bugzilla)
+we'll manage action item list there
+post drafts, meeting minutes there
+wiki coming in Nov
+
+  - Other EGs:
+
+This JSR is tightly linked to sever others:
+
+JSR 222 (JAXB): Russel, Chavdar, Sunil, Dennis, Bjarne all either in the JAXB EG or closely monitoring. 
+JSR 181 (WS Metadata): Manoj is monitoring, we want to align with the work in this JSR
+JSR 109 (WS for J2EE): Sunil asked about the plan for 109, will it be updated to align with JAX-RPC 2.0 ? 
+
+ACTION: Russell to talk to Jim Knutson and report back on future plans for JSR-109.
+
+6. Goals, non-goals, requirements
+
+JAXB
+
+We want to push data binding into JAXB. The customization mechanism
+in JAXB will be made available, we won't expose a new one.
+
+Manoj: JAXB doesn't talk about SOAP types. How are we going to deal with
+SOAP types then?
+
+Marc: I have a non-goal of support for SOAP encoding, postpone discussion of this till we get to that.
+
+Chavdar: Good idea to leave serialization support to JAXB. It avoids duplication.
+
+Dan: What's the timeline for JAXB 2.0?
+
+Marc: Similar to JAX-RPC, dependency is one way from JAX-RPC to JAXB.
+
+Dan: Concern about a JAXB 3.0 after a JAXB 2.0 and future interactions between
+the JSRs.
+
+Marc: Not aware of any plan for JAXB 3.0 immediately after that.
+
+Bjarne: Is backward compatibility a goal?
+
+Marc: It's currently listed as a non-goal. Currently JAX-RPC and JAXB use different bindings; if we require backward compatibility, we end up with two data bindings. It should be possible to customize the binding and recover the previous mapping.
+
+Roberto: In the context of J2EE 1.5, we'll have to support J2EE 1.4 apps, which
+use JAX-RPC 1.1.
+
+SOAP 1.2
+
+Add support for SOAP 1.2; keep supporting the 1.1 versions.
+
+Prasad: Would MTOM be in scope?
+
+Marc: Unclear when it'll be finalized. Can't hold JAX-RPC to wait for MTOM if
+it's delayed.
+
+WSDL 1.2
+
+Add support for WSDL 1.2. The next working draft will be called "WSDL 2.0".
+
+??: What's the timeline for WSDL 1.2?
+
+Roberto: I expect recommendation in the second half of 2004. The abstract portion is quite firm, although there are some new features being discussed (e.g. service references).
+
+Marc: You can only remove things from the spec after CR.
+
+WS-I BP 1.1
+
+Technical work is done, but discussions at the board level on how to publish it. Don't expect a schedule problem with it.
+
+Sunil: We need to support 1.1. We also want better support for 1.0. Also
+the ability to step outside of the BP envelope.
+
+Marc: By default we expect to get BP 1.0 conformance.
+
+ACTION: Sunil to send mail on his "outside the BP envelope" requirement.
+
+No call next week because it conflicts with a JCP event.
+
+Meeting adjourned.
