@@ -1,0 +1,203 @@
+Agenda:
+
+1. Roll Call, scribe for minutes selected from attached list.
+
+(Y=Present, R=Regrets, N=Absent)
+
+N	ATG	Jim Frost
+N	BEA Systems 	Manoj Cheenath 
+Y	IBM	Russell Butek
+N	IONA Technologies PLC 	Daniel Kulp 
+N	Motorola 	Rahul Sharma 
+R	Novell, Inc. 	Bjarne Rasmussen 
+R	NTT Data Corp	Toshiyuki Kimura 
+Y	Oracle	Sunil Kunisetty
+N	Pramati	Rajiv Shivane
+N	SAP AG 	Chavdar Baikov 
+N	SeeBeyond Technology Corp. 	Ugo Corda
+R	Sonic	Glen Daniels
+Y	Sosnoski Software	Dennis Sosnoski
+Y	Sun	Marc Hadley
+Y	Sun	Roberto Chinnici
+Y	Sun	Doug Kohlert
+N	Tmax Soft	JaeWoong Chung
+N	WebMethods Corporation 	Prasad Yendluri 
+
+2. Agenda Review and AOB
+
+
+
+3. Approval of Dec 11th telcon minutes
+
+See https://jsr224.dev.java.net/meetings/Minutes20031204.txt
+
+Minutes are approved.
+
+
+
+4. Review action items
+
+See https://jsr224.dev.java.net/
+
+- Glen to circulate alternate proposal for dealing with protocol 
+specific fault information on client and server side
+
+PENDING
+
+- Roberto to send note on DII enhancements / SAAJ overlap.
+
+PENDING
+
+- Russel to send proposal for improving handler framework.
+
+PENDING
+
+- Marc to put together example of typesafe callback implementation 
+without holders
+
+DONE
+
+
+
+5. F2F Planning Take 2
+
+We'll briefly discuss the responses I've received so far.
+
+(i) March 9, 10 or 10, 11 in Santa Clara, CA
+Prefer: 6
+Can't attend: 1
+
+(ii) March 9, 10 or 10, 11 in Burlington, MA
+Prefer: 3
+Can't attend: 0
+
+We'll merge these results with those from the 208 f2f poll.
+
+
+
+6. Clarification of ServletEndpointContext.getMessageContext
+
+Russel raised an issue regarding whether a service endpoint instance 
+can access a protocol message and, if so, whether that message is the 
+original or a potentially modified version of the original, see:
+
+http://archives.java.sun.com/cgi-bin/wa?A2=ind0312&L=jsr-224-
+eg&F=&S=&X=39AD2D5D89BC0A978F&P=3895
+
+We'll discuss this briefly and decide whether this can be resolved now 
+or should be logged as an issue.
+
+Russell expressed IBM's concerns that giving access to the message context
+is bad both for portability and performance reasons. Implementations might
+be forced to keep multiple copies of a message around.
+
+Marc said we shouldn't make a decision until we've gone through the handler
+framework discussion.
+
+Russell and Sunil agreed with this course of action.
+
+Sunil pointed out there are potential backward compatibility issues we
+should consider.
+
+
+
+7. Async API
+
+Marc will present his proposal, see:
+
+https://jsr224.dev.java.net/proposals/async.txt
+
+and thread titled "Async API proposal take 2" on JSR 224 mailing list.
+
+We'll discuss the propsal and hopefully answer the following questions 
+in the course of our discussion:
+
+(i) Selectively enabling generation of async method signatures - is 
+this required ? Should we use a WSDL annotation or tool specific means 
+?
+(ii) Refactoring Call interface to CallAbstract, Call and CallAsync ? 
+What are the ramifications of doing this, is it necessary ?
+(iii) Shall we adopt this proposal as the basis for the async API ?
+
+Marc walked us through the proposal.
+
+Roberto commented that the callback mechanism introduces multi-threading
+into the application. Dennis replied that implementing callbacks on top
+of polls in an application requires spawning a thread, which is
+impossible in many environments.
+After a longish discussion, we decided to look more closely at the use cases for
+callbacks.
+
+Dennis stated that perhaps callback and poll APIs should be in separate
+interfaces.
+
+Sunil stated that we should support callbacks because there are valid
+use cases for them.
+
+Marc resumed presenting his proposal with the DII section.
+
+Sunil asked whether CallAsync should extend Call or we should create a
+common base interface (via refactoring) instead.
+
+Sunil described a combination of cases in which having the Call methods
+alongside the async ones in CallAsync could be confusing. Also, in
+CallAsync we can have multiple outstanding calls, but not for the sync
+Call.
+
+Roberto and Russell stated that their gut feel is that we should refactor.
+
+Marc clarified that in his proposal the generated async interface should
+be a subinterface of the sync one.
+
+NEW ACTION ITEM to Marc to propose a refactoring for Call/AsyncCall
+
+Sunil: what's the semantics of the isDone() method on a callback?
+
+Marc: it returns true when the callback has occurred.
+
+Sunil: get() is a blocking call, so what if a thread calls it while a
+callback is registered?
+
+Marc: you would get the same result from the callback and the get
+
+Sunil: we thought having a close method on a callback would be useful
+
+Marc: I don't understand how that would work -- how does the application
+know it can call it? It could be registered with several stubs at the
+same time
+
+Sunil: I thought we wouldn't share callbacks between different invocations
+
+Roberto: we shouldn't specify an ordering for the callback thread and
+the main thread (if it calls get), instead we should explicitely say
+that they execute in parallel (or are triggered by the same condition);
+the reason is, if we force an order we could easily get into a deadlock
+situation
+
+OPEN AN ISSUE about the interaction of polling (get) and callbacks
+
+Marc: from the discussion on the list, it seemed that people want tools
+to decide when something is async (as opposed to having something in
+WSDL)
+
+Marc: should we always generate an async interface?
+
+Russell: no, it should be an option on the tool
+
+Marc: what should the granularity be, per interface or per method?
+
+Sunil: per interface is better
+
+Russell: or even make it all-or-nothing for the tool
+
+Roberto: thinks it should be per interface
+
+Doug: it makes things more difficult
+
+Sunil: let the tools choose
+
+Marc: can we accept this proposal as the basis going forward?
+
+No objections.
+
+NEW ACTION ITEM for Marc to contact the JSR-166 spec lead about Cancellable
