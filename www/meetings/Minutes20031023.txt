@@ -1,0 +1,153 @@
+1. Roll Call (Y=present, N=absent, R=regrets), scribe for minutes selected from attached list.
+
+R	ATG	Jim Frost
+Y	BEA Systems 	Manoj Cheenath 
+Y	IBM	Russell Butek
+Y	IONA Technologies PLC 	Daniel Kulp 
+N	Motorola 	Rahul Sharma 
+Y	Novell, Inc. 	Bjarne Rasmussen 
+Y	NTT Data Corp	Toshiyuki Kimura 
+Y	Oracle	Sunil Kunisetty
+N	Pramati	Rajiv Shivane
+Y	SAP AG 	Chavdar Baikov 
+N	SeeBeyond Technology Corp. 	Alan Davies 
+N	Sonic	Glen Daniels
+Y	Sosnoski Software	Dennis Sosnoski
+Y	Sun	Marc Hadley
+Y	Sun	Roberto Chinnici
+Y	Sun	Doug Kohlert
+N	Tmax Soft	JaeWoong Chung
+N	WebMethods Corporation 	Prasad Yendluri 
+
+Russel Butek to scribe.
+
+
+2. Agenda Review and AOB
+
+Reviewed and no other business.
+
+
+3. Approval of Oct 16th telcon minutes
+
+Minutes approved.
+
+
+4. Review action items
+
+"Marc to contact JSR 181 spec lead re alignment and timelines." - Marc and
+Roberto will get together with the JSR-181 folks next week and report at
+our telecon next week.
+
+"Sunil to draft concrete proposal for JAX-RPC changes required to move from
+implicit to explicit WS-I conformance." - pending (and regrets for next
+week's meeting)
+
+"Marc to send out prioritization poll for JAX-RPC 2.0 goals." - sent
+
+"Sunil to send proposal for async client API - due early Nov." - pending
+
+"Sunil to send proposal for enhanced DII API - due early Nov." - pending
+
+
+5. Issues
+
+#2: Missing MIME type holders
+(https://jsr224.dev.java.net/issues/show_bug.cgi?id=2)
+
+Decision:  this is a non-issue - generic holders in J2SE 1.5 will make
+individual holder classes unnecessary.
+
+
+#3: Name collision prevention
+(https://jsr224.dev.java.net/issues/show_bug.cgi?id=3)
+
+Decision:  this is an issue.  We should either customize JAX-B names or do
+the mapping only on the generated Java type.
+
+Manoj:  doc/lit wrapped brings in more issues - the wrapped operation
+complexType should not be generated - need WSDL to know it's a wrapper, so
+JAX-B will not have enough information.
+
+Sunil:  tight interaction between JAX-B/JAX-RPC wrt mapping file and custom
+mappings.
+
+Marc:  We need to customize JAX-B name mappings.  We need fine control over
+the schema elements JAX-B looks at.  Starting from Java, need JAX-B to
+generate the wrapper element/complexType when necessary.
+
+ACTION ITEM:  Marc will create a new issue for this doc/lit wrapped issue.
+
+
+#4: One way handler invocation
+(https://jsr224.dev.java.net/issues/show_bug.cgi?id=4)
+
+Roberto:  it's clarified in 1.1
+
+Russell:  we're not sure what 1.1 says is the right thing to do.
+
+Decision:  this will be part of the handler redesign work.  We accept this
+issue and will use it as input to the handler work.
+
+
+#5: HandlerInfo.getHeaders() return type
+(https://jsr224.dev.java.net/issues/show_bug.cgi?id=5)
+
+We seem to prefer java.util.List rather than an array.
+
+Roberto:  changing return type incompatible.
+Russell:  changing return type may or may not be an issue depending on how
+much we redesign handlers.
+Marc:  just extend existing ones
+Russell:  depends on how big the changes are
+Marc:  handler2 package?
+
+Decision:  we accept this issue and will use it as input to the handler
+work.
+
+
+#6: Service.getPorts return type
+(https://jsr224.dev.java.net/issues/show_bug.cgi?id=6)
+
+Decision:  we accept this issue since we don't know why it's a QName.
+
+
+#7: Exception serialization model
+(https://jsr224.dev.java.net/issues/show_bug.cgi?id=7)
+
+Marc:  let JAX-B gen the type, and JAX-RPC defines the exception holding
+the type.
+Dennis:  there is discussion in JAX-B - to what extent do they do
+customization of Java->XML.
+
+ACTION ITEM:  Dennis will raise the issue of exception->XML mapping with
+JAX-B.
+
+Decision:  make this issue more general - where do we draw the line between
+JAX-B/JAX-RPC?
+
+?(sorry, I didn't catch your name):  no way to check fault string/fault
+code from server-specific soap fault exception.
+Roberto:  There is some tension here between making less dependence on SOAP
+and tying JAX-RPC closer to SOAP with this suggestion.  We have to make
+choices.
+
+ACTION ITEM:  ? will summarize this issue on the mailing list.
+
+Marc:  This is a new issue beyond #7.
+
+
+#8: Serializable parameter requirement
+(https://jsr224.dev.java.net/issues/show_bug.cgi?id=8)
+
+Marc:  Roberto and I have had internal discussions on this topic.  It's a
+problem!
+
+ACTION ITEM:  Roberto will look into J2EE 1.4 spec to see whether we can
+get around the Serializable requirement.
+
+Decision:  we will leave this issue marked as new until Roberto looks into
+the J2EE spec.
+
+
+General ACTION ITEM for everyone:  please send responses to the priority
+poll.
