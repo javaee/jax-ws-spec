@@ -1,0 +1,164 @@
+Minutes of the JSR 224 EG telcon 5/27/2004
+
+1. Roll Call, scribe for minutes selected from attached list.
+
+n	ATG	Jim Frost
+Y	BEA Systems 	Manoj Cheenath 
+n	Cap Gemini	Alastair Harwood 
+n	DevelopMentor	Kevin Jones
+Y	IBM	Richard Sitze
+n	IBM	Russell Butek
+n	Intalio	Sebastien Sahuc 
+n	IONA Technologies PLC 	Daniel Kulp 
+n	Motorola 	Rahul Sharma 
+n	Nokia	Srividya Natarajan
+R	Novell, Inc. 	Bjarne Rasmussen 
+n	NTT Data Corp	Toshiyuki Kimura 
+Y	Oracle	Sunil Kunisetty
+n	Pramati	Rajiv Shivane
+n	SAP AG 	Chavdar Baikov 
+n	SeeBeyond Technology Corp. 	Ugo Corda
+Y	Sonic	Glen Daniels
+n	Sosnoski Software	Dennis Sosnoski
+Y	Sun	Marc Hadley
+Y	Sun	Roberto Chinnici
+Y	Sun	Doug Kohlert
+n	Tmax Soft	Changshin Lee
+n	Trifork	Claus Nyhus Christensen 
+n	WebMethods Corporation 	Christopher St. John
+
+- Manoj to scribe
+
+
+2. Agenda Review and AOB
+
+Glen: 
+- What is the timeline for public draft?
+
+Marc: 
+ - Early public draft will be released in javaone.
+ - It takes around 2 weeks to publish after submitting to JCP
+ - If no major review comments on this latest draft, this will be the
+early public draft.
+
+Glen:
+ - Would appreciate an extra week to gather comments from Sonic developers. Doesn't want to hold up publication though.
+
+
+3. Approval of May 6th telcon minutes
+
+See https://jsr224.dev.java.net/meetings/Minutes20040506.txt
+
+- Minutes approved without change
+
+
+4. Review action items
+
+See https://jsr224.dev.java.net/, none at present
+
+- No new action item
+
+
+5. Review of latest draft
+
+See https://jsr224.dev.java.net/drafts/spec20040520.pdf
+and https://jsr224.dev.java.net/drafts/javadoc20040520.zip
+
+
+
+Chap 1:
+
+Glen:
+ - Odd to call this spec JAX-RPC, since it deals more with message
+exchange than RPC.
+Marc:
+ - True, but JAX-RPC is well known to developers.
+Roberto:
+ - We must think about a new expansion for RPC. 
+
+Chap 2:
+
+Manoj:
+ - WSDL 1.1 to Java mapping is written with regard to client stub
+generation. The same mapping is also applicable to server side, but the
+spec does not talk about it. 
+
+
+Sec 2.3.1.2 line 26:
+Manoj:
+ - If there is a header part then the operation is not considered to be
+a wrapped style. 
+Marc:
+ - This is same as JAX-RPC 1.1
+
+
+Section 2.3.3 Figure 2.1 line 37
+Manoj:
+ - setLastTradePrice() must return SetLastTradePriceResponse
+
+
+Section 2.3.4.6 Fig 2.2 line 4
+Manoj:
+ - (!response.isDone) must be (!response.isDone())
+
+
+Section 2.5 Fault
+Manoj:
+ - Fault mapping is different from 1.1. JAX-RPC 1.1 tries to map Fault
+inheritance hierarchy.
+Marc:
+ - True, but this is a simpler mapping and requires less types to be generated. Will add a note saying that the mapping is different from 1.1 and asking for feedback
+
+
+Section 2.5.1 line 29
+Manoj:
+ - constructor order must be string, cause, faultInfo
+Roberto:
+ - it must be: string faultInfo, cause
+Sunil:
+ - need a constructor without cause
+Marc:
+ - will add this constructor
+
+Chap 3:
+
+
+Section 3.4 line 18
+Manoj:
+ - 2.0 only define document wrapped case. There are many use cases where
+the user needs to control the schema. In this case un wrapped is better
+than wrapped.
+Glen:
+ - start with WSDL is one good use case
+Marc:
+ - add a note saying only wrapped is supported for now and asking for feedback.
+
+
+Section 3.8.1 line 17
+Manoj:
+ - Spec says that the soap binding style must be document. We need to
+support RPC literal?
+Marc:
+ - will add a note requesting feedback on this question
+Sunil:
+ - Do we have to support soap encoding?
+Marc:
+ - 2.0 spec does not require nor describe how to do soap encoding, it is ok for a vendor to support it but that would be using 1.1 spec not 2.0.
+Glen:
+ - Interop using soap encoding is not a big a problem.
+
+Chap 5:
+Sunil:
+ - ordering of handler is not clear - split over two sections
+Marc:
+ - will see if this can be improved
+
+Section 5.4.1.1
+Sunil:
+ - more properties like operation name can be added to the standard
+properties.
+Marc:
+ - will add a note saying that more standard properties may be added and asking for suggestions
+
+Marc:
+ - Will hold another meeting next week to gather any additional feedback prior to sending spec to JCP for publication.
