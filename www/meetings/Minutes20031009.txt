@@ -41,9 +41,9 @@ b.	Sunil posted requirements to the EG mailing list.
 5.	Goals Discussion
 
 a.	JSR 181 and JAX-RPC
-i.     Russel: two specs defining web service annotations.
-ii.     Russel: V2 must not redefine 181 annotations
-iii.     Marc: (action item) talk to 181 lead for the spec time line
+i.     Russel: two specs defining web service annotations.
+ii.     Russel: V2 must not redefine 181 annotations
+iii.     Marc: (action item) talk to 181 lead for the spec time line
 
 b.	JSR 109 and JAX-RPC
 
