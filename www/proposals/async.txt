@@ -64,7 +64,7 @@ public interface FooPortAsync extends FooPort {
         java.lang.String p2) throws java.rmi.RemoteException;
 
     // callback version of bar method
-    Cancellable startBar(java.lang.String p1,
+    AsyncResponse<BarResponse> startBar(java.lang.String p1,
         java.lang.String p2, FooPortAsyncHandler h)
         throws java.rmi.RemoteException;
 }
@@ -264,11 +264,11 @@ public interface CallAsync extends Call {
     // do we need async variation of invokeOneWay ?
 
     // callback version of invoke methods
-    Cancellable startInvoke(
+    AsyncResponse<CallResponse> startInvoke(
         java.lang.String operationName,
         Object[] params,
         CallAsyncHandler h) throws java.rmi.RemoteException;
-    Cancellable startInvoke(
+    AsyncResponse<CallResponse> startInvoke(
         Object[] params,
         CallAsyncHandler h) throws java.rmi.RemoteException;
 }
