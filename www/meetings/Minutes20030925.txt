@@ -12,7 +12,7 @@ Sunil Kunisetty	Oracle
 Chavdar Baikov 	SAP AG
 Dennis Sosnoski	Individual
 Marc Hadley	Sun
-Roberto Chinicci	Sun
+Roberto Chinnici	Sun
 Doug Kohlert	Sun
 Prasad Yendluri 	WebMethods Corporation
 
