@@ -1,0 +1,78 @@
+1. Roll Call
+
+(Y=present, R=regrets, N=absent)
+
+N	ATG	Jim Frost
+Y	BEA Systems 	Manoj Cheenath 
+R	IBM	Russell Butek
+Y	IONA Technologies PLC 	Daniel Kulp 
+N	Motorola 	Rahul Sharma 
+N	Novell, Inc. 	Bjarne Rasmussen 
+R	NTT Data Corp	Toshiyuki Kimura 
+Y	Oracle	Sunil Kunisetty
+N	Pramati	Rajiv Shivane
+R	SAP AG 	Chavdar Baikov 
+N	SeeBeyond Technology Corp. 	Ugo Corda
+Y	Sonic	Glen Daniels
+Y	Sosnoski Software	Dennis Sosnoski
+Y	Sun	Marc Hadley
+R	Sun	Roberto Chinnici
+Y	Sun	Doug Kohlert
+N	Tmax Soft	JaeWoong Chung
+N	WebMethods Corporation 	Prasad Yendluri 
+
+Dennis to scribe.
+
+2. Agenda Review and AOB
+   Sunil asked about DII, Marc clarified that this has been resolved
+   down to async issues and is still in progress.
+
+3. Approval of Dec 4th minutes
+   Sunil pointed out minor correction to minutes, otherwise approved.
+
+4. Action items review
+   Glen still in progress on alternate proposal for dealing with
+   protocol specific fault information
+   Marc completed item to put Sunil proposal on agenda.
+   Roberto still pending
+   Russel still pending
+
+5. FTF planning
+   Action to Marc to talk to Nick about joint FTF with 209 and 222
+
+6. Explicit vs Implicit WS-I
+   Sunil presented arguments in favor of requiring explicit indication
+   of WS-I compliance
+   After discussion, Marc agreed that we'd add something like this to
+   the text when 109 information available
+
+7. Async API discussion
+   Discussion of different layers, general agreement that we should
+   isolate the user code from transport-specific issues
+   Discussion of callback vs threaded handling, general agreement that
+   callback handling was best but needs to have limitations pointed out
+   to user (thread safety, danger of blocking, etc.)
+   Discussion of typesafe vs DII-style callbacks, general agreement that
+   both are needed with typesafe implementation probably building on
+   DII-style
+   Discussion of specific typesafe approaches, action item to Marc to
+   put together example of typesafe callback implementation, Marc
+   concerns about using holder to pass back data from original call
+   Sunil clarified that would use holder only for async out, vs holders
+   for both in and out on sync
+   Marc clarified that his proposal wouldn't intersperse sync interface
+   with async interface (async would extend sync interface), with user
+   able to control which get generated, general agreement that this made
+   sense
+   Sunil clarified that his proposal handled multiple async calls,
+   discussion of abstracting in/out parameter handling and how to
+   preserve compatibility between generated stub and DII approaches,
+   issue of whether separate methods are used for callback and poll
+   methods
+
+8. Close - meeting next week (12/18), then not until 1/8
+
+New Action items
+   Marc to put together example of typesafe callback implementation
+   without holders
+  
