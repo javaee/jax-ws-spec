@@ -123,9 +123,15 @@ rather than just a single message.
 
 Will create an issue for this.
 
-Marc will produce two versions of draft incorporating all agreed chnages
-to date. One version will contain chnagebars from May 20 draft, the
-other will be a clean version.
+- Publication of early draft at JCP
 
-No objection to submitting clean version to JCP for early draft review.
+Marc will produce two versions of draft incorporating all agreed changes
+to date and post these to the web site. One version will contain
+changebars from May 20 draft, the other will be a clean version.
+
+No objection to submitting clean version to JCP for publication as an
+early draft. Marc expects to submit the spec for publication early next
+week.
+
+
 
