@@ -10,7 +10,6 @@ IBM	Russell Butet
 IONA Technologies PLC 	Daniel Kulp
 Oracle	Sunil Kunisetty
 SAP AG 	Chavdar Baikov
-SeeBeyond Technology Corp. 	Alan Davies
 Sosnoski Software	Dennis Sosnoski
 Sun	Marc Hadley
 Sun	Roberto Chinnici
@@ -24,6 +23,7 @@ Motorola 	Rahul Sharma
 Novell, Inc. 	Bjarne Rasmussen
 Pramati	Rajiv Shivane
 Sonic	Glen Daniels
+SeeBeyond Technology Corp. 	Alan Davies
 Tmax Soft	JaeWoong Chung
 
 a.	Manoj to scribe
