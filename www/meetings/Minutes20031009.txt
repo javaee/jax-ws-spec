@@ -84,9 +84,13 @@ iii.     Sunil: V2 APIs must not have any direct dependency of HTTP.
 
 i.	Relationship with JSR 208
 
-i.     Marc: (action item) contact 208 spec lead
-ii.     Sunil: V2 must use the security SPI defined by 208
-iii.     Marc: V2 must not define soap headers but only APIs and properties.
+i.     Sunil: Question whether JAX-RPC 2.0 would the standard client
+ interface to a 208 defined provider or not? At this time, we don't
+ have a position and we want to defer it until we hear the official
+ stmt. on the relationship between with 208 & 224.
+ii.     Marc: (action item) contact 208 spec lead
+iii.     Sunil: V2 must not define soap headers but only APIs and properties.
+iv.     Marc: agrees.
 
 j.	Session Management
 
