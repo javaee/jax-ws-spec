@@ -87,9 +87,10 @@ eg&F=&S=&X=39AD2D5D89BC0A978F&P=3895
 We'll discuss this briefly and decide whether this can be resolved now 
 or should be logged as an issue.
 
-Russell expressed IBM's concerns that giving access to the message context
-is bad both for portability and performance reasons. Implementations might
-be forced to keep multiple copies of a message around.
+Russell expressed IBM's concerns that giving access to the message via
+the message context is bad both for portability and performance reasons.
+Implementations might be forced to keep multiple copies of a message
+around.
 
 Marc said we shouldn't make a decision until we've gone through the handler
 framework discussion.
