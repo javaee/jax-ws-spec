@@ -1,0 +1,135 @@
+Minutes of JAXB 2.0/JAXRPC 2.0 EG joint concall, Tues Aug 24, 2004
+
+Also posted at:
+https://jsr222.dev.java.net/files/documents/919/6606/aug-24-2004.txt
+
+1. Roll call
+
+2. Joint F2F dates
+  The suggested dates were :
+  - Oct 13, 14, 15 for JAXB 2.0 EG.
+  - 1/2 day overlap ( probably Thursday )
+
+3. Attachment Proposal
+
+  Section by section review of Marc's summary of attachment proposal:
+  - two attachments proposals but for this concall focus on the
+    proposal related to databinding.
+  - 3 attachments to support
+    i.  WS-I AP 1.0 with swaRef
+    ii. W3C MTOM without media type information
+    iii. W3C MTOM with media type information
+
+  a. WS-I AP 1.0 defines two profiles
+     - WSDL mime binding (no impact on JAXB)
+     - swaref type
+
+  b. WS-I AP 1.0 with swaRef:
+     - goal of binding is to hide the URI (in swaRef)and provide a
+       useful class to the Java programmer.
+     - bind to DataHandler class since the latter provides a way to
+       deal with multiple binary types.
+     - using just WS-I that is about as far as we can go.
+
+     Sanjay Patil: Issue: losing a URI reference.
+     Sanjay Patil to write up proposal.
+
+  c. WS-I AP 1.0 with MTOM facilities
+     - MTOM facilities allow the use of media type for a more strongly
+       typed binding.
+     - Use of MTOM facilities is allowed within the WS-I spec.
+     - Since the proposal was sent, Roberto pointed out that the WSDL
+       2.0 WG meeting changed the syntax of media type from <appinfo> to
+       an attribute. However, the basic principal (i.e. specification
+       of the expected media type).
+
+     - ISSUE: hint semantics of <xmlmime:expectedMediaType>
+       i. semantics currently defined as a hint in the specification.
+       ii. choices for JAXB
+           - ingore hint and bind to DataHandler
+           - honor hint and bind to suitable Java type; error if
+             anything else is received.
+       iii. raised as an issue with the specification's author.
+       Umit: will be taken up in the WSDL working group.
+             also suggested an alternate approach. A customization
+             could be provided to let the application take
+             responsiblity for treating as a hint or not.
+
+   d. MTOM
+      - moved to Candidate Recommendation => pretty much done
+      - expect full Recommendation by year end.
+      - extracts binary64 blobs and serialize either inline or an
+        attachment.
+        - conserves space, computing power
+        - two ways: inline binary
+
+   e. Interfacing between JAXB and JAXRPC
+      - JAXB 2.0 needs to define an interface implemented by
+        clients.
+      - XOP spec designed to be used separate from WSDL and SOAP.
+      - so interfaces defined in JAXB 2.0 is useful for other xop
+        clients outside of JAX-RPC 2.0
+
+   Dennis: can this be practically used out of SOAP ?
+   Marc: Yes; e.g. over HTTP rather than over SOAP.
+
+   Umit: No consideration given to providing databinding access to
+         attachments that are not referenced from type definition.
+         - Agreed use case won't be allowed.
+         - log as an issue and close.
+
+   Umit: From a data binding perspective all attachments should be
+         available.
+   Marc: Streaming issue; assume all attachments are available.
+   Umit: agreed.
+
+   - Further discussion:
+     - at F2F
+     - via email ; Marc can see the JAXB 2.0 EG mail ; so he will
+       forward the email to JSR 224 expert group mail alias.
+
+Meeting adjourned.
+
+Attendees:
+
+X = Present
+- = absent
+R = Regrets
+
+-   Anjana Manian       Oracle
+-   Arnaud Blandin      Intalio
+X   Bjarne Rasmussen    Novell,Inc.
+X   Chavdar Baikov      SAP
+-   Christopher Fry     BEA
+-   Radu Preotiuc-Pietro BEA
+X   Dennis Sosnoksi     Individual
+-   Ed Merks            IBM
+-   Keith Visco         Intalio
+X   Kohsuke Kawaguchi   SUN
+X   Mette Hedin         Individual
+-   Russell Butek       IBM
+-   Sravan Kumar        Pramati
+-   Srividya Rajagopalan Nokia
+-   Stefan Wachter      Individual
+X   Steve Perry         Fidelity Information Services
+-   Stephen Brodsky     IBM
+X   Scott Ziegler       BEA
+X   Umit  Yalcinalp     Oracle
+-   Yann  Raoul         Micropolis-univers
+-   Glen Daniels        Sonic Software
+-   Adinarayana Sakala  IONA
+-   Jongjin Choi        Tmax Soft Inc.
+X   Zulfi Umrani        Novell
+
+X   Joe Fialli          Sun
+X   Sekhar Vajjhala     Sun
+
+JAX-RPC 2.0-only EG members
+X   Marc Hadley         Sun
+X   Roberto Chinnici    Sun
+X   Manoj Cheenath      BEA
+X   Sunil Kunisetty     Oracle
+X   Ugo Corda   SeeBeyond Technology Corp.
+
+X   Sanjay Patil         SAP
+
