@@ -1,0 +1,118 @@
+JAX-RPC 2.0 EG Conference Call 11/20.
+
+1. Roll Call, scribe for minutes selected from attached list.
+
+(Y - present, N - absent, R - regrets)
+
+Y	ATG	Jim Frost
+Y	BEA Systems 	Manoj Cheenath 
+Y	IBM	Russell Butek
+N	IONA Technologies PLC 	Daniel Kulp 
+N	Motorola 	Rahul Sharma 
+Y	Novell, Inc. 	Bjarne Rasmussen 
+Y	NTT Data Corp	Toshiyuki Kimura 
+Y	Oracle	Sunil Kunisetty
+N	Pramati	Rajiv Shivane
+N	SAP AG 	Chavdar Baikov 
+N	SeeBeyond Technology Corp. 	Ugo Corda
+Y	Sonic	Glen Daniels
+Y	Sosnoski Software	Dennis Sosnoski
+Y	Sun	Marc Hadley
+Y	Sun	Roberto Chinnici
+Y	Sun	Doug Kohlert
+N	Tmax Soft	JaeWoong Chung
+N	WebMethods Corporation 	Prasad Yendluri 
+
+Bjarne to scribe.
+
+2. Agenda Review and AOB
+
+Reviewed and no other business.
+
+3. Approval of Oct 30th telcon minutes
+
+Approved.
+
+4. Review action items
+
+ * Roberto to add information to issue #8 re serializable requirement for method 
+params. - pending, will do today
+
+ * Marc to circulate proposal for dealing with protocol specific fault
+ information on client and server side - done, on agenda
+
+ * Sunil to draft concrete proposal for JAX-RPC changes required to move from 
+implicit to explicit WS-I conformance - done, most changes to JSR 109, except 
+one critical change
+
+ * Sunil to send proposal for async client API - due early Nov - done, on agenda
+
+ * Toshiyuki to send proposal for async client API - due early Nov - done, on 
+agenda
+
+ * Sunil to send proposal for enhanced DII API - due early Nov - one, on agenda
+
+ * Russel to send proposal for improving handler framework - pending, in 
+progress
+
+5. Protocol Specific Exception Handling Proposal
+
+Marc provided a summary of his proposal: Deprecate SOAPFaultException. Base on 
+standard exception cause model. Protocol specific cause. Russel suggested 
+creating subclasses of protocol-specific exceptions, Marc agreed and proposal is 
+updated accordingly.
+
+Then followed a discussion on how to best expose this on the client-side and the 
+server-side. Parts are this are captured below:
+
+Russel: Add SOAP11DetailsException friendly constructor to improve usability
+Marc: Keep generic exception with all properties
+Sunil: getProperties on base class
+Glen: fault serialization configurable, callback to fill in protocol dependent 
+information
+Sunil: agree, same as my earlier proposal
+Roberto: would this not make the exception protocol dependent? prefer specific 
+API's in subsclas over generic properties, i.e. no map in base class
+Marc: any need for base class then?
+Robert: properties desirable when writing generic server-side code
+Bjarne: prefer generic, no need to know actual runtime exception class
+Russel: server-side with bag, client side with getters? maybe too heavy
+Mark: use case: WS-I sample app, set fault code
+Russel: most people won't use this, happy with generic approach (map)
+Sunil: what if there's a mix of protocols, intermediary or gateway
+Russel: out of scope? ok to loose information if gateway is present
+Marc: while not future proof, should not disallow other protocols, e.g. jms
+Sunil: did we get requirements from JSR 208, normalized message bus?
+Marc: not yet
+Glen: allow app to find out which protocol is in use, then throw specific 
+exception
+Bjarne: same thing in terms of server-side code?
+Roberto: prefers strongly typed approach
+Glen: protocol information and mapping information in deployment descriptor
+Russel: don't like to mix this with deployment, need to see Glen's proposal in 
+more detail, need to keep it simple
+Glen: action to write alternative proposal
+
+6. DII Enhancements
+
+Sunil started to present his proposal: improve DII easy of use, currently
+headers (non explicit) requires handlers, need simpler mechanism.
+
+Mark: wondered about the overall utility of DII
+Glen: use DII in AXIS all the time
+Manoj: recommend people not to use DII
+Mark: how to use this for doc/lit
+Dennis: has customer that uses DII with doc/lit
+Russel: same as SAAJ?
+Glen: almost, except SAAJ has no handlers
+Roberto: early JAX-RPC overlap with JAX-M, need simple doc/lit DII with handlers
+Marc: with JAX-B for data binding, will DII use JAX-B data types? need to know 
+protocol?
+Marc: how to map object to protocol, say jms?
+Marc: normalized message is protocol specific
+Glen: WSDL 2.0 global element declaration, allow exposure of either body or 
+entire soap message
+Marc: i.e. two views onto same data (normalized message)
+Roberto: ACTION to send out note for email discussion
+
+Admin: no meeting on 11/28 (Thanksgiving)
