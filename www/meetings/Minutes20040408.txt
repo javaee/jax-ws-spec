@@ -1,0 +1,135 @@
+1. Roll call:
+
+N	ATG	Jim Frost
+N	BEA Systems 	Manoj Cheenath 
+N	DevelopMentor	Kevin Jones
+Y	IBM	Russell Butek
+N	IONA Technologies PLC 	Daniel Kulp 
+N	Motorola 	Rahul Sharma 
+N	Nokia	Srividya Natarajan
+Y	Novell, Inc. 	Bjarne Rasmussen 
+N	NTT Data Corp	Toshiyuki Kimura 
+Y	Oracle	Sunil Kunisetty
+N	Pramati	Rajiv Shivane
+N	SAP AG 	Chavdar Baikov 
+N	SeeBeyond Technology Corp. 	Ugo Corda
+N	Sonic	Glen Daniels
+Y	Sosnoski Software	Dennis Sosnoski
+Y	Sun	Marc Hadley
+Y	Sun	Roberto Chinnici
+R	Sun	Doug Kohlert
+N	Tmax Soft	Changshin Lee
+N	WebMethods Corporation 	Christopher St. John
+
+Also attending:
+Joe Fialli, Sekhar Vajjhala	(JAXB specification leads)	
+
+2. Agenda Review:
+
+Discussion of issue from last meeting of the relationship between
+service port, binding, stubs, etc. This was intended to be covered in
+email, but was not.
+Agreed to change agenda item 7 to be this discussion.
+
+3. Approval of minutes
+
+Approved
+
+4. Review action items
+
+1st still pending
+2nd not really addressed yet by JAXB group, still pending
+3rd - Roberto has contacted JAXB leads
+Sekhar (JAXB) - JAXB 1.0 has ValidationEventHandler that can be
+registered for finding out about error conditions, provides details on
+location and such.
+Joe (JAXB) - JAXB has way to set event handler on unmarshaller, but
+extra layer in between needs to be worked out; when working with
+unmarshalled objects there's no tracking of original source location
+Sekhar - Users have requested codes rather than current free-form text
+error reporting
+Roberto - Request is to recover from validation errors and continue on,
+which JAXB doesn't really support (needs rewindable parse event stream,
+in effect)
+Marc - Roberto to do summary email
+4th - Glen's item still pending, change to Marc and he'll take it on
+
+5. Report from JAX-RPC session at JAXB F2F
+
+Items (Roberto reporting):
+
+JAX-RPC 1.X compatibility not a requirement
+
+MTOM support discussed, difficult from layering standpoint since it
+pushes knowledge of transport encoding at JAX-RPC level into JAXB
+marshalling/unmarshalling
+Marc: Last call working draft in about one month's time. Mid-August for
+proposed req.
+Looking to handle linkages via schema extension.
+Marc: Intent is to support both MTOM and SwA.
+
+Roberto: Need to  add serializable interface support to generated
+objects accepted by JAXB group.
+
+Roberto: JAXB will generate schema for existing classes, JAX-RPC can
+then embed into the WSDL, so JAXB needs no special knowledge of usage.
+
+Roberto: Java source round tripping issue a major point of discussion:
+start from Java classes and generate schema, then take that schema and
+generate Java classes, ideally end up with equivalent to original
+classes. Usage scenario is developer writing a JAX-RPC web service,
+wants same classes on client and server (Russell: Also use case of
+starting from EJB and making it an automatic web service). Reuse of code
+between client and server should not be a problem.
+
+Roberto: Generation of classes. JAX-RPC would like to continue using
+beans and value types in general rather than requiring interface model.
+JAXB 2.0 will be supporting this usage.
+
+Roberto: User can map WSDL part to DOM or SAAJ Element. Want to do this
+at the global element or type definition level when using JAXB. JAXB
+accepts this. What about for local elements? Agreement in JAXB that
+handling globals would be sufficient.
+
+Roberto: Two-phase deployment issues. JAXB 1.0 used code generation at
+development time for everything. For 2.0 will need to break into
+development/packaging/deployment, with non-portable code generated at
+deployment. Decided that JAXB will need to support this as a spec
+requirement, details to be worked out.
+Sekhar: Actually two requirements, one for two-phase deployment, the
+other the issue of annotations for WSDL types. Intent of annotations to
+allow getting back to original sources, so not really required in light
+of other discussions. Connection between WSDL types and Java classes
+needs to be looked at in broader context of mapping.
+Sunil: What about reference vs containment?
+Sekhar: Discussed later in EG meeting, question of what would the
+generated schema look like. Linear list easiest.
+Marc: Please share minutes on this part.
+Dennis: Tree approach the alternative, where assume a tree and use
+containment with customizations to support non-tree linkages.
+Joe: Idea behind linear approach was it handles all object graphs
+without the need for customization.
+Russel: From web services perspective schema is crucial. Need to start
+from Java and generate reasonable schema from that.
+Marc: Let's take this to email, CCing Joe and Sekhar.
+
+6. JAX-RPC / JBI
+Roberto gave a talk-through of the slides. Intent is to split protocol specific
+and protocol agnostic layers. More orderly partitioning of the handler chain should
+allow this. Marc presented this (first two slides) to the JBI group.
+Marc: Considerable confusion about the architecture, that the handlers
+don't do the actual dispatch. Feedback after this was resolved was that
+there should be a common set of APIs between the two.
+Roberto: JBI EG wanted us to define normalized message service API, but
+this was likely to be unmanageable. Last two diagrams (3 and 4) give
+cleaner view of the architecture that simplifies. Splitting into
+protocol-aware ("A") and protocol-agnostic ("B") handler chains
+simplifies structure and allows cleaner split. Some communication
+necessary between "A" and "B" handlers. We'd need to define the
+hand-offs between the chains of handlers, with the different context
+types. This split will allow JBI to more easily slide in the normalized
+message service (diagram 4).
+Marc: Let's take the remaining issues to email.
+
+Adjourned.
+
