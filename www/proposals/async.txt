@@ -64,13 +64,13 @@ public interface FooPortAsync extends FooPort {
         java.lang.String p2) throws java.rmi.RemoteException;
 
     // callback version of bar method
-    AsyncResponse<BarResponse> startBar(java.lang.String p1,
+    AsyncResponse<?> startBar(java.lang.String p1,
         java.lang.String p2, FooPortAsyncHandler h)
         throws java.rmi.RemoteException;
 }
 
 public interface FooPortAsyncHandler {
-    void endBar(BarResponse br);
+    void handleBar(BarResponse br);
     // require one fault handler per method or interface ?
     void handleFault(java.lang.Exception e);
 }
@@ -84,6 +84,14 @@ and BarResponse is an JAXB interface generated for the barResponse
 message defined in the WSDL. BarResponse is effectively a wrapper for
 all of the output of the method bar.
 
+AsyncResponse<?> represents a typeless generic. The Object returned from
+AsyncResponse<?>.get(...) has no standard type. Client code should not
+attempt to cast the Object to any particular type as this will result in
+non-portable behaviour.
+
+The Condition component of AsyncResponse represents the same condition
+that the thread waiting to perform a callback is waiting on. All threads
+waiting on the condition are awakened at the same time.
 
 JAXB Connection
 ===============
@@ -208,41 +216,11 @@ class MyFooHandler implements FooPortAsyncHandler {
 
 FooHandlerContext fhc = new FooHandlerContext(...);
 FooPortAsyncHandler h = new MyFooHandler(fhc);
-AsyncResponse<BarResponse> res = port.startBar("hello", "world", h);
+AsyncResponse<?> res = port.startBar("hello", "world", h);
 // do something
 if (!res.isDone()) {
   res.cancel(true);
 }
-
-
-Usage 5: Callback variant
-
-public class AsyncClient implements FooPortAsyncHandler {
-
-  public AsyncClient() {
-  }
-
-  public static void main(String[] args) {
-    FooPortAsyncHandler h = new AsyncClient();
-    AsyncResponse<BarResponse> res = port.startBar("hello", "world", h);
-    // do something
-    if (res.await(60, TimeUnit.SECONDS)) {
-      // carry on, knowing that endBar has been called
-    } else {
-      res.cancel(true);
-    }
-  }
-
-  public void endBar(BarResponse br) {
-    // do something with br
-  }
-
-  public void handleFault(Exception e) {
-    // do something with e
-  }
-
-}
-
 
 
 Application to DII
@@ -254,8 +232,8 @@ AsyncResponse, CallbackHandler for CallAsyncHandler and AsyncResponse
 for CallResponse.
 
 public interface CallAsyncHandler {
-    void endCall(CallResponse r);
-    void handleFault(java.lang.Exception e);
+    void handleResponse(CallResponse r);
+    void handleFault(java.lang.Exception e, CallInspect i);
 }
 
 interface CallResult {
@@ -295,6 +273,8 @@ interface CallSetup {
 
 interface Call extends CallSetup extends CallInspect extends CallResult
 {
+       Call clone(); 
+
        Object invoke(Object[] inputParams)
                throws java.rmi.RemoteException;
        Object invoke(QName operationName,
@@ -306,25 +286,38 @@ interface Call extends CallSetup extends CallInspect extends CallResult
 interface CallResponse extends CallInspect extends CallResult{}
 
 interface CallAsync extends CallSetup extends CallInspect {
+       CallAsync clone();
+        
        // polling versions of invoke methods
-       AsyncResponse<CallResponse> startInvoke(
+       AsyncResponse<CallResponse> invoke(
                java.lang.String operationName,
                Object[] params) throws java.rmi.RemoteException;
-       AsyncResponse<CallResponse> startInvoke(
+       AsyncResponse<CallResponse> invoke(
                Object[] params) throws java.rmi.RemoteException;
        // do we need async variation of invokeOneWay ?
 
        // callback version of invoke methods
-       AsyncResponse<?> startInvoke(
+       AsyncResponse<?> invoke(
                java.lang.String operationName,
                Object[] params,
                CallAsyncHandler h) throws java.rmi.RemoteException;
-       AsyncResponse<?> startInvoke(
+       AsyncResponse<?> invoke(
                Object[] params,
                CallAsyncHandler h) throws java.rmi.RemoteException;
 }
 
-The object backing the CallResponse would be required to be a snapshot
-of the object backing the CallAsync at the time of the invoke. Use of
-the CallSetup methods of the CallAsync object after an invoke wouldn't
-change the values returned from the CallResponse getters.
+CallInspect methods of a CallResponse instance are required to return
+the state of the CallAsync instance that created them at the time of the
+invoke. Use of the CallSetup methods of the CallAsync object after an
+invoke does not change the values obtained from the CallInspect getter
+methods of a previously created CallResponse.
+
+The Object returned from AsyncResponse<?>.get(...) has no standard type.
+Client code should not attempt to cast the Object to any particular
+type as this will result in non-portable behaviour.
+
+Call and CallAsync are not thread safe. Use of the same instance in
+multiple threads requires considerable care - use of the clone() method
+is recommended where multiple threads would like to  is required.
+
+
