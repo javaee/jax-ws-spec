@@ -1,0 +1,140 @@
+Also available at: https://jsr224.dev.java.net/meetings/Minutes20040122.txt
+
+1. Roll Call
+
+N       ATG     Jim Frost
+N       BEA Systems     Manoj Cheenath
+Y       DevelopMentor   Kevin Jones
+Y       IBM     Russell Butek
+N       IONA Technologies PLC   Daniel Kulp
+N       Motorola        Rahul Sharma
+N       Nokia   Srividya Natarajan
+N       Novell, Inc.    Bjarne Rasmussen
+N       NTT Data Corp   Toshiyuki Kimura
+Y       Oracle  Sunil Kunisetty
+N       Pramati Rajiv Shivane
+R       SAP AG  Chavdar Baikov
+N       SeeBeyond Technology Corp.      Ugo Corda
+R       Sonic   Glen Daniels
+Y       Sosnoski Software       Dennis Sosnoski
+R       Sun     Marc Hadley
+Y       Sun     Roberto Chinnici
+Y       Sun     Doug Kohlert
+N       Tmax Soft       JaeWoong Chung
+N       WebMethods Corporation  Christopher St. John 
+
+Roberto will scribe.
+
+2. Agenda Review and AOB
+
+Sunil asked to postpone the review of his DII proposal (item 6.3) to next week.
+
+3. Approval of Jan 15th telcon minutes
+
+See https://jsr224.dev.java.net/meetings/Minutes200401215.txt
+
+Minutes approved with no change.
+
+4. Review action items
+
+See https://jsr224.dev.java.net/
+
+* Glen to circulate alternate proposal for dealing with protocol
+specific fault information on client and server side
+
+- pending
+
+* Russell to send proposal for improving handler framework.
+
+- pending
+
+* Roberto to raise issue about the interaction of polling (get) and
+callbacks
+
+- done, added issue #13
+
+* Marc to confirm F2F arrangements
+
+- done
+
+
+5. F2F Update
+
+F2F confirmed for March 10-11 in Burlington, MA.
+Please confirm attendance with Marc Hadley ASAP.
+
+
+6. DII Enhancements
+
+(6.1)  Roberto's proposal (SAAJ/DOM/JAXB related):
+
+http://archives.java.sun.com/cgi-bin/wa?A1=ind0401&L=jsr-224-eg#6
+
+Roberto explained the proposal.
+Got email feedback on been consistent on using Element/SoapElement.
+Roberto ok with removing the soap-ness whenever possible.
+
+
+(6.2)  Marc's new proposal:
+
+http://archives.java.sun.com/cgi-bin/wa?A1=ind0401&L=jsr-224-eg#1
+
+Roberto described the proposal.
+Sunil: drastic proposal, we need to think about it more if it's going to
+replace the old DII API.
+Kevin: old one would be unchanged.
+Sunil: keep the changes defined last week, then add new ones.
+Sunil: we need to support WSDL 1.1 rpc/encoded.
+Roberto: but do we need to support asynchrony?
+Sunil: we're discussing this internally.
+Decided to discuss it more over email and solicit internal feedback.
+
+
+(6.3)  Sunil's DII enhancements proposal:
+
+http://archives.java.sun.com/cgi-bin/wa?A1=ind0401&L=jsr-224-eg#11
+
+Discussion moved to next week.
+
+
+(6.4)  Russell's observations:
+
+http://archives.java.sun.com/cgi-bin/wa?A1=ind0401&L=jsr-224-eg#3
+
+Russell: call object is not really DII, we shouldn't call it that, it's closer to portable stubs.
+Roberto: closer to dynamic proxies; have a hard time picturing a case that is not
+covered by the proposed Call.invoke(Element) or dynamic proxies.
+Russell: how many people are really using the call object?
+Kevin: used the call object for doc/lit with WSDL.
+Roberto: it's a resource allocation problem for the expert group really.
+
+
+http://archives.java.sun.com/cgi-bin/wa?A1=ind0401&L=jsr-224-eg#4
+
+Russell: IBM's implementation is doing (2).
+Sunil: we do (2) as well.
+Roberto: is (2) logical? it's not implied by the signature of the method.
+Doug: the RI is doing (2) too.
+Roberto: choice is between deprecating it altogether and clarifying that it's a shorthand for calling setOperationName and invoke.
+
+
+http://archives.java.sun.com/cgi-bin/wa?A1=ind0401&L=jsr-224-eg#5
+
+Russell: deprecate the old call and create a new, better one.
+Roberto: I'd be more comfortable if we knew how many problems the existing call really has, but it seems that the more we investigate it, the more issues we uncover.
+Discussion on creating a new call and reserving the existing one for legacy uses.
+Need to think about this path more.
+
+
+7. Java->XML mapping and JAXB binding customization
+
+The JAXB 2.0 expert group is currently discussing the issues involved in
+translating Java classes to and from XML.
+
+Dennis's email at:
+
+http://archives.java.sun.com/cgi-bin/wa?A1=ind0401&L=jsr-224-eg#15
+
+Dennis: it was discussed in the JAXB concall on Tuesday and got a favorable reception.
+
+Add action item to Dennis to write something up on linking the JAXB and JAX-RPC frameworks.
