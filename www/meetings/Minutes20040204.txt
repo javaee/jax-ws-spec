@@ -1,0 +1,128 @@
+Agenda:
+
+1. Roll Call, scribe for minutes selected from attached list.
+
+N	ATG	Jim Frost
+Y	BEA Systems 	Manoj Cheenath 
+N	DevelopMentor	Kevin Jones
+Y	IBM	Russell Butek
+N	IONA Technologies PLC 	Daniel Kulp 
+N	Motorola 	Rahul Sharma 
+N	Nokia	Srividya Natarajan
+Y	Novell, Inc. 	Bjarne Rasmussen 
+N	NTT Data Corp	Toshiyuki Kimura 
+Y	Oracle	Sunil Kunisetty
+N	Pramati	Rajiv Shivane
+N	SAP AG 	Chavdar Baikov 
+N	SeeBeyond Technology Corp. 	Ugo Corda
+N	Sonic	Glen Daniels
+Y	Sosnoski Software	Dennis Sosnoski
+Y	Sun	Marc Hadley
+R	Sun	Roberto Chinnici
+Y	Sun	Doug Kohlert
+N	Tmax Soft	Changshin Lee
+N	WebMethods Corporation 	Christopher St. John
+
+Sunil to scribe.
+
+2. Agenda Review and AOB
+
+  Accepted with no changes 
+
+3. Approval of Feb 26th telcon minutes
+
+ See https://jsr224.dev.java.net/meetings/Minutes20040226.txt
+
+  Approved. 
+
+4. Review action items
+
+ See https://jsr224.dev.java.net/
+
+ - Marc to think about how faults fit in with DII  (Pending) 
+ - Marc to poll about what happens when client side handleRequest throws 
+   RuntimeException (done) 
+ 
+
+ 5. F2F Update
+
+ Any last minute updates prior to next weeks F2F meeting.
+
+  - logistics taken care 
+ 
+
+ 6. Containment vs Reference
+
+ I posted a query to the group, see: 
+http://archives.java.sun.com/cgi-bin/wa?A2=ind0403&L=jsr-224- 
+eg&F=&S=&X=5A25196428F2204FF6&P=67
+
+ Dennis suggested using id/idref for literal case 
+ Sunil suggested using WS-I BP's graph serialization 
+ Marc:  let JAX-B deal with it 
+        let 'containment' be the default 
+        JAX-B should provide mechanism to support id/idref
+        via some binding customization
+ General agreement that JAX-RPC has a requirement for reference semantics,
+ that containment should be the default and that we should let JAXB solve
+ this.
+
+7. Protocol specific fault proposal
+
+ Glen will present his proposal for protocol specific fault handling
+
+ See: 
+http://archives.java.sun.com/cgi-bin/wa?A2=ind0402&L=jsr-224- 
+eg&F=&S=&X=246D822FEFF732D5A1&P=7701
+
+ Marc: Glen not present so postpone detailed discussion till F2F 
+ Marc: Glen's protocol involve more code generation 
+ Russell: Looks more complex. users need more information to use this 
+ Marc: Perhaps merge Glens proposal with my original. Use cause mechanism 
+       to avoid additonal class generation but drop the idea of a property
+       bag and go with standard 'cause' exceptions fro each protocol we
+       define support for.
+
+8. Proposal for Handlers
+
+ We'll continue our discussion of the handler proposal, see:
+
+ https://jsr224.dev.java.net/proposals/JAXRPC_Handlers.pdf
+
+ This week we'll continue our review starting where we left off last 
+week at section 3.2.5.
+
+  Marc: are we planning to have a new version of the proposal that includes
+        decisions made to date etc ? 
+  Richard (R): yes, we plan to have one before the F2F. 
+  Marc: Would also be helpful to have a list of questions for the F2F so group
+        can work productively.
+  
+  Discussion on section 3.2.3 
+  R: What is a SOAP node? Should it be conglomerate of handler and target
+      endpoint or treat it each handler as a node? 
+  Sunil:it should be a conglomerate 
+  Marc: agree 
+  R: who should strip the mU Header? 
+  Marc: SOAP intermediaries are more conceptual at this time and less practical
+        (deployment sense) 
+  R: we should make sure we dont preclude some extension model to support
+     'intermediaries' 
+  Sunil: briefed the concept of 'filtered handlers' 
+  Marc: some of the Handlers only need access to those headers that it 
+        processes. that should be the default.. 
+  R: what is the purpose of this effort? performance and reduce complexity? 
+  Sunil: yes and some sense of security 
+  R: how about a handler policy? define set of polices on the handler 
+     invocation.
+  Marc: global policy won;t work since some handler need access to whole
+        message, other just to 'their' headers.
+  R: SOAPMessageContext.getHeaders() - Headers defined by that handler or all 
+     headers with wild card. what about getMessage()?
+  Marc: should discourage use of getMessage as it can cause performance problems
+  Marc: we could use JAXB context in one version of getHeaders() to get Java 
+     objects and other one can use SOAPElement versions. This will give us the
+     capability to support handlers that work only with JAXB objects isntead of
+     XML fragments
+     
+     
