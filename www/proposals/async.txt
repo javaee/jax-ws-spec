@@ -208,10 +208,10 @@ class MyFooHandler implements FooPortAsyncHandler {
 
 FooHandlerContext fhc = new FooHandlerContext(...);
 FooPortAsyncHandler h = new MyFooHandler(fhc);
-Cancellable c = port.startBar("hello", "world", h);
+AsyncResponse<BarResponse> res = port.startBar("hello", "world", h);
 // do something
-if (!c.isDone()) {
-  c.cancel(true);
+if (!res.isDone()) {
+  res.cancel(true);
 }
 
 
@@ -224,11 +224,10 @@ public class AsyncClient implements FooPortAsyncHandler {
 
   public static void main(String[] args) {
     FooPortAsyncHandler h = new AsyncClient();
-    AsyncResponse<BarResponse> res = port.startBar("hello", "world");
+    AsyncResponse<BarResponse> res = port.startBar("hello", "world", h);
     // do something
     if (res.await(60, TimeUnit.SECONDS)) {
-      BarResponse br = res.get();
-      h.endBar(br);
+      // carry on, knowing that endBar has been called
     } else {
       res.cancel(true);
     }
