@@ -1,0 +1,378 @@
+Thursday Oct 14th
+
+9.00-10.30
+
+(1) Roll call, scribes for the day
+
+Marc Hadley
+Dennis Sosnoski
+Brian Zotter
+Manoj Cheenadh
+Vijay Rajan
+Doug Kohlert
+Roberto Chinnici
+Richard Sitze
+Glen Daniels
+
+(2) Agenda review and AOB
+
+Approval of draft minutes:
+
+https://jsr224.dev.java.net/meetings/Minutes20040603.txt - Approved
+https://jsr224.dev.java.net/meetings/Minutes20040824.txt - Approved
+
+(3) Requests for feedback.
+In early draft 1 we requested feedback on a number of decisions made in
+the spec. We received none so we'll briefly discuss each feedback item
+and decide how to deal with them (close and remove, open issue, leave
+in for next draft etc.).
+
+Section 2.5/Ed. Note  2.2
+- Agreed to delete the ed. note. and retain status quo on functionality
+
+Section 3.4/Ed. Note 3.1
+- Agreed to delete the ed. note. and retain status quo on functionality 
+
+Section 3.8.1/Ed. Note 3.4
+-	Delete the notes. Add rpc/lit mappings for Java->WSDL.
+-	Rationale is to support JSR 181  annotations.
+
+Section 6.2.1.2/Ed. Note 6.1
+-	Discussion on whether to intersperse logical and protocol handlers.
+-	Glen and Sunil support straight forward invocation as specified in
+configuration
+-	Roberto, Marc, and Richard seem to be inclined more for clubbing
+logical and protocol handlers  as they feel this more efficient and
+better performance
+-	Glen sees no performance degradation
+-	Sunil  feels that straight forward way is better if JBI’s BC and SE
+are different VMs and is more predictable
+-	Richard and Roberto feel that separating logical and protocol
+handlers  be more efficient as ‘transformations’ can be  minimized
+-	Decision still pending.
+
+AI to Doug to discuss with RI team and report performance implications.
+
+10.30-10.45 Break
+
+10.45-12.15
+
+(4) Standard Customizations
+Roberto will present a proposal for standard customizations including
+- WSDL -> Java via customization file or WSDL annotations
+- Java -> WSDL via annotations (incl JSR 181)
+- Use of customizations for portability and inclusion of JAX-RPC in J2SE
+
+- New (annotations will be defined in a maintenance release of JSR 181)
+- Define new WSDL 1.1 & 2.0 extensions to be used for annotations for
+top down cases.
+- Brian: Should the flag name be consistent with 181 names?
+- Roberto: Sure. Please send the 181 parameters to the list so that we
+could consolidate the names.
+- Roberto: WSDL annotations is only for assembly/design time. We don’t
+expect that to be used for deployer. Deployer should rely on annotations
+in the java class.
+- Glen: What happens if annotations are provided both on SEI and the
+impl. Class
+- Doug/Brian: The ones in SEI takes precedence.
+
+Inclusion in J2SE 6.0 (Brainstorming):
+- Client and Server support in a J2SE environment is generally deemed
+useful. 
+- There are use cases (JMX, etc.) for hosting J2SE services that support
+callback endpoints, etc.
+- Annotation based runtime makes portability easy.
+- However, SOAP/HTTP binding required. This is technical solvable, needs
+work with JDK network group.
+- Binding Pluggability is not a goal for 6.0 for timing reasons. And JBI
+may provide solutions here.
+- Roberto presented API for publishing a Service, configuring a binding
+- J2SE 1.6 is expected to provide HTTP server functionality
+- Sunil pointed out two big assumptions:
+  - J2SE 6.0 has HTTP support
+  - JAXB 2.0 annotation support is part of J2SE 6.0
+- Rick agrees with the value of J2SE based JAXRPC server side, but
+questioned whether JAX-RPC should require it. Ok with this support as
+optional.
+Q&A:
+- Glen: Do we define a JAX-RPC compliant transport? 
+- Marc/Roberto: No.
+- Sunil:  Should we take this work now? It could be confusing to
+introduce JAX-RPC server side until J2SE 1.6.
+- Roberto: We can define the server side functionality as optional for
+now, and during the JAX-RPC 2.0 maintenance cycle when J2SE 1.6 also
+shapes up, we can mark the support as required.
+- Roberto: List of required support
+  - HTTP Server
+  - Thread Management, Session, …
+  - Publishing an endpoint (including handlers)
+  - Port multiplexing
+  - JAXB inclusion
+- Use cases
+- Sanjay: Suggestion to define the use cases to scope the JAX-RPC J2SE
+based server side.
+- Roberto: We are not doing container here.
+
+12.15-1.15 Lunch
+
+1.15-3.00
+
+(5) Refactoring context
+Marc will present a proposal for tidying up the relationship between
+JAXRPCContext and MessageContext and improving the symmetry between
+client and server sides.
+
+- Manoj prefers scope to be parameterized
+- Glen: The scoping of handler vs. application may be too much of
+engineering. Simpler alternative could be to allow sharing of properties
+across application and handlers.
+- Roberto: In that case garbage collection will be application
+responsibility
+- Glen: Axis – dynamic scoping first looks into local message context
+bag, and then looks into parent which is Call object, on the client
+side. 
+- Roberto: How do you pass things back to the application
+- Richard: You are implementing copy on write
+- Glen: Properties that come from one context go back to the context.
+Other way is to get the Call and write the thing in their directly.
+- Roberto: You are doing deep-write
+- Glen: The issue may be about the extra bit as to where the property
+goes
+- Vijay: Implementation issue
+- Roberto: Without the proposal, the handlers have to know exactly where
+to fetch and update the properties
+- Vijay: What is the disadvantage of having a shared property area where
+everyone can write and read
+- Marc: Life cycle of properties. When to clean up.
+- Vijay: Wouldn’t an application know before hand what it needs from the
+response?
+- Manoj: One of the useful things is for handlers to keep a copy of some
+properties in the stub.
+- Roberto: We don’t support that. But we might do that by a separate
+scope like Conversation Scope.
+- Vijay: Right now the handlers decide what is given back to
+application.
+- Glen: Loose coupling. How does the handler know what to push up to the
+application?
+- Marc: Handler could make the scoping decision.
+- Glen: Handler could clean up after them selves.
+- Roberto: It is simpler for handlers to delegate garbage collection. 
+- Marc: Which one does the group prefer?
+- Roberto: Handlers have to be location aware with the old design, which
+is solved by the new design.
+- Vijay: Can handlers remove something?
+- Vijay: Will there be cases where handlers want to pass properties only
+to the app but not to other handlers. Example, a system security
+handler.
+- Roberto: We don’t have a sandbox for handlers.
+- Roberto: JSR 109 disallows mucking with the message
+- Glen: But you could decrypt it. If there is soap extension that says
+take this message content and take this action on it later.
+- Roberto: JSR 109 has two models Servlet endpoint and EJB endpoint; and
+in both the cases the method name can not be changed.
+- Glen: Seems like I can’t implement WS-Addressing using handlers in a
+J2EE world.
+- Manoj: You can return an exception and short circuit the handler
+chain.
+- Marc: Is the group ok with continuing on with my proposal.
+- Group: yes, it’s ok to move forward and keep investigating tweaks.
+
+3.15-3.30 Break
+
+3.30-5.15
+
+(6) Joint Session with JAXB EG
+Attachments and other JAXB/JAX-RPC integration issues.
+
+- Value classes (JAX-RPC needs)
+
+generateValeClass = true/false and globalElement = true/false are
+supported.
+
+- Serializable
+
+Would it be sufficient to assume the same classes providing ser/deser on
+the client and the provider side?
+
+Sunil: Serializable parameters to EJB method invocation? 
+
+Same schema derived value classes must be available on both sides.
+
+MTOM
+
+Attachment is not a native concept for JAXB, and so is the concept of
+delegating processing in the middle of processing. JAXB thinks that it
+should allow its use to enable XOP/MTOM, but XOP/MTOM should not be
+baked into JAXB. 
+
+Are there other cases like XOP/MTOM that warrant a generic delegation
+framework support in JAXB? In absence of such other use cases and given
+that MTOM/XOP is a current (W3C recommended) Web services use case,
+JAXRPC thinks that JAXB should support it.
+
+Friday Oct 15th
+
+9.00-10.30
+
+(7) Roll call, scribes for the day
+
+(8) Agenda review and AOB
+
+(9) Server-side dynamic endpoints (Provider interface)
+Marc will present an overview of the Provider interface for dynamic
+service  endpoints.
+
+- Context Properties 
+- Issues 
+- Why would the client need the wsdl? 
+- Client may have multiple wsdls with the same namespace and service
+name. 
+- Namespace is redundant in QName of service and port, agreed to keep as
+is. 
+- It was decided that the WSDL properties are optional: 
+- Their may not be a wsdl. 
+- J2ee there is always a wsdl, j2se maybe a wsdl, 
+- If deployed without a wsdl than these properties wont be there 
+- The values of these properties may not change during the lifecycle fo
+an endpoint. 
+- return Type for WSDL property will be changed to InputSource 
+
+Glenn:
+
+Proposed a “WSDL model” for accessing the parts (headers, body ...) from
+the LogicalMessageContext.
+
+- Of course only if there is a WSDL 
+- Needs more discussion 
+ 
+10.30-10.45 Break
+
+10.45-12.15
+
+(10) Pluggable data binding
+
+- Several members request that implementations may supply their own
+method of serializing and deserializing 
+
+Action Item: Dennis, Richard, Manoj, and Brian will come up with a
+proposal for customizing serialization and deserialization.  1 month
+deadline. 
+
+12.15-1.15 Lunch
+
+1.15-2.30
+
+(11) Security API
+
+Marc presents the proposal
+
+Sanjay : Is there a need to make this more generic, so
+Handlers/components can indicate that they support/require particular
+bits of functionality (policies?), and the system can inidicate
+mismatches?
+Marc : We don't require handlers at this level.
+Glen : But can we somehow make this generic? Glen sketches out a
+potential generic policy engine API.
+Sunil : We talked about this at the BOF at JavaOne
+Marc : are we making this too general?
+Sunil : Let's define a framework, and use it to do security, but then
+we'll have the framework
+Glen : +1
+Marc : Generic annotation wouldn't work because it would just have
+name/value pairs.
+Glen : So if we don't define a generic annotation, we could still define
+the way the annotations resolve into a policy framework/class.
+Roberto : Could annotate annotations to let you know that particular
+ones were policy annotations....
+Glen : So what do we do with these annotations?
+Sanjay : Use it to configure your handler chain.
+Roberto : exactly
+Glen : This is just half of the problem.  We need to deal with the WSDL
+reader/writer as well.
+Sanjay : We can just do the java part for now, then add that later
+
+[ scribe missed some conversation that he was involved in ]
+
+Sanjay : Does this map somehow into the MessageContext
+Marc : Good Question.  Glen, can you write that down?
+Glen : I already did :)
+Glen : Would be nice if these things did appear as MC properties, and
+control handler deployment
+Marc : We shoudn't go all the way to mapping an annotation to a handler,
+that's too far.  Mapping to MC property seems good.
+
+[ conversation about a well-defined place in the MC to put operation
+name ]
+
+Richard : What about JSR183?
+Roberto : That's lower level.
+Glen : OK, I'd like to propose we have a well-defined operation property
+in the MC
+
+[ discussion of format - end result is a QName/QName tuple
+(iface/operation) ]
+
+Marc : So do we require ties to dispatch based on this property?
+Glen : You could....
+Marc : Needs more semantics?
+Roberto : Need to account for JSR-109 requiring that this only get set
+once (method level security)
+Glen : Can do that by allowing JSR-109 compliant impls to throw a
+runtime exception
+Marc : Hm... weird but OK
+
+agreement on this part, pop back to operation-specific policies
+
+Roberto : Hey Richard, when's the next 109?
+Richard : Will ask....
+
+ACTION : Richard to find out about schedule for JSR-109 .next
+
+Marc : Recap - we now have the operation name, but something still needs
+to get at the metadata and put that in the context
+Marc : Can we just get this stuff from the WSDL?  We've got a complete
+index into where to look now....
+
+[ more discussion ]
+
+ACTION : Marc to write up this discussion, and in particular to write up
+a use case (starting from WSDL or Java) which demonstrates how this can
+really work without Glen's "missing piece" of metadata
+
+[ conversation about getting security metadata from Service and Binding
+]
+
+Glen : Can we make this more generic?  binding.getPolicy(SECURITY)?
+
+(12) Session infrastructure
+
+Requirements brainstorming
+
+- Unified mechanism for handlers and endpoint to access session state
+- Generic, not relying on HTTP session but implementable using HTTP
+sessions.
+- Need standard session interface
+- Define session scoping rule. Per Stub, Service, ... ?
+- Define session lifecycle - timeouts etc.
+- Need standard slot in MessageContext - type Session
+- Persistence ?
+- On client one session per instance of a BindingProvider
+- Axis has per invocation, per session and singleton based endpoints.
+Session and singleton multithreaded.
+
+Marc/Roberto to write up a proposal for session APIs.
+
+POSTPONED
+
+Open Issues (POSTPONED)
+3: Name collision prevention
+9: rpc/literal and null arguments
+12: Clarification of ServletEndpointContext.getMessageContext
+14: Allow constants in Java SEI ?
+15: Describe mapping from Java to WSDL Service element
+16: Multiple messages in MessageContext
+17: Service.getWSDLLocation return is ambiguous
+
+Spec Feedback: The latest version of the spec contains significant new
+material and changes since the early draft, we'll discuss any feedback
+on the latest version arising from EG members reviews.
