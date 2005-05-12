@@ -1,0 +1,62 @@
+1. Roll call
+
+Roberto, Doug, Marc, Bjarne, Brian, Thomas, Chen, Anish.
+
+2. Approval of draft minutes
+
+https://jsr224.dev.java.net/meetings/Minutes20050210.txt
+https://jsr224.dev.java.net/meetings/Minutes20050505.txt
+
+Minutes approved.
+
+2. Agenda bashing and AOB
+
+3. Closing on the renaming proposal, see separate email threads.
+
+Roberto reviews comments received to date.
+Brian: BEA is in favour but is concerned about omission of support for WS-Addressing and Policy.
+Roberto: Timelines for those JSRs are staggered so we have to make sure they will work with JAX-WS.
+Brian: What plans for J2EE 5.0, will it require addressing and policy ?
+Roberto: They are unlikely to meet the deadline for inclusion in J2EE 5.0 but should be possible to add support later.
+Brian: What if we took on some of that work ?
+Roberto: Then JAX-WS might not make the deadline ;-). 
+?: Is anyone doing the analysis to make sure addressing and policy will work with JAX-WS ?
+Roberto: We are doing that but hope to get some good discussion on the mailing list too.
+Roberto: Can we record BEA as being in favour.
+Brian: Yes with proviso that we make sure that JAX-WS works with addressing and policy JSRs.
+Roberto: Also received private mail from some EG members saying they are in favour of the renaming proposal. Silence is also taken as assent so those we didn't hear from are assumed to be in favour.
+Roberto: Any objection to recording that EG is in favour of the proposal.
+(none)
+Roberto: Proposal is abopted then.
+
+Thomas: Also need to embrace JSR 181 closely.
+Roberto: In order to publish Public Draft by JavaOne need EG draft by mid June. Public Draft needs to be feature complete. Proposed Final Draft by end of Sept, Final spec by December (?)
+Roberto: Tasks outstanding before Public draft:
+
+(i) Alignment with policy and addressing JSRs - e.g. how would EPRs show up ?
+(ii) Support for service endpoints on J2SE 6.0. J2SE EG debating inclusion of JAX-WS in JDK. Will send a proposal soon for this, can discuss and refine in this EG and leave decision about JAX-WS in JDK to J2SE EG.
+
+Marc: Cites callbacks as a reason for including this, cf WS-I Sample Application.
+Bjarne: Any plans to include something like Tomcat in J2SE ?
+Roberto: No but there is discussion on adding lightweight/simpler APIs for HTTP endpoints without the complexity (config, deloyment etc) of a servlet container.
+Thomas: Is API targetting everything servlt does ?
+Roberto: No more like a server side equivalent of HTTPURLConnection.
+
+Roberto: JSR 181 and addr/policy work. Brian is spec lead for 181, maintenance release of 181 for JAX-WS.
+Brian: Tentative date is mid summer for starting maintenance review. Hope to complete right before final JAX-WS. Can discuss content of review earlier though so we can work out if anything additional is required in JAX-WS.
+Roberto: Similar situation for JSR 109, trying to get doc to share with this EG soon.
+
+Roberto: Final are of work is routing out RPC-isms, e.g. in Dispatch and Provider. See JBoss review.
+Roberto: Also need to revisit message level security API/annotations. Like declarative approach but this may be treading in areas already being worked on elsewhere and its unclear if this area if fully baked.
+Bjarne: Would make sense to support WS-I BSP. Would like to set a direction for security that could then be applied to addressing and policy.
+Roberto: trying to get some J2EE security folks to give some detailed feedback on the security APIs we've defined. Important for rest of EG to get their security folks to review this aspect of the specification.
+
+Marc: XML/HTTP binding also needs further review.
+
+Roberto: Less important but still need to look at names for some of the interfaces and methods, e.g. Dispatch and invoke is RPC-ish.
+
+Roberto: Will be holding calls weekly for next few weeks while we discuss the items above.
+
+Meeting Adjourned.
+
+
