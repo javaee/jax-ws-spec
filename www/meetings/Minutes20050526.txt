@@ -1,6 +1,4 @@
-Agenda for the JSR 224 telcon on 26 May, 2005. Start time is noon PT,
-3pm ET, 9pm central Europe. Scheduled duration is 1 hour. Call in
-number: 1 865 525 0765, access code: 4669616, security code 2302.
+Minutes for the JSR 224 telcon on 26 May, 2005.
 
 Agenda:
 
