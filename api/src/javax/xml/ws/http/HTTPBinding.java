@@ -5,7 +5,7 @@
 
 package javax.xml.ws.http;
 
-import java.net.URI;
+
 import java.util.Set;
 import javax.xml.ws.Binding;
 

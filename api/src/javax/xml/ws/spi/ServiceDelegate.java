@@ -1,7 +1,7 @@
 /*
  * Copyright 2005 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.1 2005-09-30 18:14:51 robc Exp $
+ *$Id: ServiceDelegate.java,v 1.2 2005-11-27 19:56:23 mode Exp $
  */
 
 package javax.xml.ws.spi;
@@ -104,7 +104,7 @@ public abstract class ServiceDelegate {
    *  @see javax.xml.ws.soap.SOAPBinding#SOAP12HTTP_BINDING
    *  @see javax.xml.ws.http.HTTPBinding#HTTP_BINDING
    **/
-  public abstract void addPort(QName portName, java.net.URI bindingId,
+  public abstract void addPort(QName portName, String bindingId,
       String endpointAddress);
 
   /** Creates a <code>Dispatch</code> instance for use with objects of
@@ -147,8 +147,8 @@ public abstract class ServiceDelegate {
    *
    *  @see javax.xml.bind.JAXBContext
    **/
-  public abstract Dispatch<Object> createDispatch(QName portName, JAXBContext context,
-      Service.Mode mode);
+  public abstract Dispatch<Object> createDispatch(QName portName, 
+              JAXBContext context, Service.Mode mode);
 
 
   /** Gets the name of this service.

@@ -4,12 +4,11 @@
  */
 
 package javax.xml.ws;
-
+import java.lang.annotation.Documented;
 import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
-
 /** 
  * Used to annotate methods in the Service Endpoint Interface with the response 
  * wrapper bean to be used at runtime. The default value of the localName is 
@@ -22,21 +21,39 @@ import java.lang.annotation.RetentionPolicy;
  * @see javax.jws.WebMethod
  *  @since JAX-WS 2.0
 **/
+
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
+@Documented
 public @interface ResponseWrapper {
+
   /**
+
    *  Elements local name.
+
   **/
+
   public String localName() default "";
 
-  /**
-   *  Elements namespace name.
-  **/
-  public String targetNamespace() default "";
+
 
   /**
-   *  Response wrapper bean name.
+
+   *  Elements namespace name.
+
   **/
+
+  public String targetNamespace() default "";
+
+
+
+  /**
+
+   *  Response wrapper bean name.
+
+  **/
+
   public String className() default "";
+
 }
+

@@ -5,7 +5,7 @@
 
 package javax.xml.ws.soap;
 
-import java.net.URI;
+
 import java.util.Set;
 import javax.xml.ws.Binding;
 import javax.xml.soap.SOAPFactory;
@@ -30,9 +30,9 @@ public interface SOAPBinding extends Binding {
 
   /** Gets the roles played by the SOAP binding instance.
    *
-   *  @return Set<URI> The set of roles played by the binding instance.
+   *  @return Set<String> The set of roles played by the binding instance.
   **/
-  public Set<URI> getRoles();
+  public Set<String> getRoles();
 
   /** Sets the roles played by the SOAP binding instance.
    *
@@ -40,7 +40,7 @@ public interface SOAPBinding extends Binding {
    *  @throws WebServiceException On an error in the configuration of
    *                  the list of roles.
   **/
-  public void setRoles(Set<URI> roles);
+  public void setRoles(Set<String> roles);
 
   /**
    * Returns <code>true</code> if the use of MTOM is enabled.

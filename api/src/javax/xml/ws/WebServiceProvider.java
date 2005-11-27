@@ -6,6 +6,7 @@
 
 package javax.xml.ws;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
 import java.lang.annotation.ElementType;
@@ -19,6 +20,7 @@ import javax.xml.namespace.QName;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
+@Documented
 public @interface WebServiceProvider {
     /**
      * Location of the WSDL description for the service.

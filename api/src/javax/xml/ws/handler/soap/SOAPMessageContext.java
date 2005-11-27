@@ -8,7 +8,6 @@ package javax.xml.ws.handler.soap;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.bind.JAXBContext;
 import javax.xml.namespace.QName;
-import java.net.URI;
 import java.util.Set;
 
 /** The interface <code>SOAPMessageContext</code> 
@@ -74,7 +73,7 @@ public interface SOAPMessageContext
    *  SOAP actor roles are invariant during the processing of
    *  SOAP message through the handler chain.
    *
-   *  @return Array of URIs for SOAP actor roles
+   *  @return Array of String for SOAP actor roles
   **/
-  public Set<URI> getRoles();
+  public Set<String> getRoles();
 }

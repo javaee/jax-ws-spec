@@ -135,8 +135,7 @@ public class Service {
    *  @see javax.xml.ws.soap.SOAPBinding#SOAP12HTTP_BINDING
    *  @see javax.xml.ws.http.HTTPBinding#HTTP_BINDING
    **/
-  public void addPort(QName portName, java.net.URI bindingId,
-      String endpointAddress)
+  public void addPort(QName portName, String bindingId, String endpointAddress)
   {
       delegate.addPort(portName, bindingId, endpointAddress);
   }
