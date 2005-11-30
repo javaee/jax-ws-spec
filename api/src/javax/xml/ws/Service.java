@@ -126,7 +126,7 @@ public class Service {
    *  <code>Dispatch</code>instances.
    *
    *  @param portName  Qualified name for the target service endpoint
-   *  @param bindingId A URI identifier of a binding.
+   *  @param bindingId A String identifier of a binding.
    *  @param endpointAddress Address of the target service endpoint as a URI
    *  @throws WebServiceException If any error in the creation of
    *  the port

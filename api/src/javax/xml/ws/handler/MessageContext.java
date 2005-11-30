@@ -26,11 +26,18 @@ public interface MessageContext extends Map<String, Object> {
   public static final String MESSAGE_OUTBOUND_PROPERTY = 
                       "javax.xml.ws.handler.message.outbound";
 
-  /** Standard property: Map of attachments to a message, key is 
-   *  the MIME Content-ID, value is a DataHandler.
+  /** Standard property: Map of attachments to a message for the request, 
+   * key is  the MIME Content-ID, value is a DataHandler.
    *  <p>Type: java.util.Map<String,DataHandler>
   **/
-  public static final String MESSAGE_ATTACHMENTS = 
+  public static final String REQUEST_MESSAGE_ATTACHMENTS = 
+        "javax.xml.ws.binding.attachments";
+
+  /** Standard property: Map of attachments to a message for the response, 
+   * key is the MIME Content-ID, value is a DataHandler.
+   *  <p>Type: java.util.Map<String,DataHandler>
+  **/
+  public static final String RESPONSE_MESSAGE_ATTACHMENTS = 
         "javax.xml.ws.binding.attachments";
 
   /** Standard property: input source for WSDL document.
@@ -110,7 +117,19 @@ public interface MessageContext extends Map<String, Object> {
   **/
   public static final String SERVLET_CONTEXT =
         "javax.xml.ws.servlet.context";
-  
+     
+  /** Standard property: Query string for request.
+   *  <p>Type: String
+  **/
+  public static final String QUERY_STRING =
+        "javax.xml.ws.http.request.querystring";
+     
+  /** Standard property: Request Path Info
+   *  <p>Type: String
+  **/
+  public static final String PATH_INFO =
+        "javax.xml.ws.http.request.pathinfo";
+     
   /**
    * Property scope. Properties scoped as <code>APPLICATION</code> are
    * visible to handlers, 
