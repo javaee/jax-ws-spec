@@ -26,19 +26,19 @@ public interface MessageContext extends Map<String, Object> {
   public static final String MESSAGE_OUTBOUND_PROPERTY = 
                       "javax.xml.ws.handler.message.outbound";
 
-  /** Standard property: Map of attachments to a message for the request, 
-   * key is  the MIME Content-ID, value is a DataHandler.
+  /** Standard property: Map of attachments to a message for the inbound 
+   * message, key is  the MIME Content-ID, value is a DataHandler.
    *  <p>Type: java.util.Map<String,DataHandler>
   **/
-  public static final String REQUEST_MESSAGE_ATTACHMENTS = 
-        "javax.xml.ws.binding.attachments";
+  public static final String INBOUND_MESSAGE_ATTACHMENTS = 
+        "javax.xml.ws.binding.inbound.attachments";
 
-  /** Standard property: Map of attachments to a message for the response, 
-   * key is the MIME Content-ID, value is a DataHandler.
+  /** Standard property: Map of attachments to a message for the outbound 
+   * message, key is the MIME Content-ID, value is a DataHandler.
    *  <p>Type: java.util.Map<String,DataHandler>
   **/
-  public static final String RESPONSE_MESSAGE_ATTACHMENTS = 
-        "javax.xml.ws.binding.attachments";
+  public static final String OUTBOUND_MESSAGE_ATTACHMENTS = 
+        "javax.xml.ws.binding.outbound.attachments";
 
   /** Standard property: input source for WSDL document.
    *  <p>Type: org.xml.sax.InputSource
