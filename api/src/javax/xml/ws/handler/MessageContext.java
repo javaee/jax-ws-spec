@@ -31,14 +31,14 @@ public interface MessageContext extends Map<String, Object> {
    *  <p>Type: java.util.Map<String,DataHandler>
   **/
   public static final String INBOUND_MESSAGE_ATTACHMENTS = 
-        "javax.xml.ws.binding.inbound.attachments";
+        "javax.xml.ws.binding.attachments.inbound";
 
   /** Standard property: Map of attachments to a message for the outbound 
    * message, key is the MIME Content-ID, value is a DataHandler.
    *  <p>Type: java.util.Map<String,DataHandler>
   **/
   public static final String OUTBOUND_MESSAGE_ATTACHMENTS = 
-        "javax.xml.ws.binding.outbound.attachments";
+        "javax.xml.ws.binding.attachments.outbound";
 
   /** Standard property: input source for WSDL document.
    *  <p>Type: org.xml.sax.InputSource
