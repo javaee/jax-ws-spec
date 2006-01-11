@@ -106,12 +106,6 @@ public interface MessageContext extends Map<String, Object> {
   public static final String SERVLET_RESPONSE =
         "javax.xml.ws.servlet.response";
   
-  /** Standard property: servlet session object.
-   *  <p>Type: javax.servlet.http.HttpSession
-  **/
-  public static final String SERVLET_SESSION =
-        "javax.xml.ws.servlet.session";
-  
   /** Standard property: servlet context object.
    *  <p>Type: javax.servlet.ServletContext
   **/
