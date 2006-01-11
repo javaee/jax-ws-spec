@@ -12,9 +12,9 @@
     </description>
 
     <!-- properties -->
-    <property name="release.spec.title"    value="Proposed Final Draft"/>
+    <property name="release.spec.title"    value="Post-Proposed Final Draft"/>
     <property name="release.spec.version"  value="2.0"/>
-    <property name="release.spec.date"     value="October 7, 2005"/>
+    <property name="release.spec.date"     value="(not yet released)"/>
     <property name="release.spec.feedback" value="jsr224-spec-comments@sun.com"/>
 
     <!-- libraries that are referenced when compiling Java source files -->
