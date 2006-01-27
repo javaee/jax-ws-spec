@@ -1,12 +1,11 @@
 /*
  * Copyright 2005 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.1 2005-09-30 18:14:51 robc Exp $
+ *$Id: Provider.java,v 1.2 2006-01-27 01:04:04 iasandcb Exp $
  */
 
 package javax.xml.ws.spi;
 
-import javax.xml.ws.Service;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.WebServiceException;
 import javax.xml.namespace.QName;

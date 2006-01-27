@@ -6,7 +6,6 @@
 package javax.xml.ws.http;
 
 
-import java.util.Set;
 import javax.xml.ws.Binding;
 
 /** The <code>HTTPBinding</code> interface is an 

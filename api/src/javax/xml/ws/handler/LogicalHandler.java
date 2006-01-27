@@ -5,9 +5,6 @@
 
 package javax.xml.ws.handler;
 
-import javax.xml.ws.ProtocolException;
-import javax.xml.namespace.QName;
-
 /** The <code>LogicalHandler</code> extends
  *  Handler to provide typesafety for the message context parameter.
  * 

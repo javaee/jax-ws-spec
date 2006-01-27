@@ -6,9 +6,6 @@
 package javax.xml.ws.http;
 
 
-import javax.xml.namespace.QName;
-import javax.xml.soap.Detail;
-
 /** The <code>HTTPException</code> exception represents a 
  *  XML/HTTP fault.
  *

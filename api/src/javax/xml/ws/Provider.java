@@ -5,8 +5,6 @@
 
 package javax.xml.ws;
 
-import java.util.Map;
-
 /** Service endpoints may implement the <code>Provider</code>
  *  interface as a dynamic alternative to an SEI. Implementations
  *  are required to support <code>Provider&lt;Source&gt;</code> and

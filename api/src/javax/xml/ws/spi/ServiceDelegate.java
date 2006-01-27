@@ -1,12 +1,11 @@
 /*
  * Copyright 2005 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.2 2005-11-27 19:56:23 mode Exp $
+ *$Id: ServiceDelegate.java,v 1.3 2006-01-27 01:04:04 iasandcb Exp $
  */
 
 package javax.xml.ws.spi;
 
-import java.net.URL;
 import java.util.Iterator;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Dispatch;

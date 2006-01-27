@@ -7,9 +7,6 @@ package javax.xml.ws.handler;
 
 import javax.xml.ws.ProtocolException;
 import javax.xml.ws.handler.MessageContext;
-import javax.xml.ws.soap.SOAPFaultException;
-import javax.xml.namespace.QName;
-import java.util.Map;
 
 /** The <code>Handler</code> interface
  *  is the base interface for JAX-WS handlers.

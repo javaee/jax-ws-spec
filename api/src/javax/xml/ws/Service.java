@@ -6,7 +6,6 @@
 package javax.xml.ws;
 
 import javax.xml.namespace.QName;
-import java.net.URL;
 import java.util.Iterator;
 import javax.xml.ws.handler.HandlerResolver;
 import javax.xml.bind.JAXBContext;

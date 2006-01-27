@@ -5,8 +5,6 @@
 
 package javax.xml.ws.handler;
 
-import java.util.List;
-
 /** 
  *  <code>HandlerResolver</code> is an interface implemented
  *  by an application to get control over the handler chain
