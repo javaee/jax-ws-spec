@@ -28,6 +28,18 @@ public interface SOAPBinding extends Binding {
    */
   public static final String SOAP12HTTP_BINDING = "http://www.w3.org/2003/05/soap/bindings/HTTP/";
 
+  /**
+   * A constant representing the identity of the SOAP 1.1 over HTTP binding
+   * with MTOM enabled by default.
+   */
+  public static final String SOAP11HTTP_MTOM_BINDING = "http://schemas.xmlsoap.org/wsdl/soap/http?mtom=true";
+
+  /**
+   * A constant representing the identity of the SOAP 1.2 over HTTP binding
+   * with MTOM enabled by default.
+   */
+  public static final String SOAP12HTTP_MTOM_BINDING = "http://www.w3.org/2003/05/soap/bindings/HTTP/?mtom=true";
+
   /** Gets the roles played by the SOAP binding instance.
    *
    *  @return Set<String> The set of roles played by the binding instance.
