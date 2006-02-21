@@ -188,9 +188,9 @@ public abstract class Endpoint {
   public abstract void stop();
 
   /**
-   * Returns true if the endpoint has been published.
+   * Returns true if the endpoint is in the published state.
    *
-   * @return <code>true</code> if the endpoint has been published
+   * @return <code>true</code> if the endpoint is in the published state.
   **/
   public abstract boolean isPublished();
 
