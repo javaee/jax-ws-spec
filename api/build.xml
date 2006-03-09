@@ -12,7 +12,7 @@
     </description>
 
     <!-- properties -->
-    <property name="release.spec.title"    value="Post-Proposed Final Draft"/>
+    <property name="release.spec.title"    value="Final Draft"/>
     <property name="release.spec.version"  value="2.0"/>
     <property name="release.spec.date"     value="(not yet released)"/>
     <property name="release.spec.feedback" value="jsr224-spec-comments@sun.com"/>
@@ -111,14 +111,14 @@ href='http://java.sun.com/xml/jax-ws'>http://java.sun.com/xml/jax-ws</a></i><br>
 <![CDATA[JAX-WS<br>v${release.spec.version}]]>
             </header>
             <footer>
-<![CDATA[<a href='https://jax-rpc.dev.java.net/jax-ws/jax-ws-20-pfd/224-pfd-eval-spec-web.txt'>JAX-WS 2.0 PFD Specification License</a>]]>
+<![CDATA[<a href='https://jax-rpc.dev.java.net/jax-ws/jax-ws-20/224-spec-web.txt'>JAX-WS 2.0 Specification License</a>]]>
             </footer>
             <bottom>
 <![CDATA[<font size=-1>
 <br>Comments to: <a href='mailto:${release.spec.feedback}'><i>${release.spec.feedback}</i></a>
 <br>More information at: <a target='_top'
 href='http://java.sun.com/xml/jax-ws'><i>http://java.sun.com/xml/jax-ws</i></a> 
-<p>Copyright &copy; 2004 by Sun Microsystems, Inc., 901 San Antonio Road, 
+<p>Copyright &copy; 2006 by Sun Microsystems, Inc., 901 San Antonio Road, 
 <br>Palo Alto, California, 94303, U.S.A.  All Rights Reserved.  </font>]]>
             </bottom>
         </javadoc>
