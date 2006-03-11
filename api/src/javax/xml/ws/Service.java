@@ -145,7 +145,9 @@ public class Service {
    *  @param portName  Qualified name for the target service endpoint
    *  @param type The class of object used to messages or message
    *  payloads. Implementations are required to support
-   *  javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
+   *  <code>javax.xml.transform.Source</code>, <code>javax.xml.soap.SOAPMessage</code>
+   *  and <code>javax.activation.DataSource</code>, depending on
+   *  the binding in use.
    *  @param mode Controls whether the created dispatch instance is message
    *  or payload oriented, i.e. whether the user will work with complete
    *  protocol messages or message payloads. E.g. when using the SOAP
