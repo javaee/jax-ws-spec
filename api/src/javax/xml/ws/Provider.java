@@ -5,12 +5,16 @@
 
 package javax.xml.ws;
 
-/** Service endpoints may implement the <code>Provider</code>
- *  interface as a dynamic alternative to an SEI. Implementations
- *  are required to support <code>Provider&lt;Source&gt;</code> and
- *  <code>Provider&lt;SOAPMessage&gt;</code>.
+/**
+ *  <p>Service endpoints may implement the <code>Provider</code>
+ *  interface as a dynamic alternative to an SEI.
  *
- *  The <code>ServiceMode</code> annotation can be used to control whether
+ *  <p>Implementations are required to support <code>Provider&lt;Source&gt;</code>,
+ *  <code>Provider&lt;SOAPMessage&gt;</code> and
+ *  <code>Provider&lt;DataSource&gt;</code>, depending on the binding
+ *  in use and the service mode.
+ *
+ *  <p>The <code>ServiceMode</code> annotation can be used to control whether
  *  the <code>Provider</code> instance will receive entire protocol messages
  *  or just message payloads.
  *
