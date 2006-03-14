@@ -21,7 +21,6 @@ import java.lang.annotation.RetentionPolicy;
  * overloading conflicts in document literal mode. Only the className
  * is required in this case.
  * 
- * @see javax.jws.WebMethod
  *  @since JAX-WS 2.0
  **/
 
