@@ -179,7 +179,7 @@ public class Service {
    *  SOAP messages or the contents of a SOAP body.
    *
    *  @return Dispatch instance
-   *  @throws ServiceException If any error in the creation of
+   *  @throws WebServiceException If any error in the creation of
    *                   the <code>Dispatch</code> object
    *
    *  @see javax.xml.bind.JAXBContext
