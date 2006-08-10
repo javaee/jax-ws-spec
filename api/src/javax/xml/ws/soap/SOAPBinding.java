@@ -39,7 +39,18 @@ public interface SOAPBinding extends Binding {
    * with MTOM enabled by default.
    */
   public static final String SOAP12HTTP_MTOM_BINDING = "http://www.w3.org/2003/05/soap/bindings/HTTP/?mtom=true";
+  
+  /**
+   * A constant representing the identity of the WS-Addressing feature
+   */
+  public static final String ADDRESSING_FEATURE = "http://www.w3.org/2005/08/addressing/feature";
 
+  /**
+   * A constant representing the identity of the MTOM feature
+   */
+  public static final String MTOM_FEATURE = "http://www.w3.org/2004/08/soap/features/http-optimization";
+  
+  
   /** Gets the roles played by the SOAP binding instance.
    *
    *  @return Set<String> The set of roles played by the binding instance.

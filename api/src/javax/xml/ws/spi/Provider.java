@@ -1,7 +1,7 @@
 /*
  * Copyright 2005 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2 2006-01-27 01:04:04 iasandcb Exp $
+ *$Id: Provider.java,v 1.2.2.1 2006-08-10 19:18:02 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -9,6 +9,8 @@ package javax.xml.ws.spi;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.WebServiceException;
 import javax.xml.namespace.QName;
+import javax.xml.transform.Source;
+import javax.xml.ws.EndpointReference;
 
 /**
  * Service provider for <code>ServiceDelegate</code> and
@@ -115,6 +117,25 @@ public abstract class Provider {
     public abstract Endpoint createEndpoint(String bindingId, 
                                             Object implementor);
 
+    /** 
+     *
+     * Creates an endpoint object with the provided binding, features
+     * and implementation object.
+     *
+     * @param bindingId A URI specifying the desired binding (e.g. SOAP/HTTP)
+     * @param featuures An array of Features to enable for the specified
+     *        binding
+     * @param implementor A service implementation object to which
+     *        incoming requests will be dispatched. The corresponding
+     *        class must be annotated with all the necessary Web service
+     *        annotations.
+     * @return The newly created endpoint.
+     * @throws WebServiceException If any feature is unsupported or incompatible
+     * with the specified bindingId
+     */
+    public abstract Endpoint createEndpoint(String bindingId, String[] features,
+                                            Object implementor);
+    
     /**
      * Creates and publishes an endpoint object with the specified
      * address and implementation object.
@@ -131,4 +152,11 @@ public abstract class Provider {
      */
     public abstract Endpoint createAndPublishEndpoint(String address,
 						      Object implementor);
+    /**
+     * read an EndpointReference from the infoset contained in
+     * <code>eprInfoset</code>.
+     * throws WebServiceException if there is an error creating the
+     * EndpointReference from the specified <code>eprInfoset</code>.
+     **/
+    public abstract EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset);    
 }

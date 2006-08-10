@@ -93,6 +93,8 @@ public class Service {
   {
       return delegate.getPort(portName, serviceEndpointInterface);
   }
+  
+  
 
   /** The getPort method returns a stub. The parameter 
    *  <code>serviceEndpointInterface</code> specifies the service 
@@ -119,6 +121,48 @@ public class Service {
   public <T> T getPort(Class<T> serviceEndpointInterface) {
       return delegate.getPort(serviceEndpointInterface);
   }
+  
+  /** The getPort method returns a stub. 
+   *  The parameter <code>endpointReference</code> specifies the
+   *  endpoint that will be invoked by the returned stub.
+   *  The parameter  <code>serviceEndpointInterface</code> specifies 
+   *  the service 
+   *  endpoint interface that is supported by the returned proxy.
+   *  In the implementation of this method, the JAX-WS 
+   *  runtime system takes the responsibility of selecting a protocol
+   *  binding (and a port) and configuring the proxy accordingly from
+   *  The WSDL Metadata from the <code>EndpointReference</code>. 
+   *  The returned proxy should not be reconfigured by the client.
+   *  If this Service instance has a known proxy port that matches
+   *  the information contained in the <code>EndpointReference</code>
+   *  then that proxy is returned, otherwise a WebServiceException
+   *  is thrown.
+   *
+   *  @param endpointReference the EndpointReference that will
+   *  @param serviceEndpointInterface Service endpoint interface
+   *  be invoked by the returned proxy.
+   *  @return Object instance that supports the 
+   *                   specified service endpoint interface
+   *  @throws WebServiceException
+   *                   <UL>
+   *                   <LI>If there is an error during creation
+   *                       of the proxy
+   *                   <LI>If there is any missing WSDL metadata
+   *                       as required by this method
+   *                   <LI>If the EndpointReference Metadata
+   *                       does not match the 
+   *                   <LI>Optionally, if an illegal 
+   *                       <code>endpointReference</code>
+   *                       is specified
+   *                   <LI>Optionally, if an illegal 
+   *                       <code>serviceEndpointInterface</code>
+   *                       is specified
+   *                   </UL>  
+  **/
+  public <T> T getPort( EndpointReference endpointReference,
+                            Class<T> serviceEndpointInterface) {
+      return delegate.getPort(serviceEndpointInterface, endpointReference);
+  }
 
   /** Creates a new port for the service. Ports created in this way contain
    *  no WSDL port type information and can only be used for creating 
@@ -138,7 +182,46 @@ public class Service {
   {
       delegate.addPort(portName, bindingId, endpointAddress);
   }
+  
+  /** Creates a new port for the service. Ports created in this way contain
+   *  no WSDL port type information and can only be used for creating 
+   *  <code>Dispatch</code>instances.
+   *
+   *  @param portName  Qualified name for the target service endpoint
+   *  @param bindingId A URI identifier of a binding.
+   *  @param features  An array of features to enable for the specified binding
+   *  @param endpointAddress Address of the target service endpoint as a URI
+   *  @throws WebServiceException If any error in the creation of
+   *  the port
+   *
+   *  @see javax.xml.ws.soap.SOAPBinding#SOAP11HTTP_BINDING
+   *  @see javax.xml.ws.soap.SOAPBinding#SOAP12HTTP_BINDING
+   *  @see javax.xml.ws.soap.SOAPBinding#ADDRESSING_FEATURE
+   *  @see javax.xml.ws.soap.SOAPBinding#MTOM_FEATURE
+   *  @see javax.xml.ws.http.HTTPBinding#HTTP_BINDING
+   **/
+  public void addPort(QName portName, String bindingId, 
+      String[] features, String endpointAddress) {
+      delegate.addPort(portName, bindingId, features, endpointAddress);
+  }
 
+  /** Creates a new port for the service. The <code>EndpointReferenc</code>
+   *  must contain an EndpointName, ServiceName and WSDLLocation
+   *  The ServiceName, must match the name of this Service instance.
+   *  Ports created this way can be used to create <code>Dispatch</code>
+   *  instances using one of the <code>createDispatch</code> 
+   *  methods or proxy instances using 
+   *  <code>&ltT> T getPort(Class&ltT> serviceEndpointInterface)</code>
+   *
+   *  @param endpointReference EndpointReference of the target service 
+   *  endpoint
+   *  @throws WebServiceException If any error in the creation of
+   *  the port
+   **/
+  public void addPort(EndpointReference endpointReference) {
+      delegate.addPort(endpointReference);
+  }
+  
   /** Creates a <code>Dispatch</code> instance for use with objects of
    *  the users choosing.
    *
@@ -165,6 +248,7 @@ public class Service {
   {
       return delegate.createDispatch(portName, type, mode);
   }
+  
 
   /** Creates a <code>Dispatch</code> instance for use with JAXB
    *  generated objects.
@@ -189,7 +273,7 @@ public class Service {
   {
       return delegate.createDispatch(portName, context,  mode);
   }    
-  
+   
 
 
   /** Gets the name of this service.

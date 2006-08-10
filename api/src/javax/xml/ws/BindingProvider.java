@@ -93,4 +93,57 @@ public interface BindingProvider {
      * @return The Binding for this binding provider.
     **/
     Binding getBinding();
+    
+    
+   /** Set the <code>EndpointReference</code> for this
+    * instance.  
+    *
+    * @param endpointReference is the target endpoint used by
+    * this <code>BindingProvider</code> instance. Only the 
+    * <code>wsa:Address</code>  of the EndpointReference is  required.  
+    * @throws WebServiceException if the <code>wsa:Address</code> uses
+    * an unsupported transport protocol.  Implementations MUST support
+    * HTTP based addresses.
+    */
+    public void setEndpointReference(EndpointReference endpointReference);
+    
+   /**
+    * Returns the <code>EndpointReference</code> associate with
+    * this <code>BindingProvider</code> instance.
+    *
+    * The returned <code>EndpointReference</code> must contain 
+    *  the <code>wsdli:wsdlLocation</code> attribute
+    * on the <code>wsa:Metadata</code> element along with 
+    * <code>wsa:InterfaceName</code>,
+    * <code>wsa:ServiceName</code> elements and the <code>wsa:EndpointName</code>
+    * attribute on the <code>wsa:ServiceName</code> for BindingProviders 
+    * created from Services that contained that information
+    *
+    * @return EndpointReference of this instance.
+    * @throws WebServiceException if this BindingProvider instance
+    * was not created with WSDL information
+    */
+   public EndpointReference getEndpointReference();     
+
+
+   /**
+    * Returns the <code>EndpointReference</code> associate with
+    * this <code>BindingProvider</code> instance.  The instance 
+    * returned will be of type <code>clazz</code>.
+    *
+    * The returned <code>EndpointReference</code> must contain 
+    * the <code>wsdli:wsdlLocation</code> attribute
+    * on the <code>wsa:Metadata</code> element along with 
+    * <code>wsa:InterfaceName</code>,
+    * <code>wsa:ServiceName</code> elements and the <code>wsa:EndpointName</code>
+    * attribute on the <code>wsa:ServiceName</code> for BindingProviders 
+    * created from Services that contained that information
+    *
+    * @return EndpointReference of this instance.  Must be of type
+    * <code>clazz</code>.
+    * @throws WebServiceException if this BindingProvider instance
+    * was not created with WSDL information or if the Class <code>clazz</code>
+    * is not supported by this implementation.
+    */
+   public <T extends EndpointReference> T getEndpointReference(Class<T> clazz);   
 }

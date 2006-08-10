@@ -14,7 +14,8 @@ import java.lang.annotation.RetentionPolicy;
 /**
  *  The <code>BindingType</code> annotation is used to
  *  specify the binding to use for a web service
- *  endpoint implementation class.
+ *  endpoint implementation class. As well as specify
+ *  additional features that may be enabled.
  *  <p>
  *  This annotation may be overriden programmatically or via
  *  deployment descriptors, depending on the platform in use.
@@ -36,7 +37,21 @@ public @interface BindingType {
       * @see javax.xml.ws.Binding
       * @see javax.xml.ws.soap.SOAPBinding#SOAP11HTTP_BINDING
       * @see javax.xml.ws.soap.SOAPBinding#SOAP12HTTP_BINDING
+      * @see javax.xml.ws.soap.SOAPBinding#ADDRESSING_FEATURE
+      * @see javax.xml.ws.soap.SOAPBinding#MTOM_FEATURE
       * @see javax.xml.ws.http.HTTPBinding#HTTP_BINDING
       */
      String value() default "" ;
+
+     /**
+      * An array of features to enable on the specified binding.
+      * If not specified, no additional features are enabled.
+      * <p>
+      * See the <code>SOAPBinding</code> 
+      * for the definition of the standard feature identifiers.
+      *
+      * @see javax.xml.ws.soap.SOAPBinding#ADDRESSING_FEATURE
+      * @see javax.xml.ws.soap.SOAPBinding#MTOM_FEATURE
+      */
+     String[] features() default {};
 }
