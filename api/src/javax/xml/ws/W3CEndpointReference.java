@@ -1,10 +1,6 @@
 /*
- * W3CEndpointReference.java
- *
- * Created on August 3, 2006, 2:58 PM
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
+ * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
+ * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
 package javax.xml.ws;

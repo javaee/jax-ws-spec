@@ -1,7 +1,7 @@
 /*
- * Copyright 2005 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.1 2006-08-10 19:18:02 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.2 2006-08-10 22:37:15 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
