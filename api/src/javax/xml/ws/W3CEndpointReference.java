@@ -5,8 +5,8 @@
 
 package javax.xml.ws;
 
-import java.util.List;
-import java.util.Map;
+import org.w3c.dom.Element;
+
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
@@ -14,8 +14,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
-
-import org.w3c.dom.Element;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import java.util.List;
+import java.util.Map;
 
 /**
  * This class represents a W3C Addressing EndpointReferece.
@@ -23,45 +25,43 @@ import org.w3c.dom.Element;
  * @since JAX-WS 2.1
  */
     
-@XmlRootElement(name="EndpointReference",namespace="http://www.w3.org/2005/08/addressing")
-  // XmlRootElement allows this class to be marshalled on its own
-@XmlType(name="EndpointReferenceType",namespace="http://www.w3.org/2005/08/addressing")
+// XmlRootElement allows this class to be marshalled on its own
+@XmlRootElement(name="EndpointReference",namespace=W3CEndpointReference.NS)
+@XmlType(name="EndpointReferenceType",namespace=W3CEndpointReference.NS)
 public final class W3CEndpointReference extends EndpointReference {
     // construct an EPR from infoset representation
-    public W3CEndpointReference(javax.xml.transform.Source source) {
+    public W3CEndpointReference(Source source) {
         throw new RuntimeException("Not yet implemented");
     }
   
     /**
-     * write this EndpointReference to the specified infoset format
-     * throws WebServiceException if there is an error writing the
-     * EndpointReference to the specified <code>result</code>.
+     * {@inheritDoc}
      **/
-    public void writeTo(javax.xml.transform.Result result){
+    public void writeTo(Result result){
         throw new RuntimeException("Not yet implemented");        
     }
 
     // private but necessary properties for databinding
-    @XmlElement
+    @XmlElement(name="Address",namespace=NS)
     private Address address;
-    @XmlElement
+    @XmlElement(name="ReferenceParameters",namespace=NS)
     private Elements referenceParameters;
-    @XmlElement
+    @XmlElement(name="Metadata",namespace=NS)
     private Elements metadata;
   
-    private abstract class AttributeExtensible {
+    private class Address {
+        @XmlValue
+        String uri;
         @XmlAnyAttribute
         Map<QName,String> attributes;
     }
   
-    private class Address extends AttributeExtensible {
-        @XmlValue
-        String uri;
-    }
-  
-    private class Elements extends AttributeExtensible {
+    private class Elements {
         @XmlAnyElement
         List<Element> elements;
+        @XmlAnyAttribute
+        Map<QName,String> attributes;
     }
-    
+
+    private static final String NS = "http://www.w3.org/2005/08/addressing";
 }

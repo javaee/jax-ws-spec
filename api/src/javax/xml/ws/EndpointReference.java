@@ -21,19 +21,26 @@ import javax.xml.ws.spi.Provider;
 public abstract class EndpointReference {
 
     /**
-    * Factory method to read an EndpointReference from the infoset contained in
-    * <code>eprInfoset</code>.
-    * throws WebServiceException if there is an error creating the
-    * EndpointReference from the specified <code>eprInfoset</code>.
-    **/
+     * Factory method to read an EndpointReference from the infoset contained in
+     * <code>eprInfoset</code>.
+     * throws WebServiceException if there is an error creating the
+     * EndpointReference from the specified <code>eprInfoset</code>.
+     **/
     public static EndpointReference readFrom(Source eprInfoset) {
         return Provider.provider().readEndpointReference(eprInfoset);
     }
 
     /**
-    * write this EndpointReference to the specified infoset format
-    * throws WebServiceException if there is an error writing the
-    * EndpointReference to the specified <code>result</code>.
-    **/
+     * Write the infoset of this <code>EndpointReference</code>
+     * into a <code>Result</code> object.
+     *
+     *
+     * @throws WebServiceException
+     *      if there is an error writing the
+     *      <code>EndpointReference</code> to the specified <code>result</code>.
+     *
+     * @throws NullPointerException
+     *      If the null <code>result</tt> value is given.
+     */
     public abstract void writeTo(Result result);
 }
