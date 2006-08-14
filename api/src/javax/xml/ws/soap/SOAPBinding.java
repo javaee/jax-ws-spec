@@ -43,7 +43,7 @@ public interface SOAPBinding extends Binding {
   /**
    * A constant representing the identity of the WS-Addressing feature
    */
-  public static final String ADDRESSING_FEATURE = "http://www.w3.org/2005/08/addressing/feature";
+  public static final String ADDRESSING_FEATURE = "http://www.w3.org/2005/08/addressing/module";
 
   /**
    * A constant representing the identity of the MTOM feature
