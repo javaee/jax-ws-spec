@@ -131,7 +131,7 @@ public class Service {
    *  In the implementation of this method, the JAX-WS 
    *  runtime system takes the responsibility of selecting a protocol
    *  binding (and a port) and configuring the proxy accordingly from
-   *  The WSDL Metadata from the <code>EndpointReference</code>. 
+   *  the WSDL Metadata from the <code>EndpointReference</code>. 
    *  The returned proxy should not be reconfigured by the client.
    *  If this Service instance has a known proxy port that matches
    *  the information contained in the <code>EndpointReference</code>
@@ -139,8 +139,8 @@ public class Service {
    *  is thrown.
    *
    *  @param endpointReference the EndpointReference that will
-   *  @param serviceEndpointInterface Service endpoint interface
    *  be invoked by the returned proxy.
+   *  @param serviceEndpointInterface Service endpoint interface
    *  @return Object instance that supports the 
    *                   specified service endpoint interface
    *  @throws WebServiceException
@@ -150,7 +150,7 @@ public class Service {
    *                   <LI>If there is any missing WSDL metadata
    *                       as required by this method
    *                   <LI>If the EndpointReference Metadata
-   *                       does not match the 
+   *                       does not match the serviceEndpointInterface
    *                   <LI>Optionally, if an illegal 
    *                       <code>endpointReference</code>
    *                       is specified
@@ -161,7 +161,7 @@ public class Service {
   **/
   public <T> T getPort( EndpointReference endpointReference,
                             Class<T> serviceEndpointInterface) {
-      return delegate.getPort(serviceEndpointInterface, endpointReference);
+      return delegate.getPort(endpointReference, serviceEndpointInterface);
   }
 
   /** Creates a new port for the service. Ports created in this way contain
@@ -206,8 +206,9 @@ public class Service {
   }
 
   /** Creates a new port for the service. The <code>EndpointReferenc</code>
-   *  must contain an EndpointName, ServiceName and WSDLLocation
-   *  The ServiceName, must match the name of this Service instance.
+   *  must contain wsdli:WSDLLocation, wsaw:ServiceName, and
+   *  wsaw:ServiceName/@EndpointName
+   *  The wsaw:ServiceName, must match the name of this Service instance.
    *  Ports created this way can be used to create <code>Dispatch</code>
    *  instances using one of the <code>createDispatch</code> 
    *  methods or proxy instances using 
@@ -216,7 +217,7 @@ public class Service {
    *  @param endpointReference EndpointReference of the target service 
    *  endpoint
    *  @throws WebServiceException If any error in the creation of
-   *  the port
+   *  the port or missing Metadata or invalid endpointReference.
    **/
   public void addPort(EndpointReference endpointReference) {
       delegate.addPort(endpointReference);
@@ -250,6 +251,32 @@ public class Service {
   }
   
 
+    /** Creates a <code>Dispatch</code> instance for use with objects of
+     *  the users choosing.
+     *
+     *  @param endpointReference  The <code>EndpointReference</code>
+     *  for the target service endpoint
+     *  @param type The class of object used to messages or message
+     *  payloads. Implementations are required to support
+     *  javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
+     *  @param mode Controls whether the created dispatch instance is message
+     *  or payload oriented, i.e. whether the user will work with complete
+     *  protocol messages or message payloads. E.g. when using the SOAP
+     *  protocol, this parameter controls whether the user will work with
+     *  SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
+     *  when type is SOAPMessage.
+     *
+     *  @return Dispatch instance
+     *  @throws WebServiceException If any error in the creation of
+     *                   the <code>Dispatch</code> object
+     *  @see javax.xml.transform.Source
+     *  @see javax.xml.soap.SOAPMessage
+     **/
+    public <T> Dispatch<T> createDispatch(EndpointReference endpointReference, 
+            Class<T> type, Service.Mode mode) {
+        return delegate.createDispatch(endpointReference, type, mode);
+    }
+  
   /** Creates a <code>Dispatch</code> instance for use with JAXB
    *  generated objects.
    *
@@ -274,6 +301,30 @@ public class Service {
       return delegate.createDispatch(portName, context,  mode);
   }    
    
+    /** Creates a <code>Dispatch</code> instance for use with JAXB
+     *  generated objects.
+     *
+     *  @param endpointReference  The <code>EndpointReference</code>
+     *  for the target service endpoint
+     *  @param context The JAXB context used to marshall and unmarshall
+     *  messages or message payloads.
+     *  @param mode Controls whether the created dispatch instance is message
+     *  or payload oriented, i.e. whether the user will work with complete
+     *  protocol messages or message payloads. E.g. when using the SOAP
+     *  protocol, this parameter controls whether the user will work with
+     *  SOAP messages or the contents of a SOAP body.
+     *
+     *  @return Dispatch instance
+     *  @throws ServiceException If any error in the creation of
+     *                   the <code>Dispatch</code> object
+     *
+     *  @see javax.xml.bind.JAXBContext
+     **/
+    public Dispatch<Object> createDispatch(EndpointReference endpointReference,
+            JAXBContext context, Service.Mode mode) {
+        return delegate.createDispatch(endpointReference, context, mode);
+    }
+      
 
 
   /** Gets the name of this service.
