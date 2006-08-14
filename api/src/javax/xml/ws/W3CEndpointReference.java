@@ -5,8 +5,9 @@
 
 package javax.xml.ws;
 
-import org.w3c.dom.Element;
 
+import java.util.List;
+import java.util.Map;
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
@@ -16,8 +17,9 @@ import javax.xml.bind.annotation.XmlValue;
 import javax.xml.namespace.QName;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
-import java.util.List;
-import java.util.Map;
+
+import org.w3c.dom.Element;
+
 
 /**
  * This class represents a W3C Addressing EndpointReferece.
@@ -55,6 +57,7 @@ public final class W3CEndpointReference extends EndpointReference {
         @XmlAnyAttribute
         Map<QName,String> attributes;
     }
+
   
     private class Elements {
         @XmlAnyElement
@@ -63,5 +66,5 @@ public final class W3CEndpointReference extends EndpointReference {
         Map<QName,String> attributes;
     }
 
-    private static final String NS = "http://www.w3.org/2005/08/addressing";
+    protected static final String NS = "http://www.w3.org/2005/08/addressing";
 }
