@@ -32,7 +32,7 @@ public interface Binding {
     */
     public void setHandlerChain(java.util.List<javax.xml.ws.handler.Handler> chain);
   
-    /** Get the features enaabled for this binding provider. 
+    /** Get the features enabled for this binding provider. 
      *
      * @return An array of features enabled for this binding provider.
     **/

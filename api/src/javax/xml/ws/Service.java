@@ -206,13 +206,13 @@ public class Service {
   }
 
   /** Creates a new port for the service. The <code>EndpointReferenc</code>
-   *  must contain wsdli:WSDLLocation, wsaw:ServiceName, and
-   *  wsaw:ServiceName/@EndpointName
+   *  must contain the WSDL in Metadata, wsaw:ServiceName, and
+   *  wsaw:ServiceName/@EndpointName.
    *  The wsaw:ServiceName, must match the name of this Service instance.
    *  Ports created this way can be used to create <code>Dispatch</code>
    *  instances using one of the <code>createDispatch</code> 
    *  methods or proxy instances using 
-   *  <code>&ltT> T getPort(Class&ltT> serviceEndpointInterface)</code>
+   *  <code>&ltT>; T getPort(Class&ltT> serviceEndpointInterface)</code>
    *
    *  @param endpointReference EndpointReference of the target service 
    *  endpoint

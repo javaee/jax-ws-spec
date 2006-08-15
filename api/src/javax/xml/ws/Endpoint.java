@@ -290,13 +290,13 @@ public abstract class Endpoint {
      public abstract void setProperties(Map<String,Object> properties);
      
     /**
-     * Returns the <code>EndpointReference</code> associate with
+     * Returns the <code>EndpointReference</code> associated with
      * this <code>Endpoint</code> instance.
      *
      * @return EndpointReference of this instance.
      * @throws WebServiceException If any error in the creation of
      * the EndpointReference or if the Endpoint is not in the 
-     * published stated
+     * published state
      *
      **/
      public abstract EndpointReference getEndpointReference();
@@ -309,7 +309,7 @@ public abstract class Endpoint {
      * @return EndpointReference of type <code>clazz</code> of this instance.
      * @throws WebServiceException If any error in the creation of
      * the EndpointReference or if the Endpoint is not in the 
-     * published stated or if the <code>clazz</code> is not supported
+     * published state or if the <code>clazz</code> is not supported
      *
      **/
      public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz);
