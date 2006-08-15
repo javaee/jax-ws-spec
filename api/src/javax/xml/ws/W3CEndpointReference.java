@@ -74,7 +74,7 @@ public final class W3CEndpointReference extends EndpointReference {
     @XmlElement(name="Metadata",namespace=NS)
     private Elements metadata;
   
-    private class Address {
+    private static class Address {
         @XmlValue
         String uri;
         @XmlAnyAttribute
@@ -82,7 +82,7 @@ public final class W3CEndpointReference extends EndpointReference {
     }
 
   
-    private class Elements {
+    private static class Elements {
         @XmlAnyElement
         List<Element> elements;
         @XmlAnyAttribute
