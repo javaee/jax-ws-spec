@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.2 2006-08-10 22:37:15 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.3 2006-08-15 20:25:02 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -155,8 +155,14 @@ public abstract class Provider {
     /**
      * read an EndpointReference from the infoset contained in
      * <code>eprInfoset</code>.
-     * throws WebServiceException if there is an error creating the
-     * EndpointReference from the specified <code>eprInfoset</code>.
+     * 
+     * @returns the <code>EndpointReference</code> unmarshalled from
+     * <code>eprInfoset</code>.  This method never returns <code>null</code>.
+     * @throws WebServiceException 
+     *  if there is an error creating the
+     * <code>EndpointReference</code> from the specified <code>eprInfoset</code>.
+     * @throws NullPointerException
+     *  if the <code>null</code> <code>eprInfoset</code> value is given.
      **/
     public abstract EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset);    
 }
