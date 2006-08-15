@@ -12,15 +12,17 @@ package javax.xml.ws;
 **/
 public interface Binding {
 
-   /** Gets a copy of the handler chain for a protocol binding instance.
-    *  If the returned chain is modified a call to <code>setHandlerChain</code>
+   /** 
+    * Gets a copy of the handler chain for a protocol binding instance.
+    * If the returned chain is modified a call to <code>setHandlerChain</code>
     * is required to configure the binding instance with the new chain.
     *
     *  @return java.util.List<javax.xml.ws.handler.HandlerInfo> Handler chain
     */
     public java.util.List<javax.xml.ws.handler.Handler> getHandlerChain();
 
-   /** Sets the handler chain for the protocol binding instance.
+   /** 
+    * Sets the handler chain for the protocol binding instance.
     *
     *  @param chain    A List of handler configuration entries
     *  @throws WebServiceException On an error in the configuration of
@@ -31,10 +33,21 @@ public interface Binding {
     *          chain.
     */
     public void setHandlerChain(java.util.List<javax.xml.ws.handler.Handler> chain);
-  
-    /** Get the features enabled for this binding provider. 
+
+    /** 
+     * Get the BindingId for this binding instance. 
+     *
+     * @return The BindingId this binding provider.
+     *    Never returns <code>null</code>
+    **/
+    String getBindingId();      
+    
+    /** 
+     * Get the features enabled for this binding instancer. 
      *
      * @return An array of features enabled for this binding provider.
+     *    If there are no features enabled, it will return an empty array.
+     *    Never returns <code>null</code>
     **/
     String[] getFeatures();  
 }

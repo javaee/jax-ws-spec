@@ -110,13 +110,13 @@ public interface BindingProvider {
     /**
      * Returns the <code>EndpointReference</code> associated with
      * this <code>BindingProvider</code> instance.
-     *
+     * <p>
      * The returned <code>EndpointReference</code> must contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element.
      * It must also contain the <code>wsaw:InterfaceName</code>,
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code> for BindingProviders
-     * created from Services that contained that information
+     * created from Services that contained that information.
      *
      * @return EndpointReference of this instance.
      * @throws WebServiceException if this BindingProvider instance
@@ -129,14 +129,13 @@ public interface BindingProvider {
      * Returns the <code>EndpointReference</code> associated with
      * this <code>BindingProvider</code> instance.  The instance
      * returned will be of type <code>clazz</code>.
-     *
+     * <p>
      * The returned <code>EndpointReference</code> must contain
-     * the <code>wsdli:wsdlLocation</code> attribute
-     * on the <code>wsa:Metadata</code> element or the WSDL itself.
-     * It must also contain the <code>wsa:InterfaceName</code>,
-     * <code>wsa:ServiceName</code> elements and the <code>wsa:EndpointName</code>
-     * attribute on the <code>wsa:ServiceName</code> for BindingProviders
-     * created from Services that contained that information
+     * the embedded WSDL in the <code>wsa:Metadata</code> element.
+     * It must also contain the <code>wsaw:InterfaceName</code>,
+     * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
+     * attribute on the <code>wsaw:ServiceName</code> for BindingProviders
+     * created from Services that contained that information.
      *
      * @return EndpointReference of this instance.  Must be of type
      * <code>clazz</code>.

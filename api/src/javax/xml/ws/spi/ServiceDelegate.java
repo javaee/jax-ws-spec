@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.3.2.3 2006-08-14 21:37:13 kohlert Exp $
+ *$Id: ServiceDelegate.java,v 1.3.2.4 2006-08-15 22:39:36 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -169,8 +169,9 @@ public abstract class ServiceDelegate {
             String[] features, String endpointAddress);
     
     /** Creates a new port for the service. The <code>EndpointReferenc</code>
-     *  must contain wsdli:WSDLLocation, wsaw:ServiceName, and
-     *  wsaw:ServiceName/@EndpointName
+     *  must contain the WSDL inlined in the <code>wsa:Metadata</code> element, 
+     *  wsaw:ServiceName, and wsaw:ServiceName/@EndpointName.
+     *  <p>
      *  The wsaw:ServiceName, must match the name of this Service instance.
      *  Ports created this way can be used to create <code>Dispatch</code>
      *  instances using one of the <code>createDispatch</code>
