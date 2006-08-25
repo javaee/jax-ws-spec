@@ -37,8 +37,6 @@ public @interface BindingType {
       * @see javax.xml.ws.Binding
       * @see javax.xml.ws.soap.SOAPBinding#SOAP11HTTP_BINDING
       * @see javax.xml.ws.soap.SOAPBinding#SOAP12HTTP_BINDING
-      * @see javax.xml.ws.soap.SOAPBinding#ADDRESSING_FEATURE
-      * @see javax.xml.ws.soap.SOAPBinding#MTOM_FEATURE
       * @see javax.xml.ws.http.HTTPBinding#HTTP_BINDING
       */
      String value() default "" ;
