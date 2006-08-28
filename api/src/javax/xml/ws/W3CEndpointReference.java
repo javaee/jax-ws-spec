@@ -51,6 +51,9 @@ public final class W3CEndpointReference extends EndpointReference {
     private Marshaller marshaller;
     private Unmarshaller unmarshaller;
     
+    protected W3CEndpointReference() {
+    }
+    
     /**
      * construct an EPR from infoset representation
      *
