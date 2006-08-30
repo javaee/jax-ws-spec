@@ -113,6 +113,7 @@ public final class W3CEndpointReference extends EndpointReference {
     private Elements metadata;
     
     private static class Address {
+        protected Address() {}
         @XmlValue
         String uri;
         @XmlAnyAttribute
@@ -121,6 +122,7 @@ public final class W3CEndpointReference extends EndpointReference {
     
     
     private static class Elements {
+        protected Elements() {}
         @XmlAnyElement
         List<Element> elements;
         @XmlAnyAttribute
