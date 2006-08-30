@@ -35,12 +35,12 @@ public interface Binding {
     public void setHandlerChain(java.util.List<javax.xml.ws.handler.Handler> chain);
 
     /** 
-     * Get the BindingId for this binding instance. 
+     * Get the URI for this binding instance. 
      *
-     * @return The BindingId this binding provider.
+   *  @return String The binding identifier for the port.
      *    Never returns <code>null</code>
     **/
-    String getBindingId();      
+    String getBindingID();      
     
     /** 
      * Get the features enabled for this binding instancer. 
