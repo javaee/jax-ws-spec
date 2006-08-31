@@ -42,11 +42,22 @@ public interface SOAPBinding extends Binding {
   
   /**
    * A constant representing the identity of the WS-Addressing feature
+   * <p>
+   * Enabling this feature on the server will result in the
+   * wsaw:UsingAddressing element being added to the wsdl:Binding for 
+   * the endpoint and the runtime being capable of responding to
+   * WS-Addressing headers.
+   * <p>
+   * Enabling this feature on the client will cause the JAX-WS runtime
+   * to include WS-Addressing headers in SOAP messages.
+   *
+   * See http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/ for
+   * more information on WS-Addressing.
    */
   public static final String ADDRESSING_FEATURE = "http://www.w3.org/2005/08/addressing/module";
 
   /**
-   * A constant representing the identity of the MTOM feature
+   * A constant representing the identity of the MTOM feature.
    */
   public static final String MTOM_FEATURE = "http://www.w3.org/2004/08/soap/features/http-optimization";
   

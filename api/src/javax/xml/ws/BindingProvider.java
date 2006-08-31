@@ -95,12 +95,13 @@ public interface BindingProvider {
     Binding getBinding();
     
     
-    /** Set the <code>EndpointReference</code> for this
+    /** 
+     * Set the <code>EndpointReference</code> for this
      * instance.
      *
      * @param endpointReference is the target endpoint used by
      * this <code>BindingProvider</code> instance. Only the
-     * <code>wsa:Address</code>  of the EndpointReference is  required.
+     * <code>wsa:Address</code> of the EndpointReference is required.
      * @throws WebServiceException if the <code>wsa:Address</code> uses
      * an unsupported transport protocol.  Implementations MUST support
      * HTTP based addresses.
@@ -112,8 +113,9 @@ public interface BindingProvider {
      * this <code>BindingProvider</code> instance.
      * <p>
      * The returned <code>EndpointReference</code> must contain
-     * the embedded WSDL in the <code>wsa:Metadata</code> element.
-     * It must also contain the <code>wsaw:InterfaceName</code>,
+     * the embedded WSDL in the <code>wsa:Metadata</code> element if
+     * this WSDL is available. It must also contain the 
+     * <code>wsaw:InterfaceName</code>,
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code> for BindingProviders
      * created from Services that contained that information.
@@ -131,8 +133,9 @@ public interface BindingProvider {
      * returned will be of type <code>clazz</code>.
      * <p>
      * The returned <code>EndpointReference</code> must contain
-     * the embedded WSDL in the <code>wsa:Metadata</code> element.
-     * It must also contain the <code>wsaw:InterfaceName</code>,
+     * the embedded WSDL in the <code>wsa:Metadata</code> element
+     * if the WSDL is available. It must also contain the 
+     * <code>wsaw:InterfaceName</code>,
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code> for BindingProviders
      * created from Services that contained that information.
