@@ -32,7 +32,7 @@ public interface Provider<T> {
    *  @param  request The request message or message payload.
    *  @return The response message or message payload. May be null if
               there is no response.
-   *  @throws WebServiceException if there is an error processing request.
+   *  @throws WebServiceException If there is an error processing request.
    *          The cause of the WebServiceException may be set to a subclass
    *          of ProtocolException to control the protocol level
    *          representation of the exception.

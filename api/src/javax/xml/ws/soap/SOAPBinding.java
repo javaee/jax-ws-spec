@@ -51,13 +51,17 @@ public interface SOAPBinding extends Binding {
    * Enabling this feature on the client will cause the JAX-WS runtime
    * to include WS-Addressing headers in SOAP messages.
    *
-   * See http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/ for
-   * more information on WS-Addressing.
+   * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">WS-Addressing</a>
+   * for more information on WS-Addressing.
+   *
+   * @since JAX-WS 2.1
    */
   public static final String ADDRESSING_FEATURE = "http://www.w3.org/2005/08/addressing/module";
 
   /**
    * A constant representing the identity of the MTOM feature.
+   *
+   * @since JAX-WS 2.1
    */
   public static final String MTOM_FEATURE = "http://www.w3.org/2004/08/soap/features/http-optimization";
   
@@ -80,6 +84,9 @@ public interface SOAPBinding extends Binding {
    * Returns <code>true</code> if the use of MTOM is enabled.
    *
    * @return <code>true</code> if and only if the use of MTOM is enabled.
+   *
+   * @deprecated  {@link Binding#getFeatures} should now be used to determine
+   * if MTOM is enabled.
   **/
   
   public boolean isMTOMEnabled();
@@ -91,7 +98,11 @@ public interface SOAPBinding extends Binding {
    *               be enabled or disabled.
    *  @throws WebServiceException If the specified setting is not supported
    *                  by this binding instance.
-  **/
+   *
+   * @deprecated  {@link Binding#enableFeature} should now be used to enable
+   * MTOM.
+   *
+   **/
   public void setMTOMEnabled(boolean flag);
   
   /**

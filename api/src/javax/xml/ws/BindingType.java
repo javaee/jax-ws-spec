@@ -50,6 +50,8 @@ public @interface BindingType {
       *
       * @see javax.xml.ws.soap.SOAPBinding#ADDRESSING_FEATURE
       * @see javax.xml.ws.soap.SOAPBinding#MTOM_FEATURE
+      *
+      * @since JAX-WS 2.1
       */
      String[] features() default {};
 }

@@ -156,6 +156,8 @@ public class Service {
      *                       <code>serviceEndpointInterface</code>
      *                       is specified
      *                   </UL>
+     *
+     *  @since JAX-WS 2.1
      **/
     public <T> T getPort( EndpointReference endpointReference,
             Class<T> serviceEndpointInterface) {
@@ -196,6 +198,9 @@ public class Service {
      *  @see javax.xml.ws.soap.SOAPBinding#ADDRESSING_FEATURE
      *  @see javax.xml.ws.soap.SOAPBinding#MTOM_FEATURE
      *  @see javax.xml.ws.http.HTTPBinding#HTTP_BINDING
+     *
+     *  @since JAX-WS 2.1
+     *
      **/
     public void addPort(QName portName, String bindingId,
             String[] features, String endpointAddress) {
@@ -215,6 +220,8 @@ public class Service {
      *  endpoint
      *  @throws WebServiceException If any error in the creation of
      *  the port or missing Metadata or invalid endpointReference.
+     *
+     *  @since JAX-WS 2.1
      **/
     public void addPort(EndpointReference endpointReference) {
         delegate.addPort(endpointReference);
@@ -267,6 +274,8 @@ public class Service {
      *                   the <code>Dispatch</code> object
      *  @see javax.xml.transform.Source
      *  @see javax.xml.soap.SOAPMessage
+     *
+     *  @since JAX-WS 2.1
      **/
     public <T> Dispatch<T> createDispatch(EndpointReference endpointReference,
             Class<T> type, Service.Mode mode) {
@@ -314,6 +323,8 @@ public class Service {
      *                   the <code>Dispatch</code> object
      *
      *  @see javax.xml.bind.JAXBContext
+     *
+     *  @since JAX-WS 2.1
      **/
     public Dispatch<Object> createDispatch(EndpointReference endpointReference,
             JAXBContext context, Service.Mode mode) {

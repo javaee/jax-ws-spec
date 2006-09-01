@@ -36,7 +36,8 @@ import org.w3c.dom.Element;
  * <p>
  * JAXB will use the JAXB annotations and bind this class to XML infoset
  * that is consistent with that defined by WS-Addressing.  See
- * http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/
+ * <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">
+ * WS-Addressing</a> 
  * for more information on WS-Addressing EndpointReferences.
  *
  * @since JAX-WS 2.1
@@ -61,11 +62,11 @@ public final class W3CEndpointReference extends EndpointReference {
      * instance consistent with the W3C WS-Addressing Core
      * recommendation.
      *
-     * @throws WebServiceException
-     *   if the source does not contain a valid W3C WS-Addressing
+     * @throws WebServiceException 
+     *   If the source does not contain a valid W3C WS-Addressing
      *   EndpointReference.
-     * @throws NullPointerException
-     *   if the <code>null</code> <code>source</code> value is given
+     * @throws NullPointerException 
+     *   If the <code>null</code> <code>source</code> value is given
      */
     public W3CEndpointReference(Source source) {
         try {

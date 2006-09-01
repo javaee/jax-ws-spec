@@ -102,9 +102,11 @@ public interface BindingProvider {
      * @param endpointReference is the target endpoint used by
      * this <code>BindingProvider</code> instance. Only the
      * <code>wsa:Address</code> of the EndpointReference is required.
-     * @throws WebServiceException if the <code>wsa:Address</code> uses
+     * @throws WebServiceException If the <code>wsa:Address</code> uses
      * an unsupported transport protocol.  Implementations MUST support
      * HTTP based addresses.
+     *
+     * @since JAX-WS 2.1
      */
     public void setEndpointReference(EndpointReference endpointReference);
     
@@ -121,8 +123,10 @@ public interface BindingProvider {
      * created from Services that contained that information.
      *
      * @return EndpointReference of this instance.
-     * @throws WebServiceException if this BindingProvider instance
+     * @throws WebServiceException If this BindingProvider instance
      * was not created with WSDL information
+     *
+     * @since JAX-WS 2.1
      */
     public EndpointReference getEndpointReference();
     
@@ -142,9 +146,11 @@ public interface BindingProvider {
      *
      * @return EndpointReference of this instance.  Must be of type
      * <code>clazz</code>.
-     * @throws WebServiceException if this BindingProvider instance
+     * @throws WebServiceException If this BindingProvider instance
      * was not created with WSDL information or if the Class <code>clazz</code>
      * is not supported by this implementation.
+     *
+     * @since JAX-WS 2.1
      */
     public <T extends EndpointReference> T getEndpointReference(Class<T> clazz);
 }

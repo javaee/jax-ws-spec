@@ -94,6 +94,7 @@ import java.lang.annotation.Target;
  * <code>fault</code> message.
  * 
  * @see FaultAction
+ *
  * @since JAX-WS 2.1
  */
 

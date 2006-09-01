@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.3.2.4 2006-08-15 22:39:36 kohlert Exp $
+ *$Id: ServiceDelegate.java,v 1.3.2.5 2006-09-01 00:12:19 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -126,6 +126,8 @@ public abstract class ServiceDelegate {
      *                       <code>serviceEndpointInterface</code>
      *                       is specified
      *                   </UL>
+     *
+     *  @since JAX-WS 2.1
      **/
     public abstract <T> T getPort(EndpointReference endpointReference,
             Class<T> serviceEndpointInterface);
@@ -182,6 +184,8 @@ public abstract class ServiceDelegate {
      *  endpoint
      *  @throws WebServiceException If any error in the creation of
      *  the port or missing Metadata or invalid endpointReference.
+     *
+     *  @since JAX-WS 2.1
      **/
     public abstract void addPort(EndpointReference endpointReference);
     
@@ -228,6 +232,8 @@ public abstract class ServiceDelegate {
      *                   the <code>Dispatch</code> object
      *  @see javax.xml.transform.Source
      *  @see javax.xml.soap.SOAPMessage
+     *
+     *  @since JAX-WS 2.1
      **/
     public abstract <T> Dispatch<T> createDispatch(EndpointReference endpointReference, 
             Class<T> type, Service.Mode mode);    
@@ -271,6 +277,8 @@ public abstract class ServiceDelegate {
      *                   the <code>Dispatch</code> object
      *
      *  @see javax.xml.bind.JAXBContext
+     *
+     *  @since JAX-WS 2.1
      **/
     public abstract Dispatch<Object> createDispatch(EndpointReference endpointReference,
             JAXBContext context, Service.Mode mode);

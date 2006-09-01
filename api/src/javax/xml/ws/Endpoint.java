@@ -116,7 +116,9 @@ public abstract class Endpoint {
      *
      * @return The newly created endpoint.
      * @throws WebServiceException If any feature is unsupported or incompatible
-     * with the specified bindingId*
+     * with the specified bindingId
+     *
+     * @since JAX-WS 2.1
      **/
     public static Endpoint create(String bindingId, String[] features, Object implementor) {
         return Provider.provider().createEndpoint(bindingId, features, implementor);
@@ -147,11 +149,11 @@ public abstract class Endpoint {
      *        must be compatible with the binding specified at the
      *        time the endpoint was created.
      *
-     * @throws java.lang.IllegalArgumentException
+     * @throws java.lang.IllegalArgumentException 
      *              If the provided address URI is not usable
      *              in conjunction with the endpoint's binding.
      *
-     * @throws java.lang.IllegalStateException
+     * @throws java.lang.IllegalStateException 
      *         If the endpoint has been published already or it has been stopped.
      **/
     public abstract void publish(String address);
@@ -191,13 +193,13 @@ public abstract class Endpoint {
      * @param serverContext An object representing a server
      *           context to be used for publishing the endpoint.
      *
-     * @throws java.lang.IllegalArgumentException
+     * @throws java.lang.IllegalArgumentException 
      *              If the provided server context is not
      *              supported by the implementation or turns
      *              out to be unusable in conjunction with the
      *              endpoint's binding.
      *
-     * @throws java.lang.IllegalStateException
+     * @throws java.lang.IllegalStateException 
      *         If the endpoint has been published already or it has been stopped.
      **/
     public abstract void publish(Object serverContext);
@@ -232,7 +234,7 @@ public abstract class Endpoint {
      *           metadata information for the endpoint (e.g.
      *           WSDL or XML Schema documents)
      *
-     * @throws java.lang.IllegalStateException If the endpoint
+     * @throws java.lang.IllegalStateException  If the endpoint
      *         has already been published.
      **/
     public abstract void setMetadata(List<javax.xml.transform.Source> metadata);
@@ -264,7 +266,7 @@ public abstract class Endpoint {
      * @param executor The <code>java.util.concurrent.Executor</code>
      *        to be used to dispatch a request.
      *
-     * @throws SecurityException If the instance does not support
+     * @throws SecurityException  If the instance does not support
      *         setting an executor for security reasons (e.g. the
      *         necessary permissions are missing).
      *
@@ -294,16 +296,20 @@ public abstract class Endpoint {
      * this <code>Endpoint</code> instance.
      * <p>
      * The returned <code>EndpointReference</code> must contain
-     * the embedded WSDL in the <code>wsa:Metadata</code> element.
+     * the embedded WSDL in the <code>wsa:Metadata</code> element if
+     * the Endpoint metadata contains a WSDL. See
+     * WSDL
      * It must also contain the <code>wsaw:InterfaceName</code>,
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code>.
+     * See 
      *
      * @return EndpointReference of this instance.
      * @throws WebServiceException If any error in the creation of
-     * the EndpointReference or if the Endpoint is not in the
-     * published stated
+     * the <code>EndpointReference</code> or if the <code>Endpoint</code> is 
+     * not in thepublished state.
      *
+     * @since JAX-WS 2.1
      **/
     public abstract EndpointReference getEndpointReference();
     
@@ -313,16 +319,19 @@ public abstract class Endpoint {
      * this <code>Endpoint</code> instance.
      * <p>
      * The returned <code>EndpointReference</code> must contain
-     * the embedded WSDL in the <code>wsa:Metadata</code> element.
+     * the embedded WSDL in the <code>wsa:Metadata</code> element if
+     * the Endpoint metadata contains a WSDL.
      * It must also contain the <code>wsaw:InterfaceName</code>,
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code>.
      *
      * @return EndpointReference of type <code>clazz</code> of this instance.
      * @throws WebServiceException If any error in the creation of
-     * the EndpointReference or if the Endpoint is not in the
-     * published stated or if the <code>clazz</code> is not supported
+     * the <code>EndpointReference</code> or if the <code>Endpoint</code> is 
+     * not in thepublished state or if the <code>clazz</code> is not supported
+     * <code>EndpointReference</code> type.
      *
+     * @since JAX-WS 2.1
      **/
     public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz);
 }

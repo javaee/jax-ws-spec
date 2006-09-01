@@ -16,7 +16,8 @@ import javax.xml.namespace.QName;
 /**
  * This class represents an WS-Addressing EndpointReference
  * which is a remote reference to a web service endpoint. 
- * See http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/
+ * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">
+ * WS-Addressing</a> 
  * for more information on WS-Addressing EndpointReferences.
  * <p>  
  * This class is immutable as the typical web service developer

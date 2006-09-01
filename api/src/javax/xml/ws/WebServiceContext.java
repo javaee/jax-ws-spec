@@ -91,6 +91,8 @@ public interface WebServiceContext {
      *  @throws IllegalStateException This exception is thrown
      *          if the method is called while no request is
      *          being serviced.
+     *
+     * @since JAX-WS 2.1
      */
     public EndpointReference getEndpointReference();
 
@@ -110,6 +112,8 @@ public interface WebServiceContext {
      *  @throws IllegalStateException This exception is thrown
      *          if the method is called while no request is
      *          being serviced.     
+     *
+     * @since JAX-WS 2.1
      **/
     public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz);    
 }
