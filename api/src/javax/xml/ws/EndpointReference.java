@@ -6,10 +6,12 @@
 package javax.xml.ws;
 
 import java.util.Map;
+import javax.xml.bind.JAXBContext;
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.ws.spi.Provider;
+import javax.xml.ws.Service;
 import javax.xml.namespace.QName;
 
 
@@ -95,5 +97,92 @@ public abstract class EndpointReference {
      *      If the null <code>result</tt> value is given.
      */
     public abstract void writeTo(Result result);
-      
+    
+    /** 
+     * The getPort method returns a stub/proxy.
+     * The parameter  <code>serviceEndpointInterface</code> specifies
+     * the service endpoint interface that is supported by the
+     * returned proxy.
+     * The parameter <code>endpointReference</code> specifies the
+     * endpoint that will be invoked by the returned stub.
+     * In the implementation of this method, the JAX-WS
+     * runtime system takes the responsibility of selecting a protocol
+     * binding (and a port) and configuring the proxy accordingly from
+     * the WSDL Metadata from the <code>EndpointReference</code>.
+     * The returned proxy should not be reconfigured by the client.
+
+     *
+     * @param serviceEndpointInterface Service endpoint interface
+     * @return Object instance that supports the
+     *                  specified service endpoint interface
+     * @throws WebServiceException
+     *                  <UL>
+     *                  <LI>If there is an error during creation
+     *                      of the proxy
+     *                  <LI>If there is any missing WSDL metadata
+     *                      as required by this method such as
+     *                      the wsaw:ServiceName/@EndpointName
+     *                  <LI>Optionally, if this
+     *                      <code>endpointReference</code>
+     *                      is illegal
+     *                  <LI>Optionally, if an illegal
+     *                      <code>serviceEndpointInterface</code>
+     *                      is specified
+     *                   </UL>
+     *
+     **/
+    public <T> T getPort(Class<T> serviceEndpointInterface) {
+        return Provider.provider().getPort(this, serviceEndpointInterface);
+    }    
+    
+    /** 
+     * Creates a <code>Dispatch</code> instance for use with objects of
+     * the users choosing.
+     *
+     * @param type The class of object used to messages or message
+     * payloads. Implementations are required to support
+     * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
+     * @param mode Controls whether the created dispatch instance is message
+     * or payload oriented, i.e. whether the user will work with complete
+     * protocol messages or message payloads. E.g. when using the SOAP
+     * protocol, this parameter controls whether the user will work with
+     * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
+     * when type is SOAPMessage.
+     *
+     * @return Dispatch instance
+     * @throws WebServiceException If any error in the creation of
+     *                  the <code>Dispatch</code> object
+     * @see javax.xml.transform.Source
+     * @see javax.xml.soap.SOAPMessage
+     *
+     **/
+    public <T> Dispatch<T> createDispatch(Class<T> type, Service.Mode mode) {
+        return Provider.provider().createDispatch(this, type, mode);
+    }    
+    
+    /** 
+     * Creates a <code>Dispatch</code> instance for use with JAXB
+     * generated objects.
+     *
+     * @param endpointReference  The <code>EndpointReference</code>
+     * for the target service endpoint
+     * @param context The JAXB context used to marshall and unmarshall
+     * messages or message payloads.
+     * @param mode Controls whether the created dispatch instance is message
+     * or payload oriented, i.e. whether the user will work with complete
+     * protocol messages or message payloads. E.g. when using the SOAP
+     * protocol, this parameter controls whether the user will work with
+     * SOAP messages or the contents of a SOAP body.
+     *
+     * @return Dispatch instance
+     * @throws ServiceException If any error in the creation of
+     *                   the <code>Dispatch</code> object
+     *
+     * @see javax.xml.bind.JAXBContext
+     *
+     **/
+    public Dispatch<Object> createDispatch(JAXBContext context, Service.Mode mode) {
+        return Provider.provider().createDispatch(this, context, mode);
+    }
+          
 }
