@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.6 2006-09-08 15:33:55 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.7 2006-09-08 15:35:33 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -13,8 +13,6 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.Dispatch;
 import javax.xml.ws.EndpointReference;
 import javax.xml.ws.Service;
-import javax.xml.ws.soap.AddressingFeature;
-import javax.xml.ws.soap.MTOMFeature;
 
 /**
  * Service provider for <code>ServiceDelegate</code> and
