@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.5 2006-09-07 02:41:03 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.6 2006-09-08 15:33:55 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -270,23 +270,4 @@ public abstract class Provider {
             JAXBContext context, Service.Mode mode);
     
     
-    /**
-     * Updates the status of the @link{AddressingFeature}.  Whenever the developer 
-     * modifies the AddressingFeature, this method will be called.  The 
-     * JAX-WS runtime then must update the runtime behavior to match the 
-     * updated AddressingFeature settings.
-     *
-     * @since JAX-WS 2.1
-     */
-    public abstract void setAddressingFeature(AddressingFeature addressingFeature);
-    
-    /**
-     * Updates the status of the @link{MTOMFeature}.  Whenever the developer 
-     * modifies the MTOMFeature, this method will be called.  The 
-     * JAX-WS runtime then must update the runtime behavior to match the 
-     * updated MTOMFeature settings.
-     *
-     * @since JAX-WS 2.1
-     */
-    public abstract void setMTOMFeature(MTOMFeature MTOMFeature);
 }
