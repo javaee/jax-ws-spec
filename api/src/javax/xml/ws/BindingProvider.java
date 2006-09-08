@@ -6,6 +6,7 @@
 package javax.xml.ws;
 
 import java.util.Map;
+import java.util.List;
 
 /** The <code>BindingProvider</code> interface provides access to the
  *  protocol binding and associated context objects for request and
@@ -152,5 +153,5 @@ public interface BindingProvider {
      *
      * @since JAX-WS 2.1
      */
-    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz);
+    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz);  
 }

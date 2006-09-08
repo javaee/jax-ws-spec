@@ -3,7 +3,7 @@
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package javax.xml.ws;
+package javax.xml.ws.w3caddressing;
 
 
 import java.util.List;
@@ -21,6 +21,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
+import javax.xml.ws.*;
 
 import org.w3c.dom.Element;
 
@@ -85,7 +86,7 @@ public final class W3CEndpointReference extends EndpointReference {
     
     /**
      * {@inheritDoc}
-     **/
+     */
     public void writeTo(Result result){
         try {
             if (marshaller == null)
@@ -112,6 +113,11 @@ public final class W3CEndpointReference extends EndpointReference {
     private Elements referenceParameters;
     @XmlElement(name="Metadata",namespace=NS)
     private Elements metadata;
+    @XmlAnyAttribute
+    Map<QName,String> attributes;
+    @XmlAnyElement
+    List<Element> elements;
+    
     
     private static class Address {
         protected Address() {}

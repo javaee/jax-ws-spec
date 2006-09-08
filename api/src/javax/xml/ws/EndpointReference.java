@@ -5,7 +5,7 @@
 
 package javax.xml.ws;
 
-import java.util.Map;
+import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.transform.Result;
@@ -98,6 +98,7 @@ public abstract class EndpointReference {
      */
     public abstract void writeTo(Result result);
     
+  
     /** 
      * The getPort method returns a stub/proxy.
      * The parameter  <code>serviceEndpointInterface</code> specifies
@@ -113,6 +114,9 @@ public abstract class EndpointReference {
 
      *
      * @param serviceEndpointInterface Service endpoint interface
+     * @param features  A list of WebServiceFeatures to configure on the 
+     *                proxy.  Supported features not in the <code>features
+     *                </code> parameter will have their default values.
      * @return Object instance that supports the
      *                  specified service endpoint interface
      * @throws WebServiceException
@@ -128,12 +132,17 @@ public abstract class EndpointReference {
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
+     *                  <LI>If an unsupported WebServcieFeature for this port
+     *                      is specified.
      *                   </UL>
      *
+     * @see WebServiceFeature
      **/
-    public <T> T getPort(Class<T> serviceEndpointInterface) {
-        return Provider.provider().getPort(this, serviceEndpointInterface);
-    }    
+    public <T> T getPort(Class<T> serviceEndpointInterface, 
+            WebServiceFeature... features) {
+        return Provider.provider().getPort(this, serviceEndpointInterface, 
+                                            features);
+    }        
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
@@ -148,17 +157,25 @@ public abstract class EndpointReference {
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
      * when type is SOAPMessage.
+     * @param features  A list of WebServiceFeatures to configure on the 
+     *                proxy.  Supported features not in the <code>features
+     *                </code> parameter will have their default values.
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object
+     *                  the <code>Dispatch</code> object or if an 
+     *                  unsupported WebServcieFeature for this port
+     *                  is specified.
+     *
      * @see javax.xml.transform.Source
      * @see javax.xml.soap.SOAPMessage
-     *
+     * @see WebServiceFeature;
      **/
-    public <T> Dispatch<T> createDispatch(Class<T> type, Service.Mode mode) {
-        return Provider.provider().createDispatch(this, type, mode);
-    }    
+    public <T> Dispatch<T> createDispatch(Class<T> type, Service.Mode mode, 
+            WebServiceFeature... features) {
+        return Provider.provider().createDispatch(this, type, mode, features);
+    }     
+    
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with JAXB
@@ -173,16 +190,21 @@ public abstract class EndpointReference {
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body.
+     * @param features  A list of WebServiceFeatures to configure on the 
+     *                proxy.  Supported features not in the <code>features
+     *                </code> parameter will have their default values.
      *
      * @return Dispatch instance
-     * @throws ServiceException If any error in the creation of
-     *                   the <code>Dispatch</code> object
+     * @throws WebServiceException If any error in the creation of
+     *                   the <code>Dispatch</code> object or if an 
+     *                  unsupported WebServcieFeature for this port
+     *                  is specified.
      *
      * @see javax.xml.bind.JAXBContext
-     *
+     * @see WebServiceFeature
      **/
-    public Dispatch<Object> createDispatch(JAXBContext context, Service.Mode mode) {
-        return Provider.provider().createDispatch(this, context, mode);
-    }
-          
+    public Dispatch<Object> createDispatch(JAXBContext context, Service.Mode mode,
+            WebServiceFeature... features) {
+        return Provider.provider().createDispatch(this, context, mode, features);
+    }    
 }

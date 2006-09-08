@@ -1,14 +1,16 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.7 2006-09-08 15:35:33 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.8 2006-09-08 21:20:59 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
 
+//import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.WebServiceException;
+import javax.xml.ws.WebServiceFeature;
 import javax.xml.namespace.QName;
 import javax.xml.ws.Dispatch;
 import javax.xml.ws.EndpointReference;
@@ -173,8 +175,9 @@ public abstract class Provider {
      **/
     public abstract EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset);    
     
+    
     /** 
-     * The getPort method returns a proxy/stub.
+     * The getPort method returns a stub/proxy.
      * The parameter  <code>serviceEndpointInterface</code> specifies
      * the service endpoint interface that is supported by the
      * returned proxy.
@@ -185,14 +188,14 @@ public abstract class Provider {
      * binding (and a port) and configuring the proxy accordingly from
      * the WSDL Metadata from the <code>EndpointReference</code>.
      * The returned proxy should not be reconfigured by the client.
-     * If this Service instance has a known proxy port that matches
-     * the information contained in the <code>EndpointReference</code>
-     * then that proxy is returned, otherwise a WebServiceException
-     * is thrown.
+     *
      *
      * @param endpointReference the EndpointReference that will
      * be invoked by the returned proxy.
      * @param serviceEndpointInterface Service endpoint interface
+     * @param features  A list of WebServiceFeatures to configure on the 
+     *                proxy.  Supported features not in the <code>features
+     *                </code> parameter will have their default values.
      * @return Object instance that supports the
      *                  specified service endpoint interface
      * @throws WebServiceException
@@ -202,25 +205,32 @@ public abstract class Provider {
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method such as
      *                      the wsaw:ServiceName/@EndpointName
-     *                  <LI>Optionally, if an illegal
+     *                  <LI>Optionally, if this
      *                      <code>endpointReference</code>
-     *                      is specified
+     *                      is illegal
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
-     *                  </UL>
+     *                  <LI>If an unsupported WebServcieFeature for this port
+     *                      is specified.
+     *                   </UL>
      *
-     *  @since JAX-WS 2.1
+     * @see WebServiceFeature
+     *
+     * @since JAX-WS 2.1
      **/
     public abstract <T> T getPort(EndpointReference endpointReference,
-            Class<T> serviceEndpointInterface);    
-
+            Class<T> serviceEndpointInterface, 
+            WebServiceFeature... features);
+     
+   
+    
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
      * the users choosing.
      *
-     * @param endpointReference  The <code>EndpointReference</code>
-     * for the target service endpoint
+     * @param endpointReference the EndpointReference that will
+     * be invoked by the returned proxy.
      * @param type The class of object used to messages or message
      * payloads. Implementations are required to support
      * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
@@ -230,18 +240,26 @@ public abstract class Provider {
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
      * when type is SOAPMessage.
+     * @param features  A list of WebServiceFeatures to configure on the 
+     *                proxy.  Supported features not in the <code>features
+     *                </code> parameter will have their default values.
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object
+     *                  the <code>Dispatch</code> object or if an 
+     *                  unsupported WebServcieFeature for this port
+     *                  is specified.
+     *
      * @see javax.xml.transform.Source
      * @see javax.xml.soap.SOAPMessage
+     * @see WebServiceFeature;
      *
      * @since JAX-WS 2.1
      **/
-    public abstract <T> Dispatch<T> createDispatch(EndpointReference endpointReference, 
-            Class<T> type, Service.Mode mode);    
+    public abstract <T> Dispatch<T> createDispatch(EndpointReference endpointReference,
+            Class<T> type, Service.Mode mode, WebServiceFeature... features);    
     
+   
     /** 
      * Creates a <code>Dispatch</code> instance for use with JAXB
      * generated objects.
@@ -255,17 +273,22 @@ public abstract class Provider {
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body.
+     * @param features  A list of WebServiceFeatures to configure on the 
+     *                proxy.  Supported features not in the <code>features
+     *                </code> parameter will have their default values.
      *
      * @return Dispatch instance
-     * @throws ServiceException If any error in the creation of
-     *                   the <code>Dispatch</code> object
+     * @throws WebServiceException If any error in the creation of
+     *                   the <code>Dispatch</code> object or if an 
+     *                  unsupported WebServcieFeature for this port
+     *                  is specified.
      *
      * @see javax.xml.bind.JAXBContext
+     * @see WebServiceFeature
      *
      * @since JAX-WS 2.1
      **/
     public abstract Dispatch<Object> createDispatch(EndpointReference endpointReference,
-            JAXBContext context, Service.Mode mode);
-    
-    
+            JAXBContext context, Service.Mode mode,
+            WebServiceFeature... features);
 }

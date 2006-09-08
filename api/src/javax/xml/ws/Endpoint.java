@@ -98,31 +98,6 @@ public abstract class Endpoint {
         return Provider.provider().createEndpoint(bindingId, implementor);
     }
     
-    /**
-     * Creates an endpoint with the specified binding type, features and
-     * implementor object.
-     * <p>
-     * The newly created endpoint may be published by calling
-     * one of the javax.xml.ws.Endpoint#publish(String) and
-     * javax.xml.ws.Endpoint#publish(Object) methods.
-     *
-     * @param bindingId A URI specifying the binding to use. If the bindingID is
-     * <code>null</code> and no binding is specified via a BindingType
-     * annotation then a default SOAP 1.1 / HTTP binding MUST be used.
-     *
-     * @param features An array of features to enable on the specified binding
-     *
-     * @param implementor The endpoint implementor.
-     *
-     * @return The newly created endpoint.
-     * @throws WebServiceException If any feature is unsupported or incompatible
-     * with the specified bindingId
-     *
-     * @since JAX-WS 2.1
-     **/
-    public static Endpoint create(String bindingId, String[] features, Object implementor) {
-        return Provider.provider().createEndpoint(bindingId, features, implementor);
-    }
     
     /**
      * Returns the binding for this endpoint.
@@ -333,5 +308,5 @@ public abstract class Endpoint {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz);
+    public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz); 
 }

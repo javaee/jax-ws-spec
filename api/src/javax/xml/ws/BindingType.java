@@ -19,6 +19,21 @@ import java.lang.annotation.RetentionPolicy;
  *  <p>
  *  This annotation may be overriden programmatically or via
  *  deployment descriptors, depending on the platform in use.
+ *  <p>
+ *  Here is a sample use of the BindingType annotation that specifies
+ *  use of the SOAP1.1/HTTP binding, it enables both the 
+ *  AddressingFeature and the MTOMFeature and also sets the 
+ *  <code>threshold</code> feature parameter on the MTOMFeature.
+ * 
+ *  <pre>
+ *  &#64;BindingType(value=SOAPBinding.SOAP11HTTP_BINDING,
+ *            features={
+ *               &#64;Feature(value=AddressingFeature.ID),
+ *               &#64;Feature(value=MTOMFeature.ID,
+ *                   parameters={&#64;FeatureParameter(name=MTOMFeature.THRESHOLD, value="1000")})
+ *           })
+ *  public interface MyWebService { ... }
+ *  </pre>
  *
  *  @since JAX-WS 2.0
  *
@@ -42,16 +57,18 @@ public @interface BindingType {
      String value() default "" ;
 
      /**
-      * An array of features to enable on the specified binding.
-      * If not specified, no additional features are enabled.
+      * An array of Features to enable/disable on the specified binding.
+      * If not specified, features will be enabled/disabled based
+      * on their own rules. Refer to the documentation of the feature
+      * to determine when it will be automatically enabled.
       * <p>
       * See the <code>SOAPBinding</code> 
       * for the definition of the standard feature identifiers.
       *
-      * @see javax.xml.ws.soap.SOAPBinding#ADDRESSING_FEATURE
-      * @see javax.xml.ws.soap.SOAPBinding#MTOM_FEATURE
+      * @see javax.xml.ws.soap.AddressingFeature
+      * @see javax.xml.ws.soap.MTOMFeature
       *
       * @since JAX-WS 2.1
       */
-     String[] features() default {};
+     Feature[] features() default {};
 }
