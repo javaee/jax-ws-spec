@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.9 2006-09-13 15:05:26 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.10 2006-09-13 21:53:22 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -202,8 +202,7 @@ public abstract class Provider {
      *                  <LI>If there is an error during creation
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
-     *                      as required by this method such as
-     *                      the wsaw:ServiceName/@EndpointName
+     *                      as required by this method 
      *                  <LI>Optionally, if this
      *                      <code>endpointReference</code>
      *                      is illegal

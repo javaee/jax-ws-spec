@@ -320,7 +320,7 @@ public class Service {
      *                </code> parameter will have their default values.
      *
      * @return Dispatch instance
-     * @throws ServiceException If any error in the creation of
+     * @throws WebServiceException If any error in the creation of
      *                  the <code>Dispatch</code> object
      *
      * @see javax.xml.bind.JAXBContext

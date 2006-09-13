@@ -5,9 +5,11 @@
 
 package javax.xml.ws;
 
+import java.lang.UnsupportedOperationException;
 import java.util.List;
 import java.util.Map;
 import javax.xml.ws.spi.Provider;
+import javax.xml.ws.w3caddressing.W3CEndpointReference;
 
 /**
  * A Web service endpoint.
@@ -282,11 +284,13 @@ public abstract class Endpoint {
      * @return EndpointReference of this instance.
      * @throws WebServiceException If any error in the creation of
      * the <code>EndpointReference</code> or if the <code>Endpoint</code> is 
-     * not in thepublished state.
+     * not in the published state.
+     * @throws UnsupportedOperationException If this <code>BindingProvider</code>
+     * uses the XML/HTTP binding.
      *
      * @since JAX-WS 2.1
      **/
-    public abstract EndpointReference getEndpointReference();
+    public abstract W3CEndpointReference getEndpointReference();
     
     
     /**
@@ -299,12 +303,15 @@ public abstract class Endpoint {
      * It must also contain the <code>wsaw:InterfaceName</code>,
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code>.
+     * <p>
      *
      * @return EndpointReference of type <code>clazz</code> of this instance.
      * @throws WebServiceException If any error in the creation of
      * the <code>EndpointReference</code> or if the <code>Endpoint</code> is 
-     * not in thepublished state or if the <code>clazz</code> is not supported
+     * not in the published state or if the <code>clazz</code> is not supported
      * <code>EndpointReference</code> type.
+     * @throws UnsupportedOperationException If this <code>BindingProvider</code>
+     * uses the XML/HTTP binding.
      *
      * @since JAX-WS 2.1
      **/

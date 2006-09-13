@@ -5,15 +5,11 @@
 
 package javax.xml.ws;
 
-import java.util.List;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.annotation.XmlAnyAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.ws.spi.Provider;
-import javax.xml.ws.Service;
-import javax.xml.namespace.QName;
-
 
 /**
  * This class represents an WS-Addressing EndpointReference
@@ -65,7 +61,7 @@ import javax.xml.namespace.QName;
  * @see Service
  * @since JAX-WS 2.1
  */
-//@XmlTransient // to treat this class like Object as far as databinding is concerned (proposed JAXB 2.1 feature)
+@XmlTransient // to treat this class like Object as far as databinding is concerned (proposed JAXB 2.1 feature)
 public abstract class EndpointReference {
     
     /**
@@ -109,9 +105,10 @@ public abstract class EndpointReference {
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
-     * the WSDL Metadata from the <code>EndpointReference</code>.
-     * This EndpointRefernce object MUST have WSDL inlined in the
-     * metadata along with wsaw:ServiceName/@EndpointName
+     * the WSDL Metadata from this <code>EndpointReference</code> or from
+     * annotations on the <code>serviceEndpointInterface</code>.  
+     * If there runtime cannot determine the protocol binding, the default
+     * SOAP1.2/HTTP MUST be used.
      *
      *
      * @param serviceEndpointInterface Service endpoint interface
@@ -125,8 +122,7 @@ public abstract class EndpointReference {
      *                  <LI>If there is an error during creation
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
-     *                      as required by this method such as
-     *                      the wsaw:ServiceName/@EndpointName
+     *                      as required by this method 
      *                  <LI>Optionally, if this
      *                      <code>endpointReference</code>
      *                      is invalid
@@ -147,6 +143,12 @@ public abstract class EndpointReference {
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
      * the users choosing.
+     * In the implementation of this method, the JAX-WS
+     * runtime system takes the responsibility of selecting a protocol
+     * binding (and a port) and configuring the proxy accordingly from
+     * the WSDL Metadata from this <code>EndpointReference</code>.  
+     * If there runtime cannot determine the protocol binding, the default
+     * SOAP1.2/HTTP MUST be used.
      *
      * @param type The class of object used to messages or message
      * payloads. Implementations are required to support
@@ -178,6 +180,12 @@ public abstract class EndpointReference {
     /** 
      * Creates a <code>Dispatch</code> instance for use with JAXB
      * generated objects.
+     * In the implementation of this method, the JAX-WS
+     * runtime system takes the responsibility of selecting a protocol
+     * binding (and a port) and configuring the proxy accordingly from
+     * the WSDL Metadata from this <code>EndpointReference</code>.  
+     * If there runtime cannot determine the protocol binding, the default
+     * SOAP1.2/HTTP MUST be used.
      *
      * @param endpointReference  The <code>EndpointReference</code>
      * for the target service endpoint

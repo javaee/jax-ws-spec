@@ -6,7 +6,7 @@
 package javax.xml.ws;
 
 import java.util.Map;
-import java.util.List;
+import javax.xml.ws.w3caddressing.W3CEndpointReference;
 
 /** The <code>BindingProvider</code> interface provides access to the
  *  protocol binding and associated context objects for request and
@@ -95,27 +95,13 @@ public interface BindingProvider {
      **/
     Binding getBinding();
     
-    
-    /** 
-     * Set the <code>EndpointReference</code> for this
-     * instance.
-     *
-     * @param endpointReference is the target endpoint used by
-     * this <code>BindingProvider</code> instance. Only the
-     * <code>wsa:Address</code> of the EndpointReference is required.
-     * @throws WebServiceException If the <code>wsa:Address</code> uses
-     * an unsupported transport protocol.  Implementations MUST support
-     * HTTP based addresses.
-     *
-     * @since JAX-WS 2.1
-     */
-    public void setEndpointReference(EndpointReference endpointReference);
+   
     
     /**
      * Returns the <code>EndpointReference</code> associated with
      * this <code>BindingProvider</code> instance.
      * <p>
-     * The returned <code>EndpointReference</code> must contain
+     * The returned <code>W3CEndpointReference</code> must contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element if
      * this WSDL is available. It must also contain the 
      * <code>wsaw:InterfaceName</code>,
@@ -124,12 +110,12 @@ public interface BindingProvider {
      * created from Services that contained that information.
      *
      * @return EndpointReference of this instance.
-     * @throws WebServiceException If this BindingProvider instance
-     * was not created with WSDL information
+     * @throws java.lang.UnsupportedOperationException If this <code>BindingProvider</code>
+     * uses the XML/HTTP binding.
      *
      * @since JAX-WS 2.1
      */
-    public EndpointReference getEndpointReference();
+    public W3CEndpointReference getEndpointReference();
     
     
     /**
@@ -147,9 +133,10 @@ public interface BindingProvider {
      *
      * @return EndpointReference of this instance.  Must be of type
      * <code>clazz</code>.
-     * @throws WebServiceException If this BindingProvider instance
-     * was not created with WSDL information or if the Class <code>clazz</code>
+     * @throws WebServiceException If the Class <code>clazz</code>
      * is not supported by this implementation.
+     * @throws java.lang.UnsupportedOperationException If this <code>BindingProvider</code>
+     * uses the XML/HTTP binding.
      *
      * @since JAX-WS 2.1
      */
