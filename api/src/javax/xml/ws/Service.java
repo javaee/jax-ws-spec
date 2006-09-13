@@ -121,6 +121,8 @@ public class Service {
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      or <code>portName</code> is specified
+     *                  <LI>If a feature is enabled that is not compatible
+     *                      with this port or is unsupported.
      *                  </UL>
      * @see java.lang.reflect.Proxy
      * @see java.lang.reflect.InvocationHandler
@@ -186,6 +188,8 @@ public class Service {
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
+     *                  <LI>If a feature is enabled that is not compatible
+     *                      with this port or is unsupported.
      *                  </UL>
      *
      * @see WebServiceFeature
@@ -265,7 +269,9 @@ public class Service {
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object
+     *                  the <code>Dispatch</code> object or if a 
+     *                  feature is enabled that is not compatible with 
+     *                  this port or is unsupported.
      *
      * @see javax.xml.transform.Source
      * @see javax.xml.soap.SOAPMessage
@@ -321,7 +327,9 @@ public class Service {
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object
+     *                  the <code>Dispatch</code> object or if a 
+     *                  feature is enabled that is not compatible with 
+     *                  this port or is unsupported.
      *
      * @see javax.xml.bind.JAXBContext
      * @see WebServiceFeature

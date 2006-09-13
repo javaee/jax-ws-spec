@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.10 2006-09-13 21:53:22 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.11 2006-09-13 22:01:11 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -209,6 +209,8 @@ public abstract class Provider {
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
+     *                  <LI>If feature is enabled that is not compatible with 
+     *                      this port or is unsupported.
      *                   </UL>
      *
      * @see WebServiceFeature
@@ -242,7 +244,9 @@ public abstract class Provider {
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object 
+     *                  the <code>Dispatch</code> object or if a 
+     *                  feature is enabled that is not compatible with 
+     *                  this port or is unsupported.
      *
      * @see javax.xml.transform.Source
      * @see javax.xml.soap.SOAPMessage
@@ -273,7 +277,9 @@ public abstract class Provider {
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                   the <code>Dispatch</code> object 
+     *                   the <code>Dispatch</code> object or if a 
+     *                  feature is enabled that is not compatible with 
+     *                  this port or is unsupported.
      *
      * @see javax.xml.bind.JAXBContext
      * @see WebServiceFeature
