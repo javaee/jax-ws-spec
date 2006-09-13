@@ -21,10 +21,10 @@ import javax.xml.ws.spi.Provider;
  * to being enabled or disabled:
  * <ul>
  *  <li> ENABLED: In this Mode, MTOM will be enabled.
- *  <li> DISABLED: In this Mode, MTON will be disabled
+ *  <li> DISABLED: In this Mode, MTOM will be disabled
  * </ul>
  * <p>
- * The @link{#setThreshold) method can be used to set the threshold 
+ * The {@link#setThreshold) method can be used to set the threshold 
  * value used to determine when binary data should be XOP encoded.
  *
  * @since JAX-WS 2.1

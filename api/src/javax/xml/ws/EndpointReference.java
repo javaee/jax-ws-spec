@@ -46,7 +46,7 @@ import javax.xml.namespace.QName;
  * <p>
  * Web service developers that wish to pass or return 
  * <code>EndpointReferences</code> in Java methods in an
- * SIE should use
+ * SEI should use
  * concrete instances of an <code>EndpointReference</code> such
  * as the <code>W3CEndpointReferendce</code>.  This way the 
  * schema mapped from the SEI will be more descriptive of the
@@ -98,7 +98,7 @@ public abstract class EndpointReference {
      */
     public abstract void writeTo(Result result);
     
-  
+    
     /** 
      * The getPort method returns a stub/proxy.
      * The parameter  <code>serviceEndpointInterface</code> specifies
@@ -110,14 +110,15 @@ public abstract class EndpointReference {
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
      * the WSDL Metadata from the <code>EndpointReference</code>.
-     * The returned proxy should not be reconfigured by the client.
-
+     * This EndpointRefernce object MUST have WSDL inlined in the
+     * metadata along with wsaw:ServiceName/@EndpointName
+     *
      *
      * @param serviceEndpointInterface Service endpoint interface
      * @param features  A list of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
-     * @return Object instance that supports the
+     * @return Object Proxy instance that supports the
      *                  specified service endpoint interface
      * @throws WebServiceException
      *                  <UL>
@@ -128,14 +129,13 @@ public abstract class EndpointReference {
      *                      the wsaw:ServiceName/@EndpointName
      *                  <LI>Optionally, if this
      *                      <code>endpointReference</code>
-     *                      is illegal
+     *                      is invalid
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
-     *                  <LI>If an unsupported WebServcieFeature for this port
-     *                      is specified.
      *                   </UL>
      *
+     * @see java.lang.reflect.Proxy
      * @see WebServiceFeature
      **/
     public <T> T getPort(Class<T> serviceEndpointInterface, 
@@ -163,9 +163,7 @@ public abstract class EndpointReference {
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object or if an 
-     *                  unsupported WebServcieFeature for this port
-     *                  is specified.
+     *                  the <code>Dispatch</code> object 
      *
      * @see javax.xml.transform.Source
      * @see javax.xml.soap.SOAPMessage
@@ -196,9 +194,7 @@ public abstract class EndpointReference {
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                   the <code>Dispatch</code> object or if an 
-     *                  unsupported WebServcieFeature for this port
-     *                  is specified.
+     *                   the <code>Dispatch</code> object 
      *
      * @see javax.xml.bind.JAXBContext
      * @see WebServiceFeature

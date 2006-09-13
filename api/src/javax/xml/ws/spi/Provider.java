@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.8 2006-09-08 21:20:59 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.9 2006-09-13 15:05:26 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -187,7 +187,6 @@ public abstract class Provider {
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
      * the WSDL Metadata from the <code>EndpointReference</code>.
-     * The returned proxy should not be reconfigured by the client.
      *
      *
      * @param endpointReference the EndpointReference that will
@@ -196,7 +195,7 @@ public abstract class Provider {
      * @param features  A list of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
-     * @return Object instance that supports the
+     * @return Object Proxy instance that supports the
      *                  specified service endpoint interface
      * @throws WebServiceException
      *                  <UL>
@@ -211,8 +210,6 @@ public abstract class Provider {
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
-     *                  <LI>If an unsupported WebServcieFeature for this port
-     *                      is specified.
      *                   </UL>
      *
      * @see WebServiceFeature
@@ -231,7 +228,7 @@ public abstract class Provider {
      *
      * @param endpointReference the EndpointReference that will
      * be invoked by the returned proxy.
-     * @param type The class of object used to messages or message
+     * @param type The class of object used for messages or message
      * payloads. Implementations are required to support
      * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
      * @param mode Controls whether the created dispatch instance is message
@@ -246,13 +243,11 @@ public abstract class Provider {
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object or if an 
-     *                  unsupported WebServcieFeature for this port
-     *                  is specified.
+     *                  the <code>Dispatch</code> object 
      *
      * @see javax.xml.transform.Source
      * @see javax.xml.soap.SOAPMessage
-     * @see WebServiceFeature;
+     * @see WebServiceFeature
      *
      * @since JAX-WS 2.1
      **/
@@ -279,9 +274,7 @@ public abstract class Provider {
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                   the <code>Dispatch</code> object or if an 
-     *                  unsupported WebServcieFeature for this port
-     *                  is specified.
+     *                   the <code>Dispatch</code> object 
      *
      * @see javax.xml.bind.JAXBContext
      * @see WebServiceFeature

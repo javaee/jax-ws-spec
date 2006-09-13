@@ -22,15 +22,16 @@ package javax.xml.ws;
  */
 public abstract class WebServiceFeature {
    /**
-    * Each Feature definition should define a public static String ID
-    * that can be used in the Feature annotation to refer to the feature.
+    * Each Feature definition should define a public static final 
+    * String ID that can be used in the Feature annotation to refer 
+    * to the feature.
     */
-   // public static String ID = "some feature Identifier";
+   // public static final String ID = "some unique feature Identifier";
     
    /**
-    * Get the ID for this WebServiceFeature.
+    * Get the unique identifier for this WebServiceFeature.
     * 
-    * @return the ID for this feature.
+    * @return the unique identifier for this feature.
     */
    public abstract String getID(); 
     

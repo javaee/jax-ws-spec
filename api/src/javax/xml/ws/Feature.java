@@ -16,8 +16,7 @@ import java.lang.annotation.RetentionPolicy;
  *  enable/disable a feature to use for a web service
  *  endpoint implementation class. 
  *  <p>
- *  This annotation may be overriden programmatically or via
- *  deployment descriptors, depending on the platform in use.
+ *  This annotation may be overridden programmatically.
  *
  *  @since JAX-WS 2.1
  *
@@ -27,13 +26,13 @@ import java.lang.annotation.RetentionPolicy;
 @Documented
 public @interface Feature {
      /**
-      * The ID of feature to enable or disable;
+      * The unique identifier of feature to enable or disable;
       * <p>
       * See the <code>SOAPBinding</code> 
       * for the definition of the standard feature identifiers.
       *
-      * @see javax.xml.ws.soap.SOAPBinding#ADDRESSING_FEATURE
-      * @see javax.xml.ws.soap.SOAPBinding#MTOM_FEATURE
+      * @see javax.xml.ws.soap.AddressingFeature#ID
+      * @see javax.xml.ws.soap.MTOMFeature#ID
       *
       */
      String value() default "";
@@ -45,8 +44,8 @@ public @interface Feature {
       * See the <code>SOAPBinding</code> 
       * for the definition of the standard feature identifiers.
       *
-      * @see javax.xml.ws.soap.SOAPBinding#ADDRESSING_FEATURE
-      * @see javax.xml.ws.soap.SOAPBinding#MTOM_FEATURE
+      * @see javax.xml.ws.soap.AddressingFeature
+      * @see javax.xml.ws.soap.MTOMFeature
       *
       */
      boolean enabled() default true;     
@@ -56,6 +55,7 @@ public @interface Feature {
       * may take any number of parameters to customize the
       * use of the feature.
       *
+      * @see javax.xml.ws.soap.MTOMFeature
       */
      FeatureParameter[] parameters() default {};   
 }

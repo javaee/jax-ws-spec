@@ -17,8 +17,7 @@ import java.lang.annotation.RetentionPolicy;
  *  endpoint implementation class. As well as specify
  *  additional features that may be enabled.
  *  <p>
- *  This annotation may be overriden programmatically or via
- *  deployment descriptors, depending on the platform in use.
+ *  This annotation may be overridden programmatically.
  *  <p>
  *  Here is a sample use of the BindingType annotation that specifies
  *  use of the SOAP1.1/HTTP binding, it enables both the 

@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.3.2.6 2006-09-08 21:20:59 kohlert Exp $
+ *$Id: ServiceDelegate.java,v 1.3.2.7 2006-09-13 15:05:26 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -92,8 +92,6 @@ public abstract class ServiceDelegate {
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      or <code>portName</code> is specified
-     *                  <LI>If an unsupported WebServcieFeature for this port
-     *                      is specified.
      *                  </UL>
      * @see java.lang.reflect.Proxy
      * @see java.lang.reflect.InvocationHandler
@@ -156,8 +154,6 @@ public abstract class ServiceDelegate {
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
-     *                  <LI>If an unsupported WebServcieFeature for this port
-     *                      is specified.
      *                  </UL>
      *
      * @see WebServiceFeature
@@ -194,7 +190,7 @@ public abstract class ServiceDelegate {
      * the users choosing.
      *
      * @param portName  Qualified name for the target service endpoint
-     * @param type The class of object used to messages or message
+     * @param type The class of object used for messages or message
      * payloads. Implementations are required to support
      * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
      * @param mode Controls whether the created dispatch instance is message
@@ -218,7 +214,7 @@ public abstract class ServiceDelegate {
      * the users choosing.
      *
      * @param portName  Qualified name for the target service endpoint
-     * @param type The class of object used to messages or message
+     * @param type The class of object used for messages or message
      * payloads. Implementations are required to support
      * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
      * @param mode Controls whether the created dispatch instance is message
@@ -234,8 +230,6 @@ public abstract class ServiceDelegate {
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
      *                  the <code>Dispatch</code> object
-     *                  or if an unsupported WebServcieFeature 
-     *                  is specified.
      *
      * @see javax.xml.transform.Source
      * @see javax.xml.soap.SOAPMessage
@@ -289,8 +283,7 @@ public abstract class ServiceDelegate {
      *
      * @return Dispatch instance
      * @throws ServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object or 
-     *                  if an unsupported WebServiceFeature is specified
+     *                  the <code>Dispatch</code> object
      *
      * @see javax.xml.bind.JAXBContext
      * @see WebServiceFeature
