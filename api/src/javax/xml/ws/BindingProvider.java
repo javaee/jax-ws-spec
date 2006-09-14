@@ -98,7 +98,7 @@ public interface BindingProvider {
    
     
     /**
-     * Returns the <code>EndpointReference</code> associated with
+     * Returns the <code>W3CEndpointReference</code> associated with
      * this <code>BindingProvider</code> instance.
      * <p>
      * The returned <code>W3CEndpointReference</code> must contain
@@ -109,7 +109,7 @@ public interface BindingProvider {
      * attribute on the <code>wsaw:ServiceName</code> for BindingProviders
      * created from Services that contained that information.
      *
-     * @return EndpointReference of this instance.
+     * @return W3CEndpointReference of this instance.
      * @throws java.lang.UnsupportedOperationException If this <code>BindingProvider</code>
      * uses the XML/HTTP binding.
      *

@@ -269,7 +269,7 @@ public abstract class Endpoint {
     public abstract void setProperties(Map<String,Object> properties);
     
     /**
-     * Returns the <code>EndpointReference</code> associated with
+     * Returns the <code>W3CEndpointReference</code> associated with
      * this <code>Endpoint</code> instance.
      * <p>
      * The returned <code>EndpointReference</code> must contain
@@ -281,7 +281,7 @@ public abstract class Endpoint {
      * attribute on the <code>wsaw:ServiceName</code>.
      * See 
      *
-     * @return EndpointReference of this instance.
+     * @return W3CEndpointReference of this instance.
      * @throws WebServiceException If any error in the creation of
      * the <code>EndpointReference</code> or if the <code>Endpoint</code> is 
      * not in the published state.

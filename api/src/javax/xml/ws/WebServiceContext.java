@@ -7,6 +7,7 @@ package javax.xml.ws;
 
 import java.security.Principal;
 import javax.xml.ws.handler.MessageContext;
+import javax.xml.ws.w3caddressing.W3CEndpointReference;
 
 /**
  *  A <code>WebServiceContext</code> makes it possible for
@@ -76,7 +77,7 @@ public interface WebServiceContext {
     public boolean isUserInRole(String role);
     
     /**
-     *  Returns the <code>EndpointReference</code> for this
+     *  Returns the <code>W3CEndpointReference</code> for this
      *  endpoint.
      *  <p>
      *  The returned <code>EndpointReference</code> must contain
@@ -86,7 +87,7 @@ public interface WebServiceContext {
      *  <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      *  attribute on the <code>wsaw:ServiceName</code>.
      *
-     *  @return EndpointReference of this instance.
+     *  @return W3CEndpointReference of this instance.
      *
      *  @throws IllegalStateException This exception is thrown
      *          if the method is called while no request is
@@ -94,7 +95,7 @@ public interface WebServiceContext {
      *
      * @since JAX-WS 2.1
      */
-    public EndpointReference getEndpointReference();
+    public W3CEndpointReference getEndpointReference();
 
     /**
      *  Returns the <code>EndpointReference</code> associated with
