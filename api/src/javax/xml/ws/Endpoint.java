@@ -47,6 +47,16 @@ import javax.xml.ws.w3caddressing.W3CEndpointReference;
  * @see java.util.concurrent.Executor
  *
  **/
+@BindingType(value=javax.xml.ws.soap.SOAPBinding.SOAP11HTTP_BINDING,
+        features={
+           @Feature(value=javax.xml.ws.soap.AddressingFeature.ID),
+           @Feature(value=javax.xml.ws.soap.MTOMFeature.ID,
+               parameters={@FeatureParameter(
+                  name=javax.xml.ws.soap.MTOMFeature.THRESHOLD, value="1000")
+               }
+           )
+        }
+     )
 public abstract class Endpoint {
     
     /** Standard property: name of WSDL service.
