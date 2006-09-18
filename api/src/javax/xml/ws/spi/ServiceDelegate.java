@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.3.2.8 2006-09-18 17:00:03 kohlert Exp $
+ *$Id: ServiceDelegate.java,v 1.3.2.9 2006-09-18 20:14:51 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -93,6 +93,8 @@ public abstract class ServiceDelegate {
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      or <code>portName</code> is specified
+     *                  <LI>If a feature is enabled that is not compatible
+     *                      with this port or is unsupported.
      *                  </UL>
      * @see java.lang.reflect.Proxy
      * @see java.lang.reflect.InvocationHandler
@@ -107,72 +109,73 @@ public abstract class ServiceDelegate {
      * The getPort method returns a stub.
      * The parameter <code>endpointReference</code> specifies the
      * endpoint that will be invoked by the returned stub.
-     * The parameter  <code>serviceEndpointInterface</code> specifies
+     * The parameter <code>serviceEndpointInterface</code> specifies
      * the service endpoint interface that is supported by the 
      * returned proxy.
+     * <p>
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
-     * the WSDL Metadata from the <code>EndpointReference</code> or 
-     * from the WSDL associated with this <code>ServiceDelegate</code> instance.
+     * the WSDL associated with this <code>Service</code> instance or
+     * from the WSDL Metadata from the <code>endpointReference</code>.
+     * If this <code>Service</code> instance has a WSDL and 
+     * the <code>endpointReference</code>
+     * also has a WSDL, then the WSDL from this instance will be used.
+     * If this <code>Service</code> instance does not have a WSDL and
+     * the <code>endpointReference</code> does have a WSDL, then the 
+     * WSDL from the <code>endpointReference</code> will be used.
      * The returned proxy should not be reconfigured by the client.
-     * If this <code>ServiceDelegate</code> instance has a known proxy 
+     * If this <code>Service</code> instance has a known proxy 
      * port that matches the information contained in 
-     * the <code>EndpointReference</code> or the this instances
-     * associated WSDL,
+     * the WSDL,
      * then that proxy is returned, otherwise a WebServiceException
      * is thrown.
      * <p>
-     * This instance's <code>serviceName</code> must also match the
-     * <code>wsaw:ServiceName</code> that maybe included in the
-     * <code>endpointReference</code> metadata.
-     * <p>
      * Calling this method has the same behavior as the following
      * <pre>
-     * port = serviceDelegate.getPort(portName, serviceEndpointInterface);
+     * port = service.getPort(portName, serviceEndpointInterface);
      * </pre>
      * where the <code>portName</code> is retrieved from the 
      * <code>wsaw:EndpontName</code> attribute of the
      * <code>wsaw:ServiceName</code> element in the 
      * metadata of the <code>endpointReference</code> or from the 
      * <code>serviceEndpointInterface</code> and the WSDL
-     * associated with this <code>ServiceDelegate</code> instance.
+     * associated with this <code>Service</code> instance.
      * <br>
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
      * </a>.
-
      *
      * @param endpointReference  The <code>EndpointReference</code>
      * for the target service endpoint that will be invoked by the
      * returned proxy.
-     * @param serviceEndpointInterface Service endpoint interface
+     * @param serviceEndpointInterface Service endpoint interface.
      * @param features  A list of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      * @return Object Proxy instance that supports the
-     *                  specified service endpoint interface
+     *                  specified service endpoint interface.
      * @throws WebServiceException
      *                  <UL>
      *                  <LI>If there is an error during creation
-     *                      of the proxy
+     *                      of the proxy.
      *                  <LI>If there is any missing WSDL metadata
-     *                      as required by this method
-     *                  <LI>If the EndpointReference Metadata
-     *                      does not match the serviceEndpointInterface
+     *                      as required by this method.
      *                  <LI>If the <code>wsaw:EndpointName</code> is
      *                      missing from the <code>endpointReference</code>
-     *                      does not match a wsdl:Port
-     *                      in this <code>Service</code> instance.
+     *                      or does not match a wsdl:Port
+     *                      in the WSDL metadata.
      *                  <LI>If the <code>wsaw:ServiceName</code> in the
      *                      <code>endpointReference</code> metadata does not
      *                      match the <code>serviceName</code> of this
      *                      <code>Service</code> instance.
      *                  <LI>Optionally, if an invalid
      *                      <code>endpointReference</code>
-     *                      is specified
+     *                      is specified.
      *                  <LI>Optionally, if an invalid
      *                      <code>serviceEndpointInterface</code>
-     *                      is specified
+     *                      is specified.
+     *                  <LI>If a feature is enabled that is not compatible
+     *                      with this port or is unsupported.
      *                  </UL>
      *
      *  @since JAX-WS 2.1
@@ -231,6 +234,8 @@ public abstract class ServiceDelegate {
      *                  <LI>Optionally, if an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
+     *                  <LI>If a feature is enabled that is not compatible
+     *                      with this port or is unsupported.
      *                  </UL>
      *
      * @see WebServiceFeature
@@ -306,7 +311,9 @@ public abstract class ServiceDelegate {
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object
+     *                  the <code>Dispatch</code> object or if a 
+     *                  feature is enabled that is not compatible with 
+     *                  this port or is unsupported.
      *
      * @see javax.xml.transform.Source
      * @see javax.xml.soap.SOAPMessage
@@ -323,12 +330,19 @@ public abstract class ServiceDelegate {
      * the users choosing.
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
-     * binding (and a port) and configuring the proxy accordingly from
-     * the WSDL Metadata from the <code>endpointReference</code>.  
+     * binding (and a port) and configuring the dispatch accordingly from
+     * the WSDL associated with this <code>Service</code> instance or
+     * from the WSDL Metadata from the <code>endpointReference</code>.
+     * If this <code>Service</code> instance has a WSDL and 
+     * the <code>endpointReference</code>
+     * also has a WSDL, then the WSDL from this instance will be used.
+     * If this <code>Service</code> instance does not have a WSDL and
+     * the <code>endpointReference</code> does have a WSDL, then the 
+     * WSDL from the <code>endpointReference</code> will be used.     
      * <p>
-     * This method behavies the same as calling
+     * This method behaves the same as calling
      * <pre>
-     * dispatch = serviceDelegate.createDispatch(portName, type, mode, features);
+     * dispatch = service.createDispatch(portName, type, mode, features);
      * </pre>
      * where the <code>portName</code> is retrieved from the 
      * <code>wsaw:EndpointName</code> attribute of the <code>wsaw:ServiceName</code>
@@ -357,14 +371,18 @@ public abstract class ServiceDelegate {
      * @return Dispatch instance
      * @throws WebServiceException 
      *                  <UL>
-     *                    <li>If the WSDL is not inlined in the
-     *                    <code>endpointReference</code>
+     *                    <li>If there is any missing WSDL metadata
+     *                    as required by this method.
      *                    <li>If the <code>wsaw:ServiceName</code> element 
      *                    or the <code>wsaw:EndpointName</code> attribute
      *                    is missing in the metdata of the 
-     *                    <code>endpointReference</code>
+     *                    <code>endpointReference</code>.
+     *                    <li>If the <code>wsaw:ServiceName</code> does not
+     *                    match the <code>serviceName</code> of this instance.
+     *                    <li>If the <code>wsaw:EndpointName</code> does not
+     *                    match a valid wsdl:Port in the WSDL metadata.
      *                    <li>If any error in the creation of
-     *                  the <code>Dispatch</code> object
+     *                     the <code>Dispatch</code> object.
      *                    <li>if a feature is enabled that is not 
      *                    compatible with this port or is unsupported.
      *                  </UL>
@@ -421,8 +439,10 @@ public abstract class ServiceDelegate {
      *                </code> parameter will have their default values.
      *
      * @return Dispatch instance
-     * @throws ServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object
+     * @throws WebServiceException If any error in the creation of
+     *                  the <code>Dispatch</code> object or if a 
+     *                  feature is enabled that is not compatible with 
+     *                  this port or is unsupported.
      *
      * @see javax.xml.bind.JAXBContext
      * @see WebServiceFeature
@@ -437,12 +457,19 @@ public abstract class ServiceDelegate {
      * generated objects.
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
-     * binding (and a port) and configuring the proxy accordingly from
-     * the WSDL Metadata from this <code>EndpointReference</code>.  
+     * binding (and a port) and configuring the dispatch accordingly from
+     * the WSDL associated with this <code>Service</code> instance or
+     * from the WSDL Metadata from the <code>endpointReference</code>.
+     * If this <code>Service</code> instance has a WSDL and 
+     * the <code>endpointReference</code>
+     * also has a WSDL, then the WSDL from this instance will be used.
+     * If this <code>Service</code> instance does not have a WSDL and
+     * the <code>endpointReference</code> does have a WSDL, then the 
+     * WSDL from the <code>endpointReference</code> will be used.      
      * <p>
      * This method behavies the same as calling
      * <pre>
-     * dispatch = serviceDelegate.createDispatch(portName, context, mode, features);
+     * dispatch = service.createDispatch(portName, context, mode, features);
      * </pre>
      * where the <code>portName</code> is retrieved from the 
      * <code>wsaw:EndpointName</code> attribute of the <code>wsaw:ServiceName</code>
@@ -470,18 +497,18 @@ public abstract class ServiceDelegate {
      * @throws WebServiceException 
      * @throws WebServiceException 
      *                  <UL>
-     *                    <li>If the WSDL is not inlined in the
-     *                    <code>endpointReference</code>
+     *                    <li>If there is any missing WSDL metadata
+     *                      as required by this method.
      *                    <li>If the <code>wsaw:ServiceName</code> element 
      *                    or the <code>wsaw:EndpointName</code> attribute
      *                    is missing in the metdata of the 
-     *                    <code>endpointReference</code>
+     *                    <code>endpointReference</code>.
      *                    <li>If the <code>wsaw:ServiceName</code> does not
      *                    match the <code>serviceName</code> of this instance.
      *                    <li>If the <code>wsaw:EndpointName</code> does not
      *                    match a valid wsdl:Port in the WSDL metadata.
      *                    <li>If any error in the creation of
-     *                  the <code>Dispatch</code> object
+     *                  the <code>Dispatch</code> object.
      *                    <li>if a feature is enabled that is not 
      *                    compatible with this port or is unsupported.
      *                  </UL>
