@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.11 2006-09-13 22:01:11 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.12 2006-09-18 17:00:04 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -219,74 +219,5 @@ public abstract class Provider {
      **/
     public abstract <T> T getPort(EndpointReference endpointReference,
             Class<T> serviceEndpointInterface, 
-            WebServiceFeature... features);
-     
-   
-    
-    /** 
-     * Creates a <code>Dispatch</code> instance for use with objects of
-     * the users choosing.
-     *
-     * @param endpointReference the EndpointReference that will
-     * be invoked by the returned proxy.
-     * @param type The class of object used for messages or message
-     * payloads. Implementations are required to support
-     * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
-     * @param mode Controls whether the created dispatch instance is message
-     * or payload oriented, i.e. whether the user will work with complete
-     * protocol messages or message payloads. E.g. when using the SOAP
-     * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
-     * when type is SOAPMessage.
-     * @param features  A list of WebServiceFeatures to configure on the 
-     *                proxy.  Supported features not in the <code>features
-     *                </code> parameter will have their default values.
-     *
-     * @return Dispatch instance
-     * @throws WebServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object or if a 
-     *                  feature is enabled that is not compatible with 
-     *                  this port or is unsupported.
-     *
-     * @see javax.xml.transform.Source
-     * @see javax.xml.soap.SOAPMessage
-     * @see WebServiceFeature
-     *
-     * @since JAX-WS 2.1
-     **/
-    public abstract <T> Dispatch<T> createDispatch(EndpointReference endpointReference,
-            Class<T> type, Service.Mode mode, WebServiceFeature... features);    
-    
-   
-    /** 
-     * Creates a <code>Dispatch</code> instance for use with JAXB
-     * generated objects.
-     *
-     * @param endpointReference  The <code>EndpointReference</code>
-     * for the target service endpoint
-     * @param context The JAXB context used to marshall and unmarshall
-     * messages or message payloads.
-     * @param mode Controls whether the created dispatch instance is message
-     * or payload oriented, i.e. whether the user will work with complete
-     * protocol messages or message payloads. E.g. when using the SOAP
-     * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body.
-     * @param features  A list of WebServiceFeatures to configure on the 
-     *                proxy.  Supported features not in the <code>features
-     *                </code> parameter will have their default values.
-     *
-     * @return Dispatch instance
-     * @throws WebServiceException If any error in the creation of
-     *                   the <code>Dispatch</code> object or if a 
-     *                  feature is enabled that is not compatible with 
-     *                  this port or is unsupported.
-     *
-     * @see javax.xml.bind.JAXBContext
-     * @see WebServiceFeature
-     *
-     * @since JAX-WS 2.1
-     **/
-    public abstract Dispatch<Object> createDispatch(EndpointReference endpointReference,
-            JAXBContext context, Service.Mode mode,
             WebServiceFeature... features);
 }

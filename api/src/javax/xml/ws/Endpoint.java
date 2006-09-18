@@ -289,7 +289,9 @@ public abstract class Endpoint {
      * It must also contain the <code>wsaw:InterfaceName</code>,
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code>.
-     * See 
+     * <br>
+     * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
+     * </a>.
      *
      * @return W3CEndpointReference of this instance.
      * @throws WebServiceException If any error in the creation of
@@ -313,7 +315,9 @@ public abstract class Endpoint {
      * It must also contain the <code>wsaw:InterfaceName</code>,
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code>.
-     * <p>
+     * <br>
+     * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
+     * </a>.
      *
      * @return EndpointReference of type <code>clazz</code> of this instance.
      * @throws WebServiceException If any error in the creation of

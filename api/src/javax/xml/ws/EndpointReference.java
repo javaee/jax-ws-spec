@@ -109,6 +109,10 @@ public abstract class EndpointReference {
      * annotations on the <code>serviceEndpointInterface</code>.  
      * If there runtime cannot determine the protocol binding, the default
      * SOAP1.2/HTTP MUST be used.
+     * <p>
+     * Because this port is not created from a Service object, handlers 
+     * will not be used.  Also, the HandlerResolver and Excecutor cannot
+     * be get or set for this port.
      *
      *
      * @param serviceEndpointInterface Service endpoint interface
@@ -140,81 +144,5 @@ public abstract class EndpointReference {
             WebServiceFeature... features) {
         return Provider.provider().getPort(this, serviceEndpointInterface, 
                                             features);
-    }        
-    
-    /** 
-     * Creates a <code>Dispatch</code> instance for use with objects of
-     * the users choosing.
-     * In the implementation of this method, the JAX-WS
-     * runtime system takes the responsibility of selecting a protocol
-     * binding (and a port) and configuring the proxy accordingly from
-     * the WSDL Metadata from this <code>EndpointReference</code>.  
-     * If there runtime cannot determine the protocol binding, the default
-     * SOAP1.2/HTTP MUST be used.
-     *
-     * @param type The class of object used to messages or message
-     * payloads. Implementations are required to support
-     * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
-     * @param mode Controls whether the created dispatch instance is message
-     * or payload oriented, i.e. whether the user will work with complete
-     * protocol messages or message payloads. E.g. when using the SOAP
-     * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
-     * when type is SOAPMessage.
-     * @param features  A list of WebServiceFeatures to configure on the 
-     *                proxy.  Supported features not in the <code>features
-     *                </code> parameter will have their default values.
-     *
-     * @return Dispatch instance
-     * @throws WebServiceException If any error in the creation of
-     *                  the <code>Dispatch</code> object or if a 
-     *                  feature is enabled that is not compatible with 
-     *                  this port or is unsupported.
-     *
-     * @see javax.xml.transform.Source
-     * @see javax.xml.soap.SOAPMessage
-     * @see WebServiceFeature;
-     **/
-    public <T> Dispatch<T> createDispatch(Class<T> type, Service.Mode mode, 
-            WebServiceFeature... features) {
-        return Provider.provider().createDispatch(this, type, mode, features);
-    }     
-    
-    
-    /** 
-     * Creates a <code>Dispatch</code> instance for use with JAXB
-     * generated objects.
-     * In the implementation of this method, the JAX-WS
-     * runtime system takes the responsibility of selecting a protocol
-     * binding (and a port) and configuring the proxy accordingly from
-     * the WSDL Metadata from this <code>EndpointReference</code>.  
-     * If there runtime cannot determine the protocol binding, the default
-     * SOAP1.2/HTTP MUST be used.
-     *
-     * @param endpointReference  The <code>EndpointReference</code>
-     * for the target service endpoint
-     * @param context The JAXB context used to marshall and unmarshall
-     * messages or message payloads.
-     * @param mode Controls whether the created dispatch instance is message
-     * or payload oriented, i.e. whether the user will work with complete
-     * protocol messages or message payloads. E.g. when using the SOAP
-     * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body.
-     * @param features  A list of WebServiceFeatures to configure on the 
-     *                proxy.  Supported features not in the <code>features
-     *                </code> parameter will have their default values.
-     *
-     * @return Dispatch instance
-     * @throws WebServiceException If any error in the creation of
-     *                   the <code>Dispatch</code> object or if a 
-     *                  feature is enabled that is not compatible with 
-     *                  this port or is unsupported. 
-     *
-     * @see javax.xml.bind.JAXBContext
-     * @see WebServiceFeature
-     **/
-    public Dispatch<Object> createDispatch(JAXBContext context, Service.Mode mode,
-            WebServiceFeature... features) {
-        return Provider.provider().createDispatch(this, context, mode, features);
-    }    
+    }            
 }
