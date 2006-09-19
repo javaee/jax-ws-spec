@@ -21,10 +21,13 @@ import javax.xml.ws.spi.Provider;
  * Enabling this feature on the client will cause the JAX-WS runtime
  * to include WS-Addressing headers in SOAP messages.
  * <p>
- * If the web service developer has not explicitly enabled this feature
+ * If the web service developer has not explicitly enabled this feature,
  * it may be automatically enabled if the associated WSDL enables
  * WS-Addressing via the <code>wsaw:UsingAddressing</code> element with
  * the <code>required</code> attribute set to <code>true</code>.
+ * <br>
+ * See {@link javax.xml.ws.RespectBindingFeature} for more information 
+ * on required WSDL extensions.
  * <p>
  * The following describes the affects of this feature with respect
  * to be enabled or disabled:
@@ -42,8 +45,8 @@ import javax.xml.ws.spi.Provider;
  *       Addressing headers will not be used.
  * </ul>
  * <p>
- * The {@link #setRequired) method can be used to specify if the
- * <code>required</code> attribute on the 
+ * The {@link #setRequired} method can be used to 
+ * specify if the <code>required</code> attribute on the 
  * <code>wsaw:UsingAddressing</code> element should
  * be <code>true</code> or <code>false</code>.  By default the
  * <code>required</code> parameter is <code>false</code>.
@@ -74,8 +77,16 @@ public class AddressingFeature extends WebServiceFeature {
      */
     protected boolean required = false;
     
+    /**
+     * Create an <code>AddressingFeature</code>.
+     * The instance created will be enabled.
+     */
+    public AddressingFeature() {
+        this.enabled = true;
+    }
+    
     /** 
-     * Create an AddressingFeature
+     * Create an <code>AddressingFeature</code>
      * 
      * @param enabled specifies whether this feature should
      * be enabled or not.
@@ -85,7 +96,7 @@ public class AddressingFeature extends WebServiceFeature {
     }
 
     /** 
-     * Create an AddressingFeature
+     * Create an <code>AddressingFeature</code>
      * 
      * @param enabled specifies whether this feature should
      * be enabled or not.

@@ -81,10 +81,15 @@ public class RespectBindingFeature extends WebServiceFeature {
     
     
     /**
-     * 
+     * Create an <code>RespectBindingFeature</code>.
+     * The instance created will be enabled.
+     */
+    public RespectBindingFeature() {
+        this.enabled = true;
+    }
+
+    /**
      * Create an RespectBindingFeature
-     * 
-     * 
      * 
      * @param enabled specifies whether this feature should
      * be enabled or not.

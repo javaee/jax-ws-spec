@@ -50,14 +50,4 @@ public abstract class WebServiceFeature {
    public boolean isEnabled() {
        return enabled;
    }
-   
-   /**
-    * Enables or disables the feature.  
-    *
-    * @param enabled specifies if the feature is enabled
-    * or not.
-    */
-   public void setEnabled(boolean enabled) {
-       this.enabled = enabled;
-   }
 }
