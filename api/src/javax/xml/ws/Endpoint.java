@@ -9,7 +9,7 @@ import java.lang.UnsupportedOperationException;
 import java.util.List;
 import java.util.Map;
 import javax.xml.ws.spi.Provider;
-import javax.xml.ws.w3caddressing.W3CEndpointReference;
+import javax.xml.ws.wsaddressing.W3CEndpointReference;
 
 /**
  * A Web service endpoint.

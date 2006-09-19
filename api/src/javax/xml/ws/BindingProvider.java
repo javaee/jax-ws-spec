@@ -6,7 +6,7 @@
 package javax.xml.ws;
 
 import java.util.Map;
-import javax.xml.ws.w3caddressing.W3CEndpointReference;
+import javax.xml.ws.wsaddressing.W3CEndpointReference;
 
 /** The <code>BindingProvider</code> interface provides access to the
  *  protocol binding and associated context objects for request and

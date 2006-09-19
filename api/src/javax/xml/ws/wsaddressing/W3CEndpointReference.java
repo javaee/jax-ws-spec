@@ -3,7 +3,7 @@
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
-package javax.xml.ws.w3caddressing;
+package javax.xml.ws.wsaddressing;
 
 
 import java.util.List;

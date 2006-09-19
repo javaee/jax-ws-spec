@@ -7,7 +7,7 @@ package javax.xml.ws;
 
 import java.security.Principal;
 import javax.xml.ws.handler.MessageContext;
-import javax.xml.ws.w3caddressing.W3CEndpointReference;
+import javax.xml.ws.wsaddressing.W3CEndpointReference;
 
 /**
  *  A <code>WebServiceContext</code> makes it possible for
