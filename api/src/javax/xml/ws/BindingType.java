@@ -65,6 +65,7 @@ public @interface BindingType {
       * See the <code>SOAPBinding</code> 
       * for the definition of the standard feature identifiers.
       *
+      * @see javax.xml.ws.RespectBindingFeature
       * @see javax.xml.ws.soap.AddressingFeature
       * @see javax.xml.ws.soap.MTOMFeature
       *

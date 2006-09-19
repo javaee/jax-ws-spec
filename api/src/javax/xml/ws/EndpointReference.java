@@ -111,7 +111,7 @@ public abstract class EndpointReference {
      * SOAP1.2/HTTP MUST be used.
      * <p>
      * Because this port is not created from a Service object, handlers 
-     * will not be used.  Also, the HandlerResolver and Excecutor cannot
+     * will not be used, and the HandlerResolver and Excecutor cannot
      * be get or set for this port.
      *
      *

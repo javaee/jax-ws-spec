@@ -15,6 +15,7 @@ package javax.xml.ws;
  * necessary.  Vendor specific features may not be portable so 
  * caution should be used when using them.
  *
+ * @see javax.xml.ws.RespectBindingFeature
  * @see javax.xml.ws.soap.AddressingFeature
  * @see javax.xml.ws.soap.MTOMFeature
  * 
