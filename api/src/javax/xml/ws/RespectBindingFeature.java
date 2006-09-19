@@ -44,6 +44,8 @@ import javax.xml.ws.spi.Provider;
  *      <li>{@link Service#createDispatch(EndpointReference,
  *           JAXBContext, Service.Mode, WebServiceFeature...)}
  *      <li>{@link EndpointReference#getPort(Class,WebServiceFeature...)}
+ *      <li>One of the <code>getXXXPort(WebServiceFeatures...)</code> methods on a
+ *          generated <code>Service</code>.
  *    </ul>
  *  The runtime must also make sure that binding of 
  *  SEI parameters/return values respect the <code>wsdl:binding</code>.
