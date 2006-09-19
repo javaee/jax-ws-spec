@@ -27,9 +27,6 @@ import java.lang.annotation.RetentionPolicy;
 public @interface Feature {
      /**
       * The unique identifier of feature to enable or disable;
-      * <p>
-      * See the <code>SOAPBinding</code> 
-      * for the definition of the standard feature identifiers.
       *
       * @see javax.xml.ws.soap.AddressingFeature#ID
       * @see javax.xml.ws.soap.MTOMFeature#ID
@@ -39,10 +36,6 @@ public @interface Feature {
 
      /**
       * Specifies if the features is enabled or disabled.  
-      *
-      * <p>
-      * See the <code>SOAPBinding</code> 
-      * for the definition of the standard feature identifiers.
       *
       * @see javax.xml.ws.soap.AddressingFeature
       * @see javax.xml.ws.soap.MTOMFeature
