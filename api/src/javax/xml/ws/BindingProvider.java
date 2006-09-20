@@ -104,10 +104,10 @@ public interface BindingProvider {
      * The returned <code>W3CEndpointReference</code> must contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element if
      * this WSDL is available. It must also contain the 
-     * <code>wsaw:InterfaceName</code>,
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code> for BindingProviders
-     * created from Services that contained that information.
+     * created from Services that contained that information. The
+     * <code>wsaw:InterfaceName</code> may also be present.
      *
      * @return W3CEndpointReference of this instance.
      * @throws java.lang.UnsupportedOperationException If this <code>BindingProvider</code>
@@ -126,10 +126,10 @@ public interface BindingProvider {
      * The returned <code>EndpointReference</code> must contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element
      * if the WSDL is available. It must also contain the 
-     * <code>wsaw:InterfaceName</code>,
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code> for BindingProviders
-     * created from Services that contained that information.
+     * created from Services that contained that information. The
+     * <code>wsaw:InterfaceName</code> may also be present.
      *
      * @return EndpointReference of this instance.  Must be of type
      * <code>clazz</code>.

@@ -26,93 +26,95 @@ import javax.xml.ws.wsaddressing.W3CEndpointReference;
 public interface WebServiceContext {
     
     /**
-     *  Returns the MessageContext for the request being served
-     *  at the time this method is called. Only properties with
-     *  APPLICATION scope will be visible to the application.
+     * Returns the MessageContext for the request being served
+     * at the time this method is called. Only properties with
+     * APPLICATION scope will be visible to the application.
      *
-     *  @return MessageContext The message context.
+     * @return MessageContext The message context.
      *
-     *  @throws IllegalStateException This exception is thrown
-     *          if the method is called while no request is
-     *          being serviced.
+     * @throws IllegalStateException This exception is thrown
+     *         if the method is called while no request is
+     *         being serviced.
      *
-     *  @see javax.xml.ws.handler.MessageContext
-     *  @see javax.xml.ws.handler.MessageContext.Scope
-     *  @see java.lang.IllegalStateException
+     * @see javax.xml.ws.handler.MessageContext
+     * @see javax.xml.ws.handler.MessageContext.Scope
+     * @see java.lang.IllegalStateException
      **/
     public MessageContext getMessageContext();
     
     /**
-     *  Returns the Principal that identifies the sender
-     *  of the request currently being serviced. If the
-     *  sender has not been authenticated, the method
-     *  returns <code>null</code>.
+     * Returns the Principal that identifies the sender
+     * of the request currently being serviced. If the
+     * sender has not been authenticated, the method
+     * returns <code>null</code>.
      *
-     *  @return Principal The principal object.
+     * @return Principal The principal object.
      *
-     *  @throws IllegalStateException This exception is thrown
-     *          if the method is called while no request is
-     *          being serviced.
+     * @throws IllegalStateException This exception is thrown
+     *         if the method is called while no request is
+     *         being serviced.
      *
-     *  @see java.security.Principal
-     *  @see java.lang.IllegalStateException
+     * @see java.security.Principal
+     * @see java.lang.IllegalStateException
      **/
     public Principal getUserPrincipal();
     
     /**
-     *  Returns a boolean indicating whether the
-     *  authenticated user is included in the specified
-     *  logical role. If the user has not been
-     *  authenticated, the method returns </code>false</code>.
+     * Returns a boolean indicating whether the
+     * authenticated user is included in the specified
+     * logical role. If the user has not been
+     * authenticated, the method returns </code>false</code>.
      *
-     *  @param role  A <code>String</code> specifying the name of the role
+     * @param role  A <code>String</code> specifying the name of the role
      *
-     *  @return a <code>boolean</code> indicating whether
-     *  the sender of the request belongs to a given role
+     * @return a <code>boolean</code> indicating whether
+     * the sender of the request belongs to a given role
      *
-     *  @throws IllegalStateException This exception is thrown
-     *          if the method is called while no request is
-     *          being serviced.
+     * @throws IllegalStateException This exception is thrown
+     *         if the method is called while no request is
+     *         being serviced.
      **/
     public boolean isUserInRole(String role);
     
     /**
-     *  Returns the <code>W3CEndpointReference</code> for this
-     *  endpoint.
-     *  <p>
-     *  The returned <code>EndpointReference</code> must contain
-     *  the embedded WSDL in the <code>wsa:Metadata</code> element
-     *  if there is an associated WSDL.
-     *  It must also contain the <code>wsaw:InterfaceName</code>,
-     *  <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
-     *  attribute on the <code>wsaw:ServiceName</code>.
+     * Returns the <code>W3CEndpointReference</code> for this
+     * endpoint.
+     * <p>
+     * The returned <code>EndpointReference</code> must contain
+     * the embedded WSDL in the <code>wsa:Metadata</code> element
+     * if there is an associated WSDL.
+     * It must also contain <code>wsaw:ServiceName</code> 
+     * elements and the <code>wsaw:EndpointName</code>
+     * attribute on the <code>wsaw:ServiceName</code>. The
+     * <code>wsaw:InterfaceName</code> may also be present.
      *
-     *  @return W3CEndpointReference of this instance.
+     * @return W3CEndpointReference of this instance.
      *
-     *  @throws IllegalStateException This exception is thrown
-     *          if the method is called while no request is
-     *          being serviced.
+     * @throws IllegalStateException This exception is thrown
+     *         if the method is called while no request is
+     *         being serviced.
      *
      * @since JAX-WS 2.1
      */
     public W3CEndpointReference getEndpointReference();
 
     /**
-     *  Returns the <code>EndpointReference</code> associated with
-     *  this endpoint.
-     *  <p>
-     *  The returned <code>EndpointReference</code> must contain
-     *  the embedded WSDL in the <code>wsa:Metadata</code> element
-     *  if the endpoint has a WSDL.
-     *  It must also contain the <code>wsaw:InterfaceName</code>,
-     *  <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
-     *  attribute on the <code>wsaw:ServiceName</code>.
+     * Returns the <code>EndpointReference</code> associated with
+     * this endpoint.
+     * <p>
+     * The returned <code>EndpointReference</code> must contain
+     * the embedded WSDL in the <code>wsa:Metadata</code> element
+     * if the endpoint has a WSDL.
+     * It must also contain <code>wsaw:ServiceName</code> 
+     * elements and the <code>wsaw:EndpointName</code>
+     * attribute on the <code>wsaw:ServiceName</code>. The
+     * <code>wsaw:InterfaceName</code> may also be present.
      *
-     *  @return EndpointReference of type <code>clazz</code> of this instance.
+     * @return EndpointReference of type <code>clazz</code> of this instance.
      *
-     *  @throws IllegalStateException This exception is thrown
-     *          if the method is called while no request is
-     *          being serviced.     
+     * @throws IllegalStateException This exception is thrown
+     *         if the method is called while no request is
+     *         being serviced.     
      *
      * @since JAX-WS 2.1
      **/

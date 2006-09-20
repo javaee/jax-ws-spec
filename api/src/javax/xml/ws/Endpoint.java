@@ -286,9 +286,10 @@ public abstract class Endpoint {
      * the embedded WSDL in the <code>wsa:Metadata</code> element if
      * the Endpoint metadata contains a WSDL. See
      * WSDL
-     * It must also contain the <code>wsaw:InterfaceName</code>,
+     * It must also contain the 
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
-     * attribute on the <code>wsaw:ServiceName</code>.
+     * attribute on the <code>wsaw:ServiceName</code>. The
+     * <code>wsaw:InterfaceName</code> may also be present.
      * <br>
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
      * </a>.
@@ -312,9 +313,10 @@ public abstract class Endpoint {
      * The returned <code>EndpointReference</code> must contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element if
      * the Endpoint metadata contains a WSDL.
-     * It must also contain the <code>wsaw:InterfaceName</code>,
+     * It must also contain the 
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
-     * attribute on the <code>wsaw:ServiceName</code>.
+     * attribute on the <code>wsaw:ServiceName</code>. The
+     * <code>wsaw:InterfaceName</code> may also be present.
      * <br>
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
      * </a>.
