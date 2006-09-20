@@ -17,8 +17,6 @@ import java.lang.annotation.RetentionPolicy;
  *  endpoint implementation class. As well as specify
  *  additional features that may be enabled.
  *  <p>
- *  This annotation may be overridden programmatically.
- *  <p>
  *  Here is a sample use of the BindingType annotation that specifies
  *  use of the SOAP1.1/HTTP binding, it enables both the 
  *  AddressingFeature and the MTOMFeature and also sets the 
@@ -31,7 +29,7 @@ import java.lang.annotation.RetentionPolicy;
  *               &#64;Feature(value=MTOMFeature.ID,
  *                   parameters={&#64;FeatureParameter(name=MTOMFeature.THRESHOLD, value="1000")})
  *           })
- *  public interface MyWebService { ... }
+ *  public class MyWebService { ... }
  *  </pre>
  *
  *  @since JAX-WS 2.0

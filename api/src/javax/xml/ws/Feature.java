@@ -15,8 +15,6 @@ import java.lang.annotation.RetentionPolicy;
  *  The <code>Feature</code> annotation is used to
  *  enable/disable a feature to use for a web service
  *  endpoint implementation class. 
- *  <p>
- *  This annotation may be overridden programmatically.
  *
  *  @since JAX-WS 2.1
  *

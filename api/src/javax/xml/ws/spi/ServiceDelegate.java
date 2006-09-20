@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.3.2.9 2006-09-18 20:14:51 kohlert Exp $
+ *$Id: ServiceDelegate.java,v 1.3.2.10 2006-09-20 18:34:11 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -108,11 +108,16 @@ public abstract class ServiceDelegate {
     /** 
      * The getPort method returns a stub.
      * The parameter <code>endpointReference</code> specifies the
-     * endpoint that will be invoked by the returned stub.
+     * endpoint that will be invoked by the returned stub.  If there
+     * are any reference parameters in the 
+     * <code>endpointReference</code>, then those reference
+     * parameters MUST appear as SOAP headers, indicating them to be
+     * reference parameters, on all messages sent to the endpoint.
+     * The <code>endpointReference's</code> address MUST be used
+     * for invocations on the endpoint.
      * The parameter <code>serviceEndpointInterface</code> specifies
      * the service endpoint interface that is supported by the 
      * returned proxy.
-     * <p>
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
@@ -327,7 +332,13 @@ public abstract class ServiceDelegate {
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the users choosing.
+     * the users choosing. If there
+     * are any reference parameters in the 
+     * <code>endpointReference</code>, then those reference
+     * parameters MUST appear as SOAP headers, indicating them to be
+     * reference parameters, on all messages sent to the endpoint.
+     * The <code>endpointReference's</code> address MUST be used
+     * for invocations on the endpoint.
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the dispatch accordingly from
@@ -371,8 +382,8 @@ public abstract class ServiceDelegate {
      * @return Dispatch instance
      * @throws WebServiceException 
      *                  <UL>
-     *                    <li>If there is any missing WSDL metadata
-     *                    as required by this method.
+     *                    <LI>If there is any missing WSDL metadata
+     *                      as required by this method.
      *                    <li>If the <code>wsaw:ServiceName</code> element 
      *                    or the <code>wsaw:EndpointName</code> attribute
      *                    is missing in the metdata of the 
@@ -452,9 +463,15 @@ public abstract class ServiceDelegate {
     public abstract Dispatch<Object> createDispatch(QName portName,
             JAXBContext context, Service.Mode mode, WebServiceFeature... features);    
     
-    /** 
+     /** 
      * Creates a <code>Dispatch</code> instance for use with JAXB
-     * generated objects.
+     * generated objects. If there
+     * are any reference parameters in the 
+     * <code>endpointReference</code>, then those reference
+     * parameters MUST appear as SOAP headers, indicating them to be
+     * reference parameters, on all messages sent to the endpoint.
+     * The <code>endpointReference's</code> address MUST be used
+     * for invocations on the endpoint.
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the dispatch accordingly from

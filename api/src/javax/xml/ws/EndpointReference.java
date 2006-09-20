@@ -76,7 +76,7 @@ public abstract class EndpointReference {
      * @throws WebServiceException 
      *    if an error occurs while creating the 
      *    <code>EndpointReference</code> from the <CODE>eprInfoset</CODE>
-     * @throws NullPointerException 
+     * @throws java.lang.IllegalArgumentException 
      *     if the null <code>eprInfoset</tt> value is given.     
      */
     public static EndpointReference readFrom(Source eprInfoset) {
@@ -89,14 +89,18 @@ public abstract class EndpointReference {
      *   if there is an error writing the
      *   EndpointReference to the specified <code>result</code>.
      *
-     * @throws NullPointerException
+     * @throws java.lang.IllegalArgumentException 
      *      If the null <code>result</tt> value is given.
      */
     public abstract void writeTo(Result result);
     
     
     /** 
-     * The getPort method returns a stub/proxy.
+     * The getPort method returns a stub/proxy. If there
+     * are any reference parameters in the 
+     * <code>endpointReference</code>, then those reference
+     * parameters MUST appear as SOAP headers, indicating them to be
+     * reference parameters, on all messages sent to the endpoint.
      * The parameter  <code>serviceEndpointInterface</code> specifies
      * the service endpoint interface that is supported by the
      * returned proxy.
@@ -107,12 +111,12 @@ public abstract class EndpointReference {
      * binding (and a port) and configuring the proxy accordingly from
      * the WSDL Metadata from this <code>EndpointReference</code> or from
      * annotations on the <code>serviceEndpointInterface</code>.  
-     * If there runtime cannot determine the protocol binding, the default
-     * SOAP1.2/HTTP MUST be used.
      * <p>
      * Because this port is not created from a Service object, handlers 
-     * will not be used, and the HandlerResolver and Excecutor cannot
-     * be get or set for this port.
+     * will not automatically be configured, and the HandlerResolver 
+     * and Executor cannot be get or set for this port. The 
+     * <code>BindingProvider().getBinding().setHandlerChain()</code>
+     * method can be used to manually configure handlers for this port.
      *
      *
      * @param serviceEndpointInterface Service endpoint interface

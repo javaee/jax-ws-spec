@@ -14,8 +14,6 @@ import java.lang.annotation.RetentionPolicy;
 /**
  *  The <code>FeatureParameter</code> annotation is used to
  *  specify paramaters for a feature. 
- *  <p>
- *  This annotation may be overridden programmatically.
  *
  *  @since JAX-WS 2.1
  *

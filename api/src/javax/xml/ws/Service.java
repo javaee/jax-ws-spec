@@ -205,7 +205,13 @@ public class Service {
     /** 
      * The getPort method returns a stub.
      * The parameter <code>endpointReference</code> specifies the
-     * endpoint that will be invoked by the returned stub.
+     * endpoint that will be invoked by the returned stub.  If there
+     * are any reference parameters in the 
+     * <code>endpointReference</code>, then those reference
+     * parameters MUST appear as SOAP headers, indicating them to be
+     * reference parameters, on all messages sent to the endpoint.
+     * The <code>endpointReference's</code> address MUST be used
+     * for invocations on the endpoint.
      * The parameter <code>serviceEndpointInterface</code> specifies
      * the service endpoint interface that is supported by the 
      * returned proxy.
@@ -368,7 +374,13 @@ public class Service {
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the users choosing.
+     * the users choosing. If there
+     * are any reference parameters in the 
+     * <code>endpointReference</code>, then those reference
+     * parameters MUST appear as SOAP headers, indicating them to be
+     * reference parameters, on all messages sent to the endpoint.
+     * The <code>endpointReference's</code> address MUST be used
+     * for invocations on the endpoint.
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the dispatch accordingly from
@@ -500,7 +512,13 @@ public class Service {
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with JAXB
-     * generated objects.
+     * generated objects. If there
+     * are any reference parameters in the 
+     * <code>endpointReference</code>, then those reference
+     * parameters MUST appear as SOAP headers, indicating them to be
+     * reference parameters, on all messages sent to the endpoint.
+     * The <code>endpointReference's</code> address MUST be used
+     * for invocations on the endpoint.
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the dispatch accordingly from

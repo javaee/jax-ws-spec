@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.12 2006-09-18 17:00:04 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.13 2006-09-20 18:34:12 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -177,7 +177,11 @@ public abstract class Provider {
     
     
     /** 
-     * The getPort method returns a stub/proxy.
+     * The getPort method returns a stub/proxy.  If there
+     * are any reference parameters in the 
+     * <code>endpointReference</code>, then those reference
+     * parameters MUST appear as SOAP headers, indicating them to be
+     * reference parameters, on all messages sent to the endpoint. 
      * The parameter  <code>serviceEndpointInterface</code> specifies
      * the service endpoint interface that is supported by the
      * returned proxy.
