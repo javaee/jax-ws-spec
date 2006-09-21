@@ -120,7 +120,7 @@ public abstract class EndpointReference {
      *
      *
      * @param serviceEndpointInterface Service endpoint interface
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  An array of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      * @return Object Proxy instance that supports the

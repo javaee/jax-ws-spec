@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.3.2.11 2006-09-21 01:02:15 kohlert Exp $
+ *$Id: ServiceDelegate.java,v 1.3.2.12 2006-09-21 15:24:38 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -223,7 +223,7 @@ public abstract class ServiceDelegate {
      * The returned proxy should not be reconfigured by the client.
      *
      * @param serviceEndpointInterface Service endpoint interface
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  An array of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      * @return Object instance that supports the
@@ -373,7 +373,7 @@ public abstract class ServiceDelegate {
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
      * when type is SOAPMessage.
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  An array of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *
@@ -504,7 +504,7 @@ public abstract class ServiceDelegate {
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body.
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  An array of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *

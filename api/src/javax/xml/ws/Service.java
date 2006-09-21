@@ -249,7 +249,7 @@ public class Service {
      * for the target service endpoint that will be invoked by the
      * returned proxy.
      * @param serviceEndpointInterface Service endpoint interface.
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  An array of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      * @return Object Proxy instance that supports the
@@ -415,7 +415,7 @@ public class Service {
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
      * when type is SOAPMessage.
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  An array of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *
@@ -551,7 +551,7 @@ public class Service {
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body.
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  An array of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *
