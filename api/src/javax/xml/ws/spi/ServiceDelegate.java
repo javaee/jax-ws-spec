@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.3.2.10 2006-09-20 18:34:11 kohlert Exp $
+ *$Id: ServiceDelegate.java,v 1.3.2.11 2006-09-21 01:02:15 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -34,17 +34,16 @@ public abstract class ServiceDelegate {
     }
     
     /** 
-     * The getPort method returns a stub. A service client
-     * uses this stub to invoke operations on the target
+     * The getPort method returns a proxy. A service client
+     * uses this proxy to invoke operations on the target
      * service endpoint. The <code>serviceEndpointInterface</code>
      * specifies the service endpoint interface that is supported by
-     * the created dynamic proxy or stub instance.
+     * the created dynamic proxy instance.
      *
      * @param portName  Qualified name of the service endpoint in
      *                  the WSDL service description
      * @param serviceEndpointInterface Service endpoint interface
-     *                  supported by the dynamic proxy or stub
-     *                  instance
+     *                  supported by the dynamic proxy
      * @return Object Proxy instance that
      *                supports the specified service endpoint
      *                interface
@@ -55,7 +54,7 @@ public abstract class ServiceDelegate {
      *                      the proxy
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method
-     *                  <LI>Optionally, if an illegal
+     *                  <LI>If an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      or <code>portName</code> is specified
      *                  </UL>
@@ -66,17 +65,16 @@ public abstract class ServiceDelegate {
             Class<T> serviceEndpointInterface);
     
     /** 
-     * The getPort method returns a stub. A service client
-     * uses this stub to invoke operations on the target
+     * The getPort method returns a proxy. A service client
+     * uses this proxy to invoke operations on the target
      * service endpoint. The <code>serviceEndpointInterface</code>
      * specifies the service endpoint interface that is supported by
-     * the created dynamic proxy or stub instance.
+     * the created dynamic proxy instance.
      *
      * @param portName  Qualified name of the service endpoint in
      *                  the WSDL service description
      * @param serviceEndpointInterface Service endpoint interface
-     *                  supported by the dynamic proxy or stub
-     *                  instance
+     *                  supported by the dynamic proxy or instance
      * @param features  A list of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
@@ -90,7 +88,7 @@ public abstract class ServiceDelegate {
      *                      the proxy
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method
-     *                  <LI>Optionally, if an illegal
+     *                  <LI>If an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      or <code>portName</code> is specified
      *                  <LI>If a feature is enabled that is not compatible
@@ -106,9 +104,9 @@ public abstract class ServiceDelegate {
             Class<T> serviceEndpointInterface, WebServiceFeature... features);    
     
     /** 
-     * The getPort method returns a stub.
+     * The getPort method returns a proxy.
      * The parameter <code>endpointReference</code> specifies the
-     * endpoint that will be invoked by the returned stub.  If there
+     * endpoint that will be invoked by the returned proxy.  If there
      * are any reference parameters in the 
      * <code>endpointReference</code>, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
@@ -173,10 +171,10 @@ public abstract class ServiceDelegate {
      *                      <code>endpointReference</code> metadata does not
      *                      match the <code>serviceName</code> of this
      *                      <code>Service</code> instance.
-     *                  <LI>Optionally, if an invalid
+     *                  <LI>If an invalid
      *                      <code>endpointReference</code>
      *                      is specified.
-     *                  <LI>Optionally, if an invalid
+     *                  <LI>If an invalid
      *                      <code>serviceEndpointInterface</code>
      *                      is specified.
      *                  <LI>If a feature is enabled that is not compatible
@@ -190,7 +188,7 @@ public abstract class ServiceDelegate {
 
     
     /** 
-     * The getPort method returns a stub. The parameter
+     * The getPort method returns a proxy. The parameter
      * <code>serviceEndpointInterface</code> specifies the service
      * endpoint interface that is supported by the returned proxy.
      * In the implementation of this method, the JAX-WS
@@ -207,7 +205,7 @@ public abstract class ServiceDelegate {
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method
-     *                  <LI>Optionally, if an illegal
+     *                  <LI>If an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
      *                  </UL>
@@ -216,7 +214,7 @@ public abstract class ServiceDelegate {
 
     
     /**
-     * The getPort method returns a stub. The parameter
+     * The getPort method returns a proxy. The parameter
      * <code>serviceEndpointInterface</code> specifies the service
      * endpoint interface that is supported by the returned proxy.
      * In the implementation of this method, the JAX-WS
@@ -236,7 +234,7 @@ public abstract class ServiceDelegate {
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method
-     *                  <LI>Optionally, if an illegal
+     *                  <LI>If an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
      *                  <LI>If a feature is enabled that is not compatible

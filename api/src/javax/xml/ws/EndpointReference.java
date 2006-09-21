@@ -96,7 +96,7 @@ public abstract class EndpointReference {
     
     
     /** 
-     * The getPort method returns a stub/proxy. If there
+     * The getPort method returns a proxy. If there
      * are any reference parameters in the 
      * <code>endpointReference</code>, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
@@ -105,7 +105,7 @@ public abstract class EndpointReference {
      * the service endpoint interface that is supported by the
      * returned proxy.
      * The parameter <code>endpointReference</code> specifies the
-     * endpoint that will be invoked by the returned stub.
+     * endpoint that will be invoked by the returned proxy.
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
@@ -131,10 +131,10 @@ public abstract class EndpointReference {
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method 
-     *                  <LI>Optionally, if this
+     *                  <LI>If this
      *                      <code>endpointReference</code>
      *                      is invalid
-     *                  <LI>Optionally, if an illegal
+     *                  <LI>If an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
      *                  <LI>If feature is enabled that is not compatible with 

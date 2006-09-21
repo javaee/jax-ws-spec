@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.13 2006-09-20 18:34:12 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.14 2006-09-21 01:02:15 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -177,7 +177,7 @@ public abstract class Provider {
     
     
     /** 
-     * The getPort method returns a stub/proxy.  If there
+     * The getPort method returns a proxy.  If there
      * are any reference parameters in the 
      * <code>endpointReference</code>, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
@@ -186,7 +186,7 @@ public abstract class Provider {
      * the service endpoint interface that is supported by the
      * returned proxy.
      * The parameter <code>endpointReference</code> specifies the
-     * endpoint that will be invoked by the returned stub.
+     * endpoint that will be invoked by the returned proxy.
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
@@ -207,10 +207,10 @@ public abstract class Provider {
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method 
-     *                  <LI>Optionally, if this
+     *                  <LI>If this
      *                      <code>endpointReference</code>
      *                      is illegal
-     *                  <LI>Optionally, if an illegal
+     *                  <LI>If an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
      *                  <LI>If feature is enabled that is not compatible with 
