@@ -98,10 +98,13 @@ public interface BindingProvider {
    
     
     /**
-     * Returns the <code>W3CEndpointReference</code> associated with
+     * Returns the <code>EndpointReference</code> associated with
      * this <code>BindingProvider</code> instance.
      * <p>
-     * The returned <code>W3CEndpointReference</code> must contain
+     * If the Binding for this <code>bindingProvider</code> is
+     * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a 
+     * <code>W3CEndpointReference</code> MUST be returned.
+     * The returned <code>EndpointReference</code> must contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element if
      * this WSDL is available. It must also contain the 
      * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
@@ -109,13 +112,15 @@ public interface BindingProvider {
      * created from Services that contained that information. The
      * <code>wsaw:InterfaceName</code> may also be present.
      *
-     * @return W3CEndpointReference of this instance.
+     * @return EndpointReference of this instance.
      * @throws java.lang.UnsupportedOperationException If this <code>BindingProvider</code>
      * uses the XML/HTTP binding.
      *
+     * @see W3CEndpointReference
+     *
      * @since JAX-WS 2.1
      */
-    public W3CEndpointReference getEndpointReference();
+    public EndpointReference getEndpointReference();
     
     
     /**

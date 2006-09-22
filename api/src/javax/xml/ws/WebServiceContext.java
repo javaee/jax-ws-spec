@@ -77,9 +77,12 @@ public interface WebServiceContext {
     public boolean isUserInRole(String role);
     
     /**
-     * Returns the <code>W3CEndpointReference</code> for this
+     * Returns the <code>WEndpointReference</code> for this
      * endpoint.
      * <p>
+     * If the Binding for this <code>bindingProvider</code> is
+     * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a 
+     * <code>W3CEndpointReference</code> MUST be returned.
      * The returned <code>EndpointReference</code> must contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element
      * if there is an associated WSDL.
@@ -88,15 +91,17 @@ public interface WebServiceContext {
      * attribute on the <code>wsaw:ServiceName</code>. The
      * <code>wsaw:InterfaceName</code> may also be present.
      *
-     * @return W3CEndpointReference of this instance.
+     * @return EndpointReference of this instance.
      *
      * @throws IllegalStateException This exception is thrown
      *         if the method is called while no request is
      *         being serviced.
      *
+     * @see W3CEndpointReference
+     *
      * @since JAX-WS 2.1
      */
-    public W3CEndpointReference getEndpointReference();
+    public EndpointReference getEndpointReference();
 
     /**
      * Returns the <code>EndpointReference</code> associated with
