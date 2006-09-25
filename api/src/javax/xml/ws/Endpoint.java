@@ -282,6 +282,9 @@ public abstract class Endpoint {
      * Returns the <code>EndpointReference</code> associated with
      * this <code>Endpoint</code> instance.
      * <p>
+     * If the Binding for this <code>bindingProvider</code> is
+     * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a
+     * <code>W3CEndpointReference</code> MUST be returned.
      * If the returned <code>EndpointReference</code> is a
      * <code>W3CEndpointReference</code> it MUST contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element
