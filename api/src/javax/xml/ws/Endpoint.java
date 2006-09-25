@@ -282,20 +282,17 @@ public abstract class Endpoint {
      * Returns the <code>EndpointReference</code> associated with
      * this <code>Endpoint</code> instance.
      * <p>
-     * If the Binding for this <code>bindingProvider</code> is
-     * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a 
-     * <code>W3CEndpointReference</code> MUST be returned.
-     * The returned <code>EndpointReference</code> must contain
-     * the embedded WSDL in the <code>wsa:Metadata</code> element if
-     * the Endpoint metadata contains a WSDL. See
-     * WSDL
-     * It must also contain the 
-     * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
+     * If the returned <code>EndpointReference</code> is a
+     * <code>W3CEndpointReference</code> it MUST contain
+     * the embedded WSDL in the <code>wsa:Metadata</code> element
+     * if there is an associated WSDL.
+     * It MUST also contain <code>wsaw:ServiceName</code>
+     * element and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code>. The
-     * <code>wsaw:InterfaceName</code> may also be present.
+     * <code>wsaw:InterfaceName</code> MAY also be present. 
      * <br>
-     * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
-     * </a>.
+     * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
+     * WS-Addressing - WSDL 1.0</a>.
      *
      * @return EndpointReference of this instance.
      * @throws WebServiceException If any error in the creation of
@@ -315,16 +312,17 @@ public abstract class Endpoint {
      * Returns the <code>EndpointReference</code> associated with
      * this <code>Endpoint</code> instance.
      * <p>
-     * The returned <code>EndpointReference</code> must contain
-     * the embedded WSDL in the <code>wsa:Metadata</code> element if
-     * the Endpoint metadata contains a WSDL.
-     * It must also contain the 
-     * <code>wsaw:ServiceName</code> elements and the <code>wsaw:EndpointName</code>
+     * If the returned <code>EndpointReference</code> is a
+     * <code>W3CEndpointReference</code> it MUST contain
+     * the embedded WSDL in the <code>wsa:Metadata</code> element
+     * if there is an associated WSDL.
+     * It MUST also contain <code>wsaw:ServiceName</code>
+     * element and the <code>wsaw:EndpointName</code>
      * attribute on the <code>wsaw:ServiceName</code>. The
-     * <code>wsaw:InterfaceName</code> may also be present.
+     * <code>wsaw:InterfaceName</code> MAY also be present. 
      * <br>
-     * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
-     * </a>.
+     * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
+     * WS-Addressing - WSDL 1.0</a>.
      *
      * @return EndpointReference of type <code>clazz</code> of this instance.
      * @throws WebServiceException If any error in the creation of
