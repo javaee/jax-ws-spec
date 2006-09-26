@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 import javax.xml.ws.spi.Provider;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
+import org.w3c.dom.Element;
+
 
 /**
  * A Web service endpoint.
@@ -297,7 +299,13 @@ public abstract class Endpoint {
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
      * WS-Addressing - WSDL 1.0</a>.
      *
-     * @return EndpointReference of this instance.
+     * @param referenceParameters Reference parameters to be associated with the
+     * returned <code>EndpointReference</code> instance.
+     * @return EndpointReference of this <code>Endpoint</code> instance.
+     * If the returned <code>EndpointReference</code> is of type
+     * <code>W3CEndpointReference</code> then it MUST contain the
+     * the specified <code>referenceParameters</code>.
+
      * @throws WebServiceException If any error in the creation of
      * the <code>EndpointReference</code> or if the <code>Endpoint</code> is 
      * not in the published state.
@@ -308,7 +316,7 @@ public abstract class Endpoint {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract EndpointReference getEndpointReference();
+    public abstract EndpointReference getEndpointReference(Element... referenceParameters);
     
     
     /**
@@ -327,15 +335,24 @@ public abstract class Endpoint {
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
      * WS-Addressing - WSDL 1.0</a>.
      *
-     * @return EndpointReference of type <code>clazz</code> of this instance.
+     * @param referenceParameters Reference parameters to be associated with the
+     * returned <code>EndpointReference</code> instance.
+     * @return EndpointReference of type <code>clazz</code> of this 
+     * <code>Endpoint<code> instance.
+     * If the returned <code>EndpointReference</code> is of type
+     * <code>W3CEndpointReference</code> then it MUST contain the
+     * the specified <code>referenceParameters</code>.
+
      * @throws WebServiceException If any error in the creation of
      * the <code>EndpointReference</code> or if the <code>Endpoint</code> is 
-     * not in the published state or if the <code>clazz</code> is not supported
+     * not in the published state or if the <code>clazz</code> is not a supported
      * <code>EndpointReference</code> type.
      * @throws UnsupportedOperationException If this <code>BindingProvider</code>
      * uses the XML/HTTP binding.
      *
+     *
      * @since JAX-WS 2.1
      **/
-    public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz); 
+    public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
+            Element... referenceParameters); 
 }

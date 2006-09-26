@@ -7,6 +7,7 @@ package javax.xml.ws;
 
 import java.util.Map;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
+import org.w3c.dom.Element;
 
 /** The <code>BindingProvider</code> interface provides access to the
  *  protocol binding and associated context objects for request and
@@ -116,15 +117,23 @@ public interface BindingProvider {
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
      * WS-Addressing - WSDL 1.0</a>.
      *
-     * @return EndpointReference of this instance.
-     * @throws java.lang.UnsupportedOperationException If this <code>BindingProvider</code>
-     * uses the XML/HTTP binding.
+     * @param referenceParameters Reference parameters associated with the
+     * returned <code>EndpointReference</code> instance with the specified
+     * reference parameters.
+     * @return EndpointReference of the target endpoint associated with this
+     * <code>BindingProvider</code> instance.
+     * If the returned <code>EndpointReference</code> is of type
+     * <code>W3CEndpointReference</code> then it MUST contain the
+     * the specified <code>referenceParameters</code>. 
+     *
+     * @throws java.lang.UnsupportedOperationException If this 
+     * <code>BindingProvider</code> uses the XML/HTTP binding.
      *
      * @see W3CEndpointReference
      *
      * @since JAX-WS 2.1
      */
-    public EndpointReference getEndpointReference();
+    public EndpointReference getEndpointReference(Element... referenceParameters);
     
     
     /**
@@ -144,14 +153,24 @@ public interface BindingProvider {
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
      * WS-Addressing - WSDL 1.0</a>.
      *
-     * @return EndpointReference of this instance.  Must be of type
+     * @param clazz Specifies the type of <code>EndpointReference</code>
+     * that MUST be returned.
+     * @param referenceParameters Reference parameters to be associated with the
+     * returned <code>EndpointReference</code> instance.
+     * @return EndpointReference of the target endpoint associated with this
+     * <code>BindingProvider</code> instance. MUST be of type
      * <code>clazz</code>.
+     * If the returned <code>EndpointReference</code> is of type
+     * <code>W3CEndpointReference</code> then it MUST contain the
+     * the specified <code>referenceParameters</code>.
+
      * @throws WebServiceException If the Class <code>clazz</code>
      * is not supported by this implementation.
-     * @throws java.lang.UnsupportedOperationException If this <code>BindingProvider</code>
-     * uses the XML/HTTP binding.
+     * @throws java.lang.UnsupportedOperationException If this 
+     * <code>BindingProvider</code> uses the XML/HTTP binding.
      *
      * @since JAX-WS 2.1
      */
-    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz);  
+    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz, 
+            Element... referenceParameters);  
 }
