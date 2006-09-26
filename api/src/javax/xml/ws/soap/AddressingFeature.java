@@ -15,7 +15,7 @@ import javax.xml.ws.spi.Provider;
  * Enabling this feature on the server will result in the
  * <code>wsaw:UsingAddressing</code> element being added to the 
  * <code>wsdl:Binding</code> for 
- * the endpoint and the runtime being capable of responding to
+ * the endpoint and in the runtime being capable of responding to
  * WS-Addressing headers.
  * <p>
  * Enabling this feature on the client will cause the JAX-WS runtime
