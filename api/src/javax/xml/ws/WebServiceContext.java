@@ -8,6 +8,8 @@ package javax.xml.ws;
 import java.security.Principal;
 import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
+import org.w3c.dom.Element;
+
 
 /**
  *  A <code>WebServiceContext</code> makes it possible for
@@ -95,7 +97,13 @@ public interface WebServiceContext {
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
      * WS-Addressing - WSDL 1.0</a>.
      *
-     * @return EndpointReference of this instance.
+     * @param referenceParameters Reference parameters to be associated with the
+     * returned <code>EndpointReference</code> instance.
+     * @return EndpointReference of the endpoint associated with this
+     * <code>WebServiceContext</code>.   
+     * If the returned <code>EndpointReference</code> is of type
+     * <code>W3CEndpointReference</code> then it MUST contain the
+     * the specified <code>referenceParameters</code>.
      *
      * @throws IllegalStateException This exception is thrown
      *         if the method is called while no request is
@@ -105,7 +113,7 @@ public interface WebServiceContext {
      *
      * @since JAX-WS 2.1
      */
-    public EndpointReference getEndpointReference();
+    public EndpointReference getEndpointReference(Element... referenceParameters);
 
     /**
      * Returns the <code>EndpointReference</code> associated with
@@ -123,13 +131,24 @@ public interface WebServiceContext {
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
      * WS-Addressing - WSDL 1.0</a>.
      *
-     * @return EndpointReference of type <code>clazz</code> of this instance.
+     * @param clazz The type of <code>EndpointReference</code> that
+     * MUST be returned.
+     * @param referenceParameters Reference parameters to be associated with the
+     * returned <code>EndpointReference</code> instance.
+     * @return EndpointReference of type <code>clazz</code> of the endpoint
+     * associated with this <code>WebServiceContext</code> instance.
+     * If the returned <code>EndpointReference</code> is of type
+     * <code>W3CEndpointReference</code> then it MUST contain the
+     * the specified <code>referenceParameters</code>.
      *
      * @throws IllegalStateException This exception is thrown
      *         if the method is called while no request is
      *         being serviced.     
+     * @throws WebServiceException If the <code>clazz</code> type of
+     * <code>EndpointReference</code> is not supported.
      *
      * @since JAX-WS 2.1
      **/
-    public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz);    
+    public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
+            Element... referenceParameters);    
 }
