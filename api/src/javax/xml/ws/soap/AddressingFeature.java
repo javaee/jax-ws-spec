@@ -67,7 +67,7 @@ public class AddressingFeature extends WebServiceFeature {
     public static final String ID = "http://www.w3.org/2005/08/addressing/module";
     
     /** 
-     * Contant ID for the <code>required</code> feature parameter
+     * Constant ID for the <code>required</code> feature parameter
      */
     public static final String IS_REQUIRED = "ADDRESSING_IS_REQUIRED";
             
