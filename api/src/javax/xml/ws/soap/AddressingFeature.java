@@ -10,7 +10,9 @@ import javax.xml.ws.WebServiceException;
 import javax.xml.ws.spi.Provider;
 
 /**
- * This feature represents the use of WS-Addressing.
+ * This feature represents the use of WS-Addressing with either
+ * the SOAP 1.1/HTTP or SOAP 1.2/HTTP binding.  Using this feature
+ * with any other binding is not required.
  * <p>
  * Enabling this feature on the server will result in the
  * <code>wsaw:UsingAddressing</code> element being added to the 
