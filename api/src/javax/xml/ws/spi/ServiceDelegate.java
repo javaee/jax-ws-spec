@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.3.2.12 2006-09-21 15:24:38 kohlert Exp $
+ *$Id: ServiceDelegate.java,v 1.3.2.13 2006-09-28 18:25:39 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -282,7 +282,7 @@ public abstract class ServiceDelegate {
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
+     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
      * when type is SOAPMessage.
      *
      * @return Dispatch instance
@@ -306,7 +306,7 @@ public abstract class ServiceDelegate {
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
+     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
      * when type is SOAPMessage.
      * @param features  A list of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
@@ -371,7 +371,7 @@ public abstract class ServiceDelegate {
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
+     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
      * when type is SOAPMessage.
      * @param features  An array of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features

@@ -319,7 +319,7 @@ public class Service {
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
+     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
      * when type is SOAPMessage.
      *
      * @return Dispatch instance.
@@ -346,7 +346,7 @@ public class Service {
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
+     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
      * when type is SOAPMessage.
      * @param features  A list of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
@@ -413,7 +413,7 @@ public class Service {
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode must be MESSAGE
+     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
      * when type is SOAPMessage.
      * @param features  An array of WebServiceFeatures to configure on the 
      *                proxy.  Supported features not in the <code>features
@@ -683,7 +683,7 @@ public class Service {
     /**
      * Create a <code>Service</code> instance.
      *
-     * The specified WSDL document location and service qualified name must
+     * The specified WSDL document location and service qualified name MUST
      * uniquely identify a <code>wsdl:service</code> element.
      *
      * @param wsdlDocumentLocation URL for the WSDL document location

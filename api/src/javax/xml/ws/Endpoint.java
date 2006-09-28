@@ -135,7 +135,7 @@ public abstract class Endpoint {
      * use the javax.xml.ws.Endpoint#publish(Object) method instead.
      *
      * @param address A URI specifying the address to use. The address
-     *        must be compatible with the binding specified at the
+     *        MUST be compatible with the binding specified at the
      *        time the endpoint was created.
      *
      * @throws java.lang.IllegalArgumentException 
@@ -159,7 +159,7 @@ public abstract class Endpoint {
      * javax.xml.ws.Endpoint#publish(Object) method instead.
      *
      * @param address A URI specifying the address and transport/protocol
-     *        to use. A http: URI must result in the SOAP 1.1/HTTP
+     *        to use. A http: URI MUST result in the SOAP 1.1/HTTP
      *        binding being used. Implementations may support other
      *        URI schemes.
      * @param implementor The endpoint implementor.
@@ -176,7 +176,7 @@ public abstract class Endpoint {
      * A server context encapsulates the server infrastructure
      * and addressing information for a particular transport.
      * For a call to this method to succeed, the server context
-     * passed as an argument to it must be compatible with the
+     * passed as an argument to it MUST be compatible with the
      * endpoint's binding.
      *
      * @param serverContext An object representing a server

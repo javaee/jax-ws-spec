@@ -64,7 +64,7 @@ public final class W3CEndpointReference extends EndpointReference {
      * recommendation.
      *
      * @throws WebServiceException 
-     *   If the source does not contain a valid W3C WS-Addressing
+     *   If the source does NOT contain a valid W3C WS-Addressing
      *   EndpointReference.
      * @throws NullPointerException 
      *   If the <code>null</code> <code>source</code> value is given

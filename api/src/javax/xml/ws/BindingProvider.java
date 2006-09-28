@@ -31,7 +31,7 @@ public interface BindingProvider {
             "javax.xml.ws.security.auth.password";
     
     /** Standard property: Target service endpoint address. The
-     *  URI scheme for the endpoint address specification must
+     *  URI scheme for the endpoint address specification MUST
      *  correspond to the protocol/transport binding for the
      *  binding in use.
      *  <p>Type: java.lang.String

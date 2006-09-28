@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.14 2006-09-21 01:02:15 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.15 2006-09-28 18:25:39 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -97,7 +97,7 @@ public abstract class Provider {
      * @param wsdlDocumentLocation A URL pointing to the WSDL document
      *        for the service, or <code>null</code> if there isn't one.
      * @param serviceName The qualified name of the service.
-     * @param serviceClass The service class, which must be either
+     * @param serviceClass The service class, which MUST be either
      *        <code>javax.xml.ws.Service</code> or a subclass thereof.
      * @return The newly created service delegate.
      */
@@ -114,7 +114,7 @@ public abstract class Provider {
      * @param bindingId A URI specifying the desired binding (e.g. SOAP/HTTP)
      * @param implementor A service implementation object to which
      *        incoming requests will be dispatched. The corresponding
-     *        class must be annotated with all the necessary Web service
+     *        class MUST be annotated with all the necessary Web service
      *        annotations.
      * @return The newly created endpoint.
      */
@@ -131,7 +131,7 @@ public abstract class Provider {
      *        binding
      * @param implementor A service implementation object to which
      *        incoming requests will be dispatched. The corresponding
-     *        class must be annotated with all the necessary Web service
+     *        class MUST be annotated with all the necessary Web service
      *        annotations.
      * @return The newly created endpoint.
      * @throws WebServiceException If any feature is unsupported or incompatible
@@ -147,12 +147,12 @@ public abstract class Provider {
      * address and implementation object.
      *
      * @param address A URI specifying the address and transport/protocol
-     *        to use. A http: URI must result in the SOAP 1.1/HTTP
+     *        to use. A http: URI MUST result in the SOAP 1.1/HTTP
      *        binding being used. Implementations may support other
      *        URI schemes.
      * @param implementor A service implementation object to which
      *        incoming requests will be dispatched. The corresponding
-     *        class must be annotated with all the necessary Web service
+     *        class MUST be annotated with all the necessary Web service
      *        annotations.
      * @return The newly created endpoint.
      */

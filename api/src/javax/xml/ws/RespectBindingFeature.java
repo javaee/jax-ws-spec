@@ -23,7 +23,7 @@ import javax.xml.ws.spi.Provider;
  * The following describes the affects of this feature with respect
  * to be enabled or disabled:
  * <ul>
- *  <li> ENABLED: In this Mode, a JAX-WS runtime must assure that all
+ *  <li> ENABLED: In this Mode, a JAX-WS runtime MUST assure that all
  *  required <code>wsdl:binding</code> extensions are either understood
     and used by the runtime, or explicitly disabled by the web service
  *  application.  A web service application can disable a particular
@@ -47,16 +47,16 @@ import javax.xml.ws.spi.Provider;
  *      <li>One of the <code>getXXXPort(WebServiceFeatures...)</code> methods on a
  *          generated <code>Service</code>.
  *    </ul>
- *  The runtime must also make sure that binding of 
+ *  The runtime MUST also make sure that binding of 
  *  SEI parameters/return values respect the <code>wsdl:binding</code>.
  *  With this feature enabled, if a required 
  *  <code>wsdl:binding</code> extension is in the WSDL and it is not
  *  supported by a JAX-WS runtime and it has not 
  *  been explicitly turned off by the web service developer, then
- *  that JAX-WS runtime must behave appropriately based on whether it is 
+ *  that JAX-WS runtime MUST behave appropriately based on whether it is 
  *  on the client or server:
  *  <UL>
- *    <li>Client: runtime must throw a 
+ *    <li>Client: runtime MUST throw a 
  *  <code>WebServiceException</code> no sooner than one of the method
  *  above is invoked but no later than the first invocation of an endpoint
  *  operation. 

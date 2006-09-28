@@ -71,7 +71,7 @@ public class MTOMFeature extends WebServiceFeature {
      * Creates an <code>MTOMFeature</code>.
      * The instance created will be enabled.
      *
-     * @param threshold the size in bytes that binary data must be before
+     * @param threshold the size in bytes that binary data MUST be before
      * being XOP encoded.
      *
      * @throws WebServiceException if threshold is < 0
@@ -87,7 +87,7 @@ public class MTOMFeature extends WebServiceFeature {
      * Creates an <code>MTOMFeature</code>.
      * 
      * @param enabled specifies if this feature should be enabled or not
-     * @param threshold the size in bytes that binary data must be before
+     * @param threshold the size in bytes that binary data MUST be before
      * being XOP encoded.
      *
      * @throws WebServiceException if threshold is < 0
@@ -120,7 +120,7 @@ public class MTOMFeature extends WebServiceFeature {
      * Set the threshold value used to determine when binary data should be
      * XOP encoded. 
      *
-     * @param threshold the size in bytes that binary data must be before
+     * @param threshold the size in bytes that binary data MUST be before
      * being XOP encoded.
      *
      * @throws WebServiceException if threshold is < 0
