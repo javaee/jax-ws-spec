@@ -26,7 +26,7 @@ import javax.xml.ws.spi.Provider;
  * If the web service developer has not explicitly enabled this feature,
  * it may be automatically enabled if the associated WSDL enables
  * WS-Addressing via the <code>wsaw:UsingAddressing</code> element with
- * the <code>required</code> attribute set to <code>true</code>.
+ * the <code>wsdl:required</code> attribute set to <code>true</code>.
  * <br>
  * See {@link javax.xml.ws.RespectBindingFeature} for more information 
  * on required WSDL extensions.
@@ -51,7 +51,7 @@ import javax.xml.ws.spi.Provider;
  * specify if the <code>required</code> attribute on the 
  * <code>wsaw:UsingAddressing</code> element should
  * be <code>true</code> or <code>false</code>.  By default the
- * <code>required</code> parameter is <code>false</code>.
+ * <code>wsdl:required</code> parameter is <code>false</code>.
  *
  * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">WS-Addressing</a>
  * for more information on WS-Addressing.
@@ -74,7 +74,7 @@ public class AddressingFeature extends WebServiceFeature {
             
     /**
      * Property for <code>required</code> feature parameter. When Addressing is enabled, the value
-     * of this property will be set to the <code>required</code> attribute on 
+     * of this property will be set to the <code>wsdl:required</code> attribute on 
      * wsaw:UsingAddressing element in the WSDL.
      */
     protected boolean required = false;
@@ -103,7 +103,7 @@ public class AddressingFeature extends WebServiceFeature {
      * @param enabled specifies whether this feature should
      * be enabled or not.
      * @param isRequired specifies the value that will be used  
-     * for the <code>required</code> attribute on the
+     * for the <code>wsdl:required</code> attribute on the
      * <code>wsaw:UsingAddressing</code> element.
      */
     public AddressingFeature(boolean enabled, boolean required) {
@@ -120,7 +120,7 @@ public class AddressingFeature extends WebServiceFeature {
     
     /**
      * Gets the boolean value used to set the
-     * <code>required</code> attribute on 
+     * <code>wsdl:required</code> attribute on 
      * <code>wsaw:UsingAddressing</code> element 
      * in the WSDL.
      *
@@ -137,7 +137,7 @@ public class AddressingFeature extends WebServiceFeature {
      * in the WSDL.
      *
      * @param required specifies the value that will be used  
-     * for the <code>required</code> attribute on      
+     * for the <code>wsdl:required</code> attribute on      
      * <code>wsaw:UsingAddressing</code> element
      * in the WSDL.
      */ 
