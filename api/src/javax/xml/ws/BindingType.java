@@ -23,10 +23,10 @@ import java.lang.annotation.RetentionPolicy;
  *  <code>threshold</code> feature parameter on the MTOMFeature.
  * 
  *  <pre>
- *  &#64;BindingType(value=SOAPBinding.SOAP11HTTP_BINDING,
+ *  &#64;BindingType(SOAPBinding.SOAP11HTTP_BINDING,
  *            features={
  *               &#64;Feature(AddressingFeature.ID),
- *               &#64;Feature(value=MTOMFeature.ID,
+ *               &#64;Feature(MTOMFeature.ID,
  *                   parameters={&#64;FeatureParameter(name=MTOMFeature.THRESHOLD, value="1000")})
  *           })
  *  public class MyWebService { ... }
