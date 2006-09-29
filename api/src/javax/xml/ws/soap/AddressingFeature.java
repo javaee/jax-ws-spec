@@ -60,7 +60,7 @@ import javax.xml.ws.spi.Provider;
  *
  * @since JAX-WS 2.1
  */
-public class AddressingFeature extends WebServiceFeature {
+public final class AddressingFeature extends WebServiceFeature {
     /** 
      * Constant value identifying the AddressingFeature
      */

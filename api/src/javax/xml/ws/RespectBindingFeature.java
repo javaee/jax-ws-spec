@@ -74,7 +74,7 @@ import javax.xml.ws.spi.Provider;
  *
  * @since JAX-WS 2.1
  */
-public class RespectBindingFeature extends WebServiceFeature {
+public final class RespectBindingFeature extends WebServiceFeature {
     /**
      * 
      * Constant value identifying the RespectBindingFeature

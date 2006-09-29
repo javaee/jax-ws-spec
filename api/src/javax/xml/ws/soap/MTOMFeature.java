@@ -29,7 +29,7 @@ import javax.xml.ws.spi.Provider;
  *
  * @since JAX-WS 2.1
  */       
-public class MTOMFeature extends WebServiceFeature {
+public final class MTOMFeature extends WebServiceFeature {
     /** 
      * Constant value identifying the MTOMFeature
      */
