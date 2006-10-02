@@ -98,13 +98,13 @@ public abstract class EndpointReference {
     /** 
      * The getPort method returns a proxy. If there
      * are any reference parameters in the 
-     * <code>endpointReference</code>, then those reference
+     * <code>EndpointReference</code> instance, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
      * reference parameters, on all messages sent to the endpoint.
      * The parameter  <code>serviceEndpointInterface</code> specifies
      * the service endpoint interface that is supported by the
      * returned proxy.
-     * The parameter <code>endpointReference</code> specifies the
+     * The <code>EndpointReference</code> instance specifies the
      * endpoint that will be invoked by the returned proxy.
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
