@@ -6,24 +6,24 @@
 package javax.xml.ws.wsaddressing;
 
 
-import java.util.List;
-import java.util.Map;
+import org.w3c.dom.Element;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.XmlAnyAttribute;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.JAXBException;
 import javax.xml.namespace.QName;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
-import javax.xml.ws.*;
-
-import org.w3c.dom.Element;
+import javax.xml.ws.EndpointReference;
+import javax.xml.ws.WebServiceException;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -50,9 +50,7 @@ import org.w3c.dom.Element;
 public final class W3CEndpointReference extends EndpointReference {
     
     private final static JAXBContext w3cjc = getW3CJaxbContext();
-    private Marshaller marshaller;
-    private Unmarshaller unmarshaller;
-    
+
     protected W3CEndpointReference() {
     }
     
@@ -71,9 +69,7 @@ public final class W3CEndpointReference extends EndpointReference {
      */
     public W3CEndpointReference(Source source) {
         try {
-            if (unmarshaller == null)
-                unmarshaller = w3cjc.createUnmarshaller();
-            W3CEndpointReference epr = (W3CEndpointReference)unmarshaller.unmarshal(source);
+            W3CEndpointReference epr = w3cjc.createUnmarshaller().unmarshal(source,W3CEndpointReference.class).getValue();
             this.address = epr.address;
             this.metadata = epr.metadata;
             this.referenceParameters = epr.referenceParameters;
@@ -89,16 +85,15 @@ public final class W3CEndpointReference extends EndpointReference {
      */
     public void writeTo(Result result){
         try {
-            if (marshaller == null)
-                marshaller = w3cjc.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+            Marshaller marshaller = w3cjc.createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, true);
             marshaller.marshal(this, result);
         } catch (JAXBException e) {
             throw new WebServiceException("Error marshalling W3CEndpointReference. ", e);
         }
     }
     
-    private final static JAXBContext getW3CJaxbContext() {
+    private static JAXBContext getW3CJaxbContext() {
         try {
             return JAXBContext.newInstance(W3CEndpointReference.class);
         } catch (JAXBException e) {
