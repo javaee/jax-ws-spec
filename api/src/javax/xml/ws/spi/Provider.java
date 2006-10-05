@@ -1,20 +1,20 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.15 2006-09-28 18:25:39 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.16 2006-10-05 22:44:26 arungupta Exp $
  */
 
 package javax.xml.ws.spi;
 
 //import java.util.List;
-import javax.xml.bind.JAXBContext;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
 import javax.xml.namespace.QName;
-import javax.xml.ws.Dispatch;
 import javax.xml.ws.EndpointReference;
-import javax.xml.ws.Service;
+import javax.xml.transform.Source;
+
+import org.w3c.dom.Element;
 
 /**
  * Service provider for <code>ServiceDelegate</code> and
@@ -24,7 +24,7 @@ import javax.xml.ws.Service;
  * @since JAX-WS 2.0
  */
 public abstract class Provider {
-    
+
   /**
    * A constant representing the property used to lookup the
    * name of a <code>Provider</code> implementation 
@@ -39,14 +39,14 @@ public abstract class Provider {
   **/
   static private final String DEFAULT_JAXWSPROVIDER
         = "com.sun.xml.ws.spi.ProviderImpl";
-  
-  
+
+
     /**
      * Creates a new instance of Provider 
      */
     protected Provider() {
     }
-    
+
     /**
      *
      * Creates a new provider object.
@@ -85,12 +85,12 @@ public abstract class Provider {
         } catch (WebServiceException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new WebServiceException("Unable to create Provider: "+
+            throw new WebServiceException("Unable to createEndpointReference Provider: "+
                                 ex.getMessage());
         }
 
     }
-    
+
     /**
      * Creates a service delegate object.
      * <p>
@@ -104,9 +104,9 @@ public abstract class Provider {
     public abstract ServiceDelegate createServiceDelegate(
                                     java.net.URL wsdlDocumentLocation,
                                     QName serviceName, Class serviceClass);
-    
-        
-    /** 
+
+
+    /**
      *
      * Creates an endpoint object with the provided binding and implementation
      * object.
@@ -118,10 +118,10 @@ public abstract class Provider {
      *        annotations.
      * @return The newly created endpoint.
      */
-    public abstract Endpoint createEndpoint(String bindingId, 
+    public abstract Endpoint createEndpoint(String bindingId,
                                             Object implementor);
 
-    /** 
+    /**
      *
      * Creates an endpoint object with the provided binding, features
      * and implementation object.
@@ -141,7 +141,7 @@ public abstract class Provider {
      */
     public abstract Endpoint createEndpoint(String bindingId, String[] features,
                                             Object implementor);
-    
+
     /**
      * Creates and publishes an endpoint object with the specified
      * address and implementation object.
@@ -157,7 +157,7 @@ public abstract class Provider {
      * @return The newly created endpoint.
      */
     public abstract Endpoint createAndPublishEndpoint(String address,
-						      Object implementor);
+                                                      Object implementor);
     /**
      * read an EndpointReference from the infoset contained in
      * <code>eprInfoset</code>.
@@ -173,10 +173,40 @@ public abstract class Provider {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset);    
-    
-    
-    /** 
+    public abstract EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset);
+
+    /**
+     * Create an EndpointReference for <code>serviceName</code>
+     * service and <code>portName</code> port from the WSDL <code>wsdlDocumentLocation</code>. The instance
+     * returned will be of type <code>clazz</code> and contain the <code>referenceParameters</code>
+     * reference parameters. This method delegates to the vendor specific
+     * implementation of the {@link javax.xml.ws.spi.Provider#createEndpointReference(Class<T>, javax.xml.namespace.QName, javax.xml.namespace.QName, javax.xml.transform.Source, org.w3c.dom.Element...)} method.
+     *
+     * @param clazz Specifies the type of <code>EndpointReference</code> that MUST be returned.
+     * @param serviceName Qualified name of the service in the WSDL.
+     * @param portName Qualified name of the endpoint in the WSDL.
+     * @param wsdlDocumentLocation URL for the WSDL document location for the service.
+     * @param referenceParameters Reference parameters to be associated with the
+     * returned <code>EndpointReference</code> instance.
+     *
+     * @return the EndpointReference created from <code>serviceName</code>, <code>portName</code>,
+     *          <code>wsdlDocumentLocation</code> and <code>referenceParameters</code>. This method
+     *          never returns <code>null</code>.
+     * @throws WebServiceException
+     *         <UL>
+     *             <li>If the <code>serviceName</code> service is not present in the WSDL.
+     *             <li>If the <code>portName</code> port is not present in <code>serviceName</code> service in the WSDL.
+     *             <li>If the <code>wsdlDocumentLocation</code> does not represent a valid WSDL.
+     *             <li>If an error occurs while creating the <code>EndpointReference</code>.
+     *             <li>If the Class <code>clazz</code> is not supported by this implementation.
+     *         </UL>
+     * @throws java.lang.IllegalArgumentException
+     *     if any of the <code>clazz</code>, <code>serviceName</code>, <code>portName</code> and <code>wsdlDocumentLocation</code> is null.
+     */
+    public abstract <T extends EndpointReference> T createEndpointReference(Class<T> clazz, QName serviceName, QName portName, Source wsdlDocumentLocation, Element... referenceParameters);
+
+
+    /**
      * The getPort method returns a proxy.  If there
      * are any reference parameters in the 
      * <code>endpointReference</code>, then those reference
@@ -222,6 +252,6 @@ public abstract class Provider {
      * @since JAX-WS 2.1
      **/
     public abstract <T> T getPort(EndpointReference endpointReference,
-            Class<T> serviceEndpointInterface, 
+            Class<T> serviceEndpointInterface,
             WebServiceFeature... features);
 }

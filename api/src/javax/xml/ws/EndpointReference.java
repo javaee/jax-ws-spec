@@ -5,11 +5,13 @@
 
 package javax.xml.ws;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.ws.spi.Provider;
+import javax.xml.namespace.QName;
+
+import org.w3c.dom.Element;
 
 /**
  * This class represents an WS-Addressing EndpointReference
@@ -35,7 +37,7 @@ import javax.xml.ws.spi.Provider;
  * If JAX-WS implementors need to support different versions
  * of addressing, they should write their own 
  * <code>EndpointReference</code> subclass for that version.
- * This will allow a JAX-WS implementation to create
+ * This will allow a JAX-WS implementation to createEndpointReference
  * vendor specific <code>EndpointReferences</code> that that
  * vendor can use to flag a different version of
  * addressing.
@@ -63,7 +65,7 @@ import javax.xml.ws.spi.Provider;
  */
 @XmlTransient // to treat this class like Object as far as databinding is concerned (proposed JAXB 2.1 feature)
 public abstract class EndpointReference {
-    
+
     /**
      * Factory method to read an EndpointReference from the infoset contained in
      * <code>eprInfoset</code>. This method delegates to the vendor specific
@@ -73,29 +75,61 @@ public abstract class EndpointReference {
      *
      * @return the EndpointReference unmarshalled from <code>eprInfoset</code>
      *    never <code>null</code>
-     * @throws WebServiceException 
-     *    if an error occurs while creating the 
+     * @throws WebServiceException
+     *    if an error occurs while creating the
      *    <code>EndpointReference</code> from the <CODE>eprInfoset</CODE>
-     * @throws java.lang.IllegalArgumentException 
-     *     if the null <code>eprInfoset</tt> value is given.     
+     * @throws java.lang.IllegalArgumentException
+     *     if the null <code>eprInfoset</tt> value is given.
      */
     public static EndpointReference readFrom(Source eprInfoset) {
         return Provider.provider().readEndpointReference(eprInfoset);
     }
-    
+
+    /**
+     * Factory method to createEndpointReference an EndpointReference for <code>serviceName</code>
+     * service and <code>portName</code> port from the WSDL <code>wsdlDocumentLocation</code>. The instance
+     * returned will be of type <code>clazz</code> and contain the <code>referenceParameters</code>
+     * reference parameters. This method delegates to the vendor specific
+     * implementation of the {@link javax.xml.ws.spi.Provider#createEndpointReference(Class<T>, javax.xml.namespace.QName, javax.xml.namespace.QName, javax.xml.transform.Source, org.w3c.dom.Element...)} method.
+     *
+     * @param clazz Specifies the type of <code>EndpointReference</code> that MUST be returned.
+     * @param serviceName Qualified name of the service in the WSDL.
+     * @param portName Qualified name of the endpoint in the WSDL.
+     * @param wsdlDocumentLocation URL for the WSDL document location for the service.
+     * @param referenceParameters Reference parameters to be associated with the
+     * returned <code>EndpointReference</code> instance.
+     *
+     * @return the EndpointReference created from <code>serviceName</code>, <code>portName</code>,
+     *          <code>wsdlDocumentLocation</code> and <code>referenceParameters</code>. This method
+     *          never returns <code>null</code>.
+     * @throws WebServiceException
+     *         <UL>
+     *             <li>If the <code>serviceName</code> service is not present in the WSDL.
+     *             <li>If the <code>portName</code> port is not present in <code>serviceName</code> service in the WSDL.
+     *             <li>If the <code>wsdlDocumentLocation</code> does not represent a valid WSDL.
+     *             <li>If an error occurs while creating the <code>EndpointReference</code>.
+     *             <li>If the Class <code>clazz</code> is not supported by this implementation. 
+     *         </UL>
+     * @throws java.lang.IllegalArgumentException
+     *     if any of the <code>clazz</code>, <code>serviceName</code>, <code>portName</code> and <code>wsdlDocumentLocation</code> is null.
+     */
+    public static <T extends EndpointReference> T create(Class<T> clazz, QName serviceName, QName portName, Source wsdlDocumentLocation, Element... referenceParameters) {
+        return Provider.provider().createEndpointReference(clazz, serviceName, portName, wsdlDocumentLocation, referenceParameters);
+    }
+
     /**
      * write this EndpointReference to the specified infoset format
-     * @throws WebServiceException 
+     * @throws WebServiceException
      *   if there is an error writing the
      *   EndpointReference to the specified <code>result</code>.
      *
-     * @throws java.lang.IllegalArgumentException 
+     * @throws java.lang.IllegalArgumentException
      *      If the null <code>result</tt> value is given.
      */
     public abstract void writeTo(Result result);
-    
-    
-    /** 
+
+
+    /**
      * The getPort method returns a proxy. If there
      * are any reference parameters in the 
      * <code>EndpointReference</code> instance, then those reference
@@ -144,9 +178,9 @@ public abstract class EndpointReference {
      * @see java.lang.reflect.Proxy
      * @see WebServiceFeature
      **/
-    public <T> T getPort(Class<T> serviceEndpointInterface, 
-            WebServiceFeature... features) {
-        return Provider.provider().getPort(this, serviceEndpointInterface, 
-                                            features);
-    }            
+    public <T> T getPort(Class<T> serviceEndpointInterface,
+                         WebServiceFeature... features) {
+        return Provider.provider().getPort(this, serviceEndpointInterface,
+                                           features);
+    }
 }
