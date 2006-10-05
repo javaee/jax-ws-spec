@@ -117,9 +117,8 @@ public interface BindingProvider {
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
      * WS-Addressing - WSDL 1.0</a>.
      *
-     * @param referenceParameters Reference parameters associated with the
-     * returned <code>EndpointReference</code> instance with the specified
-     * reference parameters.
+     * @param referenceParameters Reference parameters to be associated with the
+     * returned <code>EndpointReference</code> instance.
      * @return EndpointReference of the target endpoint associated with this
      * <code>BindingProvider</code> instance.
      * If the returned <code>EndpointReference</code> is of type
