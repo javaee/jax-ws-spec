@@ -8,10 +8,10 @@ package javax.xml.ws;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.ws.spi.Provider;
-import javax.xml.namespace.QName;
-
-import org.w3c.dom.Element;
+import javax.xml.ws.wsaddressing.W3CEndpointReference;
+import java.io.StringWriter;
 
 /**
  * This class represents an WS-Addressing EndpointReference
@@ -150,5 +150,14 @@ public abstract class EndpointReference {
                          WebServiceFeature... features) {
         return Provider.provider().getPort(this, serviceEndpointInterface,
                                            features);
+    }
+
+    /**
+     * Displays EPR infoset for debugging convenience.
+     */
+    public String toString() {
+        StringWriter w = new StringWriter();
+        writeTo(new StreamResult(w));
+        return w.toString();
     }
 }
