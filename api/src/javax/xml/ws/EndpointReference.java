@@ -86,38 +86,6 @@ public abstract class EndpointReference {
     }
 
     /**
-     * Factory method to createEndpointReference an EndpointReference for <code>serviceName</code>
-     * service and <code>portName</code> port from the WSDL <code>wsdlDocumentLocation</code>. The instance
-     * returned will be of type <code>clazz</code> and contain the <code>referenceParameters</code>
-     * reference parameters. This method delegates to the vendor specific
-     * implementation of the {@link javax.xml.ws.spi.Provider#createEndpointReference(Class<T>, javax.xml.namespace.QName, javax.xml.namespace.QName, javax.xml.transform.Source, org.w3c.dom.Element...)} method.
-     *
-     * @param clazz Specifies the type of <code>EndpointReference</code> that MUST be returned.
-     * @param serviceName Qualified name of the service in the WSDL.
-     * @param portName Qualified name of the endpoint in the WSDL.
-     * @param wsdlDocumentLocation URL for the WSDL document location for the service.
-     * @param referenceParameters Reference parameters to be associated with the
-     * returned <code>EndpointReference</code> instance.
-     *
-     * @return the EndpointReference created from <code>serviceName</code>, <code>portName</code>,
-     *          <code>wsdlDocumentLocation</code> and <code>referenceParameters</code>. This method
-     *          never returns <code>null</code>.
-     * @throws WebServiceException
-     *         <UL>
-     *             <li>If the <code>serviceName</code> service is not present in the WSDL.
-     *             <li>If the <code>portName</code> port is not present in <code>serviceName</code> service in the WSDL.
-     *             <li>If the <code>wsdlDocumentLocation</code> does not represent a valid WSDL.
-     *             <li>If an error occurs while creating the <code>EndpointReference</code>.
-     *             <li>If the Class <code>clazz</code> is not supported by this implementation. 
-     *         </UL>
-     * @throws java.lang.IllegalArgumentException
-     *     if any of the <code>clazz</code>, <code>serviceName</code>, <code>portName</code> and <code>wsdlDocumentLocation</code> is null.
-     */
-    public static <T extends EndpointReference> T create(Class<T> clazz, QName serviceName, QName portName, Source wsdlDocumentLocation, Element... referenceParameters) {
-        return Provider.provider().createEndpointReference(clazz, serviceName, portName, wsdlDocumentLocation, referenceParameters);
-    }
-
-    /**
      * write this EndpointReference to the specified infoset format
      * @throws WebServiceException
      *   if there is an error writing the
