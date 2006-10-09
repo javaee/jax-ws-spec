@@ -102,11 +102,6 @@ public interface BindingProvider {
      * Returns the <code>EndpointReference</code> associated with
      * this <code>BindingProvider</code> instance.
      * <p>
-     * If the ENDPOINT_ADDRESS_PROPERTY has been set on the
-     * <code>BindingProvider</code> instance, it MUST be used
-     * as the <code>wsa:Address</code> on the returned 
-     * <code>EndpointReference</code>.
-     * <p>
      * If the Binding for this <code>bindingProvider</code> is
      * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a
      * <code>W3CEndpointReference</code> MUST be returned.
@@ -144,11 +139,6 @@ public interface BindingProvider {
      * Returns the <code>EndpointReference</code> associated with
      * this <code>BindingProvider</code> instance.  The instance
      * returned will be of type <code>clazz</code>.
-     * <p>
-     * If the ENDPOINT_ADDRESS_PROPERTY has been set on the
-     * <code>BindingProvider</code> instance, it MUST be used
-     * as the <code>wsa:Address</code> on the returned 
-     * <code>EndpointReference</code>.
      * <p>
      * If the returned <code>EndpointReference</code> is a
      * <code>W3CEndpointReference</code> it MUST contain
