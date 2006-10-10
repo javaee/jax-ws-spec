@@ -46,6 +46,9 @@ public abstract class WebServiceFeature {
     */    
    protected boolean enabled = false;
    
+   
+   protected WebServiceFeature(){}
+   
 
    /**
     * Returns <code>true</code> if this feature is enabled.

@@ -65,6 +65,10 @@ import java.io.StringWriter;
  */
 @XmlTransient // to treat this class like Object as far as databinding is concerned (proposed JAXB 2.1 feature)
 public abstract class EndpointReference {
+    //
+    //Default constructor to be only called by derived types.
+    //
+    protected EndpointReference(){};
 
     /**
      * Factory method to read an EndpointReference from the infoset contained in
