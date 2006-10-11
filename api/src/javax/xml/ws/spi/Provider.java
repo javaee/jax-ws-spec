@@ -1,18 +1,20 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.16 2006-10-05 22:44:26 arungupta Exp $
+ *$Id: Provider.java,v 1.2.2.17 2006-10-11 17:14:01 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
 
 //import java.util.List;
+import java.util.List;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
 import javax.xml.namespace.QName;
 import javax.xml.ws.EndpointReference;
 import javax.xml.transform.Source;
+import javax.xml.ws.wsaddressing.W3CEndpointReference;
 
 import org.w3c.dom.Element;
 
@@ -20,33 +22,33 @@ import org.w3c.dom.Element;
  * Service provider for <code>ServiceDelegate</code> and
  * <code>Endpoint</code> objects.
  * <p>
- * 
+ *
  * @since JAX-WS 2.0
  */
 public abstract class Provider {
-
-  /**
-   * A constant representing the property used to lookup the
-   * name of a <code>Provider</code> implementation 
-   * class.
-   */
-  static public final String JAXWSPROVIDER_PROPERTY
-        = "javax.xml.ws.spi.Provider";
-
-  /**
-   * A constant representing the name of the default 
-   * <code>Provider</code> implementation class.
-  **/
-  static private final String DEFAULT_JAXWSPROVIDER
-        = "com.sun.xml.ws.spi.ProviderImpl";
-
-
+    
     /**
-     * Creates a new instance of Provider 
+     * A constant representing the property used to lookup the
+     * name of a <code>Provider</code> implementation
+     * class.
+     */
+    static public final String JAXWSPROVIDER_PROPERTY
+            = "javax.xml.ws.spi.Provider";
+    
+    /**
+     * A constant representing the name of the default
+     * <code>Provider</code> implementation class.
+     **/
+    static private final String DEFAULT_JAXWSPROVIDER
+            = "com.sun.xml.ws.spi.ProviderImpl";
+    
+    
+    /**
+     * Creates a new instance of Provider
      */
     protected Provider() {
     }
-
+    
     /**
      *
      * Creates a new provider object.
@@ -81,16 +83,16 @@ public abstract class Provider {
         try {
             return (Provider)
             FactoryFinder.find(JAXWSPROVIDER_PROPERTY,
-                               DEFAULT_JAXWSPROVIDER);
+                    DEFAULT_JAXWSPROVIDER);
         } catch (WebServiceException ex) {
             throw ex;
         } catch (Exception ex) {
             throw new WebServiceException("Unable to createEndpointReference Provider: "+
-                                ex.getMessage());
+                    ex.getMessage());
         }
-
+        
     }
-
+    
     /**
      * Creates a service delegate object.
      * <p>
@@ -102,10 +104,10 @@ public abstract class Provider {
      * @return The newly created service delegate.
      */
     public abstract ServiceDelegate createServiceDelegate(
-                                    java.net.URL wsdlDocumentLocation,
-                                    QName serviceName, Class serviceClass);
-
-
+            java.net.URL wsdlDocumentLocation,
+            QName serviceName, Class serviceClass);
+    
+    
     /**
      *
      * Creates an endpoint object with the provided binding and implementation
@@ -119,29 +121,9 @@ public abstract class Provider {
      * @return The newly created endpoint.
      */
     public abstract Endpoint createEndpoint(String bindingId,
-                                            Object implementor);
-
-    /**
-     *
-     * Creates an endpoint object with the provided binding, features
-     * and implementation object.
-     *
-     * @param bindingId A URI specifying the desired binding (e.g. SOAP/HTTP)
-     * @param featuures An array of Features to enable for the specified
-     *        binding
-     * @param implementor A service implementation object to which
-     *        incoming requests will be dispatched. The corresponding
-     *        class MUST be annotated with all the necessary Web service
-     *        annotations.
-     * @return The newly created endpoint.
-     * @throws WebServiceException If any feature is unsupported or incompatible
-     * with the specified bindingId
-     *
-     * @since JAX-WS 2.1
-     */
-    public abstract Endpoint createEndpoint(String bindingId, String[] features,
-                                            Object implementor);
-
+            Object implementor);
+    
+    
     /**
      * Creates and publishes an endpoint object with the specified
      * address and implementation object.
@@ -157,24 +139,24 @@ public abstract class Provider {
      * @return The newly created endpoint.
      */
     public abstract Endpoint createAndPublishEndpoint(String address,
-                                                      Object implementor);
+            Object implementor);
     /**
      * read an EndpointReference from the infoset contained in
      * <code>eprInfoset</code>.
-     * 
+     *
      * @returns the <code>EndpointReference</code> unmarshalled from
      * <code>eprInfoset</code>.  This method never returns <code>null</code>.
-     * 
+     *
      * @throws WebServiceException If there is an error creating the
      * <code>EndpointReference</code> from the specified <code>eprInfoset</code>.
-     * 
-     * @throws NullPointerException If the <code>null</code> 
+     *
+     * @throws NullPointerException If the <code>null</code>
      * <code>eprInfoset</code> value is given.
      *
      * @since JAX-WS 2.1
      **/
     public abstract EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset);
-
+    
     /**
      * Create an EndpointReference for <code>serviceName</code>
      * service and <code>portName</code> port from the WSDL <code>wsdlDocumentLocation</code>. The instance
@@ -204,14 +186,14 @@ public abstract class Provider {
      *     if any of the <code>clazz</code>, <code>serviceName</code>, <code>portName</code> and <code>wsdlDocumentLocation</code> is null.
      */
     public abstract <T extends EndpointReference> T createEndpointReference(Class<T> clazz, QName serviceName, QName portName, Source wsdlDocumentLocation, Element... referenceParameters);
-
-
+    
+    
     /**
      * The getPort method returns a proxy.  If there
-     * are any reference parameters in the 
+     * are any reference parameters in the
      * <code>endpointReference</code>, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
-     * reference parameters, on all messages sent to the endpoint. 
+     * reference parameters, on all messages sent to the endpoint.
      * The parameter  <code>serviceEndpointInterface</code> specifies
      * the service endpoint interface that is supported by the
      * returned proxy.
@@ -226,7 +208,7 @@ public abstract class Provider {
      * @param endpointReference the EndpointReference that will
      * be invoked by the returned proxy.
      * @param serviceEndpointInterface Service endpoint interface
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  A list of WebServiceFeatures to configure on the
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      * @return Object Proxy instance that supports the
@@ -236,14 +218,14 @@ public abstract class Provider {
      *                  <LI>If there is an error during creation
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
-     *                      as required by this method 
+     *                      as required by this method
      *                  <LI>If this
      *                      <code>endpointReference</code>
      *                      is illegal
      *                  <LI>If an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
-     *                  <LI>If feature is enabled that is not compatible with 
+     *                  <LI>If feature is enabled that is not compatible with
      *                      this port or is unsupported.
      *                   </UL>
      *
@@ -253,5 +235,5 @@ public abstract class Provider {
      **/
     public abstract <T> T getPort(EndpointReference endpointReference,
             Class<T> serviceEndpointInterface,
-            WebServiceFeature... features);
+            WebServiceFeature... features);    
 }
