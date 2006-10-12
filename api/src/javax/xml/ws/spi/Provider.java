@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.17 2006-10-11 17:14:01 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.18 2006-10-12 19:25:02 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -235,5 +235,59 @@ public abstract class Provider {
      **/
     public abstract <T> T getPort(EndpointReference endpointReference,
             Class<T> serviceEndpointInterface,
-            WebServiceFeature... features);    
+            WebServiceFeature... features);  
+    
+    /**
+     * Factory method to createEndpointReference an EndpointReference for 
+     * <code>serviceName</code> service and <code>portName</code> port 
+     * from the WSDL <code>wsdlDocumentLocation</code>. The instance
+     * returned will be of type <code>clazz</code> and contain the 
+     * <code>referenceParameters</code> reference parameters. This method 
+     * delegates to the vendor specific implementation of the 
+     * {@link javax.xml.ws.spi.Provider#createEndpointReference(Class<T>, 
+     * javax.xml.namespace.QName, javax.xml.namespace.QName, 
+     * javax.xml.transform.Source, org.w3c.dom.Element...)} method.
+     *
+     * @param address Specifies the address of the target endpoint
+     * @param serviceName Qualified name of the service in the WSDL.
+     * @param portName Qualified name of the endpoint in the WSDL.
+     * @param metadata A list of elements that should be added to the 
+     * <code>W3CEndpointReference</code> instances <code>wsa:metadata</code> 
+     * element.
+     * @param wsdlDocumentLocation URL for the WSDL document location for 
+     * the service.  If this is <code>null</code>, then a WSDL must be 
+     * associated with the Service on the client to be usable by a JAX-WS 
+     * client application and the <code>serviceName</code>
+     * and <code>portName</code> MUST match a service and port in either 
+     * this WSDL or the WSDL on the JAX-WS client.
+     * @param referenceParameters Reference parameters to be associated 
+     * with the returned <code>EndpointReference</code> instance.
+     *
+     * @return the <code>W3CEndpointReference<code> created from 
+     *          <code>serviceName</code>, <code>portName</code>,
+     *          <code>metadata</code>, <code>wsdlDocumentLocation</code> 
+     *          and <code>referenceParameters</code>. This method
+     *          never returns <code>null</code>.
+     * @throws WebServiceException
+     *         <UL>
+     *             <li>If the <code>serviceName</code> service is 
+     *                <code>null</code> and the <code>portName> is NOT 
+     *                <code>null</code>.
+     *             <li>If the NOT <code>null</code> <code>serviceName</code>
+     *                is not present in the specified WSDL.
+     *             <li>If the <code>portName</code> port is NOT 
+     *                <code>null</code> and it is not present in 
+     *                <code>serviceName</code> service in the WSDL.
+     *             <li>If the <code>wsdlDocumentLocation</code> is NOT 
+     *                <code>null</code> and does not represent a valid WSDL.
+     *             <li>If an error occurs while creating the 
+     *                <code>W3CEndpointReference</code>.
+     *         </UL>
+     * @throws java.lang.IllegalArgumentException
+     *     If the <code>address</code> is <code>null</code>.
+     *
+     * @since JAX-WS 2.1
+     */
+    public abstract W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
+            List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters);    
 }

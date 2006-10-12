@@ -86,12 +86,12 @@ public interface WebServiceContext {
      * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a
      * <code>W3CEndpointReference</code> MUST be returned.
      * If the returned <code>EndpointReference</code> is a
-     * <code>W3CEndpointReference</code> it MUST contain
+     * <code>W3CEndpointReference</code> it MUST contain 
+     * the <code>wsaw:ServiceName</code> element and the 
+     * <code>wsaw:EndpointName</code> attribute on the 
+     * <code>wsaw:ServiceName</code>. It SHOULD contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element
-     * if there is an associated WSDL.
-     * It MUST also contain <code>wsaw:ServiceName</code>
-     * element and the <code>wsaw:EndpointName</code>
-     * attribute on the <code>wsaw:ServiceName</code>. The
+     * if there is an associated WSDL. The
      * <code>wsaw:InterfaceName</code> MAY also be present. 
      * <br>
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
@@ -120,12 +120,12 @@ public interface WebServiceContext {
      * this endpoint.
      * <p>
      * If the returned <code>EndpointReference</code> is a
-     * <code>W3CEndpointReference</code> it MUST contain
+     * <code>W3CEndpointReference</code> it MUST contain 
+     * the <code>wsaw:ServiceName</code> element and the 
+     * <code>wsaw:EndpointName</code> attribute on the 
+     * <code>wsaw:ServiceName</code>. It SHOULD contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element
-     * if there is an associated WSDL.
-     * It MUST also contain <code>wsaw:ServiceName</code>
-     * element and the <code>wsaw:EndpointName</code>
-     * attribute on the <code>wsaw:ServiceName</code>. The
+     * if there is an associated WSDL. The
      * <code>wsaw:InterfaceName</code> MAY also be present. 
      * <br>
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">

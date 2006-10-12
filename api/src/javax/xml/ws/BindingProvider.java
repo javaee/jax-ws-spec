@@ -106,24 +106,19 @@ public interface BindingProvider {
      * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a
      * <code>W3CEndpointReference</code> MUST be returned.
      * If the returned <code>EndpointReference</code> is a
-     * <code>W3CEndpointReference</code> it MUST contain
+     * <code>W3CEndpointReference</code> it MUST contain 
+     * the <code>wsaw:ServiceName</code> element and the 
+     * <code>wsaw:EndpointName</code> attribute on the 
+     * <code>wsaw:ServiceName</code>. It SHOULD contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element
-     * if there is an associated WSDL.
-     * It MUST also contain <code>wsaw:ServiceName</code>
-     * element and the <code>wsaw:EndpointName</code>
-     * attribute on the <code>wsaw:ServiceName</code>. The
+     * if there is an associated WSDL. The
      * <code>wsaw:InterfaceName</code> MAY also be present. 
      * <br>
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
      * WS-Addressing - WSDL 1.0</a>.
      *
-     * @param referenceParameters Reference parameters to be associated with the
-     * returned <code>EndpointReference</code> instance.
      * @return EndpointReference of the target endpoint associated with this
      * <code>BindingProvider</code> instance.
-     * If the returned <code>EndpointReference</code> is of type
-     * <code>W3CEndpointReference</code> then it MUST contain the
-     * the specified <code>referenceParameters</code>. 
      *
      * @throws java.lang.UnsupportedOperationException If this 
      * <code>BindingProvider</code> uses the XML/HTTP binding.
@@ -132,7 +127,7 @@ public interface BindingProvider {
      *
      * @since JAX-WS 2.1
      */
-    public EndpointReference getEndpointReference(Element... referenceParameters);
+    public EndpointReference getEndpointReference();
     
     
     /**
@@ -141,12 +136,12 @@ public interface BindingProvider {
      * returned will be of type <code>clazz</code>.
      * <p>
      * If the returned <code>EndpointReference</code> is a
-     * <code>W3CEndpointReference</code> it MUST contain
+     * <code>W3CEndpointReference</code> it MUST contain 
+     * the <code>wsaw:ServiceName</code> element and the 
+     * <code>wsaw:EndpointName</code> attribute on the 
+     * <code>wsaw:ServiceName</code>. It SHOULD contain
      * the embedded WSDL in the <code>wsa:Metadata</code> element
-     * if there is an associated WSDL.
-     * It MUST also contain <code>wsaw:ServiceName</code>
-     * element and the <code>wsaw:EndpointName</code>
-     * attribute on the <code>wsaw:ServiceName</code>. The
+     * if there is an associated WSDL. The
      * <code>wsaw:InterfaceName</code> MAY also be present. 
      * <br>
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
@@ -154,14 +149,10 @@ public interface BindingProvider {
      *
      * @param clazz Specifies the type of <code>EndpointReference</code>
      * that MUST be returned.
-     * @param referenceParameters Reference parameters to be associated with the
-     * returned <code>EndpointReference</code> instance.
+
      * @return EndpointReference of the target endpoint associated with this
      * <code>BindingProvider</code> instance. MUST be of type
      * <code>clazz</code>.
-     * If the returned <code>EndpointReference</code> is of type
-     * <code>W3CEndpointReference</code> then it MUST contain the
-     * the specified <code>referenceParameters</code>.
 
      * @throws WebServiceException If the Class <code>clazz</code>
      * is not supported by this implementation.
@@ -170,6 +161,5 @@ public interface BindingProvider {
      *
      * @since JAX-WS 2.1
      */
-    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz, 
-            Element... referenceParameters);  
+    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz);  
 }

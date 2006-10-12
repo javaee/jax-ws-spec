@@ -24,7 +24,7 @@ import javax.xml.ws.spi.Provider;
  *  <li> DISABLED: In this Mode, MTOM will be disabled
  * </ul>
  * <p>
- * The {@link #setThreshold} method can be used to set the threshold 
+ * The {@link #threshold} property can be used to set the threshold 
  * value used to determine when binary data should be XOP encoded.
  *
  * @since JAX-WS 2.1
@@ -34,11 +34,12 @@ public final class MTOMFeature extends WebServiceFeature {
      * Constant value identifying the MTOMFeature
      */
     public static final String ID = "http://www.w3.org/2004/08/soap/features/http-optimization";
-    
-    /**
-     * Constant ID for the THRESHOLD Feature parameter
-     */
-    public static final String THRESHOLD = "MTOM_THRESHOLD";
+  
+// todo remove this    
+//    /**
+//     * Constant ID for the THRESHOLD Feature parameter
+//     */
+//    public static final String THRESHOLD = "MTOM_THRESHOLD";
     
     
     /**
@@ -115,19 +116,20 @@ public final class MTOMFeature extends WebServiceFeature {
     public int getThreshold() {
         return threshold;
     }
-    
-    /**
-     * Set the threshold value used to determine when binary data should be
-     * XOP encoded. 
-     *
-     * @param threshold the size in bytes that binary data MUST be before
-     * being XOP encoded.
-     *
-     * @throws WebServiceException if threshold is < 0
-     */ 
-    public void setThreshold(int threshold) {
-        if (threshold < 0)
-            throw new WebServiceException("MTOMFeature.threshold must be >= 0, actual value: "+threshold);        
-        this.threshold = threshold;
-    }
+  
+// todo remove this    
+//    /**
+//     * Set the threshold value used to determine when binary data should be
+//     * XOP encoded. 
+//     *
+//     * @param threshold the size in bytes that binary data MUST be before
+//     * being XOP encoded.
+//     *
+//     * @throws WebServiceException if threshold is < 0
+//     */ 
+//    public void setThreshold(int threshold) {
+//        if (threshold < 0)
+//            throw new WebServiceException("MTOMFeature.threshold must be >= 0, actual value: "+threshold);        
+//        this.threshold = threshold;
+//    }
 }

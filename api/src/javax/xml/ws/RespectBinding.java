@@ -4,10 +4,12 @@
  */
 
 package javax.xml.ws;
-
-import javax.xml.ws.WebServiceFeature;
-import javax.xml.ws.WebServiceException;
-import javax.xml.ws.spi.Provider;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Target;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 
 /**
  * This feature clarifies the use of the <code>wsdl:binding</code>
@@ -25,7 +27,7 @@ import javax.xml.ws.spi.Provider;
  * <ul>
  *  <li> ENABLED: In this Mode, a JAX-WS runtime MUST assure that all
  *  required <code>wsdl:binding</code> extensions are either understood
-    and used by the runtime, or explicitly disabled by the web service
+ * and used by the runtime, or explicitly disabled by the web service
  *  application.  A web service application can disable a particular
  *  extension that has a know <code>WebServiceFeature</code> using
  *  either the {@link BindingType#features} element on the server
@@ -34,10 +36,10 @@ import javax.xml.ws.spi.Provider;
  *      <li>{@link Service#getPort(QName,Class,WebServiceFeature...)}
  *      <li>{@link Service#getPort(Class,WebServiceFeature...)}
  *      <li>{@link Service#getPort(EndpointReference,Class,WebServiceFeature...)}
- *      <li>{@link Service#createDispatch(QName,Class, 
+ *      <li>{@link Service#createDispatch(QName,Class,
  *           Service.Mode mode,WebServiceFeature...)}
  *      <li>{@link Service#createDispatch(EndpointReference,
- *           Class,Service.Mode, 
+ *           Class,Service.Mode,
  *           WebServiceFeature...)}
  *      <li>{@link Service#createDispatch(QName,
  *           JAXBContext, Service.Mode, WebServiceFeature...)}
@@ -47,63 +49,40 @@ import javax.xml.ws.spi.Provider;
  *      <li>One of the <code>getXXXPort(WebServiceFeatures...)</code> methods on a
  *          generated <code>Service</code>.
  *    </ul>
- *  The runtime MUST also make sure that binding of 
+ *  The runtime MUST also make sure that binding of
  *  SEI parameters/return values respect the <code>wsdl:binding</code>.
- *  With this feature enabled, if a required 
+ *  With this feature enabled, if a required
  *  <code>wsdl:binding</code> extension is in the WSDL and it is not
- *  supported by a JAX-WS runtime and it has not 
+ *  supported by a JAX-WS runtime and it has not
  *  been explicitly turned off by the web service developer, then
- *  that JAX-WS runtime MUST behave appropriately based on whether it is 
+ *  that JAX-WS runtime MUST behave appropriately based on whether it is
  *  on the client or server:
  *  <UL>
- *    <li>Client: runtime MUST throw a 
+ *    <li>Client: runtime MUST throw a
  *  <code>WebServiceException</code> no sooner than when one of the methods
  *  above is invoked but no later than the first invocation of an endpoint
- *  operation. 
+ *  operation.
  *    <li>throw a WebServiceException and the endpoint MUST fail to deploy
  *  </ul>
  *  <li> DISABLED: In this Mode, an implementation may choose whether
  *  to inspect the <code>wsdl:binding<code> or not and to what degree
  *  the <code>wsdl:binding</code> will be inspected.  For example,
  *  one implementation may choose to behave as if this feature is enabled,
- *  another implementation may only choose to verify the SEI's 
+ *  another implementation may only choose to verify the SEI's
  *  parameter/return type bindings.
  * </ul>
  *
- * @see javax.xml.ws.soap.AddressingFeature
+ * @see javax.xml.ws.RespectBindingFeature
  *
  * @since JAX-WS 2.1
  */
-public final class RespectBindingFeature extends WebServiceFeature {
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@WebServiceFeatureAnnotation(id=RespectBindingFeature.ID,bean=RespectBindingFeature.class)
+public @interface RespectBinding {
     /**
-     * 
-     * Constant value identifying the RespectBindingFeature
+     * Specifies if this feature is enabled or disabled.
      */
-    public static final String ID = "javax.xml.ws.InspectBindingFeature";
-    
-    
-    /**
-     * Create an <code>RespectBindingFeature</code>.
-     * The instance created will be enabled.
-     */
-    public RespectBindingFeature() {
-        this.enabled = true;
-    }
-
-    /**
-     * Create an RespectBindingFeature
-     * 
-     * @param enabled specifies whether this feature should
-     * be enabled or not.
-     */
-    public RespectBindingFeature(boolean enabled) {
-        this.enabled = enabled;
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
-    public String getID() {
-        return ID;
-    }
+    boolean enabled() default true;
 }
