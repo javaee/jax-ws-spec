@@ -17,118 +17,114 @@ import javax.xml.ws.spi.Provider;
 
 /**
  * This class is used to build <code>W3CEndpointReference</code>
- * instances. The intended use of this clss is for one
- * web service hosted on a given service provider(container)
- * to create an <code>W3CEndpointReference</code> for a 
- * different web service co-hosted by the same service
- * provider.
+ * instances. The intended use of this clsss is for
+ * an application component, for
+ * example a factory component,
+ * to create an <code>W3CEndpointReference</code> for a
+ * web service endpoint co-hosted in the same 
+ * Java EE application.
  *
  * @since JAX-WS 2.1
  */
 public final class W3CEndpointReferenceBuilder {
-
+    
     public W3CEndpointReferenceBuilder() {
         referenceParameters = new ArrayList<Element>();
         metadata = new ArrayList<Element>();
     }
     
     /**
-     * Sets the <code>address</code> to the 
+     * Sets the <code>address</code> to the
      * <code>W3CEndpointReference</code> instance's
      * <code>wsa:Address</code>.
+     * <p>
+     * The <code>address</code> SHOULD be set to a non-<code>null</code>
+     * value when building a <code>W3CEndpointReference</code> for a 
+     * web service endpoint that is not co-hosted within the same
+     * Java EE application.
      *
      * @param address The address of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference<code>.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>address</code> set to the <code>wsa:Address</code>.
-     *
-     * @throws java.lang.IllegalArgumentException if <code>address</code>
-     * is <code>null</code>.
      */
     public W3CEndpointReferenceBuilder address(String adddress) {
-        if (address == null)
-            throw new java.lang.IllegalArgumentException("The address cannot be null.");
         this.address = address;
         return this;
     }
     
     /**
-     * Sets the <code>serviceName</code> as the 
+     * Sets the <code>serviceName</code> as the
      * <code>wsaw:ServiceName</code> element in the
      * <code>wsa:Metadata</code> element.
      *
      * @param serviceName The service name of the endpoint to be targeted
-     *      by the returned <code>W3CEndpointReference<code>.
+     *      by the returned <code>W3CEndpointReference<code>.  This property
+     *      may also be used with the <code>endpointName</code> (portName) 
+     *      property to lookup the <code>address</code> of a web service 
+     *      endpoint co-hosted within the same Java EE application.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>serviceName</code> element added to the
      *  <code>wsa:Metadata</code> element.
      *
-     * @throws java.lang.IllegalArgumentException if <code>serviceName</code>
-     * is <code>null</code>.
      */
     public W3CEndpointReferenceBuilder serviceName(QName serviceName) {
-        if (serviceName == null)
-            throw new java.lang.IllegalArgumentException("The serviceName cannot be null.");
         this.serviceName = serviceName;
         return this;
-    }    
+    }
     
     /**
-     * Sets the <code>endpointName</code> as and attribute on 
+     * Sets the <code>endpointName</code> as and attribute on
      * <code>wsaw:ServiceName</code> element in the
      * <code>wsa:Metadata</code> element. This method can only
      * be called after the {@link #serviceName} method has been called.
      *
      * @param endpointName The name of the endpoint to be targeted
-     *      by the returned <code>W3CEndpointReference<code>.
+     *      by the returned <code>W3CEndpointReference<code>. The 
+     *      <code>endpointName</code> (portName) property may also be
+     *      used with the <code>serviceName</code> property to lookup 
+     *      the <code>address</code> of a web service 
+     *      endpoint co-hosted within the same Java EE application.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>endpointName</code> atrribute added to the
-     *  <code>wsaw:ServiceName</code> element in the 
+     *  <code>wsaw:ServiceName</code> element in the
      *  <code>wsa:Metadata</code> element.
      *
-     * @throws WebServiceException If the <code>serviceName</code> has not
+     * @throws javax.lang.IllegalStateException If the <code>serviceName</code> has not
      *  been set.
-     * @throws java.lang.IllegalArgumentException If <code>endpointName</code>
-     * is <code>null</code>.
      */
     public W3CEndpointReferenceBuilder endpointName(QName endpointName) {
         if (serviceName == null) {
-            throw new WebServiceException("The W3CEndpointReferenceBuilder's serviceName must be set before setting the endpointName: "+endpointName);
+            throw new IllegalStateException("The W3CEndpointReferenceBuilder's serviceName must be set before setting the endpointName: "+endpointName);
         }
-        if (endpointName == null)
-            throw new java.lang.IllegalArgumentException("The endpointName cannot be null.");
         
         this.endpointName = endpointName;
         return this;
-    }    
+    }
     
-     /**
+    /**
      * Sets the <code>wsdlDocumentLocation</code> that will be inlined
-     * inlined in the <code>W3CEndpointReferenc</code> instance's
+     * in the <code>W3CEndpointReferenc</code> instance's
      * <code>wsa:Metadata</code>.
      *
-     * @param wsdlDocumentLocation The location of the WSDL document to 
+     * @param wsdlDocumentLocation The location of the WSDL document to
      *      be inlined in the <code>wsa:Metadata</code> of the
-      *     <code>W3CEndpointReference<code>.
+     *     <code>W3CEndpointReference<code>.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>wsdlDocumentLocation</code> that is to be inlined.
      *
-     * @throws java.lang.IllegalArgumentException if <code>wsdlDocumentLocation</code>
-     * is <code>null</code>.
      */
     public W3CEndpointReferenceBuilder wsdlDocumentLocation(String wsdlDocumentLocation) {
-        if (wsdlDocumentLocation == null)
-            throw new java.lang.IllegalArgumentException("The wsdlDocumentLocation cannot be null.");
         this.wsdlDocumentLocation = wsdlDocumentLocation;
         return this;
-    } 
+    }
     
     /**
-     * Adds the <code>referenceParameter</code> to the 
+     * Adds the <code>referenceParameter</code> to the
      * <code>W3CEndpointReference</code> instance
      * <code>wsa:ReferenceParameters</code> element.
      *
@@ -136,7 +132,7 @@ public final class W3CEndpointReferenceBuilder {
      *      <code>wsa:ReferenceParameters</code> element.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
-     *   the <code>referenceParameter</code> added to the 
+     *   the <code>referenceParameter</code> added to the
      *   <code>wsa:ReferenceParameters</code> element.
      *
      * @throws java.lang.IllegalArgumentException if <code>referenceParameter</code>
@@ -150,7 +146,7 @@ public final class W3CEndpointReferenceBuilder {
     }
     
     /**
-     * Adds the <code>metadataElement</code> to the 
+     * Adds the <code>metadataElement</code> to the
      * <code>W3CEndpointReference</code> instance's
      * <code>wsa:Metadata</code> element.
      *
@@ -158,7 +154,7 @@ public final class W3CEndpointReferenceBuilder {
      *      <code>wsa:Metadata</code> element.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
-     *   the <code>metadataElement</code> added to the 
+     *   the <code>metadataElement</code> added to the
      *    <code>wsa:Metadata</code> element.
      *
      * @throws java.lang.IllegalArgumentException if <code>metadataElement</code>
@@ -170,39 +166,56 @@ public final class W3CEndpointReferenceBuilder {
         metadata.add(metadataElement);
         return this;
     }
-
+    
     /**
-     * Gets a <code>W3CEndpointReference</code> from the accumulated
+     * Creates a <code>W3CEndpointReference</code> from the accumulated
      * properties set on this <code>W3CEndpointReferenceBuilder</code>
      * instance.
+     * <p>
+     * This method can be used to create a <code>W3CEndpointReference</code>
+     * for any endpoint by specifying the <code>address</code> property along
+     * with any other desired properties.  This method
+     * can also be used to create a <code>W3CEndpointReference</code> for
+     * an endpoint that is co-hosted within the same Java EE application.
+     * This method can automatically determine the <code>address</code> of 
+     * the co-hosted endpoint that is identified by the 
+     * <code>serviceName</code> and 
+     * <code>endpointName</code> propeties.  If the <code>address</code> is 
+     * <code>null</code> and the <code>serviceName</code> and 
+     * <code>endpointName</code> 
+     * do not identify an endpoint co-hosted within the same Java EE application, a 
+     * <code>javax.lang.IllegalStateException</code> MAY be thrown.
+     * 
      *
      * @return <code>W3CEndpointReference</code> from the accumulated
      * properties set on this <code>W3CEndpointReferenceBuilder</code>
-     * instance.
+     * instance. This method never returns <code>null</code>.
      *
-     * @throws WebServiceException
-     *         <UL>
-     *             <li>If the <code>address</code> is <code>null</code>.
-     *             <li>If the <code>serviceName</code> service is <code>null</code> and the
-     *             <code>portName> is NOT <code>null</code>.
-     *             <li>If the <code>serviceName</code>is NOT <code>null</code> 
+     * @throws javax.lang.IllegalStateException
+     *     <ul>
+     *        <li>If the <code>address</code>, <code>serviceName</code> and
+     *            <code>endpointName</code> are all <code>null</code>.
+     *        <li>If the <code>serviceName</code> service is <code>null</code> and the
+     *            <code>endpointName> is NOT <code>null</code>.
+     *        <li>May be thrown if the <code>address</code> property is <code>null</code> and
+     *            the <code>serviceName</code> and <code>endpointName</code> do not
+     *            specify a valid endpoint co-hosted within the same Java EE
+     *            application.
+     *        <li>If the <code>serviceName</code>is NOT <code>null</code>
      *             and is not present in the specified WSDL.
-     *             <li>If the <code>portName</code> port is not <code>null<code> and it
+     *        <li>If the <code>endpointName</code> port is not <code>null<code> and it
      *             is not present in <code>serviceName</code> service in the WSDL.
-     *             <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code> 
-     *                 and does not represent a valid WSDL.
-     *             <li>If an error occurs while creating the <code>W3CEndpointReference</code>.
-     *         </UL>
-     * @throws java.lang.IllegalArgumentException
-     *     if the <code>address</code> is <code>null</code>.
+     *        <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code>
+     *            and does not represent a valid WSDL.
+     *     </ul>
+     * @throws WebServiceException If an error occurs while creating the 
+     *                             <code>W3CEndpointReference</code>.
+     *       
      */
     public W3CEndpointReference createW3CEndpointReference() {
-        if (address == null) {
-            throw new WebServiceException("W3CEndpointReferenceBuilder.address MUST not be null when invoking createW3CEndpointReference.");
-        }
-        return Provider.provider().createW3CEndpointReference(address, 
-                serviceName, endpointName, metadata, wsdlDocumentLocation, 
-                referenceParameters); 
+        return Provider.provider().createW3CEndpointReference(address,
+                serviceName, endpointName, metadata, wsdlDocumentLocation,
+                referenceParameters);
     }
     
     private String address;

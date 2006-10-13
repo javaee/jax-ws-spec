@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.18 2006-10-12 19:25:02 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.19 2006-10-13 20:11:20 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -238,15 +238,22 @@ public abstract class Provider {
             WebServiceFeature... features);  
     
     /**
-     * Factory method to createEndpointReference an EndpointReference for 
-     * <code>serviceName</code> service and <code>portName</code> port 
-     * from the WSDL <code>wsdlDocumentLocation</code>. The instance
-     * returned will be of type <code>clazz</code> and contain the 
-     * <code>referenceParameters</code> reference parameters. This method 
-     * delegates to the vendor specific implementation of the 
-     * {@link javax.xml.ws.spi.Provider#createEndpointReference(Class<T>, 
-     * javax.xml.namespace.QName, javax.xml.namespace.QName, 
-     * javax.xml.transform.Source, org.w3c.dom.Element...)} method.
+     * Factory method to create a <code>W3CEndpointReference</code>.
+     *
+     * <p>
+     * This method can be used to create a <code>W3CEndpointReference</code>
+     * for any endpoint by specifying the <code>address</code> property along
+     * with any other desired properties.  This method
+     * can also be used to create a <code>W3CEndpointReference</code> for
+     * an endpoint that is co-hosted within the same Java EE application.
+     * To do so the <code>address</code> property can be provided or this
+     * method can automatically determine the <code>address</code> of 
+     * an endpoint that is identified by the <code>serviceName</code> and 
+     * <code>portName</code> propeties and is co-hosted within the same 
+     * Java EE application.  If the <code>address</code> is <code>null</code>
+     * and the <code>serviceName</code> and <code>portName</code> do not
+     * identify a Java EE co-hosted endpoint a 
+     * <code>javax.lang.IllegalStateException</code> MAY be thrown.
      *
      * @param address Specifies the address of the target endpoint
      * @param serviceName Qualified name of the service in the WSDL.
@@ -255,11 +262,7 @@ public abstract class Provider {
      * <code>W3CEndpointReference</code> instances <code>wsa:metadata</code> 
      * element.
      * @param wsdlDocumentLocation URL for the WSDL document location for 
-     * the service.  If this is <code>null</code>, then a WSDL must be 
-     * associated with the Service on the client to be usable by a JAX-WS 
-     * client application and the <code>serviceName</code>
-     * and <code>portName</code> MUST match a service and port in either 
-     * this WSDL or the WSDL on the JAX-WS client.
+     * the service.  
      * @param referenceParameters Reference parameters to be associated 
      * with the returned <code>EndpointReference</code> instance.
      *
@@ -268,23 +271,26 @@ public abstract class Provider {
      *          <code>metadata</code>, <code>wsdlDocumentLocation</code> 
      *          and <code>referenceParameters</code>. This method
      *          never returns <code>null</code>.
-     * @throws WebServiceException
-     *         <UL>
-     *             <li>If the <code>serviceName</code> service is 
-     *                <code>null</code> and the <code>portName> is NOT 
-     *                <code>null</code>.
-     *             <li>If the NOT <code>null</code> <code>serviceName</code>
-     *                is not present in the specified WSDL.
-     *             <li>If the <code>portName</code> port is NOT 
-     *                <code>null</code> and it is not present in 
-     *                <code>serviceName</code> service in the WSDL.
-     *             <li>If the <code>wsdlDocumentLocation</code> is NOT 
-     *                <code>null</code> and does not represent a valid WSDL.
-     *             <li>If an error occurs while creating the 
-     *                <code>W3CEndpointReference</code>.
-     *         </UL>
-     * @throws java.lang.IllegalArgumentException
-     *     If the <code>address</code> is <code>null</code>.
+     *
+     * @throws javax.lang.IllegalArgumentException
+     *     <ul>
+     *        <li>If the <code>address</code>, <code>serviceName</code> and
+     *            <code>portName</code> are all <code>null</code>.
+     *        <li>If the <code>serviceName</code> service is <code>null</code> and the
+     *            <code>portName> is NOT <code>null</code>.
+     *        <li>May be thrown if the <code>address</code> property is <code>null</code> and
+     *            the <code>serviceName</code> and <code>portName</code> do not
+     *            specify a valid endpoint co-hosted within the same Java EE
+     *            application.
+     *        <li>If the <code>serviceName</code>is NOT <code>null</code>
+     *             and is not present in the specified WSDL.
+     *        <li>If the <code>portName</code> port is not <code>null<code> and it
+     *             is not present in <code>serviceName</code> service in the WSDL.
+     *        <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code>
+     *            and does not represent a valid WSDL.
+     *     </ul>
+     * @throws WebServiceException If an error occurs while creating the 
+     *                             <code>W3CEndpointReference</code>.
      *
      * @since JAX-WS 2.1
      */
