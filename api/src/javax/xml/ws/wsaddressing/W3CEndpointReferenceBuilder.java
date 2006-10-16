@@ -184,7 +184,7 @@ public final class W3CEndpointReferenceBuilder {
     }
     
     /**
-     * Creates a <code>W3CEndpointReference</code> from the accumulated
+     * Builds a <code>W3CEndpointReference</code> from the accumulated
      * properties set on this <code>W3CEndpointReferenceBuilder</code>
      * instance.
      * <p>
