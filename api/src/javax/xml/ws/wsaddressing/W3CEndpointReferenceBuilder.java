@@ -18,11 +18,12 @@ import javax.xml.ws.spi.Provider;
 /**
  * This class is used to build <code>W3CEndpointReference</code>
  * instances. The intended use of this clsss is for
- * an application component, for
- * example a factory component,
+ * an application component, for example a factory component,
  * to create an <code>W3CEndpointReference</code> for a
- * web service endpoint co-hosted in the same 
- * Java EE application.
+ * web service endpoint published by the same 
+ * Java EE application. It can also be used to create
+ * <code>W3CEndpointReferences</code> for an Java SE based
+ * endpoint by providing the <code>address</code>property.
  *
  * @since JAX-WS 2.1
  */
@@ -40,7 +41,7 @@ public final class W3CEndpointReferenceBuilder {
      * <p>
      * The <code>address</code> SHOULD be set to a non-<code>null</code>
      * value when building a <code>W3CEndpointReference</code> for a 
-     * web service endpoint that is not co-hosted within the same
+     * web service endpoint that is not published the same
      * Java EE application.
      *
      * @param address The address of the endpoint to be targeted
@@ -63,7 +64,7 @@ public final class W3CEndpointReferenceBuilder {
      *      by the returned <code>W3CEndpointReference<code>.  This property
      *      may also be used with the <code>endpointName</code> (portName) 
      *      property to lookup the <code>address</code> of a web service 
-     *      endpoint co-hosted within the same Java EE application.
+     *      endpoint that is published by the same Java EE application.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>serviceName</code> element added to the
@@ -86,7 +87,7 @@ public final class W3CEndpointReferenceBuilder {
      *      <code>endpointName</code> (portName) property may also be
      *      used with the <code>serviceName</code> property to lookup 
      *      the <code>address</code> of a web service 
-     *      endpoint co-hosted within the same Java EE application.
+     *      endpoint published by the same Java EE application.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>endpointName</code> atrribute added to the
@@ -176,14 +177,14 @@ public final class W3CEndpointReferenceBuilder {
      * for any endpoint by specifying the <code>address</code> property along
      * with any other desired properties.  This method
      * can also be used to create a <code>W3CEndpointReference</code> for
-     * an endpoint that is co-hosted within the same Java EE application.
+     * an endpoint that is published by the same Java EE application.
      * This method can automatically determine the <code>address</code> of 
-     * the co-hosted endpoint that is identified by the 
+     * an endpoint published by the same Java EE application that is identified by the 
      * <code>serviceName</code> and 
-     * <code>endpointName</code> propeties.  If the <code>address</code> is 
+     * <code>endpointName</code> properties.  If the <code>address</code> is 
      * <code>null</code> and the <code>serviceName</code> and 
      * <code>endpointName</code> 
-     * do not identify an endpoint co-hosted within the same Java EE application, a 
+     * do not identify an endpoint publised by the same Java EE application, a 
      * <code>javax.lang.IllegalStateException</code> MAY be thrown.
      * 
      *
@@ -199,7 +200,7 @@ public final class W3CEndpointReferenceBuilder {
      *            <code>endpointName> is NOT <code>null</code>.
      *        <li>May be thrown if the <code>address</code> property is <code>null</code> and
      *            the <code>serviceName</code> and <code>endpointName</code> do not
-     *            specify a valid endpoint co-hosted within the same Java EE
+     *            specify a valid endpoint published by the same Java EE
      *            application.
      *        <li>If the <code>serviceName</code>is NOT <code>null</code>
      *             and is not present in the specified WSDL.

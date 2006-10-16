@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.2.2.19 2006-10-13 20:11:20 kohlert Exp $
+ *$Id: Provider.java,v 1.2.2.20 2006-10-16 16:55:18 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -245,15 +245,16 @@ public abstract class Provider {
      * for any endpoint by specifying the <code>address</code> property along
      * with any other desired properties.  This method
      * can also be used to create a <code>W3CEndpointReference</code> for
-     * an endpoint that is co-hosted within the same Java EE application.
+     * an endpoint that is published by the same Java EE application.
      * To do so the <code>address</code> property can be provided or this
      * method can automatically determine the <code>address</code> of 
-     * an endpoint that is identified by the <code>serviceName</code> and 
-     * <code>portName</code> propeties and is co-hosted within the same 
-     * Java EE application.  If the <code>address</code> is <code>null</code>
-     * and the <code>serviceName</code> and <code>portName</code> do not
-     * identify a Java EE co-hosted endpoint a 
-     * <code>javax.lang.IllegalStateException</code> MAY be thrown.
+     * an endpoint that is published by the same Java EE application and is
+     * identified by the <code>serviceName</code> and 
+     * <code>portName</code> propeties.  If the <code>address</code> is 
+     * <code>null</code> and the <code>serviceName</code> and 
+     * <code>portName</code> do not identify an endpoint published by the 
+     * same Java EE application 
+     * <code>javax.lang.IllegalArgumentException</code> MAY be thrown.
      *
      * @param address Specifies the address of the target endpoint
      * @param serviceName Qualified name of the service in the WSDL.
@@ -280,7 +281,7 @@ public abstract class Provider {
      *            <code>portName> is NOT <code>null</code>.
      *        <li>May be thrown if the <code>address</code> property is <code>null</code> and
      *            the <code>serviceName</code> and <code>portName</code> do not
-     *            specify a valid endpoint co-hosted within the same Java EE
+     *            specify a valid endpoint published by the same Java EE
      *            application.
      *        <li>If the <code>serviceName</code>is NOT <code>null</code>
      *             and is not present in the specified WSDL.
