@@ -37,8 +37,9 @@ public final class MTOMFeature extends WebServiceFeature {
   
    
     /**
-     * Property for MTOM threshold value. This property is a hint when MTOM is enabled, 
-     * binary data above this size in bytes SHOULD be sent as attachment. 
+     * Property for MTOM threshold value. This property serves as a hint when 
+     * MTOM is enabled, binary data above this size in bytes SHOULD be sent 
+     * as attachment.
      * The value of this property MUST always be >= 0. Default value is 0.      
      */
     protected int threshold = 0;
