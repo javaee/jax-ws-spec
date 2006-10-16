@@ -66,13 +66,6 @@ public final class AddressingFeature extends WebServiceFeature {
      */
     public static final String ID = "http://www.w3.org/2005/08/addressing/module";
   
-// todo: remove this    
-//    /** 
-//     * Constant ID for the <code>required</code> feature parameter
-//     */
-//    public static final String IS_REQUIRED = "ADDRESSING_IS_REQUIRED";
-            
-            
     /**
      * Property for <code>required</code> feature parameter. When Addressing 
      * is enabled, the value of this property will be set to the 
@@ -130,20 +123,5 @@ public final class AddressingFeature extends WebServiceFeature {
      */
     public boolean isRequired() {
         return required;
-    }
-  // todo remove this  
-//    /**
-//     * Set the boolean value used to set the
-//     * <code>required</code> attribute on 
-//     * <code>wsaw:UsingAddressing</code> element
-//     * in the WSDL.
-//     *
-//     * @param required specifies the value that will be used  
-//     * for the <code>wsdl:required</code> attribute on      
-//     * <code>wsaw:UsingAddressing</code> element
-//     * in the WSDL.
-//     */ 
-//    public void setRequired(boolean required) {
-//        this.required = required;
-//    }    
+    }    
 }

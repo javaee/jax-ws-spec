@@ -23,7 +23,22 @@ import javax.xml.ws.spi.Provider;
  * web service endpoint published by the same 
  * Java EE application. It can also be used to create
  * <code>W3CEndpointReferences</code> for an Java SE based
- * endpoint by providing the <code>address</code>property.
+ * endpoint by providing the <code>address</code> property.
+ * <p>
+ * When creating a <code>W3CEndpointReference</code> for an
+ * endpoint that is not published by the same Java EE application,
+ * the <code>address</code> property MUST be specified.  
+ * <p>
+ * When creating a <code>W3CEndpointReference</code> for an endpoint 
+ * published by the same Java EE application, the <code>address</code>
+ * property MAY be <code>null</code> but then the <code>serviceName</code>
+ * and <code>endpointName</code> MUST specify an endpoint published by
+ * the same Java EE application.
+ * <p>
+ * When the <code>wsdlDocumentLocation</code> is specified it MUST refer
+ * to a valid WSDL document and the <code>serviceName</code> and
+ * <code>endpointName</code> (if specified) MUST match a service and port 
+ * in the WSDL document.
  *
  * @since JAX-WS 2.1
  */
@@ -39,10 +54,10 @@ public final class W3CEndpointReferenceBuilder {
      * <code>W3CEndpointReference</code> instance's
      * <code>wsa:Address</code>.
      * <p>
-     * The <code>address</code> SHOULD be set to a non-<code>null</code>
+     * The <code>address</code> MUST be set to a non-<code>null</code>
      * value when building a <code>W3CEndpointReference</code> for a 
-     * web service endpoint that is not published the same
-     * Java EE application.
+     * web service endpoint that is not published by the same
+     * Java EE application or when running on Java SE.
      *
      * @param address The address of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference<code>.
@@ -184,8 +199,8 @@ public final class W3CEndpointReferenceBuilder {
      * <code>endpointName</code> properties.  If the <code>address</code> is 
      * <code>null</code> and the <code>serviceName</code> and 
      * <code>endpointName</code> 
-     * do not identify an endpoint publised by the same Java EE application, a 
-     * <code>javax.lang.IllegalStateException</code> MAY be thrown.
+     * do not identify an endpoint published by the same Java EE application, a 
+     * <code>javax.lang.IllegalStateException</code> MUST be thrown.
      * 
      *
      * @return <code>W3CEndpointReference</code> from the accumulated
@@ -197,8 +212,8 @@ public final class W3CEndpointReferenceBuilder {
      *        <li>If the <code>address</code>, <code>serviceName</code> and
      *            <code>endpointName</code> are all <code>null</code>.
      *        <li>If the <code>serviceName</code> service is <code>null</code> and the
-     *            <code>endpointName> is NOT <code>null</code>.
-     *        <li>May be thrown if the <code>address</code> property is <code>null</code> and
+     *            <code>endpointName</code> is NOT <code>null</code>.
+     *        <li>If the <code>address</code> property is <code>null</code> and
      *            the <code>serviceName</code> and <code>endpointName</code> do not
      *            specify a valid endpoint published by the same Java EE
      *            application.
@@ -213,7 +228,7 @@ public final class W3CEndpointReferenceBuilder {
      *                             <code>W3CEndpointReference</code>.
      *       
      */
-    public W3CEndpointReference createW3CEndpointReference() {
+    public W3CEndpointReference build() {
         return Provider.provider().createW3CEndpointReference(address,
                 serviceName, endpointName, metadata, wsdlDocumentLocation,
                 referenceParameters);
