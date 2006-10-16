@@ -35,17 +35,11 @@ public final class MTOMFeature extends WebServiceFeature {
      */
     public static final String ID = "http://www.w3.org/2004/08/soap/features/http-optimization";
   
-// todo remove this    
-//    /**
-//     * Constant ID for the THRESHOLD Feature parameter
-//     */
-//    public static final String THRESHOLD = "MTOM_THRESHOLD";
-    
-    
+   
     /**
-     * Property for MTOM threshold value. When MTOM is enabled, binary data above this 
-     * size in bytes will be XOP encoded or sent as attachment. The value of this property 
-     * MUST always be >= 0. Default value is 0.      
+     * Property for MTOM threshold value. This property is a hint when MTOM is enabled, 
+     * binary data above this size in bytes SHOULD be sent as attachment. 
+     * The value of this property MUST always be >= 0. Default value is 0.      
      */
     protected int threshold = 0;
     
@@ -72,8 +66,8 @@ public final class MTOMFeature extends WebServiceFeature {
      * Creates an <code>MTOMFeature</code>.
      * The instance created will be enabled.
      *
-     * @param threshold the size in bytes that binary data MUST be before
-     * being XOP encoded.
+     * @param threshold the size in bytes that binary data SHOULD be before
+     * being sent as an attachment.
      *
      * @throws WebServiceException if threshold is < 0
      */
@@ -88,8 +82,8 @@ public final class MTOMFeature extends WebServiceFeature {
      * Creates an <code>MTOMFeature</code>.
      * 
      * @param enabled specifies if this feature should be enabled or not
-     * @param threshold the size in bytes that binary data MUST be before
-     * being XOP encoded.
+     * @param threshold the size in bytes that binary data SHOULD be before
+     * being sent as an attachment.
      *
      * @throws WebServiceException if threshold is < 0
      */
@@ -109,27 +103,11 @@ public final class MTOMFeature extends WebServiceFeature {
     
     /**
      * Gets the threshold value used to determine when binary data 
-     * should be XOP encoded.
+     * should be sent as an attachment.
      *
      * @return the current threshold size in bytes
      */
     public int getThreshold() {
         return threshold;
     }
-  
-// todo remove this    
-//    /**
-//     * Set the threshold value used to determine when binary data should be
-//     * XOP encoded. 
-//     *
-//     * @param threshold the size in bytes that binary data MUST be before
-//     * being XOP encoded.
-//     *
-//     * @throws WebServiceException if threshold is < 0
-//     */ 
-//    public void setThreshold(int threshold) {
-//        if (threshold < 0)
-//            throw new WebServiceException("MTOMFeature.threshold must be >= 0, actual value: "+threshold);        
-//        this.threshold = threshold;
-//    }
 }
