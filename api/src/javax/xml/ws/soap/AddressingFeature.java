@@ -97,7 +97,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * 
      * @param enabled specifies whether this feature should
      * be enabled or not.
-     * @param isRequired specifies the value that will be used  
+     * @param required specifies the value that will be used  
      * for the <code>wsdl:required</code> attribute on the
      * <code>wsaw:UsingAddressing</code> element.
      */
