@@ -16,8 +16,8 @@ import java.lang.annotation.Target;
  * message addressing property with <code>input</code>, <code>output</code>, and 
  * <code>fault</code> messages of the mapped WSDL operation. 
  * <p>
- * This annotation can be specified on each method of a service endpoint interface 
- * or implementation. For such a method, the mapped operation in the generated WSDL 
+ * This annotation can be specified on each method of a service endpoint interface. 
+ * For such a method, the mapped operation in the generated WSDL 
  * contains explicit <code>wsaw:Action</code> attribute on the WSDL <code>input</code>, 
  * <code>output</code> and <code>fault</code> messages of the WSDL <code>operation</code> 
  * based upon which attributes of the <code>Action</code> annotation have been specified.
