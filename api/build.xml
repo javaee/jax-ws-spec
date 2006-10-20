@@ -12,15 +12,16 @@
     </description>
 
     <!-- properties -->
-    <property name="release.spec.title"    value="Final Release"/>
-    <property name="release.spec.version"  value="2.0"/>
-    <property name="release.spec.date"     value="April 19, 2006"/>
+    <property name="release.spec.title"    value="Maintenance Review Draft"/>
+    <property name="release.spec.version"  value="2.1"/>
+    <property name="release.spec.date"     value="October 17, 2006"/>
     <property name="release.spec.feedback" value="jsr224-spec-comments@sun.com"/>
 
     <!-- libraries that are referenced when compiling Java source files -->
     <path id="javac.classpath">
         <pathelement path="lib/jaxb-api.jar" />
         <pathelement path="lib/saaj-api.jar" />
+        <pathelement path="lib/jsr173_api.jar" />
     </path>
 
     <!-- libraries that are referenced when generating docs -->
@@ -28,6 +29,7 @@
         <pathelement path="build/classes" />
         <pathelement path="lib/jaxb-api.jar" />
         <pathelement path="lib/saaj-api.jar" />
+        <pathelement path="lib/jsr173_api.jar" />
     </path>
 
     <!-- prepare to build -->
@@ -103,7 +105,7 @@ JAX-WS ${release.spec.version} Runtime Library</h2>
 ${release.spec.title} specification, ${release.spec.date}<br>
 Comments to: <i><a href='mailto:${release.spec.feedback}'>${release.spec.feedback}</a></i><br>
 More information at: <i><a target='_top'
-href='http://java.sun.com/xml/jax-ws'>http://java.sun.com/xml/jax-ws</a></i><br>
+href='http://java.sun.com/webservices/jaxws/'>http://java.sun.com/webservices/jaxws/</a></i><br>
 &nbsp;<br>&nbsp;<br><hr width='65%'><h1>${release.spec.title}</h1><hr width='75%'>
 <br>&nbsp;<br>]]>
             </doctitle>

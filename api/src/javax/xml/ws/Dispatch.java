@@ -1,5 +1,5 @@
 /*
- * Copyright 2004 Sun Microsystems, Inc. All rights reserved.
+ * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
  */
 
@@ -66,7 +66,7 @@ public interface Dispatch<T> extends BindingProvider {
      * @param handler The handler object that will receive the
      *     response to the operation invocation.
      * @return A <code>Future</code> object that may be used to check the status
-     *     of the operation invocation. This object must not be used to try to
+     *     of the operation invocation. This object MUST NOT be used to try to
      *     obtain the results of the operation - the object returned from
      *     <code>Future<?>.get()</code> is implementation dependent
      *     and any use of it will result in non-portable behaviour.
@@ -79,7 +79,7 @@ public interface Dispatch<T> extends BindingProvider {
      *  interaction mode. The operation invocation is logically non-blocking,
      *  subject to the capabilities of the underlying protocol, no results
      *  are returned. When
-     *  the protocol in use is SOAP/HTTP, this method must block until
+     *  the protocol in use is SOAP/HTTP, this method MUST block until
      *  an HTTP response code has been received or an error occurs.
      *
      * The client is responsible for ensuring that the <code>msg</code> object 
