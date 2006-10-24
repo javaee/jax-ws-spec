@@ -43,7 +43,9 @@ import javax.xml.ws.spi.Provider;
  * @since JAX-WS 2.1
  */
 public final class W3CEndpointReferenceBuilder {
-    
+    /**
+     * Creates a new <code>W3CEndpointReferenceBuilder</code> instance.
+     */
     public W3CEndpointReferenceBuilder() {
         referenceParameters = new ArrayList<Element>();
         metadata = new ArrayList<Element>();
@@ -65,7 +67,7 @@ public final class W3CEndpointReferenceBuilder {
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>address</code> set to the <code>wsa:Address</code>.
      */
-    public W3CEndpointReferenceBuilder address(String adddress) {
+    public W3CEndpointReferenceBuilder address(String address) {
         this.address = address;
         return this;
     }
@@ -109,7 +111,7 @@ public final class W3CEndpointReferenceBuilder {
      *  <code>wsaw:ServiceName</code> element in the
      *  <code>wsa:Metadata</code> element.
      *
-     * @throws javax.lang.IllegalStateException If the <code>serviceName</code> has not
+     * @throws java.lang.IllegalStateException If the <code>serviceName</code> has not
      *  been set.
      */
     public W3CEndpointReferenceBuilder endpointName(QName endpointName) {
@@ -200,14 +202,14 @@ public final class W3CEndpointReferenceBuilder {
      * <code>null</code> and the <code>serviceName</code> and 
      * <code>endpointName</code> 
      * do not identify an endpoint published by the same Java EE application, a 
-     * <code>javax.lang.IllegalStateException</code> MUST be thrown.
+     * <code>java.lang.IllegalStateException</code> MUST be thrown.
      * 
      *
      * @return <code>W3CEndpointReference</code> from the accumulated
      * properties set on this <code>W3CEndpointReferenceBuilder</code>
      * instance. This method never returns <code>null</code>.
      *
-     * @throws javax.lang.IllegalStateException
+     * @throws java.lang.IllegalStateException
      *     <ul>
      *        <li>If the <code>address</code>, <code>serviceName</code> and
      *            <code>endpointName</code> are all <code>null</code>.
