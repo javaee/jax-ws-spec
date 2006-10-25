@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.3 2006-10-20 22:08:34 kohlert Exp $
+ *$Id: Provider.java,v 1.4 2006-10-25 20:04:30 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -156,37 +156,7 @@ public abstract class Provider {
      * @since JAX-WS 2.1
      **/
     public abstract EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset);
-    
-    /**
-     * Create an EndpointReference for <code>serviceName</code>
-     * service and <code>portName</code> port from the WSDL <code>wsdlDocumentLocation</code>. The instance
-     * returned will be of type <code>clazz</code> and contain the <code>referenceParameters</code>
-     * reference parameters. This method delegates to the vendor specific
-     * implementation of the {@link javax.xml.ws.spi.Provider#createEndpointReference(Class<T>, javax.xml.namespace.QName, javax.xml.namespace.QName, javax.xml.transform.Source, org.w3c.dom.Element...)} method.
-     *
-     * @param clazz Specifies the type of <code>EndpointReference</code> that MUST be returned.
-     * @param serviceName Qualified name of the service in the WSDL.
-     * @param portName Qualified name of the endpoint in the WSDL.
-     * @param wsdlDocumentLocation URL for the WSDL document location for the service.
-     * @param referenceParameters Reference parameters to be associated with the
-     * returned <code>EndpointReference</code> instance.
-     *
-     * @return the EndpointReference created from <code>serviceName</code>, <code>portName</code>,
-     *          <code>wsdlDocumentLocation</code> and <code>referenceParameters</code>. This method
-     *          never returns <code>null</code>.
-     * @throws WebServiceException
-     *         <UL>
-     *             <li>If the <code>serviceName</code> service is not present in the WSDL.
-     *             <li>If the <code>portName</code> port is not present in <code>serviceName</code> service in the WSDL.
-     *             <li>If the <code>wsdlDocumentLocation</code> does not represent a valid WSDL.
-     *             <li>If an error occurs while creating the <code>EndpointReference</code>.
-     *             <li>If the Class <code>clazz</code> is not supported by this implementation.
-     *         </UL>
-     * @throws java.lang.IllegalArgumentException
-     *     if any of the <code>clazz</code>, <code>serviceName</code>, <code>portName</code> and <code>wsdlDocumentLocation</code> is null.
-     */
-    public abstract <T extends EndpointReference> T createEndpointReference(Class<T> clazz, QName serviceName, QName portName, Source wsdlDocumentLocation, Element... referenceParameters);
-    
+     
     
     /**
      * The getPort method returns a proxy.  If there
