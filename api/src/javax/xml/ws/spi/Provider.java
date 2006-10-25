@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.4 2006-10-25 20:04:30 kohlert Exp $
+ *$Id: Provider.java,v 1.5 2006-10-25 22:28:13 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -224,7 +224,7 @@ public abstract class Provider {
      * <code>null</code> and the <code>serviceName</code> and 
      * <code>portName</code> do not identify an endpoint published by the 
      * same Java EE application, a
-     * <code>javax.lang.IllegalArgumentException</code> MUST be thrown.
+     * <code>javax.lang.IllegalStateException</code> MUST be thrown.
      *
      * @param address Specifies the address of the target endpoint
      * @param serviceName Qualified name of the service in the WSDL.
@@ -243,7 +243,7 @@ public abstract class Provider {
      *          and <code>referenceParameters</code>. This method
      *          never returns <code>null</code>.
      *
-     * @throws javax.lang.IllegalArgumentException
+     * @throws javax.lang.IllegalStateException
      *     <ul>
      *        <li>If the <code>address</code>, <code>serviceName</code> and
      *            <code>portName</code> are all <code>null</code>.
