@@ -143,7 +143,7 @@ public abstract class EndpointReference {
      *                  <LI>If an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
-     *                  <LI>If feature is enabled that is not compatible with 
+     *                  <LI>If a feature is enabled that is not compatible with 
      *                      this port or is unsupported.
      *                   </UL>
      *

@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.5 2006-10-25 22:28:13 kohlert Exp $
+ *$Id: Provider.java,v 1.6 2006-11-08 22:05:36 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -195,7 +195,7 @@ public abstract class Provider {
      *                  <LI>If an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified
-     *                  <LI>If feature is enabled that is not compatible with
+     *                  <LI>If a feature is enabled that is not compatible with
      *                      this port or is unsupported.
      *                   </UL>
      *

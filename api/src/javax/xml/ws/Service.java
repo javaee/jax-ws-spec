@@ -434,7 +434,7 @@ public class Service {
      *                    match a valid wsdl:Port in the WSDL metadata.
      *                    <li>If any error in the creation of
      *                     the <code>Dispatch</code> object.
-     *                    <li>if a feature is enabled that is not 
+     *                    <li>If a feature is enabled that is not 
      *                    compatible with this port or is unsupported.
      *                  </UL>
      *
@@ -557,7 +557,6 @@ public class Service {
      *
      * @return Dispatch instance
      * @throws WebServiceException 
-     * @throws WebServiceException 
      *                  <UL>
      *                    <li>If there is any missing WSDL metadata
      *                      as required by this method.
@@ -571,7 +570,7 @@ public class Service {
      *                    match a valid wsdl:Port in the WSDL metadata.
      *                    <li>If any error in the creation of
      *                  the <code>Dispatch</code> object.
-     *                    <li>if a feature is enabled that is not 
+     *                    <li>If a feature is enabled that is not 
      *                    compatible with this port or is unsupported.
      *                  </UL>
      *
