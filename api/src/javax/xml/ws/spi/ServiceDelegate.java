@@ -1,7 +1,6 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: ServiceDelegate.java,v 1.4 2006-10-20 22:08:33 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
