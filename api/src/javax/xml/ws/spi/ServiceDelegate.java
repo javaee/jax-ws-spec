@@ -13,6 +13,8 @@ import javax.xml.ws.handler.HandlerResolver;
 import javax.xml.ws.WebServiceFeature;
 import javax.xml.bind.JAXBContext;
 import javax.xml.ws.EndpointReference;
+import javax.xml.ws.WebServiceException;
+
 
 /**
  * Service delegates are used internally by <code>Service</code> objects
@@ -397,7 +399,7 @@ public abstract class ServiceDelegate {
      *
      * @see javax.xml.transform.Source
      * @see javax.xml.soap.SOAPMessage
-     * @see WebServiceFeature;
+     * @see WebServiceFeature
      *
      * @since JAX-WS 2.1
      **/
@@ -421,7 +423,7 @@ public abstract class ServiceDelegate {
      * SOAP messages or the contents of a SOAP body.
      *
      * @return Dispatch instance
-     * @throws ServiceException If any error in the creation of
+     * @throws WebServiceException If any error in the creation of
      *                  the <code>Dispatch</code> object
      *
      * @see javax.xml.bind.JAXBContext

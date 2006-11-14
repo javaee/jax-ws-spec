@@ -1,7 +1,7 @@
 /*
  * Copyright 2006 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.6 2006-11-08 22:05:36 kohlert Exp $
+ *$Id: Provider.java,v 1.7 2006-11-14 22:30:52 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -144,7 +144,7 @@ public abstract class Provider {
      * read an EndpointReference from the infoset contained in
      * <code>eprInfoset</code>.
      *
-     * @returns the <code>EndpointReference</code> unmarshalled from
+     * @return the <code>EndpointReference</code> unmarshalled from
      * <code>eprInfoset</code>.  This method never returns <code>null</code>.
      *
      * @throws WebServiceException If there is an error creating the
@@ -243,7 +243,7 @@ public abstract class Provider {
      *          and <code>referenceParameters</code>. This method
      *          never returns <code>null</code>.
      *
-     * @throws javax.lang.IllegalStateException
+     * @throws java.lang.IllegalStateException
      *     <ul>
      *        <li>If the <code>address</code>, <code>serviceName</code> and
      *            <code>portName</code> are all <code>null</code>.

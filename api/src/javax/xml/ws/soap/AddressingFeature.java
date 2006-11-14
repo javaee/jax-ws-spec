@@ -55,7 +55,7 @@ import javax.xml.ws.spi.Provider;
  *
  * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">WS-Addressing</a>
  * for more information on WS-Addressing.
- * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
+ * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/#indicatinguse">WS-Addressing - WSDL 1.0
  * </a> for more information on <code>wsaw:UsingAddressing</code>.
  *
  * @since JAX-WS 2.1

@@ -440,7 +440,7 @@ public class Service {
      *
      * @see javax.xml.transform.Source
      * @see javax.xml.soap.SOAPMessage
-     * @see WebServiceFeature;
+     * @see WebServiceFeature
      *
      * @since JAX-WS 2.1
      **/

@@ -27,7 +27,7 @@ import javax.xml.ws.WebServiceFeature;
  * with the <code>WebServiceFeatureAnnotation</code> that is does not
  * recognize/support an error MUST be given.
  *
- * @see javax.xml.ws.soap.WSAddressing
+ * @see javax.xml.ws.soap.Addressing
  * @see javax.xml.ws.soap.MTOM
  * @see javax.xml.ws.RespectBinding
  *
