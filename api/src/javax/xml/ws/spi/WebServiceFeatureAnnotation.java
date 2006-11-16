@@ -24,7 +24,7 @@ import javax.xml.ws.WebServiceFeature;
  * <code>WebServiceFeature</code> annotations, however, an implementation
  * may define vendors specific annotations for other features.
  * If a JAX-WS implementation encounters an annotation annotated
- * with the <code>WebServiceFeatureAnnotation</code> that is does not
+ * with the <code>WebServiceFeatureAnnotation</code> that it does not
  * recognize/support an error MUST be given.
  *
  * @see javax.xml.ws.soap.Addressing
