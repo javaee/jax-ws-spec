@@ -38,7 +38,7 @@ import org.w3c.dom.Element;
  * <p>An endpoint may have a list of metadata documents, such as WSDL
  * and XMLSchema documents, bound to it. At publishing time, the
  * JAX-WS implementation will try to reuse as much of that metadata
- * as possible instead of generating new one based on the annotations
+ * as possible instead of generating new ones based on the annotations
  * present on the implementor.
  *
  * @since JAX-WS 2.0
@@ -68,8 +68,8 @@ public abstract class Endpoint {
      * a default of SOAP 1.1 / HTTP binding MUST be used.
      * <p>
      * The newly created endpoint may be published by calling
-     * one of the javax.xml.ws.Endpoint#publish(String) and
-     * javax.xml.ws.Endpoint#publish(Object) methods.
+     * one of the {@link javax.xml.ws.Endpoint#publish(String)} and
+     * {@link javax.xml.ws.Endpoint#publish(Object)} methods.
      *
      *
      * @param implementor The endpoint implementor.
@@ -86,8 +86,8 @@ public abstract class Endpoint {
      * implementor object.
      * <p>
      * The newly created endpoint may be published by calling
-     * one of the javax.xml.ws.Endpoint#publish(String) and
-     * javax.xml.ws.Endpoint#publish(Object) methods.
+     * one of the {@link javax.xml.ws.Endpoint#publish(String)} and
+     * {@link javax.xml.ws.Endpoint#publish(Object)} methods.
      *
      * @param bindingId A URI specifying the binding to use. If the bindingID is
      * <code>null</code> and no binding is specified via a BindingType
@@ -122,7 +122,7 @@ public abstract class Endpoint {
      * The necessary server infrastructure will be created and
      * configured by the JAX-WS implementation using some default configuration.
      * In order to get more control over the server configuration, please
-     * use the javax.xml.ws.Endpoint#publish(Object) method instead.
+     * use the {@link javax.xml.ws.Endpoint#publish(Object)} method instead.
      *
      * @param address A URI specifying the address to use. The address
      *        MUST be compatible with the binding specified at the
@@ -145,8 +145,8 @@ public abstract class Endpoint {
      * configured by the JAX-WS implementation using some default configuration.
      *
      * In order to get more control over the server configuration, please
-     * use the javax.xml.ws.Endpoint#create(String,Object) and
-     * javax.xml.ws.Endpoint#publish(Object) method instead.
+     * use the {@link javax.xml.ws.Endpoint#create(String,Object)} and
+     * {@link javax.xml.ws.Endpoint#publish(Object)} methods instead.
      *
      * @param address A URI specifying the address and transport/protocol
      *        to use. A http: URI MUST result in the SOAP 1.1/HTTP
@@ -187,7 +187,7 @@ public abstract class Endpoint {
      * Stops publishing this endpoint.
      *
      * If the endpoint is not in a published state, this method
-     * has not effect.
+     * has no effect.
      *
      **/
     public abstract void stop();
@@ -325,6 +325,7 @@ public abstract class Endpoint {
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
      * WS-Addressing - WSDL 1.0</a>.
      *
+     * @param clazz Specifies the type of EndpointReference  that MUST be returned.
      * @param referenceParameters Reference parameters to be associated with the
      * returned <code>EndpointReference</code> instance.
      * @return EndpointReference of type <code>clazz</code> of this 
