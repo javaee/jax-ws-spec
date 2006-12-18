@@ -88,14 +88,14 @@ public interface MessageContext extends Map<String, Object> {
     
     /**
      * Standard property: HTTP request headers.
-     * <p>Type: java.util.Map<java.lang.String, java.util.List<java.lang.String>>
+     * <p>Type: java.util.Map&lt;java.lang.String, java.util.List&lt;java.lang.String>>
      */
     public static final String HTTP_REQUEST_HEADERS =
             "javax.xml.ws.http.request.headers";
     
     /**
      * Standard property: HTTP response headers.
-     * <p>Type: java.util.Map<java.lang.String, java.util.List<java.lang.String>>
+     * <p>Type: java.util.Map&lt;java.lang.String, java.util.List&lt;java.lang.String>>
      */
     public static final String HTTP_RESPONSE_HEADERS =
             "javax.xml.ws.http.response.headers";
