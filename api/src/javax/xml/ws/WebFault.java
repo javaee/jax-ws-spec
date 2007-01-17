@@ -23,12 +23,12 @@ import java.lang.annotation.RetentionPolicy;
 @Documented
 public @interface WebFault {
   /**
-   *  Elements local name.
+   *  Element's local name.
   **/
   public String name() default "";
 
   /**
-   *  Elements namespace name.
+   *  Element's namespace name.
   **/
   public String targetNamespace() default "";
 

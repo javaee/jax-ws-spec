@@ -19,7 +19,7 @@ public interface LogicalMessageContext
 
   /** Gets the message from this message context
    *
-   *  @return The contained message; returns null if no 
+   *  @return The contained message; returns <code>null</code> if no 
    *          message is present in this message context
   **/
   public LogicalMessage getMessage();

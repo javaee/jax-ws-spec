@@ -28,7 +28,7 @@ import org.w3c.dom.Element;
 public interface WebServiceContext {
     
     /**
-     * Returns the MessageContext for the request being served
+     * Returns the <code>MessageContext</code> for the request being served
      * at the time this method is called. Only properties with
      * APPLICATION scope will be visible to the application.
      *
@@ -79,10 +79,10 @@ public interface WebServiceContext {
     public boolean isUserInRole(String role);
     
     /**
-     * Returns the <code>WEndpointReference</code> for this
+     * Returns the <code>EndpointReference</code> for this
      * endpoint.
      * <p>
-     * If the Binding for this <code>bindingProvider</code> is
+     * If the {@link Binding} for this <code>bindingProvider</code> is
      * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a
      * <code>W3CEndpointReference</code> MUST be returned.
      * If the returned <code>EndpointReference</code> is a

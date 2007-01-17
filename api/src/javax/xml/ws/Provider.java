@@ -30,11 +30,11 @@ public interface Provider<T> {
    *  message.
    *
    *  @param  request The request message or message payload.
-   *  @return The response message or message payload. May be null if
+   *  @return The response message or message payload. May be <code>null</code> if
               there is no response.
    *  @throws WebServiceException If there is an error processing request.
-   *          The cause of the WebServiceException may be set to a subclass
-   *          of ProtocolException to control the protocol level
+   *          The cause of the <code>WebServiceException</code> may be set to a subclass
+   *          of <code>ProtocolException</code> to control the protocol level
    *          representation of the exception.
    *  @see javax.xml.ws.handler.MessageContext
    *  @see javax.xml.ws.ProtocolException

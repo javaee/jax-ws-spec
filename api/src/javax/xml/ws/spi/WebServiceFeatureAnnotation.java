@@ -21,7 +21,8 @@ import javax.xml.ws.WebServiceFeature;
  * <code>enabled</code> property of type
  * <code>boolean</code> with a default value of <code>true</code>. 
  * JAX-WS defines the following
- * <code>WebServiceFeature</code> annotations, however, an implementation
+ * <code>WebServiceFeature</code> annotations (<code>Addressing</code>, 
+ * <code>MTOM</code>, <code>RespectBinding</code>), however, an implementation
  * may define vendors specific annotations for other features.
  * If a JAX-WS implementation encounters an annotation annotated
  * with the <code>WebServiceFeatureAnnotation</code> that it does not

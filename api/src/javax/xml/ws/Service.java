@@ -17,7 +17,7 @@ import javax.xml.ws.spi.Provider;
  * <p><code>Service</code> acts as a factory of the following:
  * <ul>
  * <li>Proxies for a target service endpoint.
- * <li>Instances of <code>javax.xml.ws.Dispatch</code> for
+ * <li>Instances of {@link javax.xml.ws.Dispatch} for
  *     dynamic message-oriented invocation of a remote
  *     operation.
  * </li>
@@ -46,8 +46,8 @@ public class Service {
     
     private ServiceDelegate delegate;
     /**
-     * The orientation of a dynamic client or service. MESSAGE provides
-     * access to entire protocol message, PAYLOAD to protocol message
+     * The orientation of a dynamic client or service. <code>MESSAGE</code> provides
+     * access to entire protocol message, <code>PAYLOAD</code> to protocol message
      * payload only.
      **/
     public enum Mode { MESSAGE, PAYLOAD };
@@ -60,7 +60,7 @@ public class Service {
     
     
     /** 
-     * The getPort method returns a proxy. A service client
+     * The <code>getPort</code> method returns a proxy. A service client
      * uses this proxy to invoke operations on the target
      * service endpoint. The <code>serviceEndpointInterface</code>
      * specifies the service endpoint interface that is supported by
@@ -93,7 +93,7 @@ public class Service {
     }
     
     /** 
-     * The getPort method returns a proxy. A service client
+     * The <code>getPort</code> method returns a proxy. A service client
      * uses this proxy to invoke operations on the target
      * service endpoint. The <code>serviceEndpointInterface</code>
      * specifies the service endpoint interface that is supported by
@@ -135,7 +135,7 @@ public class Service {
     
     
     /** 
-     * The getPort method returns a proxy. The parameter
+     * The <code>getPort</code> method returns a proxy. The parameter
      * <code>serviceEndpointInterface</code> specifies the service
      * endpoint interface that is supported by the returned proxy.
      * In the implementation of this method, the JAX-WS
@@ -163,7 +163,7 @@ public class Service {
        
     
     /**
-     * The getPort method returns a proxy. The parameter
+     * The <code>getPort</code> method returns a proxy. The parameter
      * <code>serviceEndpointInterface</code> specifies the service
      * endpoint interface that is supported by the returned proxy.
      * In the implementation of this method, the JAX-WS
@@ -201,7 +201,7 @@ public class Service {
 
     
     /** 
-     * The getPort method returns a proxy.
+     * The <code>getPort</code> method returns a proxy.
      * The parameter <code>endpointReference</code> specifies the
      * endpoint that will be invoked by the returned proxy.  If there
      * are any reference parameters in the 
@@ -233,7 +233,7 @@ public class Service {
      * <p>
      * Calling this method has the same behavior as the following
      * <pre>
-     * port = service.getPort(portName, serviceEndpointInterface);
+     * <code>port = service.getPort(portName, serviceEndpointInterface);</code>
      * </pre>
      * where the <code>portName</code> is retrieved from the 
      * <code>wsaw:EndpontName</code> attribute of the
@@ -307,7 +307,7 @@ public class Service {
         
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the users choosing.
+     * the user's choosing.
      *
      * @param portName  Qualified name for the target service endpoint
      * @param type The class of object used for messages or message
@@ -336,19 +336,19 @@ public class Service {
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the users choosing.
+     * the user's choosing.
      *
      * @param portName  Qualified name for the target service endpoint
      * @param type The class of object used for messages or message
      * payloads. Implementations are required to support
-     * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
+     * <code>javax.xml.transform.Source</code> and <code>javax.xml.soap.SOAPMessage</code>.
      * @param mode Controls whether the created dispatch instance is message
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
-     * when type is SOAPMessage.
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * SOAP messages or the contents of a SOAP body. Mode MUST be <code>MESSAGE</code>
+     * when type is <code>SOAPMessage</code>.
+     * @param features  A list of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *
@@ -372,7 +372,7 @@ public class Service {
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the users choosing. If there
+     * the user's choosing. If there
      * are any reference parameters in the 
      * <code>endpointReference</code>, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
@@ -393,7 +393,7 @@ public class Service {
      * <p>
      * This method behaves the same as calling
      * <pre>
-     * dispatch = service.createDispatch(portName, type, mode, features);
+     * <code>dispatch = service.createDispatch(portName, type, mode, features);</code>
      * </pre>
      * where the <code>portName</code> is retrieved from the 
      * <code>wsaw:EndpointName</code> attribute of the <code>wsaw:ServiceName</code>
@@ -408,14 +408,14 @@ public class Service {
      * returned <code>Dispatch</code> object.
      * @param type The class of object used to messages or message
      * payloads. Implementations are required to support
-     * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
+     * <code>javax.xml.transform.Source</code> and <code>javax.xml.soap.SOAPMessage</code>.
      * @param mode Controls whether the created dispatch instance is message
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
-     * when type is SOAPMessage.
-     * @param features  An array of WebServiceFeatures to configure on the 
+     * SOAP messages or the contents of a SOAP body. Mode MUST be <code>MESSAGE</code>
+     * when type is <code>SOAPMessage</code>.
+     * @param features  An array of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *
@@ -487,7 +487,7 @@ public class Service {
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body.
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  A list of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *
@@ -531,7 +531,7 @@ public class Service {
      * <p>
      * This method behavies the same as calling
      * <pre>
-     * dispatch = service.createDispatch(portName, context, mode, features);
+     * <code>dispatch = service.createDispatch(portName, context, mode, features);</code>
      * </pre>
      * where the <code>portName</code> is retrieved from the 
      * <code>wsaw:EndpointName</code> attribute of the <code>wsaw:ServiceName</code>
@@ -551,7 +551,7 @@ public class Service {
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body.
-     * @param features  An array of WebServiceFeatures to configure on the 
+     * @param features  An array of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *
@@ -680,14 +680,14 @@ public class Service {
     }
     
     /**
-     * Create a <code>Service</code> instance.
+     * Creates a <code>Service</code> instance.
      *
      * The specified WSDL document location and service qualified name MUST
      * uniquely identify a <code>wsdl:service</code> element.
      *
-     * @param wsdlDocumentLocation URL for the WSDL document location
+     * @param wsdlDocumentLocation <code>URL</code> for the WSDL document location
      *                             for the service
-     * @param serviceName QName for the service
+     * @param serviceName <code>QName</code> for the service
      * @throws WebServiceException If any error in creation of the
      *                    specified service.
      **/
@@ -698,9 +698,9 @@ public class Service {
     }
     
     /**
-     * Create a <code>Service</code> instance.
+     * Creates a <code>Service</code> instance.
      *
-     * @param serviceName QName for the service
+     * @param serviceName <code>QName</code> for the service
      * @throws WebServiceException If any error in creation of the
      *                    specified service
      */

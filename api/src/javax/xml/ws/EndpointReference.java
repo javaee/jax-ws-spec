@@ -83,26 +83,26 @@ public abstract class EndpointReference {
      *    if an error occurs while creating the
      *    <code>EndpointReference</code> from the <CODE>eprInfoset</CODE>
      * @throws java.lang.IllegalArgumentException
-     *     if the null <code>eprInfoset</tt> value is given.
+     *     if the <code>null</code> <code>eprInfoset</tt> value is given.
      */
     public static EndpointReference readFrom(Source eprInfoset) {
         return Provider.provider().readEndpointReference(eprInfoset);
     }
 
     /**
-     * write this EndpointReference to the specified infoset format
+     * write this <code>EndpointReference</code> to the specified infoset format
      * @throws WebServiceException
      *   if there is an error writing the
-     *   EndpointReference to the specified <code>result</code>.
+     *   <code>EndpointReference</code> to the specified <code>result</code>.
      *
      * @throws java.lang.IllegalArgumentException
-     *      If the null <code>result</tt> value is given.
+     *      If the <code>null</code> <code>result</tt> value is given.
      */
     public abstract void writeTo(Result result);
 
 
     /**
-     * The getPort method returns a proxy. If there
+     * The <code>getPort</coce> method returns a proxy. If there
      * are any reference parameters in the 
      * <code>EndpointReference</code> instance, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
@@ -118,15 +118,15 @@ public abstract class EndpointReference {
      * the WSDL Metadata from this <code>EndpointReference</code> or from
      * annotations on the <code>serviceEndpointInterface</code>.  
      * <p>
-     * Because this port is not created from a Service object, handlers 
-     * will not automatically be configured, and the HandlerResolver 
-     * and Executor cannot be get or set for this port. The 
+     * Because this port is not created from a <code>Service</code> object, handlers 
+     * will not automatically be configured, and the <code>HandlerResolver</code> 
+     * and <code>Executor</code> cannot be get or set for this port. The 
      * <code>BindingProvider().getBinding().setHandlerChain()</code>
      * method can be used to manually configure handlers for this port.
      *
      *
      * @param serviceEndpointInterface Service endpoint interface
-     * @param features  An array of WebServiceFeatures to configure on the 
+     * @param features  An array of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      * @return Object Proxy instance that supports the

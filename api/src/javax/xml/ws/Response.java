@@ -15,8 +15,8 @@ import java.util.concurrent.Future;
  *  <p>For asynchronous operation invocations it provides additional methods
  *  to check the status of the request. The <code>get(...)</code> methods may
  *  throw the standard
- *  set of exceptions and their cause may be a RemoteException or a  
- *  WebServiceException that represents the error that occured during the
+ *  set of exceptions and their cause may be a <code>RemoteException</code> or a  
+ *  {@link WebServiceException} that represents the error that occured during the
  *  asynchronous method invocation.</p>
  *
  *  @since JAX-WS 2.0

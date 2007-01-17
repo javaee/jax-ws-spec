@@ -55,7 +55,7 @@ public final class W3CEndpointReference extends EndpointReference {
     }
     
     /**
-     * construct an EPR from infoset representation
+     * Creates an EPR from infoset representation
      *
      * @param source A source object containing valid XmlInfoset
      * instance consistent with the W3C WS-Addressing Core

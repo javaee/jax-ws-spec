@@ -38,11 +38,11 @@ public interface Dispatch<T> extends BindingProvider {
      *  method returns without waiting for the response to the operation
      *  invocation, the results of the operation are obtained by polling the
      *  returned <code>Response</code>.
-     * 
+     * <p>
      * The client is responsible for ensuring that the <code>msg</code> object 
      * when marshalled is formed according to the requirements of the protocol
      * binding in use.
-     *
+     * 
      * @param msg An object that will form the message or payload of
      *     the message used to invoke the operation.
      * @return The response message or message payload to the
@@ -55,8 +55,8 @@ public interface Dispatch<T> extends BindingProvider {
     /** Invoke a service operation asynchronously. The
      *  method returns without waiting for the response to the operation
      *  invocation, the results of the operation are communicated to the client
-     *  via the passed in handler.
-     * 
+     *  via the passed in <code>handler</code>.
+     * <p>
      * The client is responsible for ensuring that the <code>msg</code> object 
      * when marshalled is formed according to the requirements of the protocol
      * binding in use.
@@ -68,7 +68,7 @@ public interface Dispatch<T> extends BindingProvider {
      * @return A <code>Future</code> object that may be used to check the status
      *     of the operation invocation. This object MUST NOT be used to try to
      *     obtain the results of the operation - the object returned from
-     *     <code>Future<?>.get()</code> is implementation dependent
+     *     <code>Future&lt;?>.get()</code> is implementation dependent
      *     and any use of it will result in non-portable behaviour.
      * @throws WebServiceException If there is any error in the configuration of
      *     the <code>Dispatch</code> instance
@@ -81,7 +81,7 @@ public interface Dispatch<T> extends BindingProvider {
      *  are returned. When
      *  the protocol in use is SOAP/HTTP, this method MUST block until
      *  an HTTP response code has been received or an error occurs.
-     *
+     * <p>
      * The client is responsible for ensuring that the <code>msg</code> object 
      * when marshalled is formed according to the requirements of the protocol
      * binding in use.

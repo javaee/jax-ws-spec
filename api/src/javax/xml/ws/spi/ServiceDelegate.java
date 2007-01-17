@@ -21,7 +21,7 @@ import javax.xml.ws.WebServiceException;
  * to allow pluggability of JAX-WS implementations.
  * <p>
  * Every <code>Service</code> object has its own delegate, created using
- * the javax.xml.ws.Provider#createServiceDelegate method. A <code>Service</code>
+ * the {@link javax.xml.ws.spi.Provider#createServiceDelegate} method. A <code>Service</code>
  * object delegates all of its instance methods to its delegate.
  *
  * @see javax.xml.ws.Service
@@ -35,7 +35,7 @@ public abstract class ServiceDelegate {
     }
     
     /** 
-     * The getPort method returns a proxy. A service client
+     * The <code>getPort</code> method returns a proxy. A service client
      * uses this proxy to invoke operations on the target
      * service endpoint. The <code>serviceEndpointInterface</code>
      * specifies the service endpoint interface that is supported by
@@ -66,7 +66,7 @@ public abstract class ServiceDelegate {
             Class<T> serviceEndpointInterface);
     
     /** 
-     * The getPort method returns a proxy. A service client
+     * The <code>getPort</code> method returns a proxy. A service client
      * uses this proxy to invoke operations on the target
      * service endpoint. The <code>serviceEndpointInterface</code>
      * specifies the service endpoint interface that is supported by
@@ -105,7 +105,7 @@ public abstract class ServiceDelegate {
             Class<T> serviceEndpointInterface, WebServiceFeature... features);    
     
     /** 
-     * The getPort method returns a proxy.
+     * The <code>getPort</code> method returns a proxy.
      * The parameter <code>endpointReference</code> specifies the
      * endpoint that will be invoked by the returned proxy.  If there
      * are any reference parameters in the 
@@ -137,7 +137,7 @@ public abstract class ServiceDelegate {
      * <p>
      * Calling this method has the same behavior as the following
      * <pre>
-     * port = service.getPort(portName, serviceEndpointInterface);
+     * <code>port = service.getPort(portName, serviceEndpointInterface);</code>
      * </pre>
      * where the <code>portName</code> is retrieved from the 
      * <code>wsaw:EndpontName</code> attribute of the
@@ -153,7 +153,7 @@ public abstract class ServiceDelegate {
      * for the target service endpoint that will be invoked by the
      * returned proxy.
      * @param serviceEndpointInterface Service endpoint interface.
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  A list of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      * @return Object Proxy instance that supports the
@@ -189,7 +189,7 @@ public abstract class ServiceDelegate {
 
     
     /** 
-     * The getPort method returns a proxy. The parameter
+     * The <code>getPort</code> method returns a proxy. The parameter
      * <code>serviceEndpointInterface</code> specifies the service
      * endpoint interface that is supported by the returned proxy.
      * In the implementation of this method, the JAX-WS
@@ -215,7 +215,7 @@ public abstract class ServiceDelegate {
 
     
     /**
-     * The getPort method returns a proxy. The parameter
+     * The <code>getPort</code> method returns a proxy. The parameter
      * <code>serviceEndpointInterface</code> specifies the service
      * endpoint interface that is supported by the returned proxy.
      * In the implementation of this method, the JAX-WS
@@ -224,7 +224,7 @@ public abstract class ServiceDelegate {
      * The returned proxy should not be reconfigured by the client.
      *
      * @param serviceEndpointInterface Service endpoint interface
-     * @param features  An array of WebServiceFeatures to configure on the 
+     * @param features  An array of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      * @return Object instance that supports the
@@ -273,18 +273,18 @@ public abstract class ServiceDelegate {
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the users choosing.
+     * the user's choosing.
      *
      * @param portName  Qualified name for the target service endpoint
      * @param type The class of object used for messages or message
      * payloads. Implementations are required to support
-     * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
+     * <code>javax.xml.transform.Source</code> and <code>javax.xml.soap.SOAPMessage</code>.
      * @param mode Controls whether the created dispatch instance is message
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
-     * when type is SOAPMessage.
+     * SOAP messages or the contents of a SOAP body. Mode MUST be <code>MESSAGE</code>
+     * when type is <code>SOAPMessage</code>.
      *
      * @return Dispatch instance
      * @throws WebServiceException If any error in the creation of
@@ -297,19 +297,19 @@ public abstract class ServiceDelegate {
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the users choosing.
+     * the user's choosing.
      *
      * @param portName  Qualified name for the target service endpoint
      * @param type The class of object used for messages or message
      * payloads. Implementations are required to support
-     * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
+     * <code>javax.xml.transform.Source</code> and <code>javax.xml.soap.SOAPMessage</code>.
      * @param mode Controls whether the created dispatch instance is message
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
-     * when type is SOAPMessage.
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * SOAP messages or the contents of a SOAP body. Mode MUST be <code>MESSAGE</code>
+     * when type is <code>SOAPMessage</code>.
+     * @param features  A list of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *
@@ -331,7 +331,7 @@ public abstract class ServiceDelegate {
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the users choosing. If there
+     * the user's choosing. If there
      * are any reference parameters in the 
      * <code>endpointReference</code>, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
@@ -352,7 +352,7 @@ public abstract class ServiceDelegate {
      * <p>
      * This method behaves the same as calling
      * <pre>
-     * dispatch = service.createDispatch(portName, type, mode, features);
+     * <code>dispatch = service.createDispatch(portName, type, mode, features);</code>
      * </pre>
      * where the <code>portName</code> is retrieved from the 
      * <code>wsaw:EndpointName</code> attribute of the <code>wsaw:ServiceName</code>
@@ -367,14 +367,14 @@ public abstract class ServiceDelegate {
      * returned <code>Dispatch</code> object.
      * @param type The class of object used to messages or message
      * payloads. Implementations are required to support
-     * javax.xml.transform.Source and javax.xml.soap.SOAPMessage.
+     * <code>javax.xml.transform.Source</code> and <code>javax.xml.soap.SOAPMessage</code>.
      * @param mode Controls whether the created dispatch instance is message
      * or payload oriented, i.e. whether the user will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
-     * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
-     * when type is SOAPMessage.
-     * @param features  An array of WebServiceFeatures to configure on the 
+     * SOAP messages or the contents of a SOAP body. Mode MUST be <code>MESSAGE</code>
+     * when type is <code>SOAPMessage</code>.
+     * @param features  An array of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *
@@ -444,7 +444,7 @@ public abstract class ServiceDelegate {
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body.
-     * @param features  A list of WebServiceFeatures to configure on the 
+     * @param features  A list of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *
@@ -485,7 +485,7 @@ public abstract class ServiceDelegate {
      * <p>
      * This method behavies the same as calling
      * <pre>
-     * dispatch = service.createDispatch(portName, context, mode, features);
+     * <code>dispatch = service.createDispatch(portName, context, mode, features);</code>
      * </pre>
      * where the <code>portName</code> is retrieved from the 
      * <code>wsaw:EndpointName</code> attribute of the <code>wsaw:ServiceName</code>
@@ -505,7 +505,7 @@ public abstract class ServiceDelegate {
      * protocol messages or message payloads. E.g. when using the SOAP
      * protocol, this parameter controls whether the user will work with
      * SOAP messages or the contents of a SOAP body.
-     * @param features  An array of WebServiceFeatures to configure on the 
+     * @param features  An array of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
      *                </code> parameter will have their default values.
      *

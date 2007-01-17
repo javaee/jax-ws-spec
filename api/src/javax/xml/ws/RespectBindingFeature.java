@@ -80,7 +80,7 @@ public final class RespectBindingFeature extends WebServiceFeature {
     
     
     /**
-     * Create an <code>RespectBindingFeature</code>.
+     * Creates an <code>RespectBindingFeature</code>.
      * The instance created will be enabled.
      */
     public RespectBindingFeature() {
@@ -88,7 +88,7 @@ public final class RespectBindingFeature extends WebServiceFeature {
     }
 
     /**
-     * Create an RespectBindingFeature
+     * Creates an RespectBindingFeature
      * 
      * @param enabled specifies whether this feature should
      * be enabled or not.

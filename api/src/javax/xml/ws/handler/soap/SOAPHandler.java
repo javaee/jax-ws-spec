@@ -21,7 +21,7 @@ public interface SOAPHandler<T extends SOAPMessageContext>
   /** Gets the header blocks that can be processed by this Handler
    *  instance.
    *
-   *  @return Set of QNames of header blocks processed by this
+   *  @return Set of <code>QNames</code> of header blocks processed by this
    *           handler instance. <code>QName</code> is the qualified 
    *           name of the outermost element of the Header block.
   **/
