@@ -1,132 +1,0 @@
-\documentclass[11pt, dvipdfm]{article}\usepackage[hyperref, thmmarks]{ntheorem}\usepackage{times}
-\usepackage[pagewise, right]{lineno}\usepackage{moreverb}
-\usepackage[dvips]{graphicx}\usepackage[dvips,  pdftitle={Refactoring Context},  pdfauthor={Marc J. Hadley, Sun Microsystems Inc.},  pdfsubject={The Java API for XML Based RPC (JAX-RPC) 2.0},  pdfkeywords={Java XML RPC API},  letterpaper=true,  bookmarksnumbered=true]{hyperref}% set up page dimensions\textwidth = 6.5 in
-\textheight = 9 in
-\oddsidemargin = 0.0 in
-\evensidemargin = 0.0 in
-\topmargin = 0.0 in
-\headheight = 0.0 in
-\headsep = 0.0 in
-\parskip = 0.2in
-\parindent = 0.0in\footskip=0.5in%\renewcommand{\today}{August 31, 2004}
-\title{Refactoring Context}
-\author{Marc Hadley\\ Sun Microsystems, Inc}
-\begin{document}
-\newcommand{\code}[1]{\texttt{\small #1}}\renewcommand\verbatimtabsize{4\relax}\maketitle
-\linenumbers
-
-\section{Introduction}
-
-In the current draft, the client-side context is subdivided into three separate compartments:
-
-\begin{description}
-\item[Request] A property bag, of type \code{JAXRPCContext}, accessible from the message context as a property named \code{javax\-.xml\-.rpc\-.handler\-.context\-.request}. When a method is invoked on a \code{Binding\-Provider} (\code{Stub}, \code{Dispatch} or \code{Call} instance), this property bag is initialized by copying the contents of the \code{JAXRPCContext} accessible from \code{Binding\-Provider\-.get\-Request\-Context()}.
-
-\item[Response] A property bag, of type \code{JAXRPCContext}, accessible from the message context as a property named \code{javax\-.xml\-.rpc\-.handler\-.context\-.response}. For synchronous methods, the contents of this property bag are copied to the \code{JAXRPCContext} accessible from \code{Binding\-Provider\-.get\-Response\-Context()} when a method invocation completes. For asynchronous methods, this property bag is made available via the \code{Response\-.get\-Context()} method.
-
-\item[Message] A property bag, of type \code{MessageContext}, accessible only to handlers. The value of the \code{javax\-.xml\-.rpc\-.handler\-.context\-.response} property is exposed to client code when a method invocation completes, handlers can access all properties.
-\end{description}
-
-Table \ref{current} shows context values before, during and after, an example method invocation.
-
-\begin{table}[htbp]
-\begin{center}
-\begin{minipage}{0.8\textwidth}
-\caption{Context value before, during and after, an example method invocation (based on current draft)}
-\label{current}
-\begin{center}
-\begin{tabular}{| l || l | l | l |}
-\hline
-& \multicolumn{3}{c|}{\bfseries Context} \tabularnewline
-\bfseries State & \bfseries Request & \bfseries Message & \bfseries Response \\
-\hline\hline
-Before & \code{foo=bar}\footnote{An example property set by a client on a binding provider.} & \code{null} & \itshape Empty  \\
-\hline
-During & \code{foo=bar} & \code{foo2=bar2}\footnote{An example message context property set by a handler.} & \itshape Empty \\
-&&  \code{javax\-.xml\-.rpc\-.handler\-.context} & \\
-&& \code{.request=\{foo=bar\footnote{Copied from request context.}, foo3=bar3\footnote{An example request context property set by a handler.}\}} & \\
-&& \code{.response=\{foo4=bar4\footnote{An example response context property set by a handler.}\}} & \\
-\hline
-After & \code{foo=bar} & \code{null} & \code{foo4=bar4\footnote{Copied from response property in message context.}} \\
-\hline
-\end{tabular}
-\end{center}
-\end{minipage}
-\end{center}
-\end{table}
-
-This current compartmentalization scheme has a number of advantages and disadvantages:
-
-\begin{itemize}
-\item[+] The properties in the request context can be set up before a sequence of method invocations since the results of each invocation do not affect the request context of subsequent invocations.
-\item[+] Only a subset of the properties set by handlers are visible to client code.
-\item[+] Properties that will be made available to client code are clearly demarked from those that are private to handlers.
-\item[-] The subdivisions are a client side only construct, writing a handler that works on client and server can be more complex because of this.
-\item[-] Its not entirely intuitive that changes made to the request context property are not visible to the client code.
-\item[-] There's no inheritance relationship between \code{Message\-Context} and \code{JAX\-RPC\-Context} though they share many identical methods and a similar purpose.
-\end{itemize}
-
-\section{Proposed Changes}
-
-In order to clean up the relationship between \code{Message\-Context} and \code{JAX\-RPC\-Context}, to improve the symmetry between client and server sides, and to maintain the existing advantages listed above the following changes are proposed:
-
-\begin{enumerate}
-
-\item Make \code{Message\-Context} extend \code{JAX\-RPC\-Context}.
-
-\item Add the following to \code{Message\-Context}:
-
-{\small
-\begin{listing}{1}
-public enum Scope {APPLICATION, HANDLER};
-public void setPropertyScope(String name, Scope scope);
-public Scope getPropertyScope(String name);
-\end{listing}
-}
-
-\item Eliminate the current client-side compartmentalization such that:
-\begin{itemize}
-\item Properties set in the request context prior to a method invocation are used to seed the message context for outbound messages.
-\item Only properties whose scope is \code{APPLICATION} are made available in the response context after a method invocation.
-\end{itemize}
-
-\item Default scope is \code{HANDLER}. Properties have to be explicitly marked as visible to the application. Request context properties are not normally copied to the response context unless their scope is changed to \code{APPLICATION} by a handler.
-
-\end{enumerate}
-
-Table \ref{proposed} shows context values before, during and after, an example method invocation with the changes proposed above.
-
-\begin{table}[htbp]
-\begin{center}
-\begin{minipage}{0.8\textwidth}
-\caption{Context value before, during and after, an example method invocation (based on proposed changes)}
-\label{proposed}
-\begin{center}
-\begin{tabular}{| l || l | l | l |}
-\hline
-& \multicolumn{3}{c|}{\bfseries Context} \tabularnewline
-\bfseries State & \bfseries Request & \bfseries Message & \bfseries Response \\
-\hline\hline
-Before & \code{foo=bar}\footnote{An example property set by a client on a binding provider.} & \code{null} & \itshape Empty  \\
-\hline
-During & \code{foo=bar} & \code{foo(HANDLER)=bar}\footnote{Copied from request context with \code{HANDLER} scope.} & \itshape Empty \\
-&& \code{foo2(HANDLER)=bar2}\footnote{An example message context property set by a handler with \code{HANDLER} scope.} & \itshape Empty \\
-&& \code{foo3(APPLICATION)=bar3}\footnote{An example message context property set by a handler with \code{APPLICATION} scope.} & \itshape Empty \\
-\hline
-After & \code{foo=bar} & \code{null} & \code{foo3=bar3\footnote{Copied from message context.}} \\
-\hline
-\end{tabular}
-\end{center}
-\end{minipage}
-\end{center}
-\end{table}
-
-If issue 12 is resolved by defining different types of endpoints:
-
-\begin{description}
-\item[Legacy] An endpoint that can obtain a \code{Message\-Context} or \code{SOAP\-Message\-Context} from \code{Servlet\-Endpoint\-Context\-.get\-Message\-Context}. Supported for backwards compatibility with JAX-RPC 1.1 endpoints.
-\item[Protocol neutral] An endpoint that can obtain a \code{Logical\-Message\-Context}  from \code{Servlet\-Endpoint\-Context\-.get\-Message\-Context}.
-\end{description}
-
-Then it would be possible to extend the property scoping rules to the server side. If scoping is extended in this way then it might be appropriate to define a \code{Service\-Context} class to encapsulate the property scoping behavior.
-\end{document}
