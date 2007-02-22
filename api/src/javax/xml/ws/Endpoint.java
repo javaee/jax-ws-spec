@@ -129,11 +129,16 @@ public abstract class Endpoint {
      *        time the endpoint was created.
      *
      * @throws java.lang.IllegalArgumentException 
-     *              If the provided address URI is not usable
-     *              in conjunction with the endpoint's binding.
+     *          If the provided address URI is not usable
+     *          in conjunction with the endpoint's binding.
      *
      * @throws java.lang.IllegalStateException 
-     *         If the endpoint has been published already or it has been stopped.
+     *          If the endpoint has been published already or it has been stopped.
+     *
+     * @throws java.lang.SecurityException 
+     *          If a <code>java.lang.SecurityManger</code>
+     *          is being used and the application doesn't have the
+     *          <code>WebServicePermission("publishEndpoint")</code> permission.
      **/
     public abstract void publish(String address);
     
@@ -155,6 +160,11 @@ public abstract class Endpoint {
      * @param implementor The endpoint implementor.
      *
      * @return The newly created endpoint.
+     *
+     * @throws java.lang.SecurityException 
+     *          If a <code>java.lang.SecurityManger</code>
+     *          is being used and the application doesn't have the
+     *          <code>WebServicePermission("publishEndpoint")</code> permission.
      *
      **/
     public static Endpoint publish(String address, Object implementor) {
@@ -180,6 +190,11 @@ public abstract class Endpoint {
      *
      * @throws java.lang.IllegalStateException 
      *         If the endpoint has been published already or it has been stopped.
+     *
+     * @throws java.lang.SecurityException 
+     *          If a <code>java.lang.SecurityManger</code>
+     *          is being used and the application doesn't have the
+     *          <code>WebServicePermission("publishEndpoint")</code> permission.
      **/
     public abstract void publish(Object serverContext);
     
