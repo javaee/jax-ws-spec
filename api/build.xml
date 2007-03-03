@@ -94,7 +94,12 @@
                  author="true"
                  version="true"
                  windowtitle="JAX-WS ${release.spec.version}">
-            <sourcepath>
+            <taglet name="com.sun.xml.ws.taglets.AddTaglet"
+                path="lib/jaxwstaglets.jar">
+            </taglet>                    
+            <taglet name="com.sun.xml.ws.taglets.DeleteTaglet"
+                path="lib/jaxwstaglets.jar">
+            </taglet>               <sourcepath>
                 <pathelement path="src"/>
             </sourcepath>
             <classpath refid="doc.classpath" />

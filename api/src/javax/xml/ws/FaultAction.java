@@ -16,9 +16,9 @@ import java.lang.annotation.Target;
  * Action</a> annotation to allow an explicit association of <code>Action</code> message
  * addressing property with the <code>fault</code> messages of the WSDL operation mapped from
  * the exception class.
- * <p>
+ * <p>{@delete 
  * The <code>fault</code> message in the generated WSDL operation mapped for <code>className</code> 
- * class contains explicit <code>wsaw:Action</code> attribute.
+ * class contains explicit <code>wsaw:Action</code> attribute.}
  *
  * <p>
  * <b>Example 1</b>: Specify explicit values for <code>Action</code> message addressing 
@@ -41,9 +41,9 @@ import java.lang.annotation.Target;
  * }
  * </pre>
  * 
- * The generated WSDL looks like:
+ * {@delete The generated WSDL looks like:}
  * 
- * <pre>
+ * <pre>{@delete
  *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
  *   ...
  *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
@@ -57,7 +57,7 @@ import java.lang.annotation.Target;
  *       &lt;/operation&gt;
  *     &lt;portType&gt;
  *   ...
- *   &lt;definitions&gt;
+ *   &lt;definitions&gt;}
  * </pre>
  *
  * <p>
@@ -79,9 +79,9 @@ import java.lang.annotation.Target;
  * }
  * </pre>
  * 
- * The generated WSDL looks like:
+ * {@delete The generated WSDL looks like:}
  * 
- * <pre>
+ * <pre>{@delete 
  *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
  *   ...
  *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
@@ -93,7 +93,7 @@ import java.lang.annotation.Target;
  *       &lt;/operation&gt;
  *     &lt;portType&gt;
  *   ...
- *   &lt;definitions&gt;
+ *   &lt;definitions&gt;}
  * </pre>
  * 
  * <p>
@@ -115,9 +115,9 @@ import java.lang.annotation.Target;
  * }
  * </pre>
  * 
- * The generated WSDL looks like:
+ * {@delete The generated WSDL looks like:}
  * 
- * <pre>
+ * <pre>{@delete 
  *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
  *   ...
  *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
@@ -131,7 +131,7 @@ import java.lang.annotation.Target;
  *       &lt;/operation&gt;
  *     &lt;portType&gt;
  *   ...
- *   &lt;definitions&gt;
+ *   &lt;definitions&gt;}
  * </pre>
  * 
  * @since JAX-WS 2.1

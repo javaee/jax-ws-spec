@@ -17,10 +17,10 @@ import java.lang.annotation.Target;
  * <code>fault</code> messages of the mapped WSDL operation. 
  * <p>
  * This annotation can be specified on each method of a service endpoint interface. 
- * For such a method, the mapped operation in the generated WSDL 
+ * {@delete For such a method, the mapped operation in the generated WSDL 
  * contains explicit <code>wsaw:Action</code> attribute on the WSDL <code>input</code>, 
  * <code>output</code> and <code>fault</code> messages of the WSDL <code>operation</code> 
- * based upon which attributes of the <code>Action</code> annotation have been specified.
+ * based upon which attributes of the <code>Action</code> annotation have been specified.}
  * <p>
  * <b>Example 1</b>: Specify explicit values for <code>Action</code> message addressing property 
  * for <code>input</code> and <code>output</code> messages.
@@ -37,8 +37,8 @@ import java.lang.annotation.Target;
  * }
  * </pre>
  * 
- * The generated WSDL looks like:
- * <pre>
+ * {@delete The generated WSDL looks like:}
+ * <pre>{@delete 
  *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
  *   ...
  *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
@@ -50,9 +50,9 @@ import java.lang.annotation.Target;
  *       &lt;/operation&gt;
  *     &lt;portType&gt;
  *   ...
- *   &lt;definitions&gt;
+ *   &lt;definitions&gt;}
  * </pre>
- * 
+ * }
  * <p>
  * <b>Example 2</b>: Specify explicit value for <code>Action</code> message addressing property
  * for only the <code>input</code> message. The default values are used for the 
@@ -68,9 +68,9 @@ import java.lang.annotation.Target;
  * }
  * </pre>
  * 
- * The generated WSDL looks like:
+ * {@delete The generated WSDL looks like:}
  * 
- * <pre>
+ * <pre>{@delete
  *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
  *   ...
  *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
@@ -81,7 +81,7 @@ import java.lang.annotation.Target;
  *       &lt;/operation&gt;
  *     &lt;portType&gt;
  *   ...
- *   &lt;definitions&gt;
+ *   &lt;definitions&gt;}
  * </pre>
  *
  * It is legitimate to specify an explicit value for <code>Action</code> message addressing property for

@@ -17,7 +17,7 @@ import java.io.StringWriter;
  * This class represents an WS-Addressing EndpointReference
  * which is a remote reference to a web service endpoint. 
  * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">
- * WS-Addressing</a> 
+ * Web Services Addressing 1.0 - Core</a> 
  * for more information on WS-Addressing EndpointReferences.
  * <p>  
  * This class is immutable as the typical web service developer
@@ -33,11 +33,11 @@ import java.io.StringWriter;
  * Concrete implementations of this class will represent
  * an <code>EndpointReference</code> for a particular version of Addressing.
  * For example the {@link W3CEndpointReference} is for use
- * with W3C WS-Addressing 1.0 - Core Recommendation. 
+ * with W3C Web Services Addressing 1.0 - Core Recommendation. 
  * If JAX-WS implementors need to support different versions
  * of addressing, they should write their own 
  * <code>EndpointReference</code> subclass for that version.
- * This will allow a JAX-WS implementation to createEndpointReference
+ * This will allow a JAX-WS implementation to create
  * vendor specific <code>EndpointReferences</code> that that
  * vendor can use to flag a different version of
  * addressing.
@@ -137,6 +137,11 @@ public abstract class EndpointReference {
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method 
+     *                  <LI>If there is any missing WSDL metadata
+     *                      as required by this method 
+     *                  <LI>{@add If the metadata the <code>EndpointReference</code> instance does
+     *                      not match the <code>serviceName</code> of a WSDL associated
+     *                      with the <code>serviceEndpointInterface</code>.}
      *                  <LI>If this
      *                      <code>endpointReference</code>
      *                      is invalid

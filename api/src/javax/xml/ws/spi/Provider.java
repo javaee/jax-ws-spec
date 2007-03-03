@@ -1,12 +1,11 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.8 2007-01-19 19:47:34 kohlert Exp $
+ *$Id: Provider.java,v 1.8.2.1 2007-03-03 00:12:00 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
 
-//import java.util.List;
 import java.util.List;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.WebServiceException;
@@ -172,7 +171,8 @@ public abstract class Provider {
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
-     * the WSDL Metadata from the <code>EndpointReference</code>.
+     * the {@delete WSDL Metadata from the}{@add WSDL metadata of the
+     * <code>Service</code> instance and the }<code>EndpointReference</code>.
      *
      *
      * @param endpointReference the EndpointReference that will
@@ -188,7 +188,14 @@ public abstract class Provider {
      *                  <LI>If there is an error during creation
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
-     *                      as required by this method
+     *                      as required by this method}
+     *                  <LI>{@add If the <code>serviceName</code> and
+     *                      <code>portName</code> cannot be determined
+     *                      from the WSDL metadata or <code>EndpointReference</code>
+     *                      metadata.}
+     *                  <LI>{@add If the <code>endpointReference</code> metadata does
+     *                      not match the <code>serviceName</code> of a WSDL associated
+     *                      with the <code>serviceEndpointInterface</code>.}
      *                  <LI>If this
      *                      <code>endpointReference</code>
      *                      is illegal

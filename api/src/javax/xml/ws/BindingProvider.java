@@ -105,7 +105,7 @@ public interface BindingProvider {
      * If the Binding for this <code>bindingProvider</code> is
      * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a
      * <code>W3CEndpointReference</code> MUST be returned.
-     * If the returned <code>EndpointReference</code> is a
+     * {@delete If the returned <code>EndpointReference</code> is a
      * <code>W3CEndpointReference</code> it MUST contain 
      * the <code>wsaw:ServiceName</code> element and the 
      * <code>wsaw:EndpointName</code> attribute on the 
@@ -115,7 +115,7 @@ public interface BindingProvider {
      * <code>wsaw:InterfaceName</code> MAY also be present. 
      * <br>
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
-     * WS-Addressing - WSDL 1.0</a>.
+     * WS-Addressing - WSDL 1.0</a>.}
      *
      * @return EndpointReference of the target endpoint associated with this
      * <code>BindingProvider</code> instance.
@@ -135,7 +135,7 @@ public interface BindingProvider {
      * this <code>BindingProvider</code> instance.  The instance
      * returned will be of type <code>clazz</code>.
      * <p>
-     * If the returned <code>EndpointReference</code> is a
+     * {@delete If the returned <code>EndpointReference</code> is a
      * <code>W3CEndpointReference</code> it MUST contain 
      * the <code>wsaw:ServiceName</code> element and the 
      * <code>wsaw:EndpointName</code> attribute on the 
@@ -145,7 +145,7 @@ public interface BindingProvider {
      * <code>wsaw:InterfaceName</code> MAY also be present. 
      * <br>
      * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
-     * WS-Addressing - WSDL 1.0</a>.
+     * WS-Addressing - WSDL 1.0</a>.}
      *
      * @param clazz Specifies the type of <code>EndpointReference</code>
      * that MUST be returned.
