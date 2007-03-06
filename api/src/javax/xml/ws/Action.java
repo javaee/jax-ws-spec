@@ -15,8 +15,8 @@ import java.lang.annotation.Target;
  * {@add This definition of this annotation is only partly defined in this release of JAX-WS as
  * there is no standard way to convey its meaning via a WSDL.
  * A future release of JAX-WS will provide that standard mechanism to convey the meaning
- * of this annotation via a WSDL.  An implementation MAY indicate via WSDL in a non-standard
- * way the meaning of this annotation.}
+ * of this annotation via a WSDL.  An implementation MAY indicate via WSDL, in a non-standard
+ * way, the meaning of this annotation.}
  * <p>
  * The <code>Action</code> annotation allows explicit association of <code>Action</code> 
  * message addressing property with <code>input</code>, <code>output</code>, and 

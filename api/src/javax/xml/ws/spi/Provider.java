@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.8.2.2 2007-03-06 19:27:10 kohlert Exp $
+ *$Id: Provider.java,v 1.8.2.3 2007-03-06 21:24:03 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -12,7 +12,6 @@ import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
 import javax.xml.namespace.QName;
 import javax.xml.ws.EndpointReference;
-import javax.xml.transform.Source;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
 
 import org.w3c.dom.Element;
@@ -154,7 +153,9 @@ public abstract class Provider {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset);
+    public EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset) {
+        throw new UnsupportedOperationException();
+    }
      
     
     /**
@@ -214,9 +215,11 @@ public abstract class Provider {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract <T> T getPort(EndpointReference endpointReference,
+    public <T> T getPort(EndpointReference endpointReference,
             Class<T> serviceEndpointInterface,
-            WebServiceFeature... features);  
+            WebServiceFeature... features) {
+        throw new UnsupportedOperationException();
+    }  
     
     /**
      * Factory method to create a <code>W3CEndpointReference</code>.
@@ -276,6 +279,8 @@ public abstract class Provider {
      *
      * @since JAX-WS 2.1
      */
-    public abstract W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
-            List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters);    
+    public W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
+            List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters) {
+        throw new UnsupportedOperationException();
+    }
 }

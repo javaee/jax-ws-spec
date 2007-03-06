@@ -149,6 +149,6 @@ public interface WebServiceContext {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
-            Element... referenceParameters);    
+    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
+            Element... referenceParameters);
 }

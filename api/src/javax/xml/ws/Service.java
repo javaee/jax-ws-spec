@@ -283,7 +283,7 @@ public class Service {
      *                      with this port or is unsupported.
      *                  </UL>
      *
-     *  @since JAX-WS 2.1
+     * @since JAX-WS 2.1
      **/
     public <T> T getPort(EndpointReference endpointReference,
            Class<T> serviceEndpointInterface, WebServiceFeature... features) {

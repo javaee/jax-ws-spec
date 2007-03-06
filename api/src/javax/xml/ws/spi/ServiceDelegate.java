@@ -101,8 +101,10 @@ public abstract class ServiceDelegate {
      * 
      * @since JAX-WS 2.1
      **/
-    public abstract <T> T getPort(QName portName,
-            Class<T> serviceEndpointInterface, WebServiceFeature... features);    
+    public <T> T getPort(QName portName,
+            Class<T> serviceEndpointInterface, WebServiceFeature... features) {
+        throw new UnsupportedOperationException();
+    }    
     
     /** 
      * The <code>getPort</code> method returns a proxy.
@@ -187,10 +189,12 @@ public abstract class ServiceDelegate {
      *                      with this port or is unsupported.
      *                  </UL>
      *
-     *  @since JAX-WS 2.1
+     * @since JAX-WS 2.1
      **/
-    public abstract <T> T getPort(EndpointReference endpointReference,
-           Class<T> serviceEndpointInterface, WebServiceFeature... features);
+    public <T> T getPort(EndpointReference endpointReference,
+           Class<T> serviceEndpointInterface, WebServiceFeature... features) {
+        throw new UnsupportedOperationException();
+    }
 
     
     /** 
@@ -251,8 +255,10 @@ public abstract class ServiceDelegate {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract <T> T getPort(Class<T> serviceEndpointInterface, 
-            WebServiceFeature... features);
+    public <T> T getPort(Class<T> serviceEndpointInterface, 
+            WebServiceFeature... features) {
+        throw new UnsupportedOperationException();
+    }
 
     
     
@@ -330,8 +336,10 @@ public abstract class ServiceDelegate {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract <T> Dispatch<T> createDispatch(QName portName, Class<T> type, 
-            Service.Mode mode, WebServiceFeature... features);    
+    public <T> Dispatch<T> createDispatch(QName portName, Class<T> type, 
+            Service.Mode mode, WebServiceFeature... features) {
+        throw new UnsupportedOperationException();
+    }
     
     
     /** 
@@ -415,9 +423,11 @@ public abstract class ServiceDelegate {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract <T> Dispatch<T> createDispatch(EndpointReference endpointReference,
+    public <T> Dispatch<T> createDispatch(EndpointReference endpointReference,
             Class<T> type, Service.Mode mode, 
-            WebServiceFeature... features);    
+            WebServiceFeature... features) {
+        throw new UnsupportedOperationException();
+    }    
 
 
     
@@ -471,8 +481,10 @@ public abstract class ServiceDelegate {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract Dispatch<Object> createDispatch(QName portName,
-            JAXBContext context, Service.Mode mode, WebServiceFeature... features);    
+    public Dispatch<Object> createDispatch(QName portName,
+            JAXBContext context, Service.Mode mode, WebServiceFeature... features) {
+        throw new UnsupportedOperationException();
+    }  
    
     /** 
      * Creates a <code>Dispatch</code> instance for use with JAXB
@@ -552,9 +564,11 @@ public abstract class ServiceDelegate {
      *
      * @since JAX-WS 2.1
     **/
-    public abstract Dispatch<Object> createDispatch(EndpointReference endpointReference,
+    public Dispatch<Object> createDispatch(EndpointReference endpointReference,
             JAXBContext context, Service.Mode mode,
-            WebServiceFeature... features);
+            WebServiceFeature... features) {
+        throw new UnsupportedOperationException();
+    }
         
     
     /** 

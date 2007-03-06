@@ -321,7 +321,9 @@ public abstract class Endpoint {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract EndpointReference getEndpointReference(Element... referenceParameters);
+    public EndpointReference getEndpointReference(Element... referenceParameters) {
+        throw new UnsupportedOperationException();
+    }
     
     
     /**
@@ -359,6 +361,8 @@ public abstract class Endpoint {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
-            Element... referenceParameters); 
+    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
+            Element... referenceParameters) {
+        throw new UnsupportedOperationException();
+    }
 }
