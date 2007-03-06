@@ -137,10 +137,10 @@ public abstract class EndpointReference {
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method 
-     *                  <LI>If there is any missing WSDL metadata
-     *                      as required by this method 
-     *                  <LI>{@add If the metadata the <code>EndpointReference</code> instance does
-     *                      not match the <code>serviceName</code> of a WSDL associated
+     *                  <LI>{@add If any implementation supported metadata 
+     *                      in the <code>EndpointReference</code> instance does
+     *                      not match the <code>serviceName</code> or <code>portName</code>
+     *                      of a WSDL associated
      *                      with the <code>serviceEndpointInterface</code>.}
      *                  <LI>If this
      *                      <code>endpointReference</code>

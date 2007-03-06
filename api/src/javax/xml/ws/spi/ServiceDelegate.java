@@ -123,11 +123,11 @@ public abstract class ServiceDelegate {
      * the WSDL associated with this <code>Service</code> instance or
      * from the{@delete WSDL} metadata from the <code>endpointReference</code>.
      * If this <code>Service</code> instance has a WSDL and 
-     * the <code>endpointReference</code>{@add metadata }
-     * also has a WSDL, then the WSDL from this instance{@delete will}{@add MUST} be used.
+     * the <code>endpointReference</code> {@add metadata }
+     * also has a WSDL, then the WSDL from this instance{ @delete will}{@add MUST} be used.
      * If this <code>Service</code> instance does not have a WSDL and
      * the <code>endpointReference</code> does have a WSDL, then the 
-     * WSDL from the <code>endpointReference</code>{@delete will}{@add MAY} be used.
+     * WSDL from the <code>endpointReference</code> {@delete will}{@add MAY} be used.
      * The returned proxy should not be reconfigured by the client.
      * If this <code>Service</code> instance has a known proxy 
      * port that matches the information contained in 
@@ -350,7 +350,7 @@ public abstract class ServiceDelegate {
      * from the{@delete WSDL} metadata from the <code>endpointReference</code>.
      * If this <code>Service</code> instance has a WSDL and 
      * the <code>endpointReference</code>
-     * also has a WSDL{@add in its metadata}, then the WSDL from this instance MUST be used.
+     * also has a WSDL {@add in its metadata}, then the WSDL from this instance MUST be used.
      * If this <code>Service</code> instance does not have a WSDL and
      * the <code>endpointReference</code> does have a WSDL, then the 
      * WSDL from the <code>endpointReference</code> {@delete will}{@add MAY} be used.     
@@ -490,7 +490,7 @@ public abstract class ServiceDelegate {
      * from the{@delete WSDL} metadata from the <code>endpointReference</code>.
      * If this <code>Service</code> instance has a WSDL and 
      * the <code>endpointReference</code>
-     * also has a WSDL{@add in its metadata}, then the WSDL from this instance{@delete will}
+     * also has a WSDL {@add in its metadata}, then the WSDL from this instance{@delete will}
      * {@add MUST} be used.
      * If this <code>Service</code> instance does not have a WSDL and
      * the <code>endpointReference</code> does have a WSDL, then the 
