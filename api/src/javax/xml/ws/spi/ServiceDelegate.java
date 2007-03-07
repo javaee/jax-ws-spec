@@ -361,7 +361,9 @@ public abstract class ServiceDelegate {
      * also has a WSDL {@add in its metadata}, then the WSDL from this instance MUST be used.
      * If this <code>Service</code> instance does not have a WSDL and
      * the <code>endpointReference</code> does have a WSDL, then the 
-     * WSDL from the <code>endpointReference</code> {@delete will}{@add MAY} be used.     
+     * WSDL from the <code>endpointReference</code> {@delete will}{@add MAY} be used. 
+     * {@add An implementation MUST be able to retrieve the <code>portName</code> from the
+     * <code>endpointReference</code> metadata.}  
      * <p>
      * This method behaves the same as calling
      * <pre>
@@ -410,7 +412,7 @@ public abstract class ServiceDelegate {
      *                      of a WSDL associated
      *                      with this <code>Service</code> instance.}
      *                    <li>{@add If the <code>portName</code> cannot be determined
-     *                    from the WSDL or <code>EndpointReference</code> metadata}
+     *                    from the <code>EndpointReference</code> metadata}
      *                    <li>If any error in the creation of
      *                     the <code>Dispatch</code> object.
      *                    <li>If a feature is enabled that is not 
@@ -507,6 +509,8 @@ public abstract class ServiceDelegate {
      * If this <code>Service</code> instance does not have a WSDL and
      * the <code>endpointReference</code> does have a WSDL, then the 
      * WSDL from the <code>endpointReference</code> {@delete will}{@add MAY} be used.      
+     * {@add An implementation MUST be able to retrieve the <code>portName</code> from the
+     * <code>endpointReference</code> metadata.}  
      * <p>
      * This method behavies the same as calling
      * <pre>
@@ -552,7 +556,7 @@ public abstract class ServiceDelegate {
      *                    of a WSDL associated
      *                    with this <code>Service</code> instance.}
      *                    <li>{@add If the <code>portName</code> cannot be determined
-     *                    from the WSDL metadata}
+     *                    from the <code>EndpointReference</code> metadata}
      *                    <li>If any error in the creation of
      *                    the <code>Dispatch</code> object.
      *                    <li>if a feature is enabled that is not 

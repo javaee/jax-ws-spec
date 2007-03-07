@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.8.2.3 2007-03-06 21:24:03 kohlert Exp $
+ *$Id: Provider.java,v 1.8.2.4 2007-03-07 04:34:43 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -173,9 +173,10 @@ public abstract class Provider {
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
      * the {@delete WSDL Metadata from the}{@add WSDL metadata of the
-     * <code>sei</code> and the }<code>EndpointReference</code>. for this
-     * method to successfully return a proxy, WSDL metadata MUST be 
-     * available.
+     * <code>sei</code> and the }<code>EndpointReference</code>. {@add For this method
+     * to successfully return a proxy, WSDL metadata MUST be available and the
+     * <code>endpointReference</code> MUST contain an implementation understood
+     * <code>serviceName</code> metadata.}  
      *
      *
      * @param endpointReference the EndpointReference that will
@@ -192,15 +193,6 @@ public abstract class Provider {
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method}
-     *                  <LI>{@add If the <code>serviceName</code> and
-     *                      <code>portName</code> cannot be determined
-     *                      from the WSDL metadata or <code>EndpointReference</code>
-     *                      metadata.}
-     *                  <LI>{@add If any implementation supported metadata 
-     *                      in the <code>EndpointReference</code> instance does
-     *                      not match the <code>serviceName</code> or <code>portName</code>
-     *                      of a WSDL associated
-     *                      with the <code>serviceEndpointInterface</code>.}
      *                  <LI>If this
      *                      <code>endpointReference</code>
      *                      is illegal

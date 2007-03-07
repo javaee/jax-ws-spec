@@ -128,6 +128,53 @@ href='http://java.sun.com/xml/jax-ws'><i>http://java.sun.com/xml/jax-ws</i></a>
         </javadoc>
     </target>
 
+    <!-- generate javadoc -->
+    <target name="revised-javadoc" 
+            depends="compile"
+            description="create javadoc into build/revised-docs/api">
+        <javadoc locale="en_US"
+                 packagenames="javax.xml.*" 
+                 destdir="build/revised-docs/api"
+                 nodeprecated="false"
+                 use="false"
+                 author="true"
+                 version="true"
+                 windowtitle="JAX-WS ${release.spec.version}">
+            <taglet name="com.sun.xml.ws.taglets.NullAddTaglet"
+                path="lib/nulljaxwstaglets.jar">
+            </taglet>                    
+            <taglet name="com.sun.xml.ws.taglets.NullDeleteTaglet"
+                path="lib/nulljaxwstaglets.jar">
+            </taglet>               <sourcepath>
+                <pathelement path="src"/>
+            </sourcepath>
+            <classpath refid="doc.classpath" />
+            <group title="JAX-WS Packages" packages="javax.xml*"/> 
+            <doctitle>
+<![CDATA[<br>
+JAX-WS ${release.spec.version} Runtime Library</h2>
+${release.spec.title} specification, ${release.spec.date}<br>
+Comments to: <i><a href='mailto:${release.spec.feedback}'>${release.spec.feedback}</a></i><br>
+More information at: <i><a target='_top'
+href='http://java.sun.com/webservices/jaxws/'>http://java.sun.com/webservices/jaxws/</a></i><br>
+&nbsp;<br>&nbsp;<br><hr width='65%'><h1>${release.spec.title}</h1><hr width='75%'>
+<br>&nbsp;<br>]]>
+            </doctitle>
+            <header>
+<![CDATA[JAX-WS<br>v${release.spec.version}]]>
+            </header>
+            <bottom>
+<![CDATA[<font size=-1>
+<br>Comments to: <a href='mailto:${release.spec.feedback}'><i>${release.spec.feedback}</i></a>
+<br>More information at: <a target='_top'
+href='http://java.sun.com/xml/jax-ws'><i>http://java.sun.com/xml/jax-ws</i></a> 
+<p>Copyright &copy; 2007 by Sun Microsystems, Inc., 4150 Network Circle, 
+<br>Santa Clara, California 95054, U.S.A.  All Rights Reserved.  </font>]]>
+            </bottom>
+        </javadoc>
+    </target>
+    
+    
     <target name="dist"
             depends="prepare, jar, javadoc, zip-javadoc, zip-src"
             description="run the entire build and copy binary products into dist">

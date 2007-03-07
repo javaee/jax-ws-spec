@@ -26,12 +26,12 @@ import java.lang.annotation.Target;
  * The <code>fault</code> message in the generated WSDL operation mapped for <code>className</code> 
  * class contains explicit <code>wsaw:Action</code> attribute.}
  *
- * <p>
+ * <p>{@delete 
  * <b>Example 1</b>: Specify explicit values for <code>Action</code> message addressing 
  * property for the <code>input</code>, <code>output</code> and <code>fault</code> message 
- * if the Java method throws only one service specific exception.
+ * if the Java method throws only one service specific exception.}
  * 
- * <pre>
+ * <pre>{@delete 
  * &#64;javax.jws.WebService
  * public class AddNumbersImpl {
  *     &#64;javax.xml.ws.Action(
@@ -44,7 +44,7 @@ import java.lang.annotation.Target;
  *         throws AddNumbersException {
  *         return number1 + number2;
  *     }
- * }
+ * }}
  * </pre>
  * 
  * {@delete The generated WSDL looks like:}
@@ -66,12 +66,12 @@ import java.lang.annotation.Target;
  *   &lt;definitions&gt;}
  * </pre>
  *
- * <p>
+ * <p>{@delete 
  * Example 2: Here is an example that shows how to specify explicit values for <code>Action</code> 
  * message addressing property if the Java method throws only one service specific exception, 
  * without specifying the values for <code>input</code> and <code>output</code> messages.
- * 
- * <pre>
+ * }
+ * <pre>{@delete 
  * &#64;javax.jws.WebService
  * public class AddNumbersImpl {
  *     &#64;javax.xml.ws.Action(
@@ -82,7 +82,7 @@ import java.lang.annotation.Target;
  *         throws AddNumbersException {
  *         return number1 + number2;
  *     }
- * }
+ * }}
  * </pre>
  * 
  * {@delete The generated WSDL looks like:}
@@ -102,11 +102,11 @@ import java.lang.annotation.Target;
  *   &lt;definitions&gt;}
  * </pre>
  * 
- * <p>
+ * <p>{@delete 
  * Example 3: Here is an example that shows how to specify explicit values for <code>Action</code> 
  * message addressing property if the Java method throws more than one service specific exception.
- * 
- * <pre>
+ * }
+ * <pre> {@delete 
  * &#64;javax.jws.WebService
  * public class AddNumbersImpl {
  *     &#64;javax.xml.ws.Action(
@@ -118,7 +118,7 @@ import java.lang.annotation.Target;
  *         throws AddNumbersException, TooBigNumbersException {
  *         return number1 + number2;
  *     }
- * }
+ * }}
  * </pre>
  * 
  * {@delete The generated WSDL looks like:}

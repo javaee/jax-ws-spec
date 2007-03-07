@@ -102,7 +102,7 @@ public abstract class EndpointReference {
 
 
     /**
-     * The <code>getPort</coce> method returns a proxy. If there
+     * The <code>getPort</code> method returns a proxy. If there
      * are any reference parameters in the 
      * <code>EndpointReference</code> instance, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
@@ -116,8 +116,10 @@ public abstract class EndpointReference {
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
      * the WSDL Metadata from this <code>EndpointReference</code> or from
-     * annotations on the <code>serviceEndpointInterface</code>.  For this method
-     * to successfully return a proxy, WSDL metadata MUST be available.
+     * annotations on the <code>serviceEndpointInterface</code>.  {@add For this method
+     * to successfully return a proxy, WSDL metadata MUST be available and the
+     * <code>EndpointReference</code> instance MUST contain an implementation understood
+     * <code>serviceName</code> metadata.}  
      * <p>
      * Because this port is not created from a <code>Service</code> object, handlers 
      * will not automatically be configured, and the <code>HandlerResolver</code> 
@@ -138,11 +140,6 @@ public abstract class EndpointReference {
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method 
-     *                  <LI>{@add If any implementation supported metadata 
-     *                      in the <code>EndpointReference</code> instance does
-     *                      not match the <code>serviceName</code> or <code>portName</code>
-     *                      of a WSDL associated
-     *                      with the <code>serviceEndpointInterface</code>.}
      *                  <LI>If this
      *                      <code>endpointReference</code>
      *                      is invalid

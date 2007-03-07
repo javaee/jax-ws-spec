@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * {@add This definition of this annotation is only partly defined in this release of JAX-WS as
+ * {@add The definition of this annotation is only partly defined in this release of JAX-WS as
  * there is no standard way to convey its meaning via a WSDL.
  * A future release of JAX-WS will provide that standard mechanism to convey the meaning
  * of this annotation via a WSDL.  An implementation MAY indicate via WSDL, in a non-standard
@@ -22,16 +22,16 @@ import java.lang.annotation.Target;
  * message addressing property with <code>input</code>, <code>output</code>, and 
  * <code>fault</code> messages of the mapped WSDL operation. 
  * <p>
- * This annotation can be specified on each method of a service endpoint interface. 
- * {@delete For such a method, the mapped operation in the generated WSDL 
+ * {@delete This annotation can be specified on each method of a service endpoint interface. 
+ * For such a method, the mapped operation in the generated WSDL 
  * contains explicit <code>wsaw:Action</code> attribute on the WSDL <code>input</code>, 
  * <code>output</code> and <code>fault</code> messages of the WSDL <code>operation</code> 
  * based upon which attributes of the <code>Action</code> annotation have been specified.}
- * <p>
+ * <p>{@delete
  * <b>Example 1</b>: Specify explicit values for <code>Action</code> message addressing property 
  * for <code>input</code> and <code>output</code> messages.
- * 
- * <pre>
+ * }
+ * <pre>{@delete
  * &#64;javax.jws.WebService
  * public class AddNumbersImpl {
  *     &#64;javax.xml.ws.Action(
@@ -40,7 +40,7 @@ import java.lang.annotation.Target;
  *     public int addNumbers(int number1, int number2) {
  *         return number1 + number2;
  *     }
- * }
+ * }}
  * </pre>
  * 
  * {@delete The generated WSDL looks like:}
@@ -58,20 +58,20 @@ import java.lang.annotation.Target;
  *   ...
  *   &lt;definitions&gt;}
  * </pre>
- * }
- * <p>
+ * 
+ * <p>{@delete
  * <b>Example 2</b>: Specify explicit value for <code>Action</code> message addressing property
  * for only the <code>input</code> message. The default values are used for the 
- * <code>output</code> message.
+ * <code>output</code> message.}
  * 
- * <pre>
+ * <pre>{@delete
  * &#64;javax.jws.WebService
  * public class AddNumbersImpl {
  *     &#64;javax.xml.ws.Action(input=&quot;http://example.com/inputAction&quot;)
  *     public int addNumbers(int number1, int number2) {
  *         return number1 + number2;
  *     }
- * }
+ * }}
  * </pre>
  * 
  * {@delete The generated WSDL looks like:}
@@ -89,15 +89,14 @@ import java.lang.annotation.Target;
  *   ...
  *   &lt;definitions&gt;}
  * </pre>
- *
+ *{@delete
  * It is legitimate to specify an explicit value for <code>Action</code> message addressing property for
  * <code>output</code> message only. In this case, a default value of <code>wsaw:Action</code> is used 
- * for the <code>input</code> message.
- * 
- * <p>
+ * for the <code>input</code> message.}
+ * <p>{@delete 
  * <b>Example 3</b>: See <a href="FaultAction.html">FaultAction</a> annotation for an example of 
  * how to specify an explicit value for <code>Action</code> message addressing property for the 
- * <code>fault</code> message.
+ * <code>fault</code> message.}
  * 
  * @see FaultAction
  *

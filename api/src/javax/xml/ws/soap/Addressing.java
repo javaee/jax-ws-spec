@@ -17,9 +17,11 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * {@add The definition of this annotation is only partly defined in this release of JAX-WS as
  * there is no standard way to convey its meaning via a WSDL.
  * A future release of JAX-WS will provide that standard mechanism to convey the meaning
- * of this annotation via a WSDL.  An implementation MAY indicate via WSDL, in a non-standard
- * way, the meaning of this annotation.  The runtime behavior of this WSDL is well-defined
- * in this release of JAX-WS.}
+ * of this annotation via WSDL.  An implementation MAY indicate via WSDL, in a non-standard
+ * way, the use of this annotation.  The runtime behavior of this annotation is well-defined
+ * in this release of JAX-WS, however, unless an implementation specifies that addressing is
+ * being used in a proprietary way in the WSDL, a JAX-WS client MUST explicitly enable addressing via
+ * the }{@link AddressingFeature} {@add if Addressing is to be used.}
  * <p>
  * This feature represents the use of WS-Addressing with either
  * the SOAP 1.1/HTTP or SOAP 1.2/HTTP binding.  Using this feature
@@ -44,7 +46,11 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  *       headers. 
  *  <li> DISABLED: In this Mode, Addressing will be disabled
  *       even if an associated WSDL specifies otherwise. At runtime,
- *       Addressing headers MUST NOT be used.
+ *       Addressing headers MUST NOT be used.  This may be used when an application
+ *       implementor has implemented Addressing themselves and thus do not want
+ *       the JAX-WS implementation to provide Addressing processing.  {@add If an application
+ *       has implemented Addressing themselves, they MUST explicitly disable this feature.
+*        Not doing so may break compatability with future versions of JAX-WS.}
  * </ul>
  * <p>
  * The {@link #required} property can be used to
@@ -53,12 +59,12 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * be <code>true</code> or <code>false</code>} {@add Addressing headers MUST
  * be present on incoming messages.  If this property is <code>false</code>
  * incoming messages MAY include Addressing headers}.  By default the
- * <code>wsdl:required</code> parameter is <code>false</code>.
+ * <code>required</code> property is <code>false</code>.
  * <p>
  * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">Web Services Addressing - Core</a>
  * {@add and <a href="http://www.w3.org/TR/2006/REC-ws-addr-soap-20060509/">Web Services Addressing 1.0 - SOAP Binding</a> }
  * for more information on WS-Addressing.
- * </a> for more information on <code>wsaw:UsingAddressing</code>.}
+ * {@delete </a> for more information on <code>wsaw:UsingAddressing</code>.}
  * {@delete See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/#indicatinguse/">WS-Addressing - WSDL 1.0
  * </a> for more information on <code>wsaw:UsingAddressing</code>.}
  *
@@ -78,10 +84,9 @@ public @interface Addressing {
      * {@add This is a placeholder property to be fully defined in a future version
      * of JAX-WS.  However, an implementation MUST use this Property to determine 
      * if Addressing headers MUST
-     * be present on incoming messages.  If this property is <code>false</code>,
-     * incoming messages MAY include Addressing headers}{@delete the value of the
+     * be present on incoming messages.}{@delete the value of the
      * <code>wsdl:required</code> attribute on
-     * <code>wsaw:UsingAddressing</code> element in the WSDL}.  (@add An implementation
+     * <code>wsaw:UsingAddressing</code> element in the WSDL}.  {@add An implementation
      * MAY indicate via WSDL that use of Addressing is required, but it would do so in
      * a proprietary way.  A future version of JAX-WS will define the standard way to
      * indicate this requirment.}
