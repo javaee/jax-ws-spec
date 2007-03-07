@@ -72,6 +72,12 @@
         <zip zipfile="build/lib/jaxws-api-doc.zip" basedir="build/docs/api"/>      
     </target>
 
+    <target name="zip-revised-javadoc" 
+            depends="javadoc"
+            description="create build/lib/revised-jaxws-api-doc.zip from API revised-javadoc">
+        <zip zipfile="build/lib/revised-jaxws-api-doc.zip" basedir="build/revised-docs/api"/>      
+    </target>    
+    
     <!-- create the jaxws-api-src.zip -->
     <target name="zip-src" 
             depends="compile"
@@ -183,6 +189,12 @@ href='http://java.sun.com/xml/jax-ws'><i>http://java.sun.com/xml/jax-ws</i></a>
         <copy file="build/lib/jaxws-api-doc.zip" toDir="dist" />
         <copy file="build/lib/jaxws-api-src.zip" toDir="dist" />
     </target>
+    
+    <target name="revised-dist"
+            depends="dist, revised-javadoc, zip-revised-javadoc"
+            description="run the entire build and copy binary products into dist">
+        <copy file="build/lib/revised-jaxws-api-doc.zip" toDir="dist" />
+    </target>    
 
     <!-- remove all intermediate files -->
     <target name="clean"
