@@ -23,13 +23,14 @@ import javax.xml.ws.spi.Provider;
  * Enabling this feature on the client will cause the JAX-WS runtime
  * to include WS-Addressing headers in SOAP messages.
  * <p>
- * {@delete If the web service developer has not explicitly enabled this feature,
+ * If the web service developer has not explicitly enabled this feature,
  * it may be automatically enabled if the associated WSDL enables
- * WS-Addressing via the <code>wsaw:UsingAddressing</code> element with
+ * WS-Addressing {@delete via the <code>wsaw:UsingAddressing</code>} {@add
+ * with an implemenation recognized WSDL extension} element with
  * the <code>wsdl:required</code> attribute set to <code>true</code>.
  * <br>
  * See {@link javax.xml.ws.RespectBindingFeature} for more information 
- * on required WSDL extensions.}
+ * on required WSDL extensions.
  * <p>
  * The following describes the affects of this feature with respect
  * to be enabled or disabled:
@@ -44,21 +45,21 @@ import javax.xml.ws.spi.Provider;
  *       headers.
  *  <li> DISABLED: In this Mode, Addressing will be disabled
  *       even if an associated WSDL specifies otherwise. At runtime, 
- *       Addressing headers MUST NOT be used.  This may be used when an application
+ *       Addressing headers MUST NOT be used.  {@add This may be used when an application
  *       implementor has implemented Addressing themselves and thus do not want
  *       the JAX-WS implementation to provide Addressing processing.  If an application
  *       has implemented Addressing themselves, they MUST explicitly disable this feature.
- *       Not doing so may break compatability with future versions of JAX-WS.
+ *       Not doing so may break compatability with future versions of JAX-WS.}
  * </ul>
  * <p>
  * The {@link #required} property can be used to 
  * specify if {@delete the <code>required</code> attribute on the 
  * <code>wsaw:UsingAddressing</code> element should
- * be <code>true</code> or <code>false</code>} {@add if Addressing headers MUST be present
+ * be <code>true</code> or <code>false</code>} {@add Addressing headers MUST be present
  * on incoming messages.  This property only has meaning when used on the
  * endpoint and has no affect when used on the client}.  
  * By default the
- * <code>wsdl:required</code> parameter is <code>false</code>.
+ * <code>{@delete wsdl:}required</code> {@delete parameter} {@add property} is <code>false</code>.
  * <p>
  * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">Web Services Addressing - Core</a>
  * {@add and <a href="http://www.w3.org/TR/2006/REC-ws-addr-soap-20060509/">Web Services Addressing 1.0 - SOAP Binding</a> }
@@ -113,7 +114,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * for the <code>wsdl:required</code> attribute on the
      * <code>wsaw:UsingAddressing</code> element} {@add whether
      * Addressing headers MUST be present on incoming messages. This property
-     * only has meaning on the endpoint provider and has no affect when
+     * only has meaning on the endpoint and has no affect when
      * used on the client}.
      */
     public AddressingFeature(boolean enabled, boolean required) {

@@ -358,7 +358,7 @@ public abstract class ServiceDelegate {
      * from the{@delete WSDL} metadata from the <code>endpointReference</code>.
      * If this <code>Service</code> instance has a WSDL and 
      * the <code>endpointReference</code>
-     * also has a WSDL {@add in its metadata}, then the WSDL from this instance MUST be used.
+     * also has a WSDL {@add in its metadata}, then the WSDL from this instance {@delete will} {@add MUST} be used.
      * If this <code>Service</code> instance does not have a WSDL and
      * the <code>endpointReference</code> does have a WSDL, then the 
      * WSDL from the <code>endpointReference</code> {@delete will}{@add MAY} be used. 

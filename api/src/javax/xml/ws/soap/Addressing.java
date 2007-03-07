@@ -82,14 +82,14 @@ public @interface Addressing {
     
     /**
      * {@add This is a placeholder property to be fully defined in a future version
-     * of JAX-WS.  However, an implementation MUST use this Property to determine 
+     * of JAX-WS.  However, an implementation MUST use this property to determine 
      * if Addressing headers MUST
      * be present on incoming messages.}{@delete the value of the
      * <code>wsdl:required</code> attribute on
      * <code>wsaw:UsingAddressing</code> element in the WSDL}.  {@add An implementation
      * MAY indicate via WSDL that use of Addressing is required, but it would do so in
      * a proprietary way.  A future version of JAX-WS will define the standard way to
-     * indicate this requirment.}
+     * indicate this requiement.}
      */
     boolean required() default false;
 }
