@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.8.2.4 2007-03-07 04:34:43 kohlert Exp $
+ *$Id: Provider.java,v 1.8.2.5 2007-03-09 21:05:25 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -153,9 +153,7 @@ public abstract class Provider {
      *
      * @since JAX-WS 2.1
      **/
-    public EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset);
      
     
     /**
@@ -207,11 +205,9 @@ public abstract class Provider {
      *
      * @since JAX-WS 2.1
      **/
-    public <T> T getPort(EndpointReference endpointReference,
+    public abstract <T> T getPort(EndpointReference endpointReference,
             Class<T> serviceEndpointInterface,
-            WebServiceFeature... features) {
-        throw new UnsupportedOperationException();
-    }  
+            WebServiceFeature... features);
     
     /**
      * Factory method to create a <code>W3CEndpointReference</code>.
@@ -271,8 +267,6 @@ public abstract class Provider {
      *
      * @since JAX-WS 2.1
      */
-    public W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
-            List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
+            List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters);
 }

@@ -5,7 +5,6 @@
 
 package javax.xml.ws;
 
-import java.lang.UnsupportedOperationException;
 import java.util.List;
 import java.util.Map;
 import javax.xml.ws.spi.Provider;
@@ -321,9 +320,7 @@ public abstract class Endpoint {
      *
      * @since JAX-WS 2.1
      **/
-    public EndpointReference getEndpointReference(Element... referenceParameters) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract EndpointReference getEndpointReference(Element... referenceParameters);
     
     
     /**
@@ -361,8 +358,6 @@ public abstract class Endpoint {
      *
      * @since JAX-WS 2.1
      **/
-    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
-            Element... referenceParameters) {
-        throw new UnsupportedOperationException();
-    }
+    public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
+            Element... referenceParameters);
 }

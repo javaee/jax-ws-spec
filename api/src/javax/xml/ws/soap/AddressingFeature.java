@@ -29,8 +29,8 @@ import javax.xml.ws.spi.Provider;
  * If the web service developer has not explicitly enabled this feature,
  * it MAY be automatically enabled if the associated WSDL enables
  * WS-Addressing {@delete via the <code>wsaw:UsingAddressing</code>} {@add
- * with an implemenation recognized WSDL extension} element with
- * the <code>wsdl:required</code> attribute set to <code>true</code>.
+ * with an implementation recognized WSDL extension} element{@delete with
+ * the <code>wsdl:required</code> attribute set to <code>true</code>}.
  * {@add However, in this version of JAX-WS, there is no standard WSDL 
  * extension that a client can rely on to automatically enable WS-Addressing,
  * nor is there a standard default value specified for wsa:Action headers.}
@@ -41,12 +41,12 @@ import javax.xml.ws.spi.Provider;
  * <code>AddressingFeature</code>, and for each invocation, the client MUST explicitly set the }
  * {@link BindingProvider#SOAPACTION_URI_PROPERTY}.
  * {@add After the W3C WG on WS-Addressing has specified how the use of WS-Addressing is specified in the WSDL,
- * and what the default value MUST be for Action headers, a future version of JAX-WS will remove these requirements.}
+ * and what the default value must be for Action headers, a future version of JAX-WS will remove these requirements.}
  * <p>
  * See {@link javax.xml.ws.RespectBindingFeature} for more information 
  * on required WSDL extensions.
  * <p>
- * The following describes the affects of this feature with respect
+ * The following describes the effects of this feature with respect
  * to be enabled or disabled:
  * <ul>
  *  <li> ENABLED: In this Mode, {@add WS-}Addressing will be enabled. 
@@ -63,7 +63,7 @@ import javax.xml.ws.spi.Provider;
  *       disabled to prevent a JAX-WS implementation from consuming and producing
  *       WS-Addressing headers. If an application
  *       has implemented WS-Addressing itself, it MUST explicitly disable this feature.
-*        Not doing so may break compatability with future versions of JAX-WS.}
+*        Not doing so may break compatibility with future versions of JAX-WS.}
  * </ul>
  * <p>
  * The {@link #required} property can be used to 

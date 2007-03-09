@@ -30,7 +30,7 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * the endpoint and in the runtime being capable of responding to
  * WS-Addressing headers.}
  * <p>
- * The following describes the affects of this feature with respect
+ * The following describes the effects of this feature with respect
  * to be enabled or disabled:
  * <ul>
  *  <li> ENABLED: In this Mode, {@add WS-}Addressing will be enabled.
@@ -47,17 +47,17 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  *       disabled to prevent a JAX-WS implementation from consuming and producing
  *       WS-Addressing headers. If an application
  *       has implemented WS-Addressing itself, it MUST explicitly disable this feature.
-*        Not doing so may break compatability with future versions of JAX-WS.}
+*        Not doing so may break compatibility with future versions of JAX-WS.}
  * </ul>
  * <p>
- * The {@link #required} property can be used to
+ * The <code>required</code> property can be used to
  * specify if {@delete the <code>required</code> attribute on the
  * <code>wsaw:UsingAddressing</code> element should
  * be <code>true</code> or <code>false</code>} {@add WS-Addressing headers MUST
  * be present on incoming messages.}  By default the
  * <code>required</code> property is <code>false</code>. 
  * <p>
- * {@add The definition of this annotation is only partly defined in this release of JAX-WS as
+ * {@add The definition of this annotation is incomplete in this release of JAX-WS as
  * there is no standard way to convey the use of WS-Addressing via a WSDL and there is no
  * standard definition for the default value of <code>wsa:Action</code> headers; 
  * however, the runtime behavior of this annotation is well-defined. 
@@ -72,7 +72,7 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * }{@link AddressingFeature}{@add , and for each invocation, the client MUST explicitly set the }
  * {@link BindingProvider#SOAPACTION_URI_PROPERTY}.
  * {@add After the W3C WG on WS-Addressing has specified how the use of WS-Addressing is specified in the WSDL,
- * and what the default value MUST be for Action headers, a future version of JAX-WS will remove these requirements.}
+ * and what the default value must be for Action headers, a future version of JAX-WS will remove these requirements.}
  * <p>
  * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">Web Services Addressing - Core</a>
  * {@add and <a href="http://www.w3.org/TR/2006/REC-ws-addr-soap-20060509/">Web Services Addressing 1.0 - SOAP Binding</a> }
