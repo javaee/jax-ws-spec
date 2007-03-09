@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.8.2.5 2007-03-09 21:05:25 kohlert Exp $
+ *$Id: Provider.java,v 1.8.2.6 2007-03-09 23:51:10 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
@@ -170,11 +170,12 @@ public abstract class Provider {
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
-     * the {@delete WSDL Metadata from the}{@add WSDL metadata of the
-     * <code>sei</code> and the }<code>EndpointReference</code>. {@add For this method
+     * the WSDL metadata of the
+     * <code>serviceEndpointInterface</code> and the <code>EndpointReference</code>. 
+     * For this method
      * to successfully return a proxy, WSDL metadata MUST be available and the
      * <code>endpointReference</code> MUST contain an implementation understood
-     * <code>serviceName</code> metadata.}  
+     * <code>serviceName</code> metadata.  
      *
      *
      * @param endpointReference the EndpointReference that will

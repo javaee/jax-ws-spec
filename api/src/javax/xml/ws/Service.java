@@ -217,13 +217,13 @@ public class Service {
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
      * the WSDL associated with this <code>Service</code> instance or
-     * from the{@delete WSDL} metadata from the <code>endpointReference</code>.
+     * from the metadata from the <code>endpointReference</code>.
      * If this <code>Service</code> instance has a WSDL and 
-     * the <code>endpointReference</code> {@add metadata }
-     * also has a WSDL, then the WSDL from this instance {@delete will}{@add MUST} be used.
+     * the <code>endpointReference</code> metadata 
+     * also has a WSDL, then the WSDL from this instance MUST be used.
      * If this <code>Service</code> instance does not have a WSDL and
      * the <code>endpointReference</code> does have a WSDL, then the 
-     * WSDL from the <code>endpointReference</code> {@delete will}{@add MAY} be used.
+     * WSDL from the <code>endpointReference</code> MAY be used.
      * The returned proxy should not be reconfigured by the client.
      * If this <code>Service</code> instance has a known proxy 
      * port that matches the information contained in 
@@ -236,14 +236,9 @@ public class Service {
      * <code>port = service.getPort(portName, serviceEndpointInterface);</code>
      * </pre>
      * where the <code>portName</code> is retrieved from the 
-     * {@delete <code>wsaw:EndpontName</code> attribute of the
-     * <code>wsaw:ServiceName</code> element in the} 
      * metadata of the <code>endpointReference</code> or from the 
      * <code>serviceEndpointInterface</code> and the WSDL
      * associated with this <code>Service</code> instance.
-     * <br>
-     * {@delete See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
-     * </a>.}
      *
      * @param endpointReference  The <code>EndpointReference</code>
      * for the target service endpoint that will be invoked by the
@@ -260,19 +255,11 @@ public class Service {
      *                      of the proxy.
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method.
-     *                  <LI>{@delete If the <code>wsaw:EndpointName</code> is
-     *                      missing from the <code>endpointReference</code>
-     *                      or does not match a wsdl:Port
-     *                      in the WSDL metadata.}
-     *                  <LI>{@delete If the <code>wsaw:ServiceName</code> in the
-     *                      <code>endpointReference</code> metadata does not
-     *                      match the <code>serviceName</code> of this
-     *                      <code>Service</code> instance.}
-     *                  <LI>{@add If the <code>endpointReference</code> metadata does
+     *                  <LI>If the <code>endpointReference</code> metadata does
      *                      not match the <code>serviceName</code> of this
-     *                      <code>Service</code> instance.}
-     *                  <LI>{@add If a <code>portName</code> cannot be extracted
-     *                      from the WSDL or <code>endpointReference</code> metadata.}
+     *                      <code>Service</code> instance.
+     *                  <LI>If a <code>portName</code> cannot be extracted
+     *                      from the WSDL or <code>endpointReference</code> metadata.
      *                  <LI>If an invalid
      *                      <code>endpointReference</code>
      *                      is specified.
@@ -388,28 +375,22 @@ public class Service {
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the dispatch accordingly from
      * the WSDL associated with this <code>Service</code> instance or
-     * from the{@delete WSDL} metadata from the <code>endpointReference</code>.
+     * from the metadata from the <code>endpointReference</code>.
      * If this <code>Service</code> instance has a WSDL and 
      * the <code>endpointReference</code>
-     * also has a WSDL {@add in its metadata}, then the WSDL from this instance {@delete will}{@add MUST} be used.
+     * also has a WSDL in its metadata, then the WSDL from this instance MUST be used.
      * If this <code>Service</code> instance does not have a WSDL and
      * the <code>endpointReference</code> does have a WSDL, then the 
-     * WSDL from the <code>endpointReference</code> {@delete will}{@add MAY} be used.     
-     * {@add An implementation MUST be able to retrieve the <code>portName</code> from the
-     * <code>endpointReference</code> metadata.}  
+     * WSDL from the <code>endpointReference</code> MAY be used.     
+     * An implementation MUST be able to retrieve the <code>portName</code> from the
+     * <code>endpointReference</code> metadata.
      * <p>
      * This method behaves the same as calling
      * <pre>
      * <code>dispatch = service.createDispatch(portName, type, mode, features);</code>
      * </pre>
      * where the <code>portName</code> is retrieved from the 
-     * {@delete <code>wsaw:EndpointName</code> attribute of the <code>wsaw:ServiceName</code>
-     * element in the 
-     * metadata of the <code>endpointReference</code>} {@add WSDL or 
-     * <code>EndpointReference</code> metadata}.
-     * <br>
-     * {@delete See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
-     * </a>.}
+     * WSDL or <code>EndpointReference</code> metadata.
      *
      * @param endpointReference  The <code>EndpointReference</code>
      * for the target service endpoint that will be invoked by the
@@ -432,20 +413,12 @@ public class Service {
      *                  <UL>
      *                    <LI>If there is any missing WSDL metadata
      *                      as required by this method.
-     *                    <li>{@delete If the <code>wsaw:ServiceName</code> element 
-     *                    or the <code>wsaw:EndpointName</code> attribute
-     *                    is missing in the metdata of the 
-     *                    <code>endpointReference</code>.}
-     *                    <li>{@delete If the <code>wsaw:ServiceName</code> does not
-     *                    match the <code>serviceName</code> of this instance.}
-     *                    <li>{@delete If the <code>wsaw:EndpointName</code> does not
-     *                    match a valid wsdl:Port in the WSDL metadata.}
-     *                    <li>{@add If the <code>endpointReference</code> metadata does
+     *                    <li>If the <code>endpointReference</code> metadata does
      *                      not match the <code>serviceName</code> or <code>portName</code>
      *                      of a WSDL associated
-     *                      with this <code>Service</code> instance.}
-     *                    <li>{@add If the <code>portName</code> cannot be determined
-     *                    from the <code>EndpointReference</code> metadata}
+     *                      with this <code>Service</code> instance.
+     *                    <li>If the <code>portName</code> cannot be determined
+     *                    from the <code>EndpointReference</code> metadata.
      *                    <li>If any error in the creation of
      *                     the <code>Dispatch</code> object.
      *                    <li>If a feature is enabled that is not 
@@ -535,28 +508,23 @@ public class Service {
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the dispatch accordingly from
      * the WSDL associated with this <code>Service</code> instance or
-     * from the{@delete WSDL} metadata from the <code>endpointReference</code>.
+     * from the metadata from the <code>endpointReference</code>.
      * If this <code>Service</code> instance has a WSDL and 
      * the <code>endpointReference</code>
-     * also has a WSDL {@add in its metadata}, then the WSDL from this instance{@delete will}
-     * {@add MUST} be used.
+     * also has a WSDL in its metadata, then the WSDL from this instance
+     * MUST be used.
      * If this <code>Service</code> instance does not have a WSDL and
      * the <code>endpointReference</code> does have a WSDL, then the 
-     * WSDL from the <code>endpointReference</code> {@delete will}{@add MAY} be used.      
-     * {@add An implementation MUST be able to retrieve the <code>portName</code> from the
-     * <code>endpointReference</code> metadata.}  
+     * WSDL from the <code>endpointReference</code> MAY be used.      
+     * An implementation MUST be able to retrieve the <code>portName</code> from the
+     * <code>endpointReference</code> metadata. 
      * <p>
      * This method behavies the same as calling
      * <pre>
      * <code>dispatch = service.createDispatch(portName, context, mode, features);</code>
      * </pre>
      * where the <code>portName</code> is retrieved from the 
-     * {@delete <code>wsaw:EndpointName</code> attribute of the <code>wsaw:ServiceName</code>
-     * element in the 
-     * metadata of the <code>endpointReference</code>} {@add WSDL or <code>endpointReference</code> metadata}.
-     * <br>
-     * {@delete See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">WS-Addressing - WSDL 1.0
-     * </a>.}
+     * WSDL or <code>endpointReference</code> metadata.
      *
      * @param endpointReference  The <code>EndpointReference</code>
      * for the target service endpoint that will be invoked by the
@@ -577,20 +545,12 @@ public class Service {
      *                  <UL>
      *                    <li>If there is any missing WSDL metadata
      *                      as required by this method.
-     *                    <li>{@delete If the <code>wsaw:ServiceName</code> element 
-     *                    or the <code>wsaw:EndpointName</code> attribute
-     *                    is missing in the metdata of the 
-     *                    <code>endpointReference</code>.}
-     *                    <li>{@delete If the <code>wsaw:ServiceName</code> does not
-     *                    match the <code>serviceName</code> of this instance.}
-     *                    <li>{@delete If the <code>wsaw:EndpointName</code> does not
-     *                    match a valid wsdl:Port in the WSDL metadata.}
-     *                    <li>{@add If the <code>endpointReference</code> metadata does
+     *                    <li>If the <code>endpointReference</code> metadata does
      *                    not match the <code>serviceName</code> or <code>portName</code>
      *                    of a WSDL associated
-     *                    with this <code>Service</code> instance.}
-     *                    <li>{@add If the <code>portName</code> cannot be determined
-     *                    from the <code>EndpointReference</code> metadata}
+     *                    with this <code>Service</code> instance.
+     *                    <li>If the <code>portName</code> cannot be determined
+     *                    from the <code>EndpointReference</code> metadata.
      *                    <li>If any error in the creation of
      *                    the <code>Dispatch</code> object.
      *                    <li>if a feature is enabled that is not 

@@ -56,23 +56,30 @@ public interface BindingProvider {
             "javax.xml.ws.session.maintain";
     
     /** 
-     * Standard property for SOAPAction. This boolean property
-     * indicates whether or not SOAPAction is to be used. The
-     * default value of this property is <code>false</code> indicating that
-     * the SOAPAction is not used{@add , however, if WS-Addressing
-     * is enabled, the default value is <code>true</code> indicating that
-     * the SOAPAction is to be used}. 
+     * Standard property for SOAPAction. This boolean property  
+     * indicates whether or not the value of the 
+     * <code>javax.xml.ws.soap.http.soapaction.uri</code> property 
+     * is used for the value of the SOAPAction. The  
+     * default value of this property is <code>false</code> indicating 
+     * that the 
+     * <code>javax.xml.ws.soap.http.soapaction.uri</code> property
+     * is not used for the value of the SOAPAction, however, 
+     * if WS-Addressing is enabled, the default value is 
+     * <code>true</code>.
+     * 
      * <p>Type: <code>java.lang.Boolean</code>
      **/
     public static final String SOAPACTION_USE_PROPERTY =
             "javax.xml.ws.soap.http.soapaction.use";
     
     /**
-     * Standard property for SOAPAction. Indicates the SOAPAction
-     * URI if the <code>javax.xml.ws.soap.http.soapaction.use</code>
-     * property is set to <code>true</code>. {@add If WS-Addressing
-     * is enabled, this value will also be used for the value of the
-     * <code>wsa:Action</code> header.}
+     * Standard property for SOAPAction. Indicates the SOAPAction  
+     * URI if the <code>javax.xml.ws.soap.http.soapaction.use</code>  
+     * property is set to <code>true</code>. If WS-Addressing  
+     * is enabled, this value will also be used for the value of the  
+     * WS-Addressing Action header.  If this property is not set, 
+     * the default SOAPAction and WS-Addressing Action will be sent.
+     *
      * <p>Type: <code>java.lang.String</code>
      **/
     public static final String SOAPACTION_URI_PROPERTY =
@@ -119,17 +126,6 @@ public interface BindingProvider {
      * If the Binding for this <code>bindingProvider</code> is
      * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a
      * <code>W3CEndpointReference</code> MUST be returned.
-     * {@delete If the returned <code>EndpointReference</code> is a
-     * <code>W3CEndpointReference</code> it MUST contain 
-     * the <code>wsaw:ServiceName</code> element and the 
-     * <code>wsaw:EndpointName</code> attribute on the 
-     * <code>wsaw:ServiceName</code>. It SHOULD contain
-     * the embedded WSDL in the <code>wsa:Metadata</code> element
-     * if there is an associated WSDL. The
-     * <code>wsaw:InterfaceName</code> MAY also be present. 
-     * <br>
-     * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
-     * WS-Addressing - WSDL 1.0</a>.}
      *
      * @return EndpointReference of the target endpoint associated with this
      * <code>BindingProvider</code> instance.
@@ -148,18 +144,6 @@ public interface BindingProvider {
      * Returns the <code>EndpointReference</code> associated with
      * this <code>BindingProvider</code> instance.  The instance
      * returned will be of type <code>clazz</code>.
-     * <p>
-     * {@delete If the returned <code>EndpointReference</code> is a
-     * <code>W3CEndpointReference</code> it MUST contain 
-     * the <code>wsaw:ServiceName</code> element and the 
-     * <code>wsaw:EndpointName</code> attribute on the 
-     * <code>wsaw:ServiceName</code>. It SHOULD contain
-     * the embedded WSDL in the <code>wsa:Metadata</code> element
-     * if there is an associated WSDL. The
-     * <code>wsaw:InterfaceName</code> MAY also be present. 
-     * <br>
-     * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
-     * WS-Addressing - WSDL 1.0</a>.}
      *
      * @param clazz Specifies the type of <code>EndpointReference</code>
      * that MUST be returned.

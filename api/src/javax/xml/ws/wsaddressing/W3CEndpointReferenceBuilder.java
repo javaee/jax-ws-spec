@@ -73,10 +73,8 @@ public final class W3CEndpointReferenceBuilder {
     }
     
     /**
-     * Sets the <code>serviceName</code> {@delete as the
-     * <code>wsaw:ServiceName</code> element in the
-     * <code>wsa:Metadata</code> element} {@add of the endpoint to be targeted
-     *      by the returned <code>W3CEndpointReference</code>}.
+     * Sets the <code>serviceName</code> of the endpoint to be targeted
+     *      by the returned <code>W3CEndpointReference</code>.
      *
      * @param serviceName The service name of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference<code>.  This property
@@ -85,9 +83,7 @@ public final class W3CEndpointReferenceBuilder {
      *      endpoint that is published by the same Java EE application.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
-     *   the {@delete <code>serviceName</code> element added to the
-     *  <code>wsa:Metadata</code> element} {@add <code>serviceName</code>
-     *  property set}.
+     *   the <code>serviceName</code> property set.
      *
      */
     public W3CEndpointReferenceBuilder serviceName(QName serviceName) {
@@ -96,10 +92,8 @@ public final class W3CEndpointReferenceBuilder {
     }
     
     /**
-     * Sets the <code>endpointName</code> {@delete as and attribute on
-     * <code>wsaw:ServiceName</code> element in the
-     * <code>wsa:Metadata</code> element} {@add of the endpoint to
-     * be targeted by the returned <code>W3CEndpointRefernce</code>}. 
+     * Sets the <code>endpointName</code> of the endpoint to
+     * be targeted by the returned <code>W3CEndpointRefernce</code>. 
      * This method can only
      * be called after the {@link #serviceName} method has been called.
      *
@@ -111,9 +105,7 @@ public final class W3CEndpointReferenceBuilder {
      *      endpoint published by the same Java EE application.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
-     *   the <code>endpointName</code> {@delete atrribute added to the
-     *  <code>wsaw:ServiceName</code> element in the
-     *  <code>wsa:Metadata</code> element.} {@add property set.}
+     *   the <code>endpointName</code> property set.
      *
      * @throws java.lang.IllegalStateException If the <code>serviceName</code> has not
      *  been set.
@@ -128,19 +120,14 @@ public final class W3CEndpointReferenceBuilder {
     }
     
     /**
-     * Sets the <code>wsdlDocumentLocation</code> {@delete that will be inlined
-     * in the <code>W3CEndpointReferenc</code> instance's
-     * <code>wsa:Metadata</code>.} {@add associated with the targeted
-     * <code>W3CEndpointReference</code>.}
+     * Sets the <code>wsdlDocumentLocation</code> associated with the targeted
+     * <code>W3CEndpointReference</code>.
      *
-     * @param wsdlDocumentLocation The location of the WSDL document {@delete to
-     *      be inlined in the <code>wsa:Metadata</code> of the
-     *     <code>W3CEndpointReference<code>.} {@add associated with the targeted
-     *     <code>W3CEndpointReference</code>.}
+     * @param wsdlDocumentLocation The location of the WSDL document associated 
+     * with the targeted <code>W3CEndpointReference</code>.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
-     *   the <code>wsdlDocumentLocation</code> {@delete that is to be inlined.}
-     *   {@add property set.}
+     *   the <code>wsdlDocumentLocation</code> property set.
      *
      */
     public W3CEndpointReferenceBuilder wsdlDocumentLocation(String wsdlDocumentLocation) {

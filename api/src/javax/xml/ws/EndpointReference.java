@@ -116,10 +116,10 @@ public abstract class EndpointReference {
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
      * the WSDL Metadata from this <code>EndpointReference</code> or from
-     * annotations on the <code>serviceEndpointInterface</code>.  {@add For this method
+     * annotations on the <code>serviceEndpointInterface</code>.  For this method
      * to successfully return a proxy, WSDL metadata MUST be available and the
      * <code>EndpointReference</code> instance MUST contain an implementation understood
-     * <code>serviceName</code> metadata.}  
+     * <code>serviceName</code> metadata.
      * <p>
      * Because this port is not created from a <code>Service</code> object, handlers 
      * will not automatically be configured, and the <code>HandlerResolver</code> 
