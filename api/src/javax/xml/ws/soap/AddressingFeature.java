@@ -34,9 +34,6 @@ import javax.xml.ws.spi.Provider;
  * {@add However, in this version of JAX-WS, there is no standard WSDL 
  * extension that a client can rely on to automatically enable WS-Addressing,
  * nor is there a standard default value specified for wsa:Action headers.}
- * <br>
- * See {@link javax.xml.ws.RespectBindingFeature} for more information 
- * on required WSDL extensions.
  * <p>
  * {@add To write a portable endpoint and its corresponding client with this version of JAX-WS,
  * an endpoint MUST explicitly specify what <code>wsa:Actions</code> are to be used via the }{@link Action} {@add and }
@@ -45,6 +42,9 @@ import javax.xml.ws.spi.Provider;
  * {@link BindingProvider#SOAPACTION_URI_PROPERTY}.
  * {@add After the W3C WG on WS-Addressing has specified how the use of WS-Addressing is specified in the WSDL,
  * and what the default value MUST be for Action headers, a future version of JAX-WS will remove these requirements.}
+ * <p>
+ * See {@link javax.xml.ws.RespectBindingFeature} for more information 
+ * on required WSDL extensions.
  * <p>
  * The following describes the affects of this feature with respect
  * to be enabled or disabled:
