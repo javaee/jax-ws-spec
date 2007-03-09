@@ -39,7 +39,7 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  *       wsaw:UsingAddressing element.} At runtime, {@add WS-}Addressing headers
  *       MUST be consumed by the receiver and {@delete generated}{@add produced} by the
  *       sender even if the WSDL declares otherwise. The
- *       mustUnderstand="0" attribute MUST be used on the {@add WS-}Addressing
+ *       mustUnderstand="0" attribute MUST be used on the {@add response WS-}Addressing
  *       headers. 
  *  <li> DISABLED: In this Mode, {@add WS-}Addressing will be disabled
  *       even if an associated WSDL specifies otherwise. At runtime,
