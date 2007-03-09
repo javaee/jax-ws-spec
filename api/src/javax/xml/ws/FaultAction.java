@@ -12,16 +12,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * {@add The definition of this annotation is only partly defined in this release of JAX-WS as
- * there is no standard way to convey its meaning via a WSDL.
- * A future release of JAX-WS will provide that standard mechanism to convey the meaning
- * of this annotation via a WSDL.  An implementation MAY indicate via WSDL, in a non-standard
- * way, the meaning of this annotation.}
- * <p>
  * The <code>FaultAction</code> annotation is used inside an <a href="Action.html">
  * Action</a> annotation to allow an explicit association of <code>Action</code> message
  * addressing property with the <code>fault</code> messages of the WSDL operation mapped from
  * the exception class.
+  * <p>
+ * {@add In this version of JAX-WS there is no standard way via a WSDL to specify 
+ * <code>Action</code> values, nor is a default value specified.  It is intended that 
+ * after the W3C WG on WS-Addressing has defined how <code>Action</code> actions are
+ * specified in a WSDL and the default values,
+ * a future version of JAX-WS will require the new standards.}
  * <p>{@delete 
  * The <code>fault</code> message in the generated WSDL operation mapped for <code>className</code> 
  * class contains explicit <code>wsaw:Action</code> attribute.}

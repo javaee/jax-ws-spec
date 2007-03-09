@@ -9,66 +9,78 @@ import java.util.Map;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
 import org.w3c.dom.Element;
 
-/** The <code>BindingProvider</code> interface provides access to the
- *  protocol binding and associated context objects for request and
- *  response message processing.
+/** 
+ * The <code>BindingProvider</code> interface provides access to the
+ * protocol binding and associated context objects for request and
+ * response message processing.
  *
- *  @since JAX-WS 2.0
+ * @since JAX-WS 2.0
  *
- *  @see javax.xml.ws.Binding
+ * @see javax.xml.ws.Binding
  **/
 public interface BindingProvider {
-    /** Standard property: User name for authentication.
-     *  <p>Type: java.lang.String
+    /** 
+     * Standard property: User name for authentication.
+     * <p>Type: <code>java.lang.String</code>
      **/
     public static final String USERNAME_PROPERTY =
             "javax.xml.ws.security.auth.username";
     
-    /** Standard property: Password for authentication.
-     *  <p>Type: java.lang.String
+    /** 
+     * Standard property: Password for authentication.
+     * <p>Type: <code>java.lang.String</code>
      **/
     public static final String PASSWORD_PROPERTY =
             "javax.xml.ws.security.auth.password";
     
-    /** Standard property: Target service endpoint address. The
-     *  URI scheme for the endpoint address specification MUST
-     *  correspond to the protocol/transport binding for the
-     *  binding in use.
-     *  <p>Type: java.lang.String
+    /** 
+     * Standard property: Target service endpoint address. The
+     * URI scheme for the endpoint address specification MUST
+     * correspond to the protocol/transport binding for the
+     * binding in use.
+     * <p>Type: <code>java.lang.String</code>
      **/
     public static final String ENDPOINT_ADDRESS_PROPERTY =
             "javax.xml.ws.service.endpoint.address";
     
-    /** Standard property: This boolean property is used by a service
-     *  client to indicate whether or not it wants to participate in
-     *  a session with a service endpoint. If this property is set to
-     *  true, the service client indicates that it wants the session
-     *  to be maintained. If set to false, the session is not maintained.
-     *  The default value for this property is false.
-     *  <p>Type: java.lang.Boolean
+    /** 
+     * Standard property: This boolean property is used by a service
+     * client to indicate whether or not it wants to participate in
+     * a session with a service endpoint. If this property is set to
+     * <code>true</code>, the service client indicates that it wants the session
+     * to be maintained. If set to <code>false</code>, the session is not maintained.
+     * The default value for this property is <code>false</code>.
+     * <p>Type: <code>java.lang.Boolean</code>
      **/
     public static final String SESSION_MAINTAIN_PROPERTY =
             "javax.xml.ws.session.maintain";
     
-    /** Standard property for SOAPAction. This boolean property
-     *  indicates whether or not SOAPAction is to be used. The
-     *  default value of this property is false indicating that
-     *  the SOAPAction is not used.
-     *  <p>Type: <code>java.lang.Boolean</code>
+    /** 
+     * Standard property for SOAPAction. This boolean property
+     * indicates whether or not SOAPAction is to be used. The
+     * default value of this property is <code>false</code> indicating that
+     * the SOAPAction is not used{@add , however, if WS-Addressing
+     * is enabled, the default value is <code>true</code> indicating that
+     * the SOAPAction is to be used}. 
+     * <p>Type: <code>java.lang.Boolean</code>
      **/
     public static final String SOAPACTION_USE_PROPERTY =
             "javax.xml.ws.soap.http.soapaction.use";
     
-    /** Standard property for SOAPAction. Indicates the SOAPAction
-     *  URI if the <code>javax.xml.ws.soap.http.soapaction.use</code>
-     *  property is set to <code>true</code>.
-     *  <p>Type: <code>java.lang.String</code>
+    /**
+     * Standard property for SOAPAction. Indicates the SOAPAction
+     * URI if the <code>javax.xml.ws.soap.http.soapaction.use</code>
+     * property is set to <code>true</code>. {@add If WS-Addressing
+     * is enabled, this value will also be used for the value of the
+     * <code>wsa:Action</code> header.}
+     * <p>Type: <code>java.lang.String</code>
      **/
     public static final String SOAPACTION_URI_PROPERTY =
             "javax.xml.ws.soap.http.soapaction.uri";
     
-    /** Get the context that is used to initialize the message context
-     *  for request messages.
+    /** 
+     * Get the context that is used to initialize the message context
+     * for request messages.
      *
      * Modifications to the request context do not affect the message context of
      * either synchronous or asynchronous operations that have already been
@@ -78,7 +90,8 @@ public interface BindingProvider {
      **/
     Map<String, Object> getRequestContext();
     
-    /** Get the context that resulted from processing a response message.
+    /** 
+     * Get the context that resulted from processing a response message.
      *
      * The returned context is for the most recently completed synchronous
      * operation. Subsequent synchronous operation invocations overwrite the
@@ -90,7 +103,8 @@ public interface BindingProvider {
      **/
     Map<String, Object> getResponseContext();
     
-    /** Get the Binding for this binding provider.
+    /** 
+     * Get the Binding for this binding provider.
      *
      * @return The Binding for this binding provider.
      **/
