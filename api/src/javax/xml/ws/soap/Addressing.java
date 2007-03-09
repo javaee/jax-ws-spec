@@ -59,15 +59,15 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * <p>
  * {@add The definition of this annotation is incomplete in this release of JAX-WS as
  * there is no standard way to convey the use of WS-Addressing via a WSDL and there is no
- * standard definition for the default value of <code>wsa:Action</code> headers; 
+ * standard definition for the default value of WS-Addressing <code>Action</code> headers; 
  * however, the runtime behavior of this annotation is well-defined. 
  * It is intended that a future version of 
  * JAX-WS will require the use of the standard mechanism to convey the use
- * of WS-Addressing via WSDL and default values for <code>wsa:Action</code> headers
+ * of WS-Addressing via WSDL and default values for WS-Addressing <code>Action</code> headers
  * as defined by the W3C WG on WS-Addressing.}  
  * <p>
  * {@add To write a portable endpoint and its corresponding client with this version of JAX-WS,
- * an endpoint MUST explicitly specify what <code>wsa:Actions</code> are to be used via the }{@link Action} {@add and }
+ * an endpoint MUST explicitly specify what WS-Addressing <code>Actions</code> are to be used via the }{@link Action} {@add and }
  * {@link FaultAction} {@add annotations.  The client MUST explicitly enable addresssing via the
  * }{@link AddressingFeature}{@add , and for each invocation, the client MUST explicitly set the }
  * {@link BindingProvider#SOAPACTION_URI_PROPERTY}.

@@ -33,10 +33,10 @@ import javax.xml.ws.spi.Provider;
  * the <code>wsdl:required</code> attribute set to <code>true</code>}.
  * {@add However, in this version of JAX-WS, there is no standard WSDL 
  * extension that a client can rely on to automatically enable WS-Addressing,
- * nor is there a standard default value specified for wsa:Action headers.}
+ * nor is there a standard default value specified for WS-Addressing <code>Action</code> headers.}
  * <p>
  * {@add To write a portable endpoint and its corresponding client with this version of JAX-WS,
- * an endpoint MUST explicitly specify what <code>wsa:Actions</code> are to be used via the }{@link Action} {@add and }
+ * an endpoint MUST explicitly specify what WS-Addressing <code>Actions</code> are to be used via the }{@link Action} {@add and }
  * {@link FaultAction} {@add annotations.  The client MUST explicitly enable addresssing via this
  * <code>AddressingFeature</code>, and for each invocation, the client MUST explicitly set the }
  * {@link BindingProvider#SOAPACTION_URI_PROPERTY}.
