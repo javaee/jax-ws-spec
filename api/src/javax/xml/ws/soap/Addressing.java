@@ -15,7 +15,6 @@ import java.lang.annotation.RetentionPolicy;
 import javax.xml.ws.Action;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.FaultAction;
-import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 
 
@@ -71,7 +70,7 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * an endpoint MUST explicitly specify what <code>wsa:Actions</code> are to be used via the }{@link Action} {@add and }
  * {@link FaultAction} {@add annotations.  The client MUST explicitly enable addresssing via the
  * }{@link AddressingFeature}{@add , and for each invocation, the client MUST explicitly set the }
- * {@link BindingProvider#SOAPACTION_URI_PROPERTY} {@add on the }{@link MessageContext}.
+ * {@link BindingProvider#SOAPACTION_URI_PROPERTY}.
  * {@add After the W3C WG on WS-Addressing has specified how the use of WS-Addressing is specified in the WSDL,
  * and what the default value MUST be for Action headers, a future version of JAX-WS will remove these requirements.}
  * <p>
