@@ -46,7 +46,7 @@ import java.io.StringWriter;
  * <code>EndpointReferences</code> in Java methods in an
  * SEI should use
  * concrete instances of an <code>EndpointReference</code> such
- * as the <code>W3CEndpointReferendce</code>.  This way the 
+ * as the <code>W3CEndpointReference</code>.  This way the 
  * schema mapped from the SEI will be more descriptive of the
  * type of endpoint reference being passed.
  * <p>
