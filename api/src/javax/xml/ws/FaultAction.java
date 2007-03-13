@@ -12,8 +12,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The <code>FaultAction</code> annotation is used inside an <a href="Action.html">
- * Action</a> annotation to allow an explicit association of a WS-Addressing 
+ * The <code>FaultAction</code> annotation is used inside an {@link Action}
+ * annotation to allow an explicit association of a WS-Addressing 
  * <code>Action</code> message addressing property with the <code>fault</code> 
  * messages of the WSDL operation mapped from the exception class.
  * <p>
@@ -37,7 +37,7 @@ public @interface FaultAction {
     Class className();
 
     /**
-     * Value of <code>Action</code> message addressing property for the exception
+     * Value of WS-Addressing <code>Action</code> message addressing property for the exception
      */
     String value() default "";
 }

@@ -36,24 +36,22 @@ import javax.xml.ws.soap.Addressing;
 @Target(ElementType.METHOD)
 public @interface Action {
     /**
-     * Explicit value of <code>Action</code> message addressing property for the <code>input</code>
-     * message of the operation. If the value is "", then no <code>wsaw:Action</code>
-     * is generated.
+     * Explicit value of the WS-Addressing <code>Action</code> message addressing property for the <code>input</code>
+     * message of the operation. 
      */
     String input() default "";
 
     /**
-     * Explicit value of <code>Action</code> message addressing property for the <code>output</code>
-     * message of the operation. If the value is "", then no <code>wsaw:Action</code>
-     * is generated.
+     * Explicit value of the WS-Addressing <code>Action</code> message addressing property for the <code>output</code>
+     * message of the operation. 
      */
     String output() default "";
     
     /**
-     * Explicit value of <code>Action</code> message addressing property for the <code>fault</code>
-     * message(s) of the operation. Each exception that is mapped to a fault and requires explicit
+     * Explicit value of the WS-Addressing <code>Action</code> message addressing property for the <code>fault</code>
+     * message(s) of the operation. Each exception that is mapped to a fault and requires an explicit WS-Addressing
      * <code>Action</code> message addressing property, need to be specified as a value in this property 
-     * using <a href="FaultAction.html">FaultAction</a> annotation.
+     * using {@link FaultAction} annotation.
      */
     FaultAction[] fault() default { };
 }
