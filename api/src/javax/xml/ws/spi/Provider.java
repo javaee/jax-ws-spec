@@ -1,11 +1,12 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.8.2.6 2007-03-09 23:51:10 kohlert Exp $
+ *$Id: Provider.java,v 1.8.2.7 2007-03-15 00:32:45 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
 
+import java.net.URL;
 import java.util.List;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.WebServiceException;
@@ -79,16 +80,27 @@ public abstract class Provider {
      */
     public static Provider provider() {
         try {
-            return (Provider)
-            FactoryFinder.find(JAXWSPROVIDER_PROPERTY,
+            Object provider =
+                    FactoryFinder.find(JAXWSPROVIDER_PROPERTY,
                     DEFAULT_JAXWSPROVIDER);
+            if (!(provider instanceof Provider)) {
+                Class pClass = Provider.class;
+                String classnameAsResource = pClass.getName().replace('.', '/') + ".class";
+                ClassLoader loader = pClass.getClassLoader();
+                if(loader == null) {
+                    loader = ClassLoader.getSystemClassLoader();
+                }
+                URL targetTypeURL  = loader.getResource(classnameAsResource);
+                throw new LinkageError("ClassCastException: attempting to cast" + 
+                       provider.getClass().getClassLoader().getResource(classnameAsResource) +
+                       "to" + targetTypeURL.toString() );
+            }
+            return (Provider) provider;
         } catch (WebServiceException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new WebServiceException("Unable to createEndpointReference Provider: "+
-                    ex.getMessage());
-        }
-        
+            throw new WebServiceException("Unable to createEndpointReference Provider", ex);
+        } 
     }
     
     /**
