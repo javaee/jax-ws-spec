@@ -50,7 +50,7 @@ public @interface Action {
     /**
      * Explicit value of the WS-Addressing <code>Action</code> message addressing property for the <code>fault</code>
      * message(s) of the operation. Each exception that is mapped to a fault and requires an explicit WS-Addressing
-     * <code>Action</code> message addressing property, need to be specified as a value in this property 
+     * <code>Action</code> message addressing property, needs to be specified as a value in this property 
      * using {@link FaultAction} annotation.
      */
     FaultAction[] fault() default { };
