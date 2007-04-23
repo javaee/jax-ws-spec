@@ -17,7 +17,7 @@ import java.io.StringWriter;
  * This class represents an WS-Addressing EndpointReference
  * which is a remote reference to a web service endpoint. 
  * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">
- * WS-Addressing</a> 
+ * Web Services Addressing 1.0 - Core</a> 
  * for more information on WS-Addressing EndpointReferences.
  * <p>  
  * This class is immutable as the typical web service developer
@@ -33,11 +33,11 @@ import java.io.StringWriter;
  * Concrete implementations of this class will represent
  * an <code>EndpointReference</code> for a particular version of Addressing.
  * For example the {@link W3CEndpointReference} is for use
- * with W3C WS-Addressing 1.0 - Core Recommendation. 
+ * with W3C Web Services Addressing 1.0 - Core Recommendation. 
  * If JAX-WS implementors need to support different versions
  * of addressing, they should write their own 
  * <code>EndpointReference</code> subclass for that version.
- * This will allow a JAX-WS implementation to createEndpointReference
+ * This will allow a JAX-WS implementation to create
  * vendor specific <code>EndpointReferences</code> that that
  * vendor can use to flag a different version of
  * addressing.
@@ -46,7 +46,7 @@ import java.io.StringWriter;
  * <code>EndpointReferences</code> in Java methods in an
  * SEI should use
  * concrete instances of an <code>EndpointReference</code> such
- * as the <code>W3CEndpointReferendce</code>.  This way the 
+ * as the <code>W3CEndpointReference</code>.  This way the 
  * schema mapped from the SEI will be more descriptive of the
  * type of endpoint reference being passed.
  * <p>
@@ -102,7 +102,7 @@ public abstract class EndpointReference {
 
 
     /**
-     * The <code>getPort</coce> method returns a proxy. If there
+     * The <code>getPort</code> method returns a proxy. If there
      * are any reference parameters in the 
      * <code>EndpointReference</code> instance, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
@@ -116,7 +116,10 @@ public abstract class EndpointReference {
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
      * the WSDL Metadata from this <code>EndpointReference</code> or from
-     * annotations on the <code>serviceEndpointInterface</code>.  
+     * annotations on the <code>serviceEndpointInterface</code>.  For this method
+     * to successfully return a proxy, WSDL metadata MUST be available and the
+     * <code>EndpointReference</code> instance MUST contain an implementation understood
+     * <code>serviceName</code> metadata.
      * <p>
      * Because this port is not created from a <code>Service</code> object, handlers 
      * will not automatically be configured, and the <code>HandlerResolver</code> 

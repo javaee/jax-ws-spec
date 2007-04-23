@@ -1,19 +1,18 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.8 2007-01-19 19:47:34 kohlert Exp $
+ *$Id: Provider.java,v 1.9 2007-04-23 19:03:20 kohlert Exp $
  */
 
 package javax.xml.ws.spi;
 
-//import java.util.List;
+import java.net.URL;
 import java.util.List;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
 import javax.xml.namespace.QName;
 import javax.xml.ws.EndpointReference;
-import javax.xml.transform.Source;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
 
 import org.w3c.dom.Element;
@@ -81,16 +80,27 @@ public abstract class Provider {
      */
     public static Provider provider() {
         try {
-            return (Provider)
-            FactoryFinder.find(JAXWSPROVIDER_PROPERTY,
+            Object provider =
+                    FactoryFinder.find(JAXWSPROVIDER_PROPERTY,
                     DEFAULT_JAXWSPROVIDER);
+            if (!(provider instanceof Provider)) {
+                Class pClass = Provider.class;
+                String classnameAsResource = pClass.getName().replace('.', '/') + ".class";
+                ClassLoader loader = pClass.getClassLoader();
+                if(loader == null) {
+                    loader = ClassLoader.getSystemClassLoader();
+                }
+                URL targetTypeURL  = loader.getResource(classnameAsResource);
+                throw new LinkageError("ClassCastException: attempting to cast" + 
+                       provider.getClass().getClassLoader().getResource(classnameAsResource) +
+                       "to" + targetTypeURL.toString() );
+            }
+            return (Provider) provider;
         } catch (WebServiceException ex) {
             throw ex;
         } catch (Exception ex) {
-            throw new WebServiceException("Unable to createEndpointReference Provider: "+
-                    ex.getMessage());
-        }
-        
+            throw new WebServiceException("Unable to createEndpointReference Provider", ex);
+        } 
     }
     
     /**
@@ -172,7 +182,12 @@ public abstract class Provider {
      * In the implementation of this method, the JAX-WS
      * runtime system takes the responsibility of selecting a protocol
      * binding (and a port) and configuring the proxy accordingly from
-     * the WSDL Metadata from the <code>EndpointReference</code>.
+     * the WSDL metadata of the
+     * <code>serviceEndpointInterface</code> and the <code>EndpointReference</code>. 
+     * For this method
+     * to successfully return a proxy, WSDL metadata MUST be available and the
+     * <code>endpointReference</code> MUST contain an implementation understood
+     * <code>serviceName</code> metadata.  
      *
      *
      * @param endpointReference the EndpointReference that will
@@ -188,7 +203,7 @@ public abstract class Provider {
      *                  <LI>If there is an error during creation
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
-     *                      as required by this method
+     *                      as required by this method}
      *                  <LI>If this
      *                      <code>endpointReference</code>
      *                      is illegal
@@ -205,7 +220,7 @@ public abstract class Provider {
      **/
     public abstract <T> T getPort(EndpointReference endpointReference,
             Class<T> serviceEndpointInterface,
-            WebServiceFeature... features);  
+            WebServiceFeature... features);
     
     /**
      * Factory method to create a <code>W3CEndpointReference</code>.
@@ -266,5 +281,5 @@ public abstract class Provider {
      * @since JAX-WS 2.1
      */
     public abstract W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
-            List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters);    
+            List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters);
 }

@@ -85,17 +85,6 @@ public interface WebServiceContext {
      * If the {@link Binding} for this <code>bindingProvider</code> is
      * either SOAP1.1/HTTP or SOAP1.2/HTTP, then a
      * <code>W3CEndpointReference</code> MUST be returned.
-     * If the returned <code>EndpointReference</code> is a
-     * <code>W3CEndpointReference</code> it MUST contain 
-     * the <code>wsaw:ServiceName</code> element and the 
-     * <code>wsaw:EndpointName</code> attribute on the 
-     * <code>wsaw:ServiceName</code>. It SHOULD contain
-     * the embedded WSDL in the <code>wsa:Metadata</code> element
-     * if there is an associated WSDL. The
-     * <code>wsaw:InterfaceName</code> MAY also be present. 
-     * <br>
-     * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
-     * WS-Addressing - WSDL 1.0</a>.
      *
      * @param referenceParameters Reference parameters to be associated with the
      * returned <code>EndpointReference</code> instance.
@@ -118,18 +107,6 @@ public interface WebServiceContext {
     /**
      * Returns the <code>EndpointReference</code> associated with
      * this endpoint.
-     * <p>
-     * If the returned <code>EndpointReference</code> is a
-     * <code>W3CEndpointReference</code> it MUST contain 
-     * the <code>wsaw:ServiceName</code> element and the 
-     * <code>wsaw:EndpointName</code> attribute on the 
-     * <code>wsaw:ServiceName</code>. It SHOULD contain
-     * the embedded WSDL in the <code>wsa:Metadata</code> element
-     * if there is an associated WSDL. The
-     * <code>wsaw:InterfaceName</code> MAY also be present. 
-     * <br>
-     * See <a href="http://www.w3.org/TR/2006/CR-ws-addr-wsdl-20060529/">
-     * WS-Addressing - WSDL 1.0</a>.
      *
      * @param clazz The type of <code>EndpointReference</code> that
      * MUST be returned.
@@ -149,6 +126,6 @@ public interface WebServiceContext {
      *
      * @since JAX-WS 2.1
      **/
-    public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
-            Element... referenceParameters);    
+    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
+            Element... referenceParameters);
 }
