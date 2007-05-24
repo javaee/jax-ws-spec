@@ -16,7 +16,11 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 /**
  * This feature represents the use of MTOM with a 
  * web service.
- *
+ * <p>
+ * <u>This annotation MUST only be used in conjunction with either the
+ * <code>javax.jws.WebService</code> or {@link javax.xml.ws.WebServiceRef}
+ * annotations.
+ * </u>
  * <p>
  * The following describes the affects of this feature with respect
  * to being enabled or disabled:
@@ -30,7 +34,7 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  *
  * @since JAX-WS 2.1
  */   
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @WebServiceFeatureAnnotation(id=MTOMFeature.ID,bean=MTOMFeature.class)

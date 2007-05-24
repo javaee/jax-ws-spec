@@ -19,6 +19,11 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * This feature clarifies the use of the <code>wsdl:binding</code>
  * in a JAX-WS runtime.
  * <p>
+ * <u>This annotation MUST only be used in conjunction with either the
+ * <code>javax.jws.WebService</code> or {@link javax.xml.ws.WebServiceRef}
+ * annotations.
+ * </u>
+ * <p>
  * This feature is only useful with web services that have an
  * associated WSDL. Enabling this feature requires that a JAX-WS
  * implementation inspect the <code>wsdl:binding</code> for an
@@ -75,7 +80,7 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  *
  * @since JAX-WS 2.1
  */
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @WebServiceFeatureAnnotation(id=RespectBindingFeature.ID,bean=RespectBindingFeature.class)

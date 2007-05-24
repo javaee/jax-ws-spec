@@ -15,18 +15,29 @@ import javax.xml.ws.WebServiceFeature;
 /**
  * Annotation used to identify other annotations
  * as a <code>WebServiceFeature</code>.
- *
+ * <p>
  * Each <code>WebServiceFeature</code> annotation annotated with
  * this annotation MUST contain an 
  * <code>enabled</code> property of type
  * <code>boolean</code> with a default value of <code>true</code>. 
+ * <p>
  * JAX-WS defines the following
  * <code>WebServiceFeature</code> annotations (<code>Addressing</code>, 
  * <code>MTOM</code>, <code>RespectBinding</code>), however, an implementation
  * may define vendors specific annotations for other features.
+ * <p>
+ * <u>
+ * Annotations annotated with <code>WebServiceFeature</code> SHOULD have each
+ * of <code>ElementType.TYPE</code>, <code>ElementType.ELEMENT</code>, 
+ * <code>ElementType.FIELD</code> so that the resulting feature annotation can 
+ * be used in conjunction with the {@link javax.xml.ws.WebServiceRef} annotation
+ * if necessary.
+ * </u>
+ * <p>
  * If a JAX-WS implementation encounters an annotation annotated
  * with the <code>WebServiceFeatureAnnotation</code> that it does not
  * recognize/support an error MUST be given.
+ * <p>
  *
  * @see javax.xml.ws.soap.Addressing
  * @see javax.xml.ws.soap.MTOM
