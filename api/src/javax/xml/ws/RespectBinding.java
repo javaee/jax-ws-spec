@@ -20,8 +20,8 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * in a JAX-WS runtime.
  * <p>
  * <u>This annotation MUST only be used in conjunction with either the
- * <code>javax.jws.WebService</code> or {@link javax.xml.ws.WebServiceRef}
- * annotations.
+ * <code>javax.jws.WebService</code> annotation or a {@link javax.xml.ws.WebServiceRef}
+ * annotation that is placed on an SEI and not a service class.
  * </u>
  * <p>
  * This feature is only useful with web services that have an

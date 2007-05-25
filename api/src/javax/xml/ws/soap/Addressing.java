@@ -25,8 +25,8 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * with any other binding is NOT required.
  * <p>
  * <u>This annotation MUST only be used in conjunction with either the
- * <code>javax.jws.WebService</code> or {@link javax.xml.ws.WebServiceRef}
- * annotations.
+ * <code>javax.jws.WebService</code> annotation or a {@link javax.xml.ws.WebServiceRef}
+ * annotation that is placed on an SEI and not a service class.
  * </u>
  * <p>
  * The following describes the effects of this feature with respect
