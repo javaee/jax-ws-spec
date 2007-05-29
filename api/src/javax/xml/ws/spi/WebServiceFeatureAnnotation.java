@@ -27,7 +27,7 @@ import javax.xml.ws.WebServiceFeature;
  * may define vendors specific annotations for other features.
  * <p>
  * <u>
- * Annotations annotated with <code>WebServiceFeature</code> SHOULD have each
+ * Annotations annotated with <code>WebServiceFeatureAnnotation</code> SHOULD have each
  * of <code>ElementType.TYPE</code>, <code>ElementType.ELEMENT</code>, 
  * <code>ElementType.FIELD</code> so that the resulting feature annotation can 
  * be used in conjunction with the {@link javax.xml.ws.WebServiceRef} annotation
