@@ -28,7 +28,7 @@ import javax.xml.ws.WebServiceFeature;
  * <p>
  * <u>
  * Annotations annotated with <code>WebServiceFeatureAnnotation</code> SHOULD have each
- * of <code>ElementType.TYPE</code>, <code>ElementType.ELEMENT</code>, 
+ * of <code>ElementType.TYPE</code>, <code>ElementType.METHOD</code>, 
  * <code>ElementType.FIELD</code> so that the resulting feature annotation can 
  * be used in conjunction with the {@link javax.xml.ws.WebServiceRef} annotation
  * if necessary.

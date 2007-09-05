@@ -19,7 +19,11 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * <p>
  * <u>This annotation MUST only be used in conjunction with either the
  * <code>javax.jws.WebService</code> annotation or a {@link javax.xml.ws.WebServiceRef}
- * annotation that is placed on an SEI and not a service class.
+ * annotation.  This annotation MUST NOT be used with a
+ * <code>WebServiceRef</code> annotation that is used to specify a generated
+ * service class. When used with <code>WebServiceRef</code> specifying an
+ * SEI, the injected SEI proxy MUST
+ * honor the values of the <code>MTOM</code> annotation.
  * </u>
  * <p>
  * The following describes the affects of this feature with respect
