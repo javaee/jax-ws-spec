@@ -12,13 +12,38 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- *  The <code>WebServiceRef</code> annotation is used to
- *  define a reference to a web service and
- *  (optionally) an injection target for it.
+ * The <code>WebServiceRef</code> annotation is used to
+ * define a reference to a web service and
+ * (optionally) an injection target for it.
  *
- *  Web service references are resources in the Java EE 5 sense.
+ * Web service references are resources in the Java EE 5 sense.
+ * <p>
+ * <u>When used to specify a proxy injection target this annotation
+ * can be used in conjunction with 
+ * {@link javax.xml.ws.spi.WebServiceFeature} annotations.  In this 
+ * case the injected proxy MUST honor the specified
+ * <code>WebServiceFeatures</code>.  
+ * <p>
+ * For example, in the code below, the injected 
+ * <code>StockQuoteProvider</code> proxy MUST
+ * have WS-Addressing enabled as specifed by the
+ * {@link javax.xml.ws.soap.Addressing}
+ * annotation.
+ *
+ *  <code>
+ *  <pre>
+ *  public class MyClient {
+ *     &#64;Addressing
+ *     &#64;WebServiceRef(StockQuoteService.class)
+ *     private StockQuoteProvider stockQuoteProvider;
+ *     ...
+ *  }
+ *  </pre>
+ *  </code>
+ *  </u>
  * 
  *  @see javax.annotation.Resource
+ *  @see javax.xml.ws.spi.WebServiceFeatureAnnotation
  *
  *  @since JAX-WS 2.0
  *
