@@ -38,7 +38,7 @@
         <mkdir dir="build/lib" />
         <mkdir dir="build/docs" />
     </target>
-
+ 
     <!-- compile Java source files -->
     <target name="compile"
             depends="prepare"
