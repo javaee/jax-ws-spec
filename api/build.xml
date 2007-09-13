@@ -62,7 +62,9 @@
             description="create build/lib/jaxws-api.jar from compiled API sources">
         <jar jarfile="build/lib/jaxws-api.jar" 
              basedir="build/classes"
-             manifest="etc/manifest.mf"/>
+             manifest="etc/manifest.mf">
+		<metainf dir="etc"/>
+        </jar>
     </target>
 
     <!-- create the jaxws-api-doc.zip -->
