@@ -30,8 +30,14 @@ import javax.xml.ws.WebServiceFeature;
  * Annotations annotated with <code>WebServiceFeatureAnnotation</code> SHOULD have each
  * of <code>ElementType.TYPE</code>, <code>ElementType.METHOD</code>, 
  * <code>ElementType.FIELD</code> so that the resulting feature annotation can 
- * be used in conjunction with the {@link javax.xml.ws.WebServiceRef} annotation
- * if necessary.
+ * be used in conjunction with the {@link javax.xml.ws.WebServiceRef} 
+ * and {@link javax.xml.ws.WebServiceRefs} annotations if necessary.
+ * <p>
+ * <code>WebServiceFeature</code> annotations such as {@link javax.xml.ws.soap.Addressing}
+ * MAY be placed on both the service endpoint interface and the service endpoint 
+ * implementation.  When this happens, the <code>WebServiceFeature</code> annotations from
+ * both MUST be honored with the annotations on the service endpoint implementation taking 
+ * precedence in the case of any conflict.
  * </u>
  * <p>
  * If a JAX-WS implementation encounters an annotation annotated

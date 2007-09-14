@@ -18,9 +18,10 @@ import java.lang.annotation.RetentionPolicy;
  *
  * Web service references are resources in the Java EE 5 sense.
  * <p>
- * <u>When used to specify a proxy injection target this annotation
- * can be used in conjunction with 
- * {@link javax.xml.ws.spi.WebServiceFeature} annotations.  In this 
+ * <u>When used to specify a service endpoint interface proxy 
+ * injection target this annotation can be used in conjunction with 
+ * {@link javax.xml.ws.spi.WebServiceFeatureAnnotation} annotations such
+ * as {@link javax.xml.ws.soap.Addressing}.  In this 
  * case the injected proxy MUST honor the specified
  * <code>WebServiceFeatures</code>.  
  * <p>
@@ -30,22 +31,30 @@ import java.lang.annotation.RetentionPolicy;
  * {@link javax.xml.ws.soap.Addressing}
  * annotation.
  *
- *  <code>
- *  <pre>
- *  public class MyClient {
- *     &#64;Addressing
- *     &#64;WebServiceRef(StockQuoteService.class)
- *     private StockQuoteProvider stockQuoteProvider;
- *     ...
- *  }
- *  </pre>
- *  </code>
- *  </u>
+ * <code>
+ * <pre>
+ *    public class MyClient {
+ *       &#64;Addressing
+ *       &#64;WebServiceRef(StockQuoteService.class)
+ *       private StockQuoteProvider stockQuoteProvider;
+ *       ...
+ *    }
+ * </pre>
+ * </code>
+ * <p>
+ * <code>WebServiceFeature</code> annotations such as {@link javax.xml.ws.soap.Addressing}
+ * MAY also be present on the service endpoint interface (SEI).  When this happens, 
+ * the <code>WebServiceFeature</code> annotations from the SEI and the ones specified
+ * with the <code>WebServiceRef</code> annotation MUST be honored.  If there is a
+ * conflict between the two sets of annotations, the annotations 
+ * used in conjunction with the <code>WebServiceRef</code> take precedence over
+ * the annotations used on the SEI.
+ * </u>
  * 
- *  @see javax.annotation.Resource
- *  @see javax.xml.ws.spi.WebServiceFeatureAnnotation
+ * @see javax.annotation.Resource
+ * @see javax.xml.ws.spi.WebServiceFeatureAnnotation
  *
- *  @since JAX-WS 2.0
+ * @since JAX-WS 2.0
  *
 **/
 
