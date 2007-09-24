@@ -34,9 +34,8 @@ import static java.lang.annotation.RetentionPolicy.*;
  * <code>
  * <pre>
  *    &#64;Addressing
- *    &#64;WebServiceRefs({&#64;WebServiceRef(name="service/stockquoteservice", type=StockQuoteProvider.class, value=StockQuoteService.class),
- *                         &#64;WebServiceRef(name="service/stockquoteprovider", type=StockQuoteService.class})
- *    private StockQuoteProvider stockQuoteProvider;
+ *    &#64;WebServiceRefs({&#64;WebServiceRef(name="service/stockquoteservice", value=StockQuoteService.class),
+ *                         &#64;WebServiceRef(name="service/stockquoteprovider", type=StockQuoteProvider.class, type=StockQuoteService.class})
  *    public class MyClient {
  *    static StockQuoteService service;
  *    static StockQuoteProvider port;
