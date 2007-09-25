@@ -20,6 +20,11 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * <u>This annotation MUST only be used in conjunction the
  * <code>javax.jws.WebService</code>, {@link javax.xml.ws.WebServiceRef},
  * or {@link javax.xml.ws.WebServiceRefs} annotations.
+ * <p>
+ * When used with the <code>javax.jws.WebService</code> annotation this
+ * annotation MUST only be used on the service endpoint implementation
+ * class.
+ * <p>
  * This annotation has no affect when used with 
  * <code>WebServiceRef</code> annotations that are used to specify a generated
  * service class. When used with <code>WebServiceRef</code> that specifies a
