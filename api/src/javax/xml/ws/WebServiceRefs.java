@@ -35,19 +35,13 @@ import static java.lang.annotation.RetentionPolicy.*;
  * <pre>
  *    &#64;Addressing
  *    &#64;WebServiceRefs({&#64;WebServiceRef(name="service/stockquoteservice", value=StockQuoteService.class),
- *                     &#64;WebServiceRef(name="service/stockquoteprovider", type=StockQuoteProvider.class, type=StockQuoteService.class})
+ *                     &#64;WebServiceRef(name="service/stockquoteprovider", type=StockQuoteProvider.class, value=StockQuoteService.class})
  *    public class MyClient {
- *    static StockQuoteService service;
- *    static StockQuoteProvider port;
- *
- *       protected void init() {
- *          try {
- *             Context ic = new InitialContext();
- *             service = (StockQuoteService) ic.lookup("java:comp/env/service/stockquoteservice");
- *             port = (StockQuoteProvider) ic.lookup("java:comp/env/service/stockquoteprovider");
- *          } catch(Throwable t) {
- *             ...
- *          }   
+ *        void init() {
+ *            Context ic = new InitialContext();
+ *            StockQuoteService service = (StockQuoteService) ic.lookup("java:comp/env/service/stockquoteservice");
+ *            StockQuoteProvider port = (StockQuoteProvider) ic.lookup("java:comp/env/service/stockquoteprovider");
+ *            ...
  *       }
  *       ...
  *    }
