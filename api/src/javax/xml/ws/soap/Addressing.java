@@ -80,7 +80,8 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * and what the default value must be for Action headers, a future version of JAX-WS will remove these requirements.
  * <p>
  * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">Web Services Addressing - Core</a>
- * and <a href="http://www.w3.org/TR/2006/REC-ws-addr-soap-20060509/">Web Services Addressing 1.0 - SOAP Binding</a> 
+ * <a href="http://www.w3.org/TR/2006/REC-ws-addr-soap-20060509/">Web Services Addressing 1.0 - SOAP Binding</a>,
+ * and <a href="http://www.w3.org/TR/ws-addr-metadata/">Web Services Addressing 1.0 - Metadata</a> 
  * for more information on WS-Addressing.
  * 
  * @since JAX-WS 2.1

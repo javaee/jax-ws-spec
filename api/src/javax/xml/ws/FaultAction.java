@@ -17,12 +17,122 @@ import java.lang.annotation.Target;
  * <code>Action</code> message addressing property with the <code>fault</code> 
  * messages of the WSDL operation mapped from the exception class.
  * <p>
- * In this version of JAX-WS there is no standard way to specify 
- * <code>Action</code> values in a WSDL and there is no standard default value.  It is intended that, 
- * after the W3C WG on WS-Addressing has defined these items in a recommendation,
- * a future version of JAX-WS will require the new standards.
- * 
- * @see Action
+ * The <code>fault</code> message in the generated WSDL operation mapped for <code>className</code>
+ * class contains explicit <code>wsam:Action</code> attribute.
+ *
+ * <p>
+ * <b>Example 1</b>: Specify explicit values for <code>Action</code> message addressing
+ * property for the <code>input</code>, <code>output</code> and <code>fault</code> message
+ * if the Java method throws only one service specific exception.
+ *
+ * <pre>
+ * &#64;javax.jws.WebService
+ * public class AddNumbersImpl {
+ *     &#64;javax.xml.ws.Action(
+ *         input=&quot;http://example.com/inputAction&quot;,
+ *         output=&quot;http://example.com/outputAction&quot;,
+ *         fault = {
+ *             &#64;javax.xml.ws.FaultAction(className=AddNumbersException.class, value=&quot;http://example.com/faultAction&quot;)
+ *         })
+ *     public int addNumbers(int number1, int number2)
+ *         throws AddNumbersException {
+ *         return number1 + number2;
+ *     }
+ * }
+ * </pre>
+ *
+ * The generated WSDL looks like:
+ *
+ * <pre>
+ *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
+ *   ...
+ *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
+ *       &lt;operation name=&quot;AddNumbers&quot;&gt;
+ *         &lt;input message=&quot;tns:AddNumbersInput&quot; name=&quot;Parameters&quot;
+ *           wsam:Action=&quot;http://example.com/inputAction&quot;/&gt;
+ *        &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;Result&quot;
+ *          wsam:Action=&quot;http://example.com/outputAction&quot;/&gt;
+ *        &lt;fault message=&quot;tns:AddNumbersException&quot; name=&quot;AddNumbersException&quot;
+ *          wsam:Action=&quot;http://example.com/faultAction&quot;/&gt;
+ *       &lt;/operation&gt;
+ *     &lt;portType&gt;
+ *   ...
+ *   &lt;definitions&gt;
+ * </pre>
+ *
+ * <p>
+ * Example 2: Here is an example that shows how to specify explicit values for <code>Action</code>
+ * message addressing property if the Java method throws only one service specific exception,
+ * without specifying the values for <code>input</code> and <code>output</code> messages.
+ *
+ * <pre>
+ * &#64;javax.jws.WebService
+ * public class AddNumbersImpl {
+ *     &#64;javax.xml.ws.Action(
+ *         fault = {
+ *             &#64;javax.xml.ws.FaultAction(className=AddNumbersException.class, value=&quot;http://example.com/faultAction&quot;)
+ *         })
+ *     public int addNumbers(int number1, int number2)
+ *         throws AddNumbersException {
+ *         return number1 + number2;
+ *     }
+ * }
+ * </pre>
+ *
+ * The generated WSDL looks like:
+ *
+ * <pre>
+ *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
+ *   ...
+ *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
+ *       &lt;operation name=&quot;AddNumbers&quot;&gt;
+ *         &lt;input message=&quot;tns:AddNumbersInput&quot; name=&quot;Parameters&quot;/&gt;
+ *         &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;Result&quot;/&gt;
+ *         &lt;fault message=&quot;tns:addNumbersFault&quot; name=&quot;InvalidNumbers&quot;
+ *           wsa:Action=&quot;http://example.com/addnumbers/fault&quot;/&gt;
+ *       &lt;/operation&gt;
+ *     &lt;portType&gt;
+ *   ...
+ *   &lt;definitions&gt;
+ * </pre>
+ *
+ * <p>
+ * Example 3: Here is an example that shows how to specify explicit values for <code>Action</code>
+ * message addressing property if the Java method throws more than one service specific exception.
+ *
+ * <pre>
+ * &#64;javax.jws.WebService
+ * public class AddNumbersImpl {
+ *     &#64;javax.xml.ws.Action(
+ *         fault = {
+ *             &#64;javax.xml.ws.FaultAction(className=AddNumbersException.class, value=&quot;http://example.com/addFaultAction&quot;)
+ *             &#64;javax.xml.ws.FaultAction(className=TooBigNumbersException.class, value=&quot;http://example.com/toobigFaultAction&quot;)
+ *         })
+ *     public int addNumbers(int number1, int number2)
+ *         throws AddNumbersException, TooBigNumbersException {
+ *         return number1 + number2;
+ *     }
+ * }
+ * </pre>
+ *
+ * The generated WSDL looks like:
+ *
+ * <pre>
+ *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
+ *   ...
+ *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
+ *       &lt;operation name=&quot;AddNumbers&quot;&gt;
+ *         &lt;input message=&quot;tns:AddNumbersInput&quot; name=&quot;Parameters&quot;/&gt;
+ *         &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;Result&quot;/&gt;
+ *         &lt;fault message=&quot;tns:addNumbersFault&quot; name=&quot;AddNumbersException&quot;
+ *           wsa:Action=&quot;http://example.com/addnumbers/fault&quot;/&gt;
+ *         &lt;fault message=&quot;tns:tooBigNumbersFault&quot; name=&quot;TooBigNumbersException&quot;
+ *           wsa:Action=&quot;http://example.com/toobigFaultAction&quot;/&gt;
+ *       &lt;/operation&gt;
+ *     &lt;portType&gt;
+ *   ...
+ *   &lt;definitions&gt;
+ * </pre>
  *
  * @since JAX-WS 2.1
  */

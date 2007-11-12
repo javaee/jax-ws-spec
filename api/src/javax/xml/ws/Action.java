@@ -11,8 +11,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.xml.ws.soap.Addressing;
-
 /**
 
  * The <code>Action</code> annotation allows explicit association of a 
@@ -20,12 +18,83 @@ import javax.xml.ws.soap.Addressing;
  * <code>input</code>, <code>output</code>, and 
  * <code>fault</code> messages of the mapped WSDL operation. 
  * <p>
- * In this version of JAX-WS there is no standard way to specify 
- * <code>Action</code> values in a WSDL and there is no standard default value.  It is intended that, 
- * after the W3C WG on WS-Addressing has defined these items in a recommendation,
- * a future version of JAX-WS will require the new standards.
+ * This annotation can be specified on each method of a service endpoint interface.
+ * For such a method, the mapped operation in the generated WSDL
+ * contains explicit <code>wsam:Action</code> attribute on the WSDL <code>input</code>,
+ * <code>output</code> and <code>fault</code> messages of the WSDL <code>operation</code>
+ * based upon which attributes of the <code>Action</code> annotation have been specified.
+ * <p>
+ * <b>Example 1</b>: Specify explicit values for <code>Action</code> message addressing property
+ * for <code>input</code> and <code>output</code> messages.
  * 
- * @see Addressing
+ * <pre>
+ * &#64;javax.jws.WebService
+ * public class AddNumbersImpl {
+ *     &#64;javax.xml.ws.Action(
+ *         input="http://example.com/inputAction",
+ *         output="http://example.com/outputAction")
+ *     public int addNumbers(int number1, int number2) {
+ *         return number1 + number2;
+ *     }
+ * }
+ * </pre>
+ *
+ * The generated WSDL looks like:
+ * <pre>
+ *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
+ *   ...
+ *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
+ *       &lt;operation name=&quot;AddNumbers&quot;&gt;
+ *         &lt;input message=&quot;tns:AddNumbersInput&quot; name=&quot;Parameters&quot;
+ *           wsam:Action=&quot;http://example.com/inputAction&quot;/&gt;
+ *        &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;Result&quot;
+ *           wsam:Action=&quot;http://example.com/outputAction&quot;/&gt;
+ *       &lt;/operation&gt;
+ *     &lt;portType&gt;
+ *   ...
+ *   &lt;definitions&gt;
+ * </pre>
+ *
+ * <p>
+ * <b>Example 2</b>: Specify explicit value for <code>Action</code> message addressing property
+ * for only the <code>input</code> message. The default values are used for the
+ * <code>output</code> message.
+ *
+ * <pre>
+ * &#64;javax.jws.WebService
+ * public class AddNumbersImpl {
+ *     &#64;javax.xml.ws.Action(input=&quot;http://example.com/inputAction&quot;)
+ *     public int addNumbers(int number1, int number2) {
+ *         return number1 + number2;
+ *     }
+ * }
+ * </pre>
+ *
+ * The generated WSDL looks like:
+ *
+ * <pre>
+ *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
+ *   ...
+ *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
+ *       &lt;operation name=&quot;AddNumbers&quot;&gt;
+ *         &lt;input message=&quot;tns:AddNumbersInput&quot; name=&quot;Parameters&quot;
+ *           wsam:Action=&quot;http://example.com/inputAction&quot;/&gt;
+ *        &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;Result&quot;/&gt;
+ *       &lt;/operation&gt;
+ *     &lt;portType&gt;
+ *   ...
+ *   &lt;definitions&gt;
+ * </pre>
+ *
+ * It is legitimate to specify an explicit value for <code>Action</code> message addressing property for
+ * <code>output</code> message only. In this case, a default value of <code>wsam:Action</code> is used
+ * for the <code>input</code> message.
+ *
+ * <p>
+ * <b>Example 3</b>: See <a href="FaultAction.html">FaultAction</a> annotation for an example of
+ * how to specify an explicit value for <code>Action</code> message addressing property for the
+ * <code>fault</code> message.
+ *
  * @see FaultAction
  *
  * @since JAX-WS 2.1
