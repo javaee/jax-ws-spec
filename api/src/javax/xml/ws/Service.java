@@ -152,7 +152,7 @@ public class Service {
      *                      of the proxy.
      *                  <LI>If there is any missing WSDL metadata
      *                      as required by this method.
-     *                  <LI>If an illegal.
+     *                  <LI>If an illegal
      *                      <code>serviceEndpointInterface</code>
      *                      is specified.
      *                  </UL>
@@ -299,7 +299,7 @@ public class Service {
         
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the user's choosing.
+     * the client's choosing.
      *
      * @param portName  Qualified name for the target service endpoint
      * @param type The class of object used for messages or message
@@ -308,9 +308,9 @@ public class Service {
      * and <code>javax.activation.DataSource</code>, depending on
      * the binding in use.
      * @param mode Controls whether the created dispatch instance is message
-     * or payload oriented, i.e. whether the user will work with complete
+     * or payload oriented, i.e. whether the client will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
-     * protocol, this parameter controls whether the user will work with
+     * protocol, this parameter controls whether the client will work with
      * SOAP messages or the contents of a SOAP body. Mode MUST be MESSAGE
      * when type is SOAPMessage.
      *
@@ -328,16 +328,16 @@ public class Service {
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the user's choosing.
+     * the client's choosing.
      *
      * @param portName  Qualified name for the target service endpoint
      * @param type The class of object used for messages or message
      * payloads. Implementations are required to support
      * <code>javax.xml.transform.Source</code> and <code>javax.xml.soap.SOAPMessage</code>.
      * @param mode Controls whether the created dispatch instance is message
-     * or payload oriented, i.e. whether the user will work with complete
+     * or payload oriented, i.e. whether the client will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
-     * protocol, this parameter controls whether the user will work with
+     * protocol, this parameter controls whether the client will work with
      * SOAP messages or the contents of a SOAP body. Mode MUST be <code>MESSAGE</code>
      * when type is <code>SOAPMessage</code>.
      * @param features  A list of <code>WebServiceFeatures</code> to configure on the 
@@ -364,7 +364,7 @@ public class Service {
     
     /** 
      * Creates a <code>Dispatch</code> instance for use with objects of
-     * the user's choosing. If there
+     * the client's choosing. If there
      * are any reference parameters in the 
      * <code>endpointReference</code>, then those reference
      * parameters MUST appear as SOAP headers, indicating them to be
@@ -399,9 +399,9 @@ public class Service {
      * payloads. Implementations are required to support
      * <code>javax.xml.transform.Source</code> and <code>javax.xml.soap.SOAPMessage</code>.
      * @param mode Controls whether the created dispatch instance is message
-     * or payload oriented, i.e. whether the user will work with complete
+     * or payload oriented, i.e. whether the client will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
-     * protocol, this parameter controls whether the user will work with
+     * protocol, this parameter controls whether the client will work with
      * SOAP messages or the contents of a SOAP body. Mode MUST be <code>MESSAGE</code>
      * when type is <code>SOAPMessage</code>.
      * @param features  An array of <code>WebServiceFeatures</code> to configure on the 
@@ -445,9 +445,9 @@ public class Service {
      * @param context The JAXB context used to marshall and unmarshall
      * messages or message payloads.
      * @param mode Controls whether the created dispatch instance is message
-     * or payload oriented, i.e. whether the user will work with complete
+     * or payload oriented, i.e. whether the client will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
-     * protocol, this parameter controls whether the user will work with
+     * protocol, this parameter controls whether the client will work with
      * SOAP messages or the contents of a SOAP body.
      *
      * @return Dispatch instance.
@@ -470,9 +470,9 @@ public class Service {
      * @param context The JAXB context used to marshall and unmarshall
      * messages or message payloads.
      * @param mode Controls whether the created dispatch instance is message
-     * or payload oriented, i.e. whether the user will work with complete
+     * or payload oriented, i.e. whether the client will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
-     * protocol, this parameter controls whether the user will work with
+     * protocol, this parameter controls whether the client will work with
      * SOAP messages or the contents of a SOAP body.
      * @param features  A list of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
@@ -532,9 +532,9 @@ public class Service {
      * @param context The JAXB context used to marshall and unmarshall
      * messages or message payloads.
      * @param mode Controls whether the created dispatch instance is message
-     * or payload oriented, i.e. whether the user will work with complete
+     * or payload oriented, i.e. whether the client will work with complete
      * protocol messages or message payloads. E.g. when using the SOAP
-     * protocol, this parameter controls whether the user will work with
+     * protocol, this parameter controls whether the client will work with
      * SOAP messages or the contents of a SOAP body.
      * @param features  An array of <code>WebServiceFeatures</code> to configure on the 
      *                proxy.  Supported features not in the <code>features
