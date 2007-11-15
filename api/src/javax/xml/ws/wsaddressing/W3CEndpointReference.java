@@ -73,6 +73,8 @@ public final class W3CEndpointReference extends EndpointReference {
             this.address = epr.address;
             this.metadata = epr.metadata;
             this.referenceParameters = epr.referenceParameters;
+            this.elements = epr.elements;
+            this.attributes = epr.attributes;
         } catch (JAXBException e) {
             throw new WebServiceException("Error unmarshalling W3CEndpointReference " ,e);
         } catch (ClassCastException e) {
@@ -107,6 +109,8 @@ public final class W3CEndpointReference extends EndpointReference {
     private Elements referenceParameters;
     @XmlElement(name="Metadata",namespace=NS)
     private Elements metadata;
+    // attributes and elements are not private for performance reasons
+    // (JAXB can bypass reflection)
     @XmlAnyAttribute
     Map<QName,String> attributes;
     @XmlAnyElement
