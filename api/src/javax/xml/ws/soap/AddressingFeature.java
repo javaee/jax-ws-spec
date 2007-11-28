@@ -67,8 +67,9 @@ import javax.xml.ws.spi.Provider;
  * <code>required</code> property is <code>false</code>.
   <p>
 
- * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">Web Services Addressing - Core</a>
- * and <a href="http://www.w3.org/TR/2006/REC-ws-addr-soap-20060509/">Web Services Addressing 1.0 - SOAP Binding</a> 
+ * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">Web Services Addressing - Core</a>,
+ *  <a href="http://www.w3.org/TR/2006/REC-ws-addr-soap-20060509/">Web Services Addressing 1.0 - SOAP Binding</a>
+ * and <a href="http://www.w3.org/TR/ws-addr-metadata/">Web Services Addressing 1.0 - Metadata</a>
  * for more information on WS-Addressing.
  *
  * @since JAX-WS 2.1
@@ -86,14 +87,18 @@ public final class AddressingFeature extends WebServiceFeature {
      * property only has meaning on the endpoint and has no
      * affect when used on the client.
      */
-    protected boolean required = false;
+    protected final boolean required;
+
+    protected final boolean anonymousResponses;
+    protected final boolean nonAnonymousResponses;
     
     /**
      * Create an <code>AddressingFeature</code>.
      * The instance created will be enabled.
      */
     public AddressingFeature() {
-        this.enabled = true;
+        this(true, false, false, false);
+
     }
     
     /** 
@@ -103,7 +108,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * be enabled or not.
      */
     public AddressingFeature(boolean enabled) {
-        this.enabled = enabled;
+        this(enabled, false, false, false);
     }
 
     /** 
@@ -117,9 +122,16 @@ public final class AddressingFeature extends WebServiceFeature {
      * used on the client.
      */
     public AddressingFeature(boolean enabled, boolean required) {
+        this(enabled, required, false, false);
+    }
+
+    public AddressingFeature(boolean enabled, boolean required, boolean anonymousResponses,
+                             boolean nonAnonymousResponses) {
         this.enabled = enabled;
         this.required = required;
-    }    
+        this.anonymousResponses = anonymousResponses;
+        this.nonAnonymousResponses = nonAnonymousResponses;
+    }
     
     /**
      * {@inheritDoc}
@@ -138,5 +150,21 @@ public final class AddressingFeature extends WebServiceFeature {
      */
     public boolean isRequired() {
         return required;
-    }    
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isAnonymousResponses() {
+        return anonymousResponses;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isNonAnonymousResponses() {
+        return nonAnonymousResponses;
+    }
 }

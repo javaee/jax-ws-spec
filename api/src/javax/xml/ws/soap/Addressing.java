@@ -24,7 +24,7 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * the SOAP 1.1/HTTP or SOAP 1.2/HTTP binding.  Using this feature
  * with any other binding is NOT required.
  * <p>
- * <u>This annotation MUST only be used in conjunction the
+ * This annotation MUST only be used in conjunction the
  * <code>javax.jws.WebService</code>, {@link javax.xml.ws.WebServiceRef},
  * or {@link javax.xml.ws.WebServiceRefs} annotations.
  * <p>
@@ -37,7 +37,6 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * service class. When used with <code>WebServiceRef</code> that specifies a
  * service endpoint interface (SEI), the injected SEI proxy MUST
  * honor the values of the <code>Addressing</code> annotation.
- * </u>
  * <p>
  * The following describes the effects of this feature with respect
  * to be enabled or disabled:
@@ -47,7 +46,8 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  *       MUST be consumed by the receiver and produced by the
  *       sender even if the WSDL declares otherwise. The
  *       mustUnderstand="0" attribute MUST be used on the response WS-Addressing
- *       headers. 
+ *       headers. If a WSDL needs to be generated, it MUST contain explicit
+ *       wsam:Action for all the operations.
  *  <li> DISABLED: In this Mode, WS-Addressing will be disabled
  *       even if an associated WSDL specifies otherwise. At runtime,
  *       WS-Addressing headers MUST NOT be used. WS-Addressing may be explicitly
@@ -60,7 +60,9 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * The <code>required</code> property can be used to
  * specify if WS-Addressing headers MUST
  * be present on incoming messages.  By default the
- * <code>required</code> property is <code>false</code>. 
+ * <code>required</code> property is <code>false</code>.
+ *
+ *
  * <p>
  * The definition of this annotation is incomplete in this release of JAX-WS as
  * there is no standard way to convey the use of WS-Addressing via a WSDL and there is no
@@ -92,13 +94,42 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 @WebServiceFeatureAnnotation(id=AddressingFeature.ID,bean=AddressingFeature.class)
 public @interface Addressing {
     /**
-     * Specifies if this feature is enabled or disabled.
+     * Specifies if this feature is enabled or disabled. If enabled, it means the
+     * endpoint supports WS-Addressing but does not require its use. See
+     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyaddressing">
+     * 3.1.1 Addressing Assertion</a>
      */
     boolean enabled() default true;
     
     /**
      * Property to determine if WS-Addressing headers MUST
-     * be present on incoming messages.
+     * be present on incoming messages. If required is true, it means endpoint
+     * requires WS-Addressing.See
+     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyaddressing">
+     * 3.1.1 Addressing Assertion</a>
      */
     boolean required() default false;
+
+    /**
+     * If addressing is enabled, this property determines if endpoint requires
+     * the use of anonymous responses.
+     *
+     * <p>
+     * This will result into wsam:AnonymousResponses nested assertion as specified in
+     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyanonresponses">
+     * 3.1.2 AnonymousResponses Assertion</a> in the generated WSDL.
+     */
+    boolean anonymousResponses() default false;
+
+    /**
+     * If addressing is enabled, this property determines if endpoint requires
+     * the use of non-anonymous responses.
+     *
+     * <p>
+     * This will result into
+     * wsam:AnonymousResponses nested assertion as specified in
+     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicynonanonresponses">
+     * 3.1.3 NonAnonymousResponses Assertion</a> in the generated WSDL.
+     */
+    boolean nonAnonymousResponses() default false;
 }
