@@ -1,13 +1,15 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9 2007-04-23 19:03:20 kohlert Exp $
+ *$Id: Provider.java,v 1.9.2.1 2008-01-23 01:51:47 jitu Exp $
  */
 
 package javax.xml.ws.spi;
 
 import java.net.URL;
 import java.util.List;
+import java.util.Iterator;
+import java.lang.reflect.Method;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
@@ -40,6 +42,28 @@ public abstract class Provider {
      **/
     static private final String DEFAULT_JAXWSPROVIDER
             = "com.sun.xml.ws.spi.ProviderImpl";
+
+    /**
+     * Take advantage of Java SE 6's java.util.ServiceLoader API.
+     * Using reflection so that there is no compile-time dependency on SE 6.
+     */
+    static private final Method loadMethod;
+    static private final Method iteratorMethod;
+    static {
+        Method tLoadMethod = null;
+        Method tIteratorMethod = null;
+        try {
+            Class<?> clazz = Class.forName("java.util.ServiceLoader");
+            tLoadMethod = clazz.getMethod("load", Class.class);
+            tIteratorMethod = clazz.getMethod("iterator");
+        } catch(ClassNotFoundException ce) {
+            // Running on Java SE 5
+        } catch(NoSuchMethodException ne) {
+            // Shouldn't happen
+        }
+        loadMethod = tLoadMethod;
+        iteratorMethod = tIteratorMethod;
+    }
     
     
     /**
@@ -80,9 +104,10 @@ public abstract class Provider {
      */
     public static Provider provider() {
         try {
-            Object provider =
-                    FactoryFinder.find(JAXWSPROVIDER_PROPERTY,
-                    DEFAULT_JAXWSPROVIDER);
+            Object provider = getProviderUsingServiceLoader();
+            if (provider == null) {
+                provider = FactoryFinder.find(JAXWSPROVIDER_PROPERTY, DEFAULT_JAXWSPROVIDER);
+            }
             if (!(provider instanceof Provider)) {
                 Class pClass = Provider.class;
                 String classnameAsResource = pClass.getName().replace('.', '/') + ".class";
@@ -101,6 +126,27 @@ public abstract class Provider {
         } catch (Exception ex) {
             throw new WebServiceException("Unable to createEndpointReference Provider", ex);
         } 
+    }
+
+
+    private static Provider getProviderUsingServiceLoader() {
+        if (loadMethod != null) {
+            Object loader;
+            try {
+                loader = loadMethod.invoke(null, Provider.class);
+            } catch (Exception e) {
+                throw new WebServiceException("Cannot invoke java.util.ServiceLoader#load()", e);
+            }
+
+            Iterator<Provider> it;
+            try {
+                it = (Iterator<Provider>)iteratorMethod.invoke(loader);
+            } catch(Exception e) {
+                throw new WebServiceException("Cannot invoke java.util.ServiceLoader#iterator()", e);
+            }
+            return it.hasNext() ? it.next() : null;
+        }
+        return null;
     }
     
     /**
@@ -153,6 +199,8 @@ public abstract class Provider {
     /**
      * read an EndpointReference from the infoset contained in
      * <code>eprInfoset</code>.
+     *
+     * @param eprInfoset infoset for EndpointReference
      *
      * @return the <code>EndpointReference</code> unmarshalled from
      * <code>eprInfoset</code>.  This method never returns <code>null</code>.
