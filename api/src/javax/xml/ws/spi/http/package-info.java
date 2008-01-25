@@ -1,14 +1,15 @@
 /**
    Provides HTTP SPI that is used for portable deployment of JAX-WS
    web services in containers(for e.g. servlet containers). This SPI
-   provides a way for the container developers to 
+   is not for end developers but provides a way for the container
+   developers to deploy JAX-WS services portably.
 
    <p>
    The portable deployment happens in three steps:
    <ol>
-   <li>Container needs to create {@link javax.xml.ws.spi.http.HttpContext} from the web
+   <li>Container needs to create {@link javax.xml.ws.spi.http.HttpContext} from the
    deployment. For example, a HttpContext could be created using
-   ServletContext in servlet container case.
+   ServletContext and url-pattern for the web service in servlet container case.
    <li>It creates a {@link javax.xml.ws.Endpoint} using web service deployment
    descriptor files.
    <li>Then publishes the endpoint using {@link javax.xml.ws.Endpoint#publish(HttpContext)}

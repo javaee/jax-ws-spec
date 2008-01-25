@@ -218,7 +218,18 @@ public interface HttpExchange {
      * This method will return the {@link HttpPrincipal} that represents
      * the authenticated user for this HttpExchange.
      *
-     * @return the HttpPrincipal, or <code>null</code> if no authenticator is set.
+     * @return HttpPrincipal for an authenticated user
+     *         null otherwise
      */
-    HttpPrincipal getPrincipal();
+    HttpPrincipal getUserPrincipal();
+
+    /**
+     * Returns a boolean indicating whether the authenticated user is
+     * included in the specified logical "role".
+     *
+     * @param role specifies the name of the role
+     * @return true if the user making this request belongs to a given role
+     *         false if the user has not been authenticated
+     */
+    boolean isUserInRole(String role);
 }
