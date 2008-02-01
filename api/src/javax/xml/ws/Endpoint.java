@@ -8,6 +8,7 @@ package javax.xml.ws;
 import java.util.List;
 import java.util.Map;
 import javax.xml.ws.spi.Provider;
+import javax.xml.ws.spi.http.HttpContext;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
 import org.w3c.dom.Element;
 
@@ -79,6 +80,10 @@ public abstract class Endpoint {
     public static Endpoint create(Object implementor) {
         return create(null, implementor);
     }
+
+    public static Endpoint create(Object implementor, WebServiceFeature ... features) {
+        return create(null, implementor, features);
+    }
     
     /**
      * Creates an endpoint with the specified binding type and
@@ -99,6 +104,11 @@ public abstract class Endpoint {
      **/
     public static Endpoint create(String bindingId, Object implementor) {
         return Provider.provider().createEndpoint(bindingId, implementor);
+    }
+
+    public static Endpoint create(String bindingId, Object implementor, WebServiceFeature ... features) {
+        // TODO delegate to Provider
+        return null;
     }
     
     
@@ -169,6 +179,11 @@ public abstract class Endpoint {
     public static Endpoint publish(String address, Object implementor) {
         return Provider.provider().createAndPublishEndpoint(address, implementor);
     }
+
+    public static Endpoint publish(String address, Object implementor, WebServiceFeature ... features) {
+        // TODO delegate to Provider
+        return null;
+    }
     
     /**
      * Publishes this endpoint at the provided server context.
@@ -196,6 +211,39 @@ public abstract class Endpoint {
      *          <code>WebServicePermission("publishEndpoint")</code> permission.
      **/
     public abstract void publish(Object serverContext);
+
+    /**
+     * Publishes this endpoint at the provided server context.
+     * A server context encapsulates the server infrastructure
+     * and addressing information for a particular transport.
+     * For a call to this method to succeed, the server context
+     * passed as an argument to it MUST be compatible with the
+     * endpoint's binding.
+     *
+     * <p>
+     * This is meant for container developers to publish the
+     * the endpoints portably and not intended for the end
+     * developers.
+     *
+     *
+     * @param serverContext An object representing a server
+     *           context to be used for publishing the endpoint.
+     *
+     * @throws java.lang.IllegalArgumentException
+     *              If the provided server context is not
+     *              supported by the implementation or turns
+     *              out to be unusable in conjunction with the
+     *              endpoint's binding.
+     *
+     * @throws java.lang.IllegalStateException
+     *         If the endpoint has been published already or it has been stopped.
+     *
+     * @throws java.lang.SecurityException
+     *          If a <code>java.lang.SecurityManger</code>
+     *          is being used and the application doesn't have the
+     *          <code>WebServicePermission("publishEndpoint")</code> permission.
+     **/
+    public abstract void publish(HttpContext serverContext);
     
     /**
      * Stops publishing this endpoint.

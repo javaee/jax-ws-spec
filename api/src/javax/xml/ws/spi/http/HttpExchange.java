@@ -5,9 +5,14 @@
 
 package javax.xml.ws.spi.http;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
+import javax.xml.ws.handler.MessageContext;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.URI;
+import java.util.List;
+import java.util.Map;
+import java.nio.channels.WritableByteChannel;
+import java.nio.channels.ReadableByteChannel;
 
 /**
  * This class encapsulates a HTTP request received and a 
@@ -57,7 +62,7 @@ public interface HttpExchange {
      * The keys in Map are case-insensitive.
      * @return a read-only Map which can be used to access request headers
      */
-    Map<String, List<String>> getRequestHeaders() ;
+    Map<String, List<String>> getRequestHeaders();
 
     /**
      * Returns a mutable Map into which the HTTP response headers can be stored
@@ -69,68 +74,69 @@ public interface HttpExchange {
      * The keys in Map are case-insensitive.
      * @return a writable Map which can be used to set response headers.
      */
-    Map<String, List<String>> getResponseHeaders() ;
+    Map<String, List<String>> getResponseHeaders();
 
     /**
      * Get the request URI
      *
      * @return the request URI 
      */
-    URI getRequestURI() ;
+    URI getRequestURI();
 
     /**
      * Get the request method
+     *
      * @return the request method
      */
     String getRequestMethod();
 
     /**
      * Get the HttpContext for this exchange
+     *
      * @return the HttpContext
      */
     HttpContext getHttpContext();
 
     /**
+     * This must be called to end the exchange.
+     *
      * Ends this exchange by doing the following in sequence:<p><ol>
-     * <li>close the request InputStream, if not already closed<p></li>
-     * <li>close the response OutputStream, if not already closed. </li>
+     * <li>close the request ReadableByteChannel, if not already closed<p></li>
+     * <li>close the response WritableByteChannel, if not already closed. </li>
      * </ol>
      */
-    void close() ;
+    void close();
 
     /**
-     * returns a stream from which the request body can be read.
-     * Multiple calls to this method will return the same stream.
+     * returns a Channel from which the request body can be read.
+     * Multiple calls to this method will return the same Channel.
      * It is recommended that applications should consume (read) all of the
      * data from this stream before closing it. If a stream is closed
      * before all data has been read, then the close() call will 
      * read and discard remaining data (up to an implementation specific
      * number of bytes).
-     * @return the stream from which the request body can be read.
+     * @return the Channel from which the request body can be read.
      */
-    InputStream getRequestBody() ;
+    ReadableByteChannel getRequestBody();
 
     /**
-     * returns a stream to which the response body must be
+     * returns a Channel to which the response body must be
      * written. {@link #sendResponseHeaders(int,long)}) must be called prior to calling
      * this method. Multiple calls to this method (for the same exchange)
-     * will return the same stream. In order to correctly terminate
-     * each exchange, the output stream must be closed, even if no 
+     * will return the same Channel. In order to correctly terminate
+     * each exchange, the output Channel must be closed, even if no
      * response body is being sent.
      * <p>
-     * Closing this stream implicitly
-     * closes the InputStream returned from {@link #getRequestBody()}
-     * (if it is not already closed).
-     * <P>
      * If the call to sendResponseHeaders() specified a fixed response
      * body length, then the exact number of bytes specified in that
      * call must be written to this stream. If too many bytes are written,
      * then write() will throw an IOException. If too few bytes are written
      * then the stream close() will throw an IOException. In both cases,
      * the exchange is aborted and the underlying TCP connection closed.
-     * @return the stream to which the response body is written
+     *
+     * @return the Channel to which the response body is written
      */
-    OutputStream getResponseBody() ;
+    WritableByteChannel getResponseBody();
 
 
     /**
@@ -158,22 +164,25 @@ public interface HttpExchange {
      * @see HttpExchange#getResponseBody()
      * @throws IOException if there is i/o error
      */
-    void sendResponseHeaders (int rCode, long responseLength) throws IOException ;
+    void sendResponseHeaders(int rCode, long responseLength) throws IOException ;
 
     /**
      * Returns the address of the remote entity invoking this request
+     *
      * @return the InetSocketAddress of the caller
      */
-    InetSocketAddress getRemoteAddress ();
+    InetSocketAddress getRemoteAddress();
 
     /**
      * Returns the response code, if it has already been set
+     *
      * @return the response code, if available. <code>-1</code> if not available yet.
      */
-    int getResponseCode ();
+    int getResponseCode();
 
     /**
      * Returns the local address on which the request was received
+     *
      * @return the InetSocketAddress of the local interface
      */
     InetSocketAddress getLocalAddress();
@@ -182,36 +191,27 @@ public interface HttpExchange {
      * Returns the protocol string from the request in the form 
      * <i>protocol/majorVersion.minorVersion</i>. For example,
      * "HTTP/1.1"
+     *
      * @return the protocol string from the request
      */
     String getProtocol();
 
     /**
-     * Filter modules may store arbitrary objects with HttpExchange
-     * instances as an out-of-band communication mechanism. Other Filters
-     * or the exchange handler may then access these objects.
+     * Returns immutable map of arbitrary objects that are associated with
+     * HttpExchange. Container may store these objects with HttpExchange
+     * instances as an out-of-band communication mechanism. JAX-WS handlers
+     * and endpoints may then access these objects via {@link MessageContext}.
      * <p>
-     * Each Filter class will document the attributes which they make
-     * available.
-     * @param name the name of the attribute to retrieve
-     * @return the attribute object, or null if it does not exist
-     * @throws NullPointerException if name is <code>null</code>
+     * Servlet containers must expose {@link MessageContext#SERVLET_CONTEXT},
+     * {@link MessageContext#SERVLET_REQUEST}, {@link MessageContext#SERVLET_RESPONSE}
+     * as attributes.
+     *
+     * @return the attribute objects, or null if they do not exist
+     *
+     * TODO: Should this be a mutable map ? Then endpoints can communicate with
+     * TODO: the container by adding its own properties
      */
-    Object getAttribute(String name) ;
-
-    /**
-     * Filter modules may store arbitrary objects with HttpExchange
-     * instances as an out-of-band communication mechanism. Other Filters
-     * or the exchange handler may then access these objects.
-     * <p>
-     * Each Filter class will document the attributes which they make
-     * available.
-     * @param name the name to associate with the attribute value
-     * @param value the object to store as the attribute value. <code>null</code>
-     * value is permitted.
-     * @throws NullPointerException if name is <code>null</code>
-     */
-    void setAttribute(String name, Object value) ;
+    Map<String, Object> getAttributes();
 
 
     /**
