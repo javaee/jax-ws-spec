@@ -17,6 +17,7 @@
    <p>A sample JAX-WS deployment can be done as follows:
    <blockquote><pre>
    // Create service
+   // Endpoint endpoint = Provider.provider().createEndpoint(bindingId, impl, invoker, mtomFeature, ...)
    Endpoint endpoint = Endpoint.create(impl, mtomFeature, ...)
    // If DD overrides wsdl:service, wsdl:port names, configure them
    endpoint.setProperties(...)

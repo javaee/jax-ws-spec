@@ -81,6 +81,22 @@ public abstract class Endpoint {
         return create(null, implementor);
     }
 
+    /**
+     * Creates an endpoint with the specified implementor object. If there is
+     * a binding specified via a BindingType annotation then it MUST be used else
+     * a default of SOAP 1.1 / HTTP binding MUST be used.
+     * <p>
+     * The newly created endpoint may be published by calling
+     * one of the {@link javax.xml.ws.Endpoint#publish(String)} and
+     * {@link javax.xml.ws.Endpoint#publish(Object)} methods.
+     *
+     *
+     * @param implementor The endpoint implementor.
+     *
+     * @return The newly created endpoint.
+     * @since 2.2
+     *
+     */
     public static Endpoint create(Object implementor, WebServiceFeature ... features) {
         return create(null, implementor, features);
     }
@@ -106,11 +122,26 @@ public abstract class Endpoint {
         return Provider.provider().createEndpoint(bindingId, implementor);
     }
 
+    /**
+     * Creates an endpoint with the specified binding type and
+     * implementor object.
+     * <p>
+     * The newly created endpoint may be published by calling
+     * one of the {@link javax.xml.ws.Endpoint#publish(String)} and
+     * {@link javax.xml.ws.Endpoint#publish(Object)} methods.
+     *
+     * @param bindingId A URI specifying the binding to use. If the bindingID is
+     * <code>null</code> and no binding is specified via a BindingType
+     * annotation then a default SOAP 1.1 / HTTP binding MUST be used.
+     *
+     * @param implementor The endpoint implementor.
+     *
+     * @return The newly created endpoint.
+     * @since 2.2
+     */
     public static Endpoint create(String bindingId, Object implementor, WebServiceFeature ... features) {
-        // TODO delegate to Provider
-        return null;
+        return Provider.provider().createEndpoint(bindingId, implementor, features);
     }
-    
     
     /**
      * Returns the binding for this endpoint.
@@ -180,11 +211,37 @@ public abstract class Endpoint {
         return Provider.provider().createAndPublishEndpoint(address, implementor);
     }
 
+    /**
+     * Creates and publishes an endpoint for the specified implementor
+     * object at the given address.
+     * <p>
+     * The necessary server infrastructure will be created and
+     * configured by the JAX-WS implementation using some default configuration.
+     *
+     * In order to get more control over the server configuration, please
+     * use the {@link javax.xml.ws.Endpoint#create(String,Object)} and
+     * {@link javax.xml.ws.Endpoint#publish(Object)} methods instead.
+     *
+     * @param address A URI specifying the address and transport/protocol
+     *        to use. A http: URI MUST result in the SOAP 1.1/HTTP
+     *        binding being used. Implementations may support other
+     *        URI schemes.
+     * @param implementor The endpoint implementor.
+     *
+     * @return The newly created endpoint.
+     *
+     * @throws java.lang.SecurityException
+     *          If a <code>java.lang.SecurityManger</code>
+     *          is being used and the application doesn't have the
+     *          <code>WebServicePermission("publishEndpoint")</code> permission.
+     * @since 2.2
+     */
+
     public static Endpoint publish(String address, Object implementor, WebServiceFeature ... features) {
-        // TODO delegate to Provider
-        return null;
+        return Provider.provider().createAndPublishEndpoint(address, implementor, features);
     }
-    
+
+
     /**
      * Publishes this endpoint at the provided server context.
      * A server context encapsulates the server infrastructure
@@ -242,7 +299,8 @@ public abstract class Endpoint {
      *          If a <code>java.lang.SecurityManger</code>
      *          is being used and the application doesn't have the
      *          <code>WebServicePermission("publishEndpoint")</code> permission.
-     **/
+     * @since 2.2
+     */
     public abstract void publish(HttpContext serverContext);
     
     /**

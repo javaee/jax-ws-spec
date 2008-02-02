@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.1 2008-01-23 01:51:47 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.2 2008-02-02 01:52:27 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -196,6 +196,7 @@ public abstract class Provider {
      */
     public abstract Endpoint createAndPublishEndpoint(String address,
             Object implementor);
+
     /**
      * read an EndpointReference from the infoset contained in
      * <code>eprInfoset</code>.
@@ -330,4 +331,64 @@ public abstract class Provider {
      */
     public abstract W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
             List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters);
+
+    /**
+     * Creates and publishes an endpoint object with the specified
+     * address and implementation object.
+     *
+     * @param address A URI specifying the address and transport/protocol
+     *        to use. A http: URI MUST result in the SOAP 1.1/HTTP
+     *        binding being used. Implementations may support other
+     *        URI schemes.
+     * @param implementor A service implementation object to which
+     *        incoming requests will be dispatched. The corresponding
+     *        class MUST be annotated with all the necessary Web service
+     *        annotations.
+     * @param features A list of WebServiceFeatures to configure on the
+     *        endpoint.  Supported features not in the <code>features
+     *        </code> parameter will have their default values.
+     * @return The newly created endpoint.
+     * @since 2.2
+     */
+    public abstract Endpoint createAndPublishEndpoint(String address,
+            Object implementor, WebServiceFeature ... features);
+
+    /**
+     *
+     * Creates an endpoint object with the provided binding and implementation
+     * object.
+     *
+     * @param bindingId A URI specifying the desired binding (e.g. SOAP/HTTP)
+     * @param implementor A service implementation object to which
+     *        incoming requests will be dispatched. The corresponding
+     *        class MUST be annotated with all the necessary Web service
+     *        annotations.
+     * @param features A list of WebServiceFeatures to configure on the
+     *        endpoint.  Supported features not in the <code>features
+     *        </code> parameter will have their default values.
+     * @return The newly created endpoint.
+     * @since 2.2
+     */
+    public abstract Endpoint createEndpoint(String bindingId, Object implementor,
+            WebServiceFeature ... features);
+
+    /**
+     * Creates an endpoint object with the provided binding and implementation
+     * object.
+     *
+     * @param bindingId A URI specifying the desired binding (e.g. SOAP/HTTP).
+     *        Can be null.
+     * @param implementorClass A service implementation class that
+     *        MUST be annotated with all the necessary Web service
+     *        annotations.
+     * @param invoker that does the actual invocation on the service instance.
+     * @param features A list of WebServiceFeatures to configure on the
+     *        endpoint.  Supported features not in the <code>features
+     *        </code> parameter will have their default values.
+     * @return The newly created endpoint.
+     * @since 2.2
+     */
+    public abstract Endpoint createEndpoint(String bindingId, Object implementorClass,
+            Invoker invoker, WebServiceFeature ... features);
+
 }
