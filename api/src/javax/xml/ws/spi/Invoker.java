@@ -1,11 +1,12 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- * $Id: Invoker.java,v 1.1.2.1 2008-02-02 01:52:27 jitu Exp $
+ * $Id: Invoker.java,v 1.1.2.2 2008-02-05 18:40:07 jitu Exp $
  */
 package javax.xml.ws.spi;
 
 import javax.xml.ws.WebServiceContext;
+import javax.xml.ws.WebServiceFeature;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 
@@ -16,7 +17,7 @@ import java.lang.reflect.InvocationTargetException;
  * for a web service invocation. Finally, Invoker does the actual
  * invocation of web service on endpoint instance.
  *
- * @see Provider#createEndpoint(String, Object, Invoker, javax.xml.ws.WebServiceFeature[])
+ * @see Provider#createEndpoint(String, Class, Invoker, WebServiceFeature[])
  * @author Jitendra Kotamraju
  * @since 2.2
  */
@@ -34,6 +35,9 @@ public interface Invoker {
      *         by reflection API throws this exception
      * @throws InvocationTargetException if the injection done
      *         by reflection API throws this exception
+     *
+     * TODO what about @PostConstruct, @PreDestroy. Whose responsibility
+     * TODO to invoke them ?
      */
     void inject(WebServiceContext webServiceContext)
     throws IllegalAccessException, IllegalArgumentException, InvocationTargetException;

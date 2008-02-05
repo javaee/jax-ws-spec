@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.2 2008-02-02 01:52:27 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.3 2008-02-05 18:40:07 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -388,7 +388,7 @@ public abstract class Provider {
      * @return The newly created endpoint.
      * @since 2.2
      */
-    public abstract Endpoint createEndpoint(String bindingId, Object implementorClass,
+    public abstract Endpoint createEndpoint(String bindingId, Class implementorClass,
             Invoker invoker, WebServiceFeature ... features);
 
 }

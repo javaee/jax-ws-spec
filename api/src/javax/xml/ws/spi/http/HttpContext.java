@@ -5,6 +5,7 @@
 
 package javax.xml.ws.spi.http;
 
+import javax.xml.ws.spi.ApplicationContext;
 import java.util.*;
 
 /**
@@ -51,5 +52,12 @@ public interface HttpContext {
      * @return property bag of the context
      */
     Map<String,Object> getProperties();
+
+    /**
+     * Returns the application context in which this http context is part of.
+     *
+     * @return application context in which this context is part of
+     */
+    ApplicationContext getApplicationContext();
 
 }
