@@ -24,20 +24,20 @@ import java.nio.channels.ReadableByteChannel;
  * below. 
  * <ol><li>{@link #getRequestMethod()} to determine the command
  * <li>{@link #getRequestHeaders()} to examine the request headers (if needed)
- * <li>{@link #getRequestBody()} returns a {@link java.io.InputStream} for reading the request body. 
- *     After reading the request body, the stream is close.
+ * <li>{@link #getRequestBody()} returns a {@link ReadableByteChannel} for reading the request body.
+ *     After reading the request body, the channel is closed.
  * <li>{@link #getResponseHeaders()} to set any response headers, except content-length
  * <li>{@link #sendResponseHeaders(int,long)} to send the response headers. Must be called before
  * next step.
- * <li>{@link #getResponseBody()} to get a {@link java.io.OutputStream} to send the response body.
- *      When the response body has been written, the stream must be closed to terminate the exchange.
+ * <li>{@link #getResponseBody()} to get a {@link WritableByteChannel} to send the response body.
+ *      When the response body has been written, the channel must be closed to terminate the exchange.
  * </ol>
  * <b>Terminating exchanges</b>
  * <br>
- * Exchanges are terminated when both the request InputStream and response OutputStream are closed. 
- * Closing the OutputStream, implicitly closes the InputStream (if it is not already closed). 
+ * Exchanges are terminated when both the request Channel and response Channel are closed.
+ * Closing the WritableByteChannel, implicitly closes the ReadableByteChannel (if it is not already closed).
  * However, it is recommended
- * to consume all the data from the InputStream before closing it.
+ * to consume all the data from the ReadableByteChannel before closing it.
  * The convenience method {@link #close()} does all of these tasks.
  * Closing an exchange without consuming all of the request body is not an error
  * but may make the underlying TCP connection unusable for following exchanges.
@@ -111,7 +111,7 @@ public interface HttpExchange {
      * returns a Channel from which the request body can be read.
      * Multiple calls to this method will return the same Channel.
      * It is recommended that applications should consume (read) all of the
-     * data from this stream before closing it. If a stream is closed
+     * data from this Channel before closing it. If a Channel is closed
      * before all data has been read, then the close() call will 
      * read and discard remaining data (up to an implementation specific
      * number of bytes).
@@ -129,9 +129,9 @@ public interface HttpExchange {
      * <p>
      * If the call to sendResponseHeaders() specified a fixed response
      * body length, then the exact number of bytes specified in that
-     * call must be written to this stream. If too many bytes are written,
+     * call must be written to this Channel. If too many bytes are written,
      * then write() will throw an IOException. If too few bytes are written
-     * then the stream close() will throw an IOException. In both cases,
+     * then the Channel close() will throw an IOException. In both cases,
      * the exchange is aborted and the underlying TCP connection closed.
      *
      * @return the Channel to which the response body is written
@@ -146,7 +146,7 @@ public interface HttpExchange {
      * number of bytes to send and the application must send that exact amount of data. 
      * If the response length parameter is <code>zero</code>, then chunked transfer encoding is
      * used and an arbitrary amount of data may be sent. The application terminates the
-     * response body by closing the OutputStream. If response length has the value <code>-1</code>
+     * response body by closing the WritableByteChannel. If response length has the value <code>-1</code>
      * then no response body is being sent.
      * <p>
      * If the content-length response header has not already been set then
@@ -156,7 +156,7 @@ public interface HttpExchange {
      * @param rCode the response code to send
      * @param responseLength if > 0, specifies a fixed response body length
      * 	      and that exact number of bytes must be written
-     *        to the stream acquired from getResponseBody(), or else 
+     *        to the WritableByteChannel acquired from getResponseBody(), or else
      *        if equal to 0, then chunked encoding is used, 
      *        and an arbitrary number of bytes may be written.
      *	      if <= -1, then no response body length is specified and
