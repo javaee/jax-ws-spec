@@ -8,6 +8,11 @@ import javax.xml.ws.Endpoint;
 import java.util.List;
 
 /**
+ * Capturs an application which may consists multiple endpoints.
+ * For example, in servlet container a war represents an application
+ * and war may contain multiple endpoints. This context allows one
+ * endpoint to get information about other endpoint.
+ *
  * @author Jitendra Kotamraju
  */
 public interface ApplicationContext {
