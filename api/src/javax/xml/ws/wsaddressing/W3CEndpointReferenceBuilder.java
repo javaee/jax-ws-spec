@@ -73,8 +73,12 @@ public final class W3CEndpointReferenceBuilder {
     }
     
     /**
-     * Sets the <code>serviceName</code> of the endpoint to be targeted
-     *      by the returned <code>W3CEndpointReference</code>.
+     * Sets the <code>serviceName</code> as the
+     * <code>wsam:ServiceName</code> element in the
+     * <code>wsa:Metadata</code> element.
+     *
+     * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
+     * Web Services Addressing 1.0 - Metadata</a> for more details.
      *
      * @param serviceName The service name of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference<code>.  This property
@@ -83,7 +87,8 @@ public final class W3CEndpointReferenceBuilder {
      *      endpoint that is published by the same Java EE application.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
-     *   the <code>serviceName</code> property set.
+     *   the <code>serviceName</code> as <code>wsam:ServiceName</code>
+     *   element added to the <code>wsa:Metadata</code> element
      *
      */
     public W3CEndpointReferenceBuilder serviceName(QName serviceName) {
@@ -92,10 +97,13 @@ public final class W3CEndpointReferenceBuilder {
     }
     
     /**
-     * Sets the <code>endpointName</code> of the endpoint to
-     * be targeted by the returned <code>W3CEndpointRefernce</code>. 
-     * This method can only
-     * be called after the {@link #serviceName} method has been called.
+     * Sets the <code>endpointName</code> as
+     * <code>wsam:ServiceName/@EndpointName</code> in the
+     * <code>wsa:Metadata</code> element. This method can only be called
+     * after the {@link #serviceName} method has been called.
+     * <p>
+     * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
+     * Web Services Addressing 1.0 - Metadata</a> for more details.
      *
      * @param endpointName The name of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference<code>. The 
@@ -105,10 +113,15 @@ public final class W3CEndpointReferenceBuilder {
      *      endpoint published by the same Java EE application.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
-     *   the <code>endpointName</code> property set.
+     *   the <code>endpointName</code> as
+     * <code>wsam:ServiceName/@EndpointName</code> in the
+     * <code>wsa:Metadata</code> element.
      *
-     * @throws java.lang.IllegalStateException If the <code>serviceName</code> has not
-     *  been set.
+     * @throws IllegalStateException, if the <code>serviceName</code>
+     * has not been set.
+     * @throws IllegalArgumentException, if the <code>endpointName</code>'s
+     * Namespace URI doesn't match <code>serviceName</code>'s Namespace URI
+     *
      */
     public W3CEndpointReferenceBuilder endpointName(QName endpointName) {
         if (serviceName == null) {
@@ -120,14 +133,16 @@ public final class W3CEndpointReferenceBuilder {
     }
     
     /**
-     * Sets the <code>wsdlDocumentLocation</code> associated with the targeted
-     * <code>W3CEndpointReference</code>.
+     * Sets the <code>wsdlDocumentLocation</code> that will be inlined
+     * in the <code>W3CEndpointReferenc</code> instance's
+     * <code>wsa:Metadata</code>.
      *
-     * @param wsdlDocumentLocation The location of the WSDL document associated 
-     * with the targeted <code>W3CEndpointReference</code>.
+     * @param wsdlDocumentLocation The location of the WSDL document to
+     *      be inlined in the <code>wsa:Metadata</code> of the
+     *     <code>W3CEndpointReference<code>.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
-     *   the <code>wsdlDocumentLocation</code> property set.
+     *   the <code>wsdlDocumentLocation</code> that is to be inlined.
      *
      */
     public W3CEndpointReferenceBuilder wsdlDocumentLocation(String wsdlDocumentLocation) {
@@ -203,7 +218,7 @@ public final class W3CEndpointReferenceBuilder {
      * properties set on this <code>W3CEndpointReferenceBuilder</code>
      * instance. This method never returns <code>null</code>.
      *
-     * @throws java.lang.IllegalStateException
+     * @throws IllegalStateException
      *     <ul>
      *        <li>If the <code>address</code>, <code>serviceName</code> and
      *            <code>endpointName</code> are all <code>null</code>.
