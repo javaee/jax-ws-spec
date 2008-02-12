@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.nio.channels.WritableByteChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.security.Principal;
 
 /**
  * This class encapsulates a HTTP request received and a 
@@ -215,13 +216,13 @@ public interface HttpExchange {
 
 
     /**
-     * This method will return the {@link HttpPrincipal} that represents
+     * This method will return the {@link Principal} that represents
      * the authenticated user for this HttpExchange.
      *
-     * @return HttpPrincipal for an authenticated user
+     * @return Principal for an authenticated user
      *         null otherwise
      */
-    HttpPrincipal getUserPrincipal();
+    Principal getUserPrincipal();
 
     /**
      * Returns a boolean indicating whether the authenticated user is

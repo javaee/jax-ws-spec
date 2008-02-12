@@ -60,4 +60,6 @@ public interface HttpContext {
      */
     ApplicationContext getApplicationContext();
 
+    String getScheme();
+
 }
