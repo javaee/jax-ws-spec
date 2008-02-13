@@ -134,8 +134,11 @@ public final class W3CEndpointReferenceBuilder {
     
     /**
      * Sets the <code>wsdlDocumentLocation</code> that will be inlined
-     * in the <code>W3CEndpointReferenc</code> instance's
-     * <code>wsa:Metadata</code>.
+     * as <code>wsa:Metadata/@wsdli:wsdlLocation</code>.
+     *
+     * <p>
+     * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
+     * Web Services Addressing 1.0 - Metadata</a> for more details.
      *
      * @param wsdlDocumentLocation The location of the WSDL document to
      *      be inlined in the <code>wsa:Metadata</code> of the
