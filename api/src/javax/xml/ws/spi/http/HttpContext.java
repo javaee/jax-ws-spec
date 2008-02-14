@@ -18,19 +18,19 @@ import java.util.*;
  * <p>
  *
  * @author Jitendra Kotamraju
- * @since 2.2
+ * @since JAX-WS 2.2
  */
 public interface HttpContext {
 
     /**
-     * Returns the handler for this context
+     * Returns the handler that handles HTTP requests for this context
      *
      * @return the HttpHandler for this context
      */
     HttpHandler getHandler();
 
     /**
-     * Sets the handler for this context.
+     * Sets a handler that handles HTTP requests for this context
      *
      * @param h the handler to set for this context
      */
@@ -44,14 +44,20 @@ public interface HttpContext {
     String getPath();
 
     /**
-     * Returns a bag of properties for container's configuration
-     * and other data that can be used by jax-ws runtime. Every
-     * property stored in this Map will be visible to
-     * every {@link HttpExchange} processed by this context
+     * Returns an attribute value for container's configuration
+     * and other data that can be used by jax-ws runtime.
      *
-     * @return property bag of the context
+     * @return attribute value
      */
-    Map<String,Object> getProperties();
+    Object getAttribute(String name);
+
+    /**
+     * Returns all attribute names for container's configuration
+     * and other data that can be used by jax-ws runtime.
+     *
+     * @return iterator for all attribute names
+     */
+    Iterator<String> getAttributeNames();
 
     /**
      * Returns the application context in which this http context is part of.
@@ -59,7 +65,5 @@ public interface HttpContext {
      * @return application context in which this context is part of
      */
     ApplicationContext getApplicationContext();
-
-    String getScheme();
 
 }

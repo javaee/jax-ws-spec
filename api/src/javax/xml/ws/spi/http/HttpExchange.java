@@ -11,6 +11,7 @@ import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
+import java.util.Iterator;
 import java.nio.channels.WritableByteChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.security.Principal;
@@ -46,7 +47,7 @@ import java.security.Principal;
  * result in resources failing to be freed/reused.
  *
  * @author Jitendra Kotamraju
- * @since 2.2
+ * @since JAX-WS 2.2
  */
 
 public interface HttpExchange {
@@ -214,6 +215,10 @@ public interface HttpExchange {
      */
     Map<String, Object> getAttributes();
 
+    Object getAttribute(String name);
+    
+    Iterator<String> getAttributeNames();
+
 
     /**
      * This method will return the {@link Principal} that represents
@@ -233,4 +238,7 @@ public interface HttpExchange {
      *         false if the user has not been authenticated
      */
     boolean isUserInRole(String role);
+
+    String getScheme();
+
 }

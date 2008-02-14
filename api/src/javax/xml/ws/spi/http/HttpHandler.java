@@ -12,7 +12,7 @@ import java.io.IOException;
  * HTTP exchange is handled by one of these handlers.
  *
  * @author Jitendra Kotamraju
- * @since 2.2
+ * @since JAX-WS 2.2
  */
 public interface HttpHandler {
     /**
