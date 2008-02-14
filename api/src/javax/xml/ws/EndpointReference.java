@@ -68,7 +68,7 @@ public abstract class EndpointReference {
     //
     //Default constructor to be only called by derived types.
     //
-    protected EndpointReference(){};
+    protected EndpointReference(){}
 
     /**
      * Factory method to read an EndpointReference from the infoset contained in
@@ -91,6 +91,8 @@ public abstract class EndpointReference {
 
     /**
      * write this <code>EndpointReference</code> to the specified infoset format
+     *
+     * @param result for writing infoset
      * @throws WebServiceException
      *   if there is an error writing the
      *   <code>EndpointReference</code> to the specified <code>result</code>.
