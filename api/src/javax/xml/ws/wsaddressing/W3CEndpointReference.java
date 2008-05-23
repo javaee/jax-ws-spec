@@ -73,6 +73,8 @@ public final class W3CEndpointReference extends EndpointReference {
             this.address = epr.address;
             this.metadata = epr.metadata;
             this.referenceParameters = epr.referenceParameters;
+            this.attributes = epr.attributes;
+            this.elements = epr.elements;
         } catch (JAXBException e) {
             throw new WebServiceException("Error unmarshalling W3CEndpointReference " ,e);
         } catch (ClassCastException e) {
