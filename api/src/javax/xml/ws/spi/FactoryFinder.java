@@ -14,9 +14,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import javax.xml.ws.WebServiceException;
 
-import java.security.AccessController;
-import java.security.PrivilegedExceptionAction;
-
 class FactoryFinder {
 
     /**
@@ -40,27 +37,6 @@ class FactoryFinder {
         } catch (ClassNotFoundException x) {
             throw new WebServiceException(
                 "Provider " + className + " not found", x);
-        } catch (Exception x) {
-            throw new WebServiceException(
-                "Provider " + className + " could not be instantiated: " + x,
-                x);
-        }
-    }
-
-    private static Object newInstancePrivileged(final String className,
-                                      final ClassLoader classLoader)
-    {
-        try {
-            Class spi = AccessController.doPrivileged(new PrivilegedExceptionAction<Class>() {
-                public Class run() throws Exception {
-                    if (classLoader == null) {
-                        return Class.forName(className);
-                    } else {
-                        return classLoader.loadClass(className);
-                    }
-                }
-            });
-            return spi.newInstance();
         } catch (Exception x) {
             throw new WebServiceException(
                 "Provider " + className + " could not be instantiated: " + x,
@@ -153,6 +129,7 @@ class FactoryFinder {
             throw new WebServiceException(
                 "Provider for " + factoryId + " cannot be found", null);
         }
-        return newInstancePrivileged(fallbackClassName, classLoader);
+
+        return newInstance(fallbackClassName, classLoader);
     }
 }
