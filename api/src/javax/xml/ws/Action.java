@@ -57,8 +57,8 @@ import java.lang.annotation.Target;
  *
  * <p>
  * <b>Example 2</b>: Specify explicit value for <code>Action</code> message addressing property
- * for only the <code>input</code> message. The default values are used for the
- * <code>output</code> message.
+ * for only the <code>input</code> message. The <code>wsam:Action</code> values for the
+ * WSDL <code>output</code> message are computed using the algorithm in the jax-ws specification.
  *
  * <pre>
  * &#64;javax.jws.WebService
@@ -79,7 +79,8 @@ import java.lang.annotation.Target;
  *       &lt;operation name=&quot;AddNumbers&quot;&gt;
  *         &lt;input message=&quot;tns:AddNumbersInput&quot; name=&quot;Parameters&quot;
  *           wsam:Action=&quot;http://example.com/inputAction&quot;/&gt;
- *        &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;Result&quot;/&gt;
+ *        &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;Result&quot;
+ *           wsam:Action=&quot;http://example.com/numbers/AddNumbersPortType/AddNumbersResponse&quot;/&gt;
  *       &lt;/operation&gt;
  *     &lt;portType&gt;
  *   ...
@@ -87,8 +88,8 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * It is legitimate to specify an explicit value for <code>Action</code> message addressing property for
- * <code>output</code> message only. In this case, a default value of <code>wsam:Action</code> is used
- * for the <code>input</code> message.
+ * <code>output</code> message only. In this case, <code>wsam:Action</code> values for the
+ * WSDL <code>input</code> message are computed using the algorithm in the jax-ws specification.
  *
  * <p>
  * <b>Example 3</b>: See <a href="FaultAction.html">FaultAction</a> annotation for an example of

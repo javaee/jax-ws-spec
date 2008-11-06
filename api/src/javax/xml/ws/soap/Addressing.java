@@ -15,6 +15,7 @@ import java.lang.annotation.RetentionPolicy;
 import javax.xml.ws.Action;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.FaultAction;
+import javax.xml.ws.soap.AddressingFeature.Responses;
 import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 
 
@@ -110,11 +111,9 @@ public @interface Addressing {
      */
     boolean required() default false;
 
-    enum Responses { ANONYMOUS, NON_ANONYMOUS, ALL }
-
     /**
      * If addressing is enabled, this property determines if endpoint requires
-     * the use of only anonymous responses, or only non-anonymous responses, or all.
+     * the use of anonymous responses, or non-anonymous responses, or all.
      *
      * <p>
      * {@link Responses#ALL} supports all response types and this is the default
@@ -122,7 +121,8 @@ public @interface Addressing {
      *
      * <p>
      * {@link Responses#ANONYMOUS} requires the use of only anonymous
-     * responses. It will result into wsam:AnonymousResponses nested assertion as specified in
+     * responses. It will result into wsam:AnonymousResponses nested assertion
+     * as specified in
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyanonresponses">
      * 3.1.2 AnonymousResponses Assertion</a> in the generated WSDL.
      *

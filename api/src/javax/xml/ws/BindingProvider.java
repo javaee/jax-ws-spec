@@ -85,11 +85,35 @@ public interface BindingProvider {
     public static final String SOAPACTION_URI_PROPERTY =
             "javax.xml.ws.soap.http.soapaction.uri";
 
-    public static final String TO_PROPERTY = "";
+    /**
+     * Standard property for wsa:To. If WS-Addressing
+     * is enabled, this value will be used for the value of the
+     * WS-Addressing To header.
+     *
+     * <p>Type: <code>javax.xml.ws.EndpointReference</code>
+     **/
+    public static final String TO_PROPERTY =
+            "javax.xml.ws.addressing.to";
 
-    public static final String REPLY_TO_PROPERTY = "";
+    /**
+     * Standard property for wsa:ReplyTo. If WS-Addressing
+     * is enabled, this value will be used for the value of the
+     * WS-Addressing ReplyTo header.
+     *
+     * <p>Type: <code>javax.xml.ws.EndpointReference</code>
+     **/
+    public static final String REPLYTO_PROPERTY =
+            "javax.xml.ws.addressing.replyto";
 
-    public static final String FAULT_TO_PROPERTY = "";
+    /**
+     * Standard property for wsa:FaultTo. If WS-Addressing
+     * is enabled, this value will be used for the value of the
+     * WS-Addressing FaultTo header.
+     *
+     * <p>Type: <code>javax.xml.ws.EndpointReference</code>
+     **/
+    public static final String FAULTTO_PROPERTY =
+            "javax.xml.ws.addressing.faultto";
 
     
     /** 

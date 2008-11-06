@@ -133,7 +133,7 @@ public final class W3CEndpointReferenceBuilder {
     }
     
     /**
-     * Sets the <code>wsdlDocumentLocation</code> that will be inlined
+     * Sets the <code>wsdlDocumentLocation</code> that will be referenced
      * as <code>wsa:Metadata/@wsdli:wsdlLocation</code>.
      *
      * <p>
@@ -141,11 +141,11 @@ public final class W3CEndpointReferenceBuilder {
      * Web Services Addressing 1.0 - Metadata</a> for more details.
      *
      * @param wsdlDocumentLocation The location of the WSDL document to
-     *      be inlined in the <code>wsa:Metadata</code> of the
+     *      be referenced in the <code>wsa:Metadata</code> of the
      *     <code>W3CEndpointReference<code>.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
-     *   the <code>wsdlDocumentLocation</code> that is to be inlined.
+     *   the <code>wsdlDocumentLocation</code> that is to be referenced.
      *
      */
     public W3CEndpointReferenceBuilder wsdlDocumentLocation(String wsdlDocumentLocation) {

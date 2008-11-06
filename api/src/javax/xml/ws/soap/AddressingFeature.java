@@ -186,16 +186,16 @@ public final class AddressingFeature extends WebServiceFeature {
 
     /**
      * If addressing is enabled, this property determines if endpoint requires
-     * the use of only anonymous responses, or only non-anonymous responses, or all
-     * reponses.
+     * the use of anonymous responses, or non-anonymous responses,
+     * or all responses.
      *
      * <p>
-     * @return {@link Responses#ALL} supports all response types and this is the default
-     * value.
-     *         {@link Responses#ANONYMOUS} requires the use of only anonymous
-     * responses.
-     *         {@link Responses#NON_ANONYMOUS} requires the use of only non-anonymous
-     * responses.
+     * @return {@link Responses#ALL} when endpoint supports all types of
+     * responses
+     *         {@link Responses#ANONYMOUS} when endpoint requires the use of
+     * anonymous responses.
+     *         {@link Responses#NON_ANONYMOUS} when endpoint requires the use
+     * of non-anonymous responses.
      *
      * @since JAX-WS 2.2
      */
