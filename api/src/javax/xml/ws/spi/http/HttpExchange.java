@@ -199,24 +199,27 @@ public interface HttpExchange {
     String getProtocol();
 
     /**
-     * Returns immutable map of arbitrary objects that are associated with
-     * HttpExchange. Container may store these objects with HttpExchange
+     * Returns an attribute that is associated with
+     * HttpExchange. Container may store this object with HttpExchange
      * instances as an out-of-band communication mechanism. JAX-WS handlers
-     * and endpoints may then access these objects via {@link MessageContext}.
+     * and endpoints may then access this object via {@link MessageContext}.
      * <p>
      * Servlet containers must expose {@link MessageContext#SERVLET_CONTEXT},
      * {@link MessageContext#SERVLET_REQUEST}, {@link MessageContext#SERVLET_RESPONSE}
      * as attributes.
      *
-     * @return the attribute objects, or null if they do not exist
-     *
-     * TODO: Should this be a mutable map ? Then endpoints can communicate with
-     * TODO: the container by adding its own properties
+     * @param name attribute name
+     * @return the attribute value, or null if they do not exist
      */
-    Map<String, Object> getAttributes();
-
     Object getAttribute(String name);
-    
+
+    /**
+     * Gives all the attribute names that are associated with
+     * HttpExchange.
+     *
+     * @return Iterator for all attribute names
+     * @see #getAttribute(String)
+     */
     Iterator<String> getAttributeNames();
 
 

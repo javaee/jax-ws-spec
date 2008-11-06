@@ -9,7 +9,6 @@ import javax.xml.ws.Action;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.FaultAction;
 import javax.xml.ws.WebServiceFeature;
-import javax.xml.ws.spi.Provider;
 
 /**
  * This feature represents the use of WS-Addressing with either
@@ -86,18 +85,42 @@ public final class AddressingFeature extends WebServiceFeature {
      * property only has meaning on the endpoint and has no
      * affect when used on the client.
      */
-    protected final boolean required;
+    private final boolean required;
 
-    protected final boolean anonymousResponses;
-    protected final boolean nonAnonymousResponses;
-    
+    /**
+     * If addressing is enabled, this property determines if endpoint requires
+     * the use of only anonymous responses, or only non-anonymous responses, or all.
+     *
+     * <p>
+     * {@link Responses#ALL} supports all response types and this is the default
+     * value.
+     *
+     * <p>
+     * {@link Responses#ANONYMOUS} requires the use of only anonymous
+     * responses. It will result into wsam:AnonymousResponses nested assertion as specified in
+     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyanonresponses">
+     * 3.1.2 AnonymousResponses Assertion</a> in the generated WSDL.
+     *
+     * <p>
+     * {@link Responses#NON_ANONYMOUS} requires the use of only non-anonymous
+     * responses. It will result into
+     * wsam:AnonymousResponses nested assertion as specified in
+     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicynonanonresponses">
+     * 3.1.3 NonAnonymousResponses Assertion</a> in the generated WSDL.
+     *
+     * @since JAX-WS 2.2
+     */
+    public enum Responses { ANONYMOUS, NON_ANONYMOUS, ALL }
+
+
+    private final Responses responses;
+
     /**
      * Create an <code>AddressingFeature</code>.
      * The instance created will be enabled.
      */
     public AddressingFeature() {
-        this(true, false, false, false);
-
+        this(true, false, Responses.ALL);
     }
     
     /** 
@@ -107,7 +130,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * be enabled or not.
      */
     public AddressingFeature(boolean enabled) {
-        this(enabled, false, false, false);
+        this(enabled, false, Responses.ALL);
     }
 
     /** 
@@ -121,7 +144,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * used on the client.
      */
     public AddressingFeature(boolean enabled, boolean required) {
-        this(enabled, required, false, false);
+        this(enabled, required, Responses.ALL);
     }
 
     /**
@@ -133,17 +156,13 @@ public final class AddressingFeature extends WebServiceFeature {
      * WS-Addressing headers MUST be present on incoming messages. This property
      * only has meaning on the endpoint and has no affect when
      * used on the client.
-     * @param anonymousResponses specifies whether endpoint requires
+     * @param responses specifies whether endpoint requires
      * the use of anonymous responses.
-     * @param nonAnonymousResponses specifies whether endpoint requires
-     * the use of non-anonymous responses.
      */
-    public AddressingFeature(boolean enabled, boolean required, boolean anonymousResponses,
-                             boolean nonAnonymousResponses) {
+    public AddressingFeature(boolean enabled, boolean required, Responses responses) {
         this.enabled = enabled;
         this.required = required;
-        this.anonymousResponses = anonymousResponses;
-        this.nonAnonymousResponses = nonAnonymousResponses;
+        this.responses = responses;
     }
     
     /**
@@ -167,32 +186,21 @@ public final class AddressingFeature extends WebServiceFeature {
 
     /**
      * If addressing is enabled, this property determines if endpoint requires
-     * the use of anonymous responses.
+     * the use of only anonymous responses, or only non-anonymous responses, or all
+     * reponses.
      *
      * <p>
-     * This will result into wsam:AnonymousResponses nested assertion as specified in
-     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyanonresponses">
-     * 3.1.2 AnonymousResponses Assertion</a> in the generated WSDL.
+     * @return {@link Responses#ALL} supports all response types and this is the default
+     * value.
+     *         {@link Responses#ANONYMOUS} requires the use of only anonymous
+     * responses.
+     *         {@link Responses#NON_ANONYMOUS} requires the use of only non-anonymous
+     * responses.
      *
-     * @return true to enable anonymous responses, else false
+     * @since JAX-WS 2.2
      */
-    public boolean isAnonymousResponses() {
-        return anonymousResponses;
+    public Responses getResponses() {
+        return responses;
     }
 
-    /**
-     * If addressing is enabled, this property determines if endpoint requires
-     * the use of non-anonymous responses.
-     *
-     * <p>
-     * This will result into
-     * wsam:AnonymousResponses nested assertion as specified in
-     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicynonanonresponses">
-     * 3.1.3 NonAnonymousResponses Assertion</a> in the generated WSDL.
-     *
-     * @return true to enable non-anonymous respones, else false
-     */
-    public boolean isNonAnonymousResponses() {
-        return nonAnonymousResponses;
-    }
 }

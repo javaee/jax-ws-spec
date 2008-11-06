@@ -84,6 +84,13 @@ public interface BindingProvider {
      **/
     public static final String SOAPACTION_URI_PROPERTY =
             "javax.xml.ws.soap.http.soapaction.uri";
+
+    public static final String TO_PROPERTY = "";
+
+    public static final String REPLY_TO_PROPERTY = "";
+
+    public static final String FAULT_TO_PROPERTY = "";
+
     
     /** 
      * Get the context that is used to initialize the message context

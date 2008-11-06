@@ -110,24 +110,24 @@ public @interface Addressing {
      */
     boolean required() default false;
 
-    enum Responses { ANONYMOUS_RESPONSES, NONANONYMOUS_RESPONSES, BOTH }
+    enum Responses { ANONYMOUS, NON_ANONYMOUS, ALL }
 
     /**
      * If addressing is enabled, this property determines if endpoint requires
-     * the use of only anonymous responses, or only non-anonymous responses, or both.
+     * the use of only anonymous responses, or only non-anonymous responses, or all.
      *
      * <p>
-     * {@link Responses#BOTH} supports all response types and this is the default
+     * {@link Responses#ALL} supports all response types and this is the default
      * value.
      *
      * <p>
-     * {@link Responses#ANONYMOUS_RESPONSES} requires the use of only anonymous
+     * {@link Responses#ANONYMOUS} requires the use of only anonymous
      * responses. It will result into wsam:AnonymousResponses nested assertion as specified in
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyanonresponses">
      * 3.1.2 AnonymousResponses Assertion</a> in the generated WSDL.
      *
      * <p>
-     * {@link Responses#NONANONYMOUS_RESPONSES} requires the use of only non-anonymous
+     * {@link Responses#NON_ANONYMOUS} requires the use of only non-anonymous
      * responses. It will result into
      * wsam:AnonymousResponses nested assertion as specified in
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicynonanonresponses">
@@ -135,6 +135,6 @@ public @interface Addressing {
      *
      * @since JAX-WS 2.2
      */
-    Responses responses() default Responses.BOTH;
+    Responses responses() default Responses.ALL;
 
 }
