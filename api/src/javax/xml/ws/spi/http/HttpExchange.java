@@ -7,6 +7,8 @@ package javax.xml.ws.spi.http;
 
 import javax.xml.ws.handler.MessageContext;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.List;
@@ -119,7 +121,7 @@ public interface HttpExchange {
      * number of bytes).
      * @return the Channel from which the request body can be read.
      */
-    ReadableByteChannel getRequestBody();
+    InputStream getRequestBody();
 
     /**
      * returns a Channel to which the response body must be
@@ -138,7 +140,7 @@ public interface HttpExchange {
      *
      * @return the Channel to which the response body is written
      */
-    WritableByteChannel getResponseBody();
+    OutputStream getResponseBody();
 
 
     /**
