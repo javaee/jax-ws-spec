@@ -69,6 +69,19 @@ public interface HttpExchange {
     Map<String, List<String>> getRequestHeaders();
 
     /**
+     * Returns the value of the specified request header. If the request
+     * did not include a header of the specified name, this method returns
+     * null. If there are multiple headers with the same name, this method
+     * returns the first header in the request. The header name is
+     * case-insensitive. You can use this method with any request header.
+     *
+     * @param name the name of the request header
+     * @return returns the value of the requested header,
+     *         or null if the request does not have a header of that name
+     */
+     String getRequestHeader(String name);
+
+    /**
      * Returns a mutable Map into which the HTTP response headers can be stored
      * and which will be transmitted as part of this response. The keys in the 
      * Map will be the header names, while the values must be a List of Strings
@@ -79,6 +92,17 @@ public interface HttpExchange {
      * @return a writable Map which can be used to set response headers.
      */
     Map<String, List<String>> getResponseHeaders();
+
+    /**
+     * Adds a response header with the given name and value. This method allows
+     * response headers to have multiple values.
+     * 
+     * @param name the name of the header
+     * @param value the additional header value If it contains octet string,
+     *        it should be encoded according to
+     *        RFC 2047 (http://www.ietf.org/rfc/rfc2047.txt)
+     */
+    void addHeader(String name, String value);
 
     /**
      * Get the request URI
@@ -119,12 +143,12 @@ public interface HttpExchange {
      * before all data has been read, then the close() call will 
      * read and discard remaining data (up to an implementation specific
      * number of bytes).
-     * @return the Channel from which the request body can be read.
+     * @return the stream from which the request body can be read.
      */
     InputStream getRequestBody();
 
     /**
-     * returns a Channel to which the response body must be
+     * returns a stream to which the response body must be
      * written. {@link #sendResponseHeaders(int,long)}) must be called prior to calling
      * this method. Multiple calls to this method (for the same exchange)
      * will return the same Channel. In order to correctly terminate
@@ -138,7 +162,7 @@ public interface HttpExchange {
      * then the Channel close() will throw an IOException. In both cases,
      * the exchange is aborted and the underlying TCP connection closed.
      *
-     * @return the Channel to which the response body is written
+     * @return the stream to which the response body is written
      */
     OutputStream getResponseBody();
 
