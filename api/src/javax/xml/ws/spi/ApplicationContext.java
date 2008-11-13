@@ -5,7 +5,9 @@
 package javax.xml.ws.spi;
 
 import javax.xml.ws.Endpoint;
+import javax.xml.ws.spi.http.HttpContext;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Capturs an application which may consists multiple endpoints.
@@ -15,12 +17,20 @@ import java.util.List;
  *
  * @author Jitendra Kotamraju
  */
-public interface ApplicationContext {
+public abstract class ApplicationContext {
     /**
      * This gives list of endpoints in an application. For e.g in
      * servlet container, a war file may contain multiple endpoints.
      *
      * @return list of endpoints in an application
      */
-    List<Endpoint> getEndpoints();
+    public abstract Map<Endpoint, HttpContext> getEndpoints();
+
+    /**
+     * Deploy all the endpoints in this context at their
+     * respective {@link HttpContext}
+     */
+    public void deploy() {
+        Provider.provider().deploy(this);
+    }
 }
