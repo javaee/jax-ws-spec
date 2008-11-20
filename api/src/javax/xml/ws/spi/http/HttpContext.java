@@ -57,7 +57,7 @@ public interface HttpContext {
      *
      * @return iterator for all attribute names
      */
-    Iterator<String> getAttributeNames();
+    Set<String> getAttributeNames();
 
     /**
      * Returns the application context in which this http context is part of.

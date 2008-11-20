@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.4 2008-11-13 03:53:49 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.5 2008-11-20 01:27:48 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -392,9 +392,4 @@ public abstract class Provider {
     public abstract Endpoint createEndpoint(String bindingId, Class implementorClass,
             Invoker invoker, WebServiceFeature ... features);
 
-    /**
-     * Deploy all the endpoints in the application context at their
-     * respective {@link HttpContext}
-     */
-    public abstract void deploy(ApplicationContext applicationContext);
 }
