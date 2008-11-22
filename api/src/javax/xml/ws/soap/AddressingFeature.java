@@ -92,10 +92,6 @@ public final class AddressingFeature extends WebServiceFeature {
      * the use of only anonymous responses, or only non-anonymous responses, or all.
      *
      * <p>
-     * {@link Responses#ALL} supports all response types and this is the default
-     * value.
-     *
-     * <p>
      * {@link Responses#ANONYMOUS} requires the use of only anonymous
      * responses. It will result into wsam:AnonymousResponses nested assertion as specified in
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyanonresponses">
@@ -108,19 +104,24 @@ public final class AddressingFeature extends WebServiceFeature {
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicynonanonresponses">
      * 3.1.3 NonAnonymousResponses Assertion</a> in the generated WSDL.
      *
+     * <p>
+     * {@link Responses#ANONYMOUS}, and {@link Responses#NON_ANONYMOUS} are not used or
+     * both are used together to support all response types
+     *
      * @since JAX-WS 2.2
      */
-    public enum Responses { ANONYMOUS, NON_ANONYMOUS, ALL }
+    public enum Responses { ANONYMOUS, NON_ANONYMOUS }
 
-
-    private final Responses responses;
+    private static final Responses[] ALL = { Responses.ANONYMOUS, Responses.NON_ANONYMOUS };
+    
+    private final Responses[] responses;
 
     /**
      * Create an <code>AddressingFeature</code>.
      * The instance created will be enabled.
      */
     public AddressingFeature() {
-        this(true, false, Responses.ALL);
+        this(true, false, ALL);
     }
     
     /** 
@@ -130,7 +131,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * be enabled or not.
      */
     public AddressingFeature(boolean enabled) {
-        this(enabled, false, Responses.ALL);
+        this(enabled, false, ALL);
     }
 
     /** 
@@ -144,7 +145,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * used on the client.
      */
     public AddressingFeature(boolean enabled, boolean required) {
-        this(enabled, required, Responses.ALL);
+        this(enabled, required, ALL);
     }
 
     /**
@@ -159,7 +160,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * @param responses specifies whether endpoint requires
      * the use of anonymous responses.
      */
-    public AddressingFeature(boolean enabled, boolean required, Responses responses) {
+    public AddressingFeature(boolean enabled, boolean required, Responses[] responses) {
         this.enabled = enabled;
         this.required = required;
         this.responses = responses;
@@ -190,8 +191,8 @@ public final class AddressingFeature extends WebServiceFeature {
      * or all responses.
      *
      * <p>
-     * @return {@link Responses#ALL} when endpoint supports all types of
-     * responses
+     * @return array of {@link Responses#ANONYMOUS}, and {@link Responses#NON_ANONYMOUS}
+     * when endpoint supports all types of responses
      *         {@link Responses#ANONYMOUS} when endpoint requires the use of
      * anonymous responses.
      *         {@link Responses#NON_ANONYMOUS} when endpoint requires the use
@@ -199,7 +200,7 @@ public final class AddressingFeature extends WebServiceFeature {
      *
      * @since JAX-WS 2.2
      */
-    public Responses getResponses() {
+    public Responses[] getResponses() {
         return responses;
     }
 
