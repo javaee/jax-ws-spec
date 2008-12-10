@@ -20,36 +20,42 @@ import java.util.*;
  * @author Jitendra Kotamraju
  * @since JAX-WS 2.2
  */
-public interface HttpContext {
+public abstract class HttpContext {
+    private HttpHandler httpHandler;
 
     /**
      * Returns the handler that handles HTTP requests for this context
      *
      * @return the HttpHandler for this context
      */
-    HttpHandler getHandler();
+    public HttpHandler getHandler() {
+        return httpHandler;
+    }
 
     /**
      * Sets a handler that handles HTTP requests for this context
      *
      * @param h the handler to set for this context
      */
-    void setHandler(HttpHandler h);
+    public void setHandler(HttpHandler h) {
+        this.httpHandler = h;
+    }
 
     /**
      * Returns the path for this context.
      * 
      * @return this context's path
      */
-    String getPath();
+    public abstract String getPath();
 
     /**
      * Returns an attribute value for container's configuration
      * and other data that can be used by jax-ws runtime.
      *
+     * @param name attribute name
      * @return attribute value
      */
-    Object getAttribute(String name);
+    public abstract Object getAttribute(String name);
 
     /**
      * Returns all attribute names for container's configuration
@@ -57,13 +63,13 @@ public interface HttpContext {
      *
      * @return iterator for all attribute names
      */
-    Set<String> getAttributeNames();
+    public abstract Set<String> getAttributeNames();
 
     /**
      * Returns the application context in which this http context is part of.
      *
      * @return application context in which this context is part of
      */
-    ApplicationContext getApplicationContext();
+    public abstract ApplicationContext getApplicationContext();
 
 }
