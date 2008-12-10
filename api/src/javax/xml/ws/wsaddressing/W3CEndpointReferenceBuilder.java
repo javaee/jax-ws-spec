@@ -10,6 +10,8 @@ import org.w3c.dom.Element;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import javax.xml.namespace.QName;
 import javax.xml.ws.WebServiceException;
 import javax.xml.ws.spi.Provider;
@@ -49,6 +51,8 @@ public final class W3CEndpointReferenceBuilder {
     public W3CEndpointReferenceBuilder() {
         referenceParameters = new ArrayList<Element>();
         metadata = new ArrayList<Element>();
+        attributes = new HashMap<QName, String>();
+        elements = new ArrayList<Element>();
     }
     
     /**
@@ -196,6 +200,25 @@ public final class W3CEndpointReferenceBuilder {
         metadata.add(metadataElement);
         return this;
     }
+
+    /**
+     * TODO
+     *
+     * @since JAX-WS 2.2
+     */
+    public W3CEndpointReferenceBuilder element(Element element) {
+        elements.add(element);
+        return this;
+    }
+
+    /**
+     * TODO
+     * @since JAX-WS 2.2
+     */
+    public W3CEndpointReferenceBuilder attribute(QName name,String value) {
+        attributes.put(name, value);
+        return this;
+    }
     
     /**
      * Builds a <code>W3CEndpointReference</code> from the accumulated
@@ -254,4 +277,6 @@ public final class W3CEndpointReferenceBuilder {
     private QName serviceName;
     private QName endpointName;
     private String wsdlDocumentLocation;
+    private Map<QName,String> attributes;
+    private List<Element> elements;
 }

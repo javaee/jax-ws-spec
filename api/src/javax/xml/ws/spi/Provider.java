@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.5 2008-11-20 01:27:48 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.6 2008-12-10 23:36:58 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -9,6 +9,7 @@ package javax.xml.ws.spi;
 import java.net.URL;
 import java.util.List;
 import java.util.Iterator;
+import java.util.Map;
 import java.lang.reflect.Method;
 import javax.xml.ws.Endpoint;
 import javax.xml.ws.WebServiceException;
@@ -332,6 +333,14 @@ public abstract class Provider {
      */
     public abstract W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
             List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters);
+
+
+    /**
+     * @since JAX-WS 2.2
+     */
+    public abstract W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
+            List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters,
+            List<Element> elements, Map<QName, String> attributes);
 
     /**
      * Creates and publishes an endpoint object with the specified
