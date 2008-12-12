@@ -250,8 +250,8 @@ public interface HttpExchange {
 
 
     /**
-     * This method will return the {@link Principal} that represents
-     * the authenticated user for this HttpExchange.
+     * Returns the {@link Principal} that represents the authenticated
+     * user for this HttpExchange.
      *
      * @return Principal for an authenticated user
      *         null otherwise
@@ -268,6 +268,13 @@ public interface HttpExchange {
      */
     boolean isUserInRole(String role);
 
+
+    /**
+     * Returns the name of the scheme used to make this request,
+     * for example, http, or https.
+     *
+     * @return name of the scheme used to make this request
+     */
     String getScheme();
 
 }

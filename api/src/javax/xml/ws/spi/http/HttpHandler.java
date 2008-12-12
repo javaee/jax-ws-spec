@@ -5,20 +5,26 @@
 
 package javax.xml.ws.spi.http;
 
+import javax.xml.ws.Endpoint;
 import java.io.IOException;
 
 /**
  * A handler which is invoked to process HTTP exchanges. Each
  * HTTP exchange is handled by one of these handlers.
  *
+ * <p>
+ * JAX-WS runtime provides the implementation for this and sets
+ * it in {@link HttpContext} during {@link Endpoint#publish(HttpContext) }
+ *
  * @author Jitendra Kotamraju
  * @since JAX-WS 2.2
  */
 public interface HttpHandler {
     /**
-     * Handle the given request and generate an appropriate response.
+     * Handles the given request and generate an appropriate response.
      * See {@link HttpExchange} for a description of the steps
-     * involved in handling an exchange.
+     * involved in handling an exchange. Container invokes this method
+     * when it receives an incoming request.
      *
      * @param exchange the exchange containing the request from the 
      *      client and used to send the response

@@ -6,15 +6,15 @@
 package javax.xml.ws.spi.http;
 
 import javax.xml.ws.spi.ApplicationContext;
-import java.util.*;
+import java.util.Set;
 
 /**
  * HttpContext represents a mapping between the root URI path of a web
  * service to a {@link HttpHandler} which is invoked to handle requests
  * destined for that path on the associated container.
  * <p>
- * It is the responsibility of a container to match request URIs to
- * HttpContext objects.
+ * Container provides the implementation for this and it matches
+ * request URIs to HttpContext objects.
  * <p>
  *
  * @author Jitendra Kotamraju
@@ -24,7 +24,9 @@ public abstract class HttpContext {
     private HttpHandler httpHandler;
 
     /**
-     * Returns the handler that handles HTTP requests for this context
+     * Returns the handler that handles HTTP requests for this context.
+     * Container or its extensions use this handler to process the
+     * received requests.
      *
      * @return the HttpHandler for this context
      */
@@ -33,16 +35,20 @@ public abstract class HttpContext {
     }
 
     /**
-     * Sets a handler that handles HTTP requests for this context
+     * JAX-WS runtime sets its handler during
+     * {@link javax.xml.ws.Endpoint#publish(HttpContext)} to handle
+     * HTTP requests for this context. Container or its extensions
+     * use this handler to process the requests.
      *
-     * @param h the handler to set for this context
+     * @param httpHandler the handler to set for this context
      */
-    public void setHandler(HttpHandler h) {
-        this.httpHandler = h;
+    public void setHandler(HttpHandler httpHandler) {
+        this.httpHandler = httpHandler;
     }
 
     /**
-     * Returns the path for this context.
+     * Returns the path for this context. Container should give this
+     * path based on how it matches request URIs to this HttpContext object.
      * 
      * @return this context's path
      */
