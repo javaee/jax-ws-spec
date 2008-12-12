@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.6 2008-12-10 23:36:58 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.7 2008-12-12 04:28:54 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -336,11 +336,72 @@ public abstract class Provider {
 
 
     /**
+     * Factory method to create a <code>W3CEndpointReference</code>.
+     *
+     * <p>
+     * This method can be used to create a <code>W3CEndpointReference</code>
+     * for any endpoint by specifying the <code>address</code> property along
+     * with any other desired properties.  This method
+     * can also be used to create a <code>W3CEndpointReference</code> for
+     * an endpoint that is published by the same Java EE application.
+     * To do so the <code>address</code> property can be provided or this
+     * method can automatically determine the <code>address</code> of
+     * an endpoint that is published by the same Java EE application and is
+     * identified by the <code>serviceName</code> and
+     * <code>portName</code> propeties.  If the <code>address</code> is
+     * <code>null</code> and the <code>serviceName</code> and
+     * <code>portName</code> do not identify an endpoint published by the
+     * same Java EE application, a
+     * <code>javax.lang.IllegalStateException</code> MUST be thrown.
+     *
+     * @param address Specifies the address of the target endpoint
+     * @param serviceName Qualified name of the service in the WSDL.
+     * @param portName Qualified name of the endpoint in the WSDL.
+     * @param metadata A list of elements that should be added to the
+     * <code>W3CEndpointReference</code> instances <code>wsa:metadata</code>
+     * element.
+     * @param wsdlDocumentLocation URL for the WSDL document location for
+     * the service.
+     * @param referenceParameters Reference parameters to be associated
+     * with the returned <code>EndpointReference</code> instance.
+     * @param elements extension elements to be associated
+     * with the returned <code>EndpointReference</code> instance.
+     * @param attributes extension attributes to be associated
+     * with the returned <code>EndpointReference</code> instance.
+     *
+     * @return the <code>W3CEndpointReference<code> created from
+     *          <code>serviceName</code>, <code>portName</code>,
+     *          <code>metadata</code>, <code>wsdlDocumentLocation</code>
+     *          and <code>referenceParameters</code>. This method
+     *          never returns <code>null</code>.
+     *
+     * @throws java.lang.IllegalStateException
+     *     <ul>
+     *        <li>If the <code>address</code>, <code>serviceName</code> and
+     *            <code>portName</code> are all <code>null</code>.
+     *        <li>If the <code>serviceName</code> service is <code>null</code> and the
+     *            <code>portName> is NOT <code>null</code>.
+     *        <li>If the <code>address</code> property is <code>null</code> and
+     *            the <code>serviceName</code> and <code>portName</code> do not
+     *            specify a valid endpoint published by the same Java EE
+     *            application.
+     *        <li>If the <code>serviceName</code>is NOT <code>null</code>
+     *             and is not present in the specified WSDL.
+     *        <li>If the <code>portName</code> port is not <code>null<code> and it
+     *             is not present in <code>serviceName</code> service in the WSDL.
+     *        <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code>
+     *            and does not represent a valid WSDL.
+     *     </ul>
+     * @throws WebServiceException If an error occurs while creating the
+     *                             <code>W3CEndpointReference</code>.
      * @since JAX-WS 2.2
      */
-    public abstract W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
+    public W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
             List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters,
-            List<Element> elements, Map<QName, String> attributes);
+            List<Element> elements, Map<QName, String> attributes) {
+        return createW3CEndpointReference(address,  serviceName,  portName,
+            metadata,  wsdlDocumentLocation, referenceParameters);
+    }
 
     /**
      * Creates and publishes an endpoint object with the specified
@@ -360,8 +421,10 @@ public abstract class Provider {
      * @return The newly created endpoint.
      * @since 2.2
      */
-    public abstract Endpoint createAndPublishEndpoint(String address,
-            Object implementor, WebServiceFeature ... features);
+    public Endpoint createAndPublishEndpoint(String address,
+            Object implementor, WebServiceFeature ... features) {
+        throw new UnsupportedOperationException();
+    }
 
     /**
      *
@@ -379,8 +442,10 @@ public abstract class Provider {
      * @return The newly created endpoint.
      * @since 2.2
      */
-    public abstract Endpoint createEndpoint(String bindingId, Object implementor,
-            WebServiceFeature ... features);
+    public Endpoint createEndpoint(String bindingId, Object implementor,
+            WebServiceFeature ... features) {
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * Creates an endpoint object with the provided binding and implementation
@@ -398,7 +463,9 @@ public abstract class Provider {
      * @return The newly created endpoint.
      * @since 2.2
      */
-    public abstract Endpoint createEndpoint(String bindingId, Class implementorClass,
-            Invoker invoker, WebServiceFeature ... features);
+    public Endpoint createEndpoint(String bindingId, Class implementorClass,
+            Invoker invoker, WebServiceFeature ... features) {
+        throw new UnsupportedOperationException();
+    }
 
 }

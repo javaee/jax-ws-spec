@@ -301,7 +301,9 @@ public abstract class Endpoint {
      *          <code>WebServicePermission("publishEndpoint")</code> permission.
      * @since 2.2
      */
-    public abstract void publish(HttpContext serverContext);
+    public void publish(HttpContext serverContext) {
+        throw new UnsupportedOperationException();
+    }
     
     /**
      * Stops publishing this endpoint.
