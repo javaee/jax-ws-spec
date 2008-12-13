@@ -12,7 +12,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
-
  * The <code>Action</code> annotation allows explicit association of a 
  * WS-Addressing <code>Action</code> message addressing property with 
  * <code>input</code>, <code>output</code>, and 
@@ -23,6 +22,8 @@ import java.lang.annotation.Target;
  * contains explicit <code>wsam:Action</code> attribute on the WSDL <code>input</code>,
  * <code>output</code> and <code>fault</code> messages of the WSDL <code>operation</code>
  * based upon which attributes of the <code>Action</code> annotation have been specified.
+ * For the exact computation of <code>wsam:Action</code> values for the messages, refer
+ * to the algorithm in the jax-ws specification.
  * <p>
  * <b>Example 1</b>: Specify explicit values for <code>Action</code> message addressing property
  * for <code>input</code> and <code>output</code> messages.
@@ -77,9 +78,9 @@ import java.lang.annotation.Target;
  *   ...
  *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
  *       &lt;operation name=&quot;AddNumbers&quot;&gt;
- *         &lt;input message=&quot;tns:AddNumbersInput&quot; name=&quot;Parameters&quot;
+ *         &lt;input message=&quot;tns:AddNumbersInput&quot; name=&quot;foo&quot;
  *           wsam:Action=&quot;http://example.com/inputAction&quot;/&gt;
- *        &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;Result&quot;
+ *        &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;bar&quot;
  *           wsam:Action=&quot;http://example.com/numbers/AddNumbersPortType/AddNumbersResponse&quot;/&gt;
  *       &lt;/operation&gt;
  *     &lt;portType&gt;
