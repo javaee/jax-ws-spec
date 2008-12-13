@@ -18,26 +18,26 @@ import javax.xml.ws.FaultAction;
 import javax.xml.ws.soap.AddressingFeature.Responses;
 import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 
-
 /**
  * <p>
  * This feature represents the use of WS-Addressing with either
  * the SOAP 1.1/HTTP or SOAP 1.2/HTTP binding.  Using this feature
  * with any other binding is NOT required.
  * <p>
- * This annotation MUST only be used in conjunction the
+ * This annotation MUST only be used in conjunction with the
  * <code>javax.jws.WebService</code>, {@link javax.xml.ws.WebServiceRef},
  * or {@link javax.xml.ws.WebServiceRefs} annotations.
  * <p>
- * When used with the <code>javax.jws.WebService</code> annotation this
+ * When used with the <code>javax.jws.WebService</code> annotation, this
  * annotation MUST only be used on the service endpoint implementation
  * class.
  * <p>
  * This annotation has no affect when used with 
- * <code>WebServiceRef</code> annotations that are used to specify a generated
+ * <code>WebServiceRef</code>, <code>WebServiceRefs</code> annotations that are used to specify a generated
  * service class. When used with <code>WebServiceRef</code> that specifies a
  * service endpoint interface (SEI), the injected SEI proxy MUST
  * honor the values of the <code>Addressing</code> annotation.
+ *
  * <p>
  * The following describes the effects of this feature with respect
  * to be enabled or disabled:
@@ -47,8 +47,8 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  *       MUST be consumed by the receiver and produced by the
  *       sender even if the WSDL declares otherwise. The
  *       mustUnderstand="0" attribute MUST be used on the response WS-Addressing
- *       headers. If a WSDL needs to be generated, it MUST contain explicit
- *       wsam:Action for all the operations.
+ *       headers. If a WSDL needs to be generated, it MUST contain a corresponding
+ *       wsam:Addressing policy assertion.
  *  <li> DISABLED: In this Mode, WS-Addressing will be disabled
  *       even if an associated WSDL specifies otherwise. At runtime,
  *       WS-Addressing headers MUST NOT be used. WS-Addressing may be explicitly
@@ -58,33 +58,52 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 *        Not doing so may break compatibility with future versions of JAX-WS.
  * </ul>
  * <p>
- * The <code>required</code> property can be used to
- * specify if WS-Addressing headers MUST
- * be present on incoming messages.  By default the
+ * The <code>required</code> property determines whether the endpoint
+ * requires WS-Addressing. If it is set true, WS-Addressing headers MUST
+ * be present on incoming messages. By default the
  * <code>required</code> property is <code>false</code>.
  *
+ * <p>
+ * If the web service developer has not explicitly enabled this feature,
+ * corresponding WSDL's wsam:Addressing policy assertion is used to find
+ * the use of WS-Addressing.
+ * If addressing is enabled, a corresponding wsam:Addressing policy assertion
+ * must be generated in the WSDL as per
+ * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyassertions">3.1 WS-Policy Assertions</a>
  *
  * <p>
- * The definition of this annotation is incomplete in this release of JAX-WS as
- * there is no standard way to convey the use of WS-Addressing via a WSDL and there is no
- * standard definition for the default value of WS-Addressing <code>Action</code> headers; 
- * however, the runtime behavior of this annotation is well-defined. 
- * It is intended that a future version of 
- * JAX-WS will require the use of the standard mechanism to convey the use
- * of WS-Addressing via WSDL and default values for WS-Addressing <code>Action</code> headers
- * as defined by the W3C WG on WS-Addressing.  
+ * <b>Example 1: </b>Possible Policy Assertion in the generated WSDL for
+ * <code>&#64;Addressing</code>
+ * <pre>
+ *   &lt;wsam:Addressing wsp:Optional="true">
+ *     &lt;wsp:Policy/>
+ *   &lt;/wsam:Addressing>
+ * </pre>
+ *
  * <p>
- * To write a portable endpoint and its corresponding client with this version of JAX-WS,
- * an endpoint MUST explicitly specify what WS-Addressing <code>Actions</code> are to be used 
- * via the {@link Action} and {@link FaultAction} annotations.  The client MUST explicitly 
- * enable addresssing via the {@link AddressingFeature}, and for each invocation, the client 
- * MUST explicitly set the {@link BindingProvider#SOAPACTION_URI_PROPERTY}.
- * After the W3C WG on WS-Addressing has specified how the use of WS-Addressing is specified in the WSDL,
- * and what the default value must be for Action headers, a future version of JAX-WS will remove these requirements.
+ * <b>Example 2: </b>Possible Policy Assertion in the generated WSDL for
+ * <code>&#64;Addressing(required=true)</code>
+ * <pre>
+ *   &lt;wsam:Addressing>
+ *     &lt;wsp:Policy/>
+ *   &lt;/wsam:Addressing>
+ * </pre>
+ *
  * <p>
- * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">Web Services Addressing - Core</a>
+ * <b>Example 3: </b>Possible Policy Assertion in the generated WSDL for
+ * <code>&#64;Addressing(required=true, responses=Responses.ANONYMOUS)</code>
+ * <pre>
+ *   &lt;wsam:Addressing>
+ *      &lt;wsp:Policy>
+ *        &lt;wsam:AnonymousResponses/>
+ *      &lt;/wsp:Policy>
+ *   &lt;/wsam:Addressing>
+ * </pre>
+ *
+ * <p>
+ * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">Web Services Addressing - Core</a>,
  * <a href="http://www.w3.org/TR/2006/REC-ws-addr-soap-20060509/">Web Services Addressing 1.0 - SOAP Binding</a>,
- * and <a href="http://www.w3.org/TR/ws-addr-metadata/">Web Services Addressing 1.0 - Metadata</a> 
+ * and <a href="http://www.w3.org/TR/ws-addr-metadata/">Web Services Addressing 1.0 - Metadata</a>
  * for more information on WS-Addressing.
  * 
  * @since JAX-WS 2.1
@@ -96,18 +115,19 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 public @interface Addressing {
     /**
      * Specifies if this feature is enabled or disabled. If enabled, it means the
-     * endpoint supports WS-Addressing but does not require its use. See
+     * endpoint supports WS-Addressing but does not require its use. Corresponding
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyaddressing">
-     * 3.1.1 Addressing Assertion</a>
+     * 3.1.1 Addressing Assertion</a> must be generated in the generated WSDL.
      */
     boolean enabled() default true;
     
     /**
-     * Property to determine if WS-Addressing headers MUST
-     * be present on incoming messages. If required is true, it means endpoint
-     * requires WS-Addressing.See
+     * If addressing is enabled, this property determines whether the endpoint
+     * requires WS-Addressing. If required is true, the endpoint requires
+     * WS-Addressing and WS-Addressing headers MUST
+     * be present on incoming messages. A corresponding
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyaddressing">
-     * 3.1.1 Addressing Assertion</a>
+     * 3.1.1 Addressing Assertion</a> must be generated in the WSDL.
      */
     boolean required() default false;
 
@@ -115,13 +135,12 @@ public @interface Addressing {
      * If addressing is enabled, this property determines if endpoint requires
      * the use of anonymous responses, or non-anonymous responses, or all.
      *
-     *
      * <p>
      * {@link Responses#ANONYMOUS} requires the use of only anonymous
      * responses. It will result into wsam:AnonymousResponses nested assertion
      * as specified in
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyanonresponses">
-     * 3.1.2 AnonymousResponses Assertion</a> in the generated WSDL.
+     * 3.1.2 AnonymousResponses Assertion</a> in the WSDL.
      *
      * <p>
      * {@link Responses#NON_ANONYMOUS} requires the use of only non-anonymous
@@ -130,7 +149,11 @@ public @interface Addressing {
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicynonanonresponses">
      * 3.1.3 NonAnonymousResponses Assertion</a> in the generated WSDL.
      *
-     * <p>The default value supports all response types
+     * <p>The default value supports all response types. Specifying both
+     * {@link Responses#ANONYMOUS}, and {@link Responses#NON_ANONYMOUS }
+     * would mean that the endpoint supports all response types. Similary,
+     * not specifying any one of them would mean that the endpoint supports
+     * all response types.
      *
      * @since JAX-WS 2.2
      */

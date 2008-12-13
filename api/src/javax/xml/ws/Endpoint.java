@@ -302,7 +302,7 @@ public abstract class Endpoint {
      * @since 2.2
      */
     public void publish(HttpContext serverContext) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
     }
     
     /**

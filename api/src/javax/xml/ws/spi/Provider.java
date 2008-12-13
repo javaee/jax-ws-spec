@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.7 2008-12-12 04:28:54 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.8 2008-12-13 02:43:50 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -423,7 +423,7 @@ public abstract class Provider {
      */
     public Endpoint createAndPublishEndpoint(String address,
             Object implementor, WebServiceFeature ... features) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
     }
 
     /**
@@ -444,7 +444,8 @@ public abstract class Provider {
      */
     public Endpoint createEndpoint(String bindingId, Object implementor,
             WebServiceFeature ... features) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
+
     }
 
     /**
@@ -465,7 +466,7 @@ public abstract class Provider {
      */
     public Endpoint createEndpoint(String bindingId, Class implementorClass,
             Invoker invoker, WebServiceFeature ... features) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
     }
 
 }
