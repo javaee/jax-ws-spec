@@ -138,7 +138,9 @@ public final class W3CEndpointReferenceBuilder {
     
     /**
      * Sets the <code>wsdlDocumentLocation</code> that will be referenced
-     * as <code>wsa:Metadata/@wsdli:wsdlLocation</code>.
+     * as <code>wsa:Metadata/@wsdli:wsdlLocation</code>. The namespace name
+     * for the wsdli:wsdlLocation can be taken from {@link #serviceName(QName)}
+     * value.
      *
      * <p>
      * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
@@ -147,12 +149,16 @@ public final class W3CEndpointReferenceBuilder {
      * @param wsdlDocumentLocation The location of the WSDL document to
      *      be referenced in the <code>wsa:Metadata</code> of the
      *     <code>W3CEndpointReference<code>.
-     *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>wsdlDocumentLocation</code> that is to be referenced.
+     * @throws IllegalStateException, if the <code>serviceName</code>
+     * has not been set.
      *
      */
     public W3CEndpointReferenceBuilder wsdlDocumentLocation(String wsdlDocumentLocation) {
+        if (serviceName == null) {
+            throw new IllegalStateException("The W3CEndpointReferenceBuilder's serviceName must be set before setting the wsdlDocumentLocation: "+wsdlDocumentLocation);
+        }
         this.wsdlDocumentLocation = wsdlDocumentLocation;
         return this;
     }
@@ -202,20 +208,45 @@ public final class W3CEndpointReferenceBuilder {
     }
 
     /**
-     * TODO
+     * Adds an extension element to the
+     * <code>W3CEndpointReference</code> instance.
+     *
+     * @param element The extension element to be added to the
+     *   <code>W3CEndpointReference</code>
+     * @return A <code>W3CEndpointReferenceBuilder</code> instance with
+     *   the extension <code>element</code> added to the
+     *    <code>W3CEndpointReference</code>.
+     * @throws java.lang.IllegalArgumentException if <code>element</code>
+     * is <code>null</code>.
      *
      * @since JAX-WS 2.2
      */
     public W3CEndpointReferenceBuilder element(Element element) {
+        if (element == null) {
+            throw new IllegalArgumentException("The extension element cannot be null.");
+        }
         elements.add(element);
         return this;
     }
 
     /**
-     * TODO
+     * Adds an extension attribute to the
+     * <code>W3CEndpointReference</code> instance.
+     *
+     * @param name The name of the extension attribute to be added to the
+     *   <code>W3CEndpointReference</code>
+     * @param value extension attribute value
+     * @return A <code>W3CEndpointReferenceBuilder</code> instance with
+     *   the extension attribute added to the <code>W3CEndpointReference</code>
+     * @throws java.lang.IllegalArgumentException if <code>name</code>
+     *   or <code>value</code> is <code>null</code>.
+     *
      * @since JAX-WS 2.2
      */
-    public W3CEndpointReferenceBuilder attribute(QName name,String value) {
+    public W3CEndpointReferenceBuilder attribute(QName name, String value) {
+        if (name == null || value == null) {
+            throw new IllegalArgumentException("The extension attribute name or value cannot be null.");
+        }
         attributes.put(name, value);
         return this;
     }
@@ -266,9 +297,15 @@ public final class W3CEndpointReferenceBuilder {
      *       
      */
     public W3CEndpointReference build() {
-        return Provider.provider().createW3CEndpointReference(address,
+        if (elements.isEmpty() && attributes.isEmpty()) {
+            // 2.1 API
+            return Provider.provider().createW3CEndpointReference(address,
                 serviceName, endpointName, metadata, wsdlDocumentLocation,
                 referenceParameters);
+        }
+        return Provider.provider().createW3CEndpointReference(address,
+                serviceName, endpointName, metadata, wsdlDocumentLocation,
+                referenceParameters, elements, attributes);
     }
     
     private String address;
