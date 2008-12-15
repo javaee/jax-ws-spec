@@ -11,6 +11,8 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import javax.xml.ws.WebServiceFeature;
+import javax.xml.ws.WebServiceRef;
+import javax.xml.ws.WebServiceRefs;
 
 /**
  * Annotation used to identify other annotations
@@ -26,19 +28,11 @@ import javax.xml.ws.WebServiceFeature;
  * <code>MTOM</code>, <code>RespectBinding</code>), however, an implementation
  * may define vendors specific annotations for other features.
  * <p>
- * <u>
- * Annotations annotated with <code>WebServiceFeatureAnnotation</code> SHOULD have each
- * of <code>ElementType.TYPE</code>, <code>ElementType.METHOD</code>, 
- * <code>ElementType.FIELD</code> so that the resulting feature annotation can 
- * be used in conjunction with the {@link javax.xml.ws.WebServiceRef} 
- * and {@link javax.xml.ws.WebServiceRefs} annotations if necessary.
- * <p>
- * <code>WebServiceFeature</code> annotations such as {@link javax.xml.ws.soap.Addressing}
- * MAY be placed on both the service endpoint interface and the service endpoint 
- * implementation.  When this happens, the <code>WebServiceFeature</code> annotations from
- * both MUST be honored with the annotations on the service endpoint implementation taking 
- * precedence in the case of any conflict.
- * </u>
+ * Annotations annotated with <code>WebServiceFeatureAnnotation</code> MUST
+ * have the same @Target of {@link WebServiceRef} and
+ * {@link javax.xml.ws.WebServiceRefs} annotations, so that the resulting
+ * feature annotation can be used in conjunction with the {@link WebServiceRef}
+ * and {@link WebServiceRefs} annotations if necessary.
  * <p>
  * If a JAX-WS implementation encounters an annotation annotated
  * with the <code>WebServiceFeatureAnnotation</code> that it does not
