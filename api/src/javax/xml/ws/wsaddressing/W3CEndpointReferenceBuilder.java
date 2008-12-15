@@ -82,7 +82,7 @@ public final class W3CEndpointReferenceBuilder {
      * <code>wsa:Metadata</code> element.
      *
      * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
-     * Web Services Addressing 1.0 - Metadata</a> for more details.
+     * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
      *
      * @param serviceName The service name of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference<code>.  This property
@@ -107,7 +107,7 @@ public final class W3CEndpointReferenceBuilder {
      * after the {@link #serviceName} method has been called.
      * <p>
      * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
-     * Web Services Addressing 1.0 - Metadata</a> for more details.
+     * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
      *
      * @param endpointName The name of the endpoint to be targeted
      *      by the returned <code>W3CEndpointReference<code>. The 
@@ -140,25 +140,19 @@ public final class W3CEndpointReferenceBuilder {
      * Sets the <code>wsdlDocumentLocation</code> that will be referenced
      * as <code>wsa:Metadata/@wsdli:wsdlLocation</code>. The namespace name
      * for the wsdli:wsdlLocation can be taken from {@link #serviceName(QName)}
-     * value.
+     * value or from the WSDL itself if there is only one service in the WSDL.
      *
      * <p>
      * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
-     * Web Services Addressing 1.0 - Metadata</a> for more details.
+     * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
      *
      * @param wsdlDocumentLocation The location of the WSDL document to
      *      be referenced in the <code>wsa:Metadata</code> of the
      *     <code>W3CEndpointReference<code>.
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>wsdlDocumentLocation</code> that is to be referenced.
-     * @throws IllegalStateException, if the <code>serviceName</code>
-     * has not been set.
-     *
      */
     public W3CEndpointReferenceBuilder wsdlDocumentLocation(String wsdlDocumentLocation) {
-        if (serviceName == null) {
-            throw new IllegalStateException("The W3CEndpointReferenceBuilder's serviceName must be set before setting the wsdlDocumentLocation: "+wsdlDocumentLocation);
-        }
         this.wsdlDocumentLocation = wsdlDocumentLocation;
         return this;
     }
@@ -215,7 +209,7 @@ public final class W3CEndpointReferenceBuilder {
      *   <code>W3CEndpointReference</code>
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the extension <code>element</code> added to the
-     *    <code>W3CEndpointReference</code>.
+     *    <code>W3CEndpointReference</code> instance.
      * @throws java.lang.IllegalArgumentException if <code>element</code>
      * is <code>null</code>.
      *
@@ -238,6 +232,7 @@ public final class W3CEndpointReferenceBuilder {
      * @param value extension attribute value
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the extension attribute added to the <code>W3CEndpointReference</code>
+     *   instance.
      * @throws java.lang.IllegalArgumentException if <code>name</code>
      *   or <code>value</code> is <code>null</code>.
      *
@@ -291,6 +286,9 @@ public final class W3CEndpointReferenceBuilder {
      *             is not present in <code>serviceName</code> service in the WSDL.
      *        <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code>
      *            and does not represent a valid WSDL.
+     *        <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code> but
+     *            wsdli:wsdlLocation's namespace name cannot be got from the available
+     *            metadata.
      *     </ul>
      * @throws WebServiceException If an error occurs while creating the 
      *                             <code>W3CEndpointReference</code>.
