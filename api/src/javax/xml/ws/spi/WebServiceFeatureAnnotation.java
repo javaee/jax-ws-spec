@@ -13,6 +13,9 @@ import java.lang.annotation.RetentionPolicy;
 import javax.xml.ws.WebServiceFeature;
 import javax.xml.ws.WebServiceRef;
 import javax.xml.ws.WebServiceRefs;
+import javax.xml.ws.RespectBinding;
+import javax.xml.ws.soap.Addressing;
+import javax.xml.ws.soap.MTOM;
 
 /**
  * Annotation used to identify other annotations
@@ -30,7 +33,7 @@ import javax.xml.ws.WebServiceRefs;
  * <p>
  * Annotations annotated with <code>WebServiceFeatureAnnotation</code> MUST
  * have the same @Target of {@link WebServiceRef} and
- * {@link javax.xml.ws.WebServiceRefs} annotations, so that the resulting
+ * {@link WebServiceRefs} annotations, so that the resulting
  * feature annotation can be used in conjunction with the {@link WebServiceRef}
  * and {@link WebServiceRefs} annotations if necessary.
  * <p>
@@ -39,9 +42,9 @@ import javax.xml.ws.WebServiceRefs;
  * recognize/support an error MUST be given.
  * <p>
  *
- * @see javax.xml.ws.soap.Addressing
- * @see javax.xml.ws.soap.MTOM
- * @see javax.xml.ws.RespectBinding
+ * @see Addressing
+ * @see MTOM
+ * @see RespectBinding
  *
  * @since JAX-WS 2.1
  */
