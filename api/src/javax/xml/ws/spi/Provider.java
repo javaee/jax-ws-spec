@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.9 2008-12-16 01:21:45 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.10 2008-12-16 20:57:47 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -337,6 +337,8 @@ public abstract class Provider {
 
     /**
      * Factory method to create a <code>W3CEndpointReference</code>.
+     * Using this method, a <code>W3CEndpointReference</code> instance
+     * can be created with extension elements, and attributes.
      * <code>Provider</code> implementations must override the default
      * implementation.
      *
