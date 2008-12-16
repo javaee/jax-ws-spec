@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.8 2008-12-13 02:43:50 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.9 2008-12-16 01:21:45 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -337,6 +337,8 @@ public abstract class Provider {
 
     /**
      * Factory method to create a <code>W3CEndpointReference</code>.
+     * <code>Provider</code> implementations must override the default
+     * implementation.
      *
      * <p>
      * This method can be used to create a <code>W3CEndpointReference</code>
@@ -391,6 +393,9 @@ public abstract class Provider {
      *             is not present in <code>serviceName</code> service in the WSDL.
      *        <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code>
      *            and does not represent a valid WSDL.
+     *        <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code> but
+     *            wsdli:wsdlLocation's namespace name cannot be got from the available
+     *            metadata.
      *     </ul>
      * @throws WebServiceException If an error occurs while creating the
      *                             <code>W3CEndpointReference</code>.
@@ -399,13 +404,14 @@ public abstract class Provider {
     public W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
             List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters,
             List<Element> elements, Map<QName, String> attributes) {
-        return createW3CEndpointReference(address,  serviceName,  portName,
-            metadata,  wsdlDocumentLocation, referenceParameters);
+        throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
     }
 
     /**
      * Creates and publishes an endpoint object with the specified
-     * address and implementation object.
+     * address, implementation object and web service features.
+     * <code>Provider</code> implementations must override the
+     * default implementation.
      *
      * @param address A URI specifying the address and transport/protocol
      *        to use. A http: URI MUST result in the SOAP 1.1/HTTP
@@ -427,9 +433,9 @@ public abstract class Provider {
     }
 
     /**
-     *
-     * Creates an endpoint object with the provided binding and implementation
-     * object.
+     * Creates an endpoint object with the provided binding, implementation
+     * object and web service features. <code>Provider</code> implementations
+     * must override the default implementation.
      *
      * @param bindingId A URI specifying the desired binding (e.g. SOAP/HTTP)
      * @param implementor A service implementation object to which
@@ -445,12 +451,13 @@ public abstract class Provider {
     public Endpoint createEndpoint(String bindingId, Object implementor,
             WebServiceFeature ... features) {
         throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
-
     }
 
     /**
-     * Creates an endpoint object with the provided binding and implementation
-     * object.
+     * Creates an endpoint object with the provided binding, implementation
+     * class, invoker and web service features. Containers typically use
+     * this to create Endpoint objects. <code>Provider</code>
+     * implementations must override the default implementation.
      *
      * @param bindingId A URI specifying the desired binding (e.g. SOAP/HTTP).
      *        Can be null.
