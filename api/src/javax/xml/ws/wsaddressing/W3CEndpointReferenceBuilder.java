@@ -139,8 +139,7 @@ public final class W3CEndpointReferenceBuilder {
     /**
      * Sets the <code>wsdlDocumentLocation</code> that will be referenced
      * as <code>wsa:Metadata/@wsdli:wsdlLocation</code>. The namespace name
-     * for the wsdli:wsdlLocation can be taken from {@link #serviceName(QName)}
-     * value or from the WSDL itself if there is only one service in the WSDL.
+     * for the wsdli:wsdlLocation's value can be taken from the WSDL itself.
      *
      * <p>
      * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
@@ -286,9 +285,6 @@ public final class W3CEndpointReferenceBuilder {
      *             is not present in <code>serviceName</code> service in the WSDL.
      *        <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code>
      *            and does not represent a valid WSDL.
-     *        <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code> but
-     *            wsdli:wsdlLocation's namespace name cannot be got from the available
-     *            metadata.
      *     </ul>
      * @throws WebServiceException If an error occurs while creating the 
      *                             <code>W3CEndpointReference</code>.
