@@ -82,9 +82,10 @@ public abstract class Endpoint {
     }
 
     /**
-     * Creates an endpoint with the specified implementor object. If there is
-     * a binding specified via a BindingType annotation then it MUST be used else
-     * a default of SOAP 1.1 / HTTP binding MUST be used.
+     * Creates an endpoint with the specified implementor object and web
+     * service features. If there is a binding specified via a BindingType
+     * annotation then it MUST be used else a default of SOAP 1.1 / HTTP
+     * binding MUST be used.
      * <p>
      * The newly created endpoint may be published by calling
      * one of the {@link javax.xml.ws.Endpoint#publish(String)} and
@@ -92,6 +93,10 @@ public abstract class Endpoint {
      *
      *
      * @param implementor The endpoint implementor.
+     * @param features A list of WebServiceFeatures to configure on the
+     *        endpoint. Supported features not in the <code>features
+     *        </code> parameter will have their default values.
+     *
      *
      * @return The newly created endpoint.
      * @since 2.2
@@ -123,8 +128,8 @@ public abstract class Endpoint {
     }
 
     /**
-     * Creates an endpoint with the specified binding type and
-     * implementor object.
+     * Creates an endpoint with the specified binding type,
+     * implementor object, and web service features.
      * <p>
      * The newly created endpoint may be published by calling
      * one of the {@link javax.xml.ws.Endpoint#publish(String)} and
@@ -135,6 +140,10 @@ public abstract class Endpoint {
      * annotation then a default SOAP 1.1 / HTTP binding MUST be used.
      *
      * @param implementor The endpoint implementor.
+     *
+     * @param features A list of WebServiceFeatures to configure on the
+     *        endpoint. Supported features not in the <code>features
+     *        </code> parameter will have their default values.
      *
      * @return The newly created endpoint.
      * @since 2.2
@@ -213,7 +222,8 @@ public abstract class Endpoint {
 
     /**
      * Creates and publishes an endpoint for the specified implementor
-     * object at the given address.
+     * object at the given address. The created endpoint is configured
+     * with the web service features.
      * <p>
      * The necessary server infrastructure will be created and
      * configured by the JAX-WS implementation using some default configuration.
@@ -227,7 +237,9 @@ public abstract class Endpoint {
      *        binding being used. Implementations may support other
      *        URI schemes.
      * @param implementor The endpoint implementor.
-     *
+     * @param features A list of WebServiceFeatures to configure on the
+     *        endpoint. Supported features not in the <code>features
+     *        </code> parameter will have their default values.
      * @return The newly created endpoint.
      *
      * @throws java.lang.SecurityException
@@ -236,7 +248,6 @@ public abstract class Endpoint {
      *          <code>WebServicePermission("publishEndpoint")</code> permission.
      * @since 2.2
      */
-
     public static Endpoint publish(String address, Object implementor, WebServiceFeature ... features) {
         return Provider.provider().createAndPublishEndpoint(address, implementor, features);
     }
