@@ -11,10 +11,10 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-
-import javax.xml.ws.Action;
 import javax.xml.ws.BindingProvider;
-import javax.xml.ws.FaultAction;
+import javax.xml.ws.WebServiceRef;
+import javax.xml.ws.WebServiceRefs;
+import javax.xml.ws.WebServiceProvider;
 import javax.xml.ws.soap.AddressingFeature.Responses;
 import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 
@@ -25,8 +25,8 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * with any other binding is NOT required.
  * <p>
  * This annotation MUST only be used in conjunction with the
- * <code>javax.jws.WebService</code>, {@link javax.xml.ws.WebServiceRef},
- * or {@link javax.xml.ws.WebServiceRefs} annotations.
+ * {@link javax.jws.WebService}, {@link WebServiceProvider},
+ * {@link WebServiceRef}, or {@link WebServiceRefs} annotations.
  * <p>
  * When used with the <code>javax.jws.WebService</code> annotation, this
  * annotation MUST only be used on the service endpoint implementation

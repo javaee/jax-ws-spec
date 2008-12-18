@@ -12,14 +12,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 import javax.xml.ws.spi.WebServiceFeatureAnnotation;
+import javax.xml.ws.WebServiceRef;
+import javax.xml.ws.WebServiceRefs;
+import javax.xml.ws.WebServiceProvider;
 
 /**
  * This feature represents the use of MTOM with a 
  * web service.
  * <p>
- * <u>This annotation MUST only be used in conjunction the
- * <code>javax.jws.WebService</code>, {@link javax.xml.ws.WebServiceRef},
- * or {@link javax.xml.ws.WebServiceRefs} annotations.
+ * This annotation MUST only be used in conjunction the
+ * <code>javax.jws.WebService</code>, {@link WebServiceProvider},
+ * {@link WebServiceRef}, or {@link WebServiceRefs} annotations.
  * <p>
  * When used with the <code>javax.jws.WebService</code> annotation this
  * annotation MUST only be used on the service endpoint implementation
@@ -30,7 +33,6 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * service class. When used with <code>WebServiceRef</code> that specifies a
  * service endpoint interface (SEI), the injected SEI proxy MUST
  * honor the values of the <code>MTOM</code> annotation.
- * </u>
  * <p>
  * The following describes the affects of this feature with respect
  * to being enabled or disabled:
