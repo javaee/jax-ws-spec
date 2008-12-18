@@ -60,7 +60,7 @@ import java.lang.annotation.Target;
  *
  * <p>
  * Example 2: Here is an example that shows if the explicit value for <code>Action</code>
- * message addressing property the service specific exception is not present.
+ * message addressing property for the service specific exception is not present.
  *
  * <pre>
  * &#64;WebService
