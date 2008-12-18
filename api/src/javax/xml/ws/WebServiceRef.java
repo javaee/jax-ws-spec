@@ -20,12 +20,15 @@ import java.lang.annotation.RetentionPolicy;
  *
  * Web service references are resources in the Java EE 5 sense.
  * <p>
- * When used to specify a service endpoint interface proxy
- * injection target this annotation can be used in conjunction with 
- * {@link WebServiceFeatureAnnotation} annotations such
- * as {@link Addressing}.  In this
- * case the injected proxy MUST honor the specified
- * <code>WebServiceFeatures</code>.  
+ * {@link WebServiceFeatureAnnotation} annotations
+ * (for example, {@link Addressing})
+ * can be used in conjunction with <code>WebServiceRef</code>.
+ * It has no affect when a <code>WebServiceRef</code> is used
+ * to specify a generated service class. But when
+ * it is used with a <code>WebServiceRef</code> that specifies
+ * a service endpoint interface (SEI), the injected SEI proxy
+ * MUST be configured with the annotation's web service feature.
+ *
  * <p>
  * For example, in the code below, the injected 
  * <code>StockQuoteProvider</code> proxy MUST

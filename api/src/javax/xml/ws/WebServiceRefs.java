@@ -20,13 +20,14 @@ import static java.lang.annotation.RetentionPolicy.*;
  *
  * <p>
  * {@link WebServiceFeatureAnnotation} annotations
- * such as {@link Addressing} MAY be used in
- * conjunction with the <code>WebServiceRefs</code> annotation.  
- * When this happens, only the enclosed {@link WebServiceRef} 
- * annotations that specify a service endpoint interface (SEI)
- * proxy <code>type</code> will be affected.  In this 
- * case the SEI proxies MUST honor the specified
- * <code>WebServiceFeatures</code>.  
+ * (for example, {@link Addressing})
+ * can be used in conjunction with <code>WebServiceRefs</code>.
+ * It has no affect when an enclosed <code>WebServiceRef</code>
+ * that is used to specify a generated service class. But when
+ * it is used with an enclosed <code>WebServiceRef</code> that specifies
+ * a service endpoint interface (SEI), the injected SEI proxy
+ * MUST be configured with the annotation's web service feature.
+ * 
  * <p>
  * For example, in the code below, the <code>StockQuoteProvider</code> proxy MUST
  * have WS-Addressing enabled as specifed by the {@link Addressing}
