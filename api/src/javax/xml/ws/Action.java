@@ -29,9 +29,9 @@ import java.lang.annotation.Target;
  * for <code>input</code> and <code>output</code> messages.
  * 
  * <pre>
- * &#64;javax.jws.WebService
+ * &#64;WebService
  * public class AddNumbersImpl {
- *     &#64;javax.xml.ws.Action(
+ *     &#64;Action(
  *         input="http://example.com/inputAction",
  *         output="http://example.com/outputAction")
  *     public int addNumbers(int number1, int number2) {
@@ -42,18 +42,18 @@ import java.lang.annotation.Target;
  *
  * The generated WSDL looks like:
  * <pre>
- *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
+ *   &lt;definitions targetNamespace="http://example.com/numbers" ...>
  *   ...
- *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
- *       &lt;operation name=&quot;AddNumbers&quot;&gt;
- *         &lt;input message=&quot;tns:AddNumbersInput&quot; name=&quot;Parameters&quot;
- *           wsam:Action=&quot;http://example.com/inputAction&quot;/&gt;
- *        &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;Result&quot;
- *           wsam:Action=&quot;http://example.com/outputAction&quot;/&gt;
- *       &lt;/operation&gt;
- *     &lt;portType&gt;
+ *     &lt;portType name="AddNumbersPortType">
+ *       &lt;operation name="AddNumbers">
+ *         &lt;input message="tns:AddNumbersInput" name="foo"
+ *           wsam:Action="http://example.com/inputAction"/>
+ *         &lt;output message="tns:AddNumbersOutput" name="bar"
+ *           wsam:Action="http://example.com/outputAction"/>
+ *       &lt;/operation>
+ *     &lt;/portType>
  *   ...
- *   &lt;definitions&gt;
+ *   &lt;/definitions>
  * </pre>
  *
  * <p>
@@ -62,9 +62,9 @@ import java.lang.annotation.Target;
  * WSDL <code>output</code> message are computed using the algorithm in the jax-ws specification.
  *
  * <pre>
- * &#64;javax.jws.WebService
+ * &#64;WebService
  * public class AddNumbersImpl {
- *     &#64;javax.xml.ws.Action(input=&quot;http://example.com/inputAction&quot;)
+ *     &#64;Action(input="http://example.com/inputAction")
  *     public int addNumbers(int number1, int number2) {
  *         return number1 + number2;
  *     }
@@ -72,20 +72,19 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * The generated WSDL looks like:
- *
  * <pre>
- *   &lt;definitions targetNamespace=&quot;http://example.com/numbers&quot; ...&gt;
+ *   &lt;definitions targetNamespace="http://example.com/numbers" ...>
  *   ...
- *     &lt;portType name=&quot;AddNumbersPortType&quot;&gt;
- *       &lt;operation name=&quot;AddNumbers&quot;&gt;
- *         &lt;input message=&quot;tns:AddNumbersInput&quot; name=&quot;foo&quot;
- *           wsam:Action=&quot;http://example.com/inputAction&quot;/&gt;
- *        &lt;output message=&quot;tns:AddNumbersOutput&quot; name=&quot;bar&quot;
- *           wsam:Action=&quot;http://example.com/numbers/AddNumbersPortType/AddNumbersResponse&quot;/&gt;
- *       &lt;/operation&gt;
- *     &lt;portType&gt;
+ *     &lt;portType name="AddNumbersPortType">
+ *       &lt;operation name="AddNumbers">
+ *         &lt;input message="tns:AddNumbersInput" name="foo"
+ *           wsam:Action="http://example.com/inputAction" />
+ *         &lt;output message="tns:AddNumbersOutput" name="bar"
+ *           wsam:Action="http://example.com/numbers/AddNumbersPortType/AddNumbersResponse"/>
+ *       &lt;/operation>
+ *     &lt;/portType>
  *   ...
- *   &lt;definitions&gt;
+ *   &lt;/definitions>
  * </pre>
  *
  * It is legitimate to specify an explicit value for <code>Action</code> message addressing property for
@@ -93,7 +92,7 @@ import java.lang.annotation.Target;
  * WSDL <code>input</code> message are computed using the algorithm in the jax-ws specification.
  *
  * <p>
- * <b>Example 3</b>: See <a href="FaultAction.html">FaultAction</a> annotation for an example of
+ * <b>Example 3</b>: See {@link FaultAction} annotation for an example of
  * how to specify an explicit value for <code>Action</code> message addressing property for the
  * <code>fault</code> message.
  *
