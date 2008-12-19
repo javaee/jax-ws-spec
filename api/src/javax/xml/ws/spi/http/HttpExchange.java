@@ -55,6 +55,28 @@ import java.security.Principal;
 public interface HttpExchange {
 
     /**
+     * Standard property: cipher suite value when the request is received over HTTPS
+     * <p>Type: String
+     */
+    public static final String REQUEST_CIPHER_SUITE = "javax.xml.ws.spi.http.request.cipher.suite";
+
+    /**
+     * Standard property: bit size of the algorithm when the request is received over HTTPS
+     * <p>Type: Integer
+     */
+    public static final String REQUEST_KEY_SIZE = "javax.xml.ws.spi.http.request.key.size";
+
+    /**
+     * Standard property: A SSL certificate, if any, associated with the request
+     *
+     * <p>Type: java.security.cert.X509Certificate[]
+     * The order of this array is defined as being in ascending order of trust.
+     * The first certificate in the chain is the one set by the client, the next
+     * is the one used to authenticate the first, and so on.
+     */
+    public static final String REQUEST_X509CERTIFICATE = "javax.xml.ws.spi.http.request.cert.X509Certificate";
+
+    /**
      * Returns an immutable Map containing the HTTP headers that were 
      * included with this request. The keys in this Map will be the header 
      * names, while the values will be a List of Strings containing each value 
@@ -233,6 +255,12 @@ public interface HttpExchange {
      * Servlet containers must expose {@link MessageContext#SERVLET_CONTEXT},
      * {@link MessageContext#SERVLET_REQUEST}, {@link MessageContext#SERVLET_RESPONSE}
      * as attributes.
+     *
+     * <p>If the request has been received by the container using HTTPS, the
+     * following information must be exposed as attributes. These attributes
+     * are {@link #REQUEST_CIPHER_SUITE}, {@link #REQUEST_KEY_SIZE}. If there
+     * is a SSL certificate associated with the request, it must be exposed
+     * using {@link #REQUEST_X509CERTIFICATE}
      *
      * @param name attribute name
      * @return the attribute value, or null if they do not exist
