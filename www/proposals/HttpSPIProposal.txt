@@ -1,0 +1,137 @@
+HTTP SPI
+--------
+This proposal describes a portable deployment for JAX-WS 2.2 web services in containers(for example, servlet containers) for HTTP transport. This SPI is not for end developers but provides a way for the container or its extension developers to deploy JAX-WS services portably.
+
+Introduction
+------------
+Current JAX-WS deployments are tightly coupled with the container's runtime. For example, GlassFish JSR-109 deployment works only with GlassFish web services runtime. Similarly, RI uses sun-jaxws.xml to deploy web service endpoints and it works only with RI. Also JDK6 has web services runtime but there is no portable way to use it for 109 and other deployments. Hence, there is a need for an SPI that allows handoff between a container deployment and a runtime.
+
+The proposed SPI allows a deployment to use any available web services runtime for HTTP transport. Consider a case when JAX-WS 2.2 is integrated in JDK. Java EE6 web profile vendors can support 109 deployments using the runtime in JDK. These implementations won't have to worry about implementing the whole web services runtime. They could use a Servlet 3.0 extension that does the 109 deployment by reading deployment descriptors and handoff the request processing to the web services runtime that is in JDK.
+
+SPI
+---
+
+The following new classes are being proposed:
+  * javax.xml.ws.spi.http.HttpContext - HttpContext represents a mapping between the root URI path of a web service to a HttpHandler which is invoked to handle requests destined for that path on the associated container.
+  * javax.xml.ws.spi.http.HttpExchange - This class encapsulates a HTTP request received and a response to be generated in one exchange.
+  * javax.xml.ws.spi.http.HttpHandler - A handler which is invoked to process HTTP exchanges.
+  * javax.xml.ws.spi.ApplicationContext - Capturs an application which may consists multiple endpoints. Using this one endpoint can find other endpoint's address.
+  * javax.xml.ws.spi.Invoker - Invoker hides the detail of calling into application endpoint implementation.
+
+See the attached javadoc and diffs between 2.1 and 2.2 API for all the details.
+
+How it works
+------------
+
+The portable deployment is done as below:
+   1. Container creates Endpoint objects for an application. The necessary information to create Endpoint objects may be got from web service deployment descriptor files.
+   2. Container needs to create HttpContext objects for the deployment. For example, a HttpContext could be created using servlet configuration(for e.g url-pattern) for the web service in servlet container case.
+   3. Then publishes all the endpoints using Endpoint.publish(HttpContext). During publish(), JAX-WS runtime registers a HttpHandler callback to handle incoming requests or HttpExchange objects. The HttpExchange object encapsulates HTTP request and response. 
+
+  Container                               JAX-WS runtime
+  ---------                               --------------
+  1. Creates Invoker1, ... InvokerN                               
+  2. Provider.createEndpoint(...)     --> 3. creates Endpoint1
+     configures Endpoint1
+     ...
+  4. Provider.createEndpoint(...)     --> 5. creates EndpointN
+     configures EndpointN
+  6. Creates ApplicationContext
+  7. creates HttpContext1, ... HttpContextN
+  8. Endpoint1.publish(HttpContext1)  --> 9. creates HttpHandler1
+                                          HttpContext1.setHandler(HttpHandler1)
+     ...
+ 10. EndpointN.publish(HttpContextN)  --> 11. creates HttpHandlerN
+                                          HttpContextN.setHandler(HttpHandlerN)
+
+The request processing is done as below(for every request):
+  Container                               JAX-WS runtime
+  ---------                               --------------
+  1. Creates a HttpExchange
+  2. Gets handler: HttpContext.getHandler()
+  3. HttpHandler.handle(HttpExchange) --> 4. reads request from HttpExchange
+                                      <-- 5. Calls Invoker
+  6. Invokes the actual instance
+                                          7. Writes the response to HttpExchange
+
+The portable undeployment is done as below:
+  Container                               JAX-WS runtime
+  ---------                               --------------
+  1. @preDestroy on instances
+  2. Endpoint1.stop()
+  ...
+  3. EndpointN.stop()
+
+Sample Container implementations:
+
+   // Sample Invoker which invokes singleton instance
+   class InvokerImpl implements Invoker {
+      private final Object impl;
+
+      InvokerImpl(Class implType) {
+         impl = implType.newInstance();
+      }
+      void inject(WebServiceContext webServiceContext) {
+         // inject WebServiceContext and others
+         // do @postConstuct processing
+      }
+      Object invoke(Method m, Object... args) {
+         return m.invoke(impl, args);
+      }
+   }
+
+   class HttpContextImpl extends HttpContext {
+      String getPath() {
+         return urlPattern;
+      }
+      ApplicationContext getApplicationContext() {
+      }
+      ...
+   }
+
+   class ApplicationContextImpl extends ApplicationContext {
+      public Collection<Endpoint> getEndpoints() {
+         // return all endpoints in the application
+      }
+   }
+
+   // Create service
+   InvokerImpl endpointInvoker = new InvokerImpl(implType);
+   Endpoint endpoint = Provider.provider().createEndpoint(SOAP11HTTP_BINDING,
+      implType, endpointInvoker, mtomFeature, ...);
+   // If DD overrides wsdl:service, wsdl:port names, configure them
+   endpoint.setProperties(...)
+   // Configure service with the packaged WSDL, Schema metadata(if any)
+   endpoint.setMetadata(...)
+   // Configure the handler chain from DD
+   endpoint.getBinding().setHandlerChain(...)
+   // Finally endpoint is ready to accept requests
+   endpoint.publish(httpContext)
+
+   // HttpExchange for servlet container
+   HttpExchangeImpl implements HttpExchange {
+      HttpExchangeImpl(HttpServletRequest req, HttpServletResponse res) {
+      }
+   }
+
+   // Request processing in servlet container
+   ServletImpl extends HttpServlet {
+      HttpContext ctxt;
+
+      void doPost(HttpServletRequest request, HttpServletResponse response) {
+         HttpExchange exch = new HttpExchangeImpl(request, response);
+         HttpHandler handler = ctxt.getHandler();
+         handler.handle(exch);
+      }
+   }
+       
+
+Sample JAX-WS implementations:
+
+   MyHandler extends HttpHandler {
+      public void handle(HttpExchange t) throws IOException {
+         // read the request from HttpExchange
+         // Use Invoker to invoke the web service
+         // write response to HttpExchange
+      }
+   }
