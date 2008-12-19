@@ -202,7 +202,8 @@ public final class W3CEndpointReferenceBuilder {
 
     /**
      * Adds an extension element to the
-     * <code>W3CEndpointReference</code> instance.
+     * <code>W3CEndpointReference</code> instance's
+     * <code>wsa:EndpointReference</code> element.
      *
      * @param element The extension element to be added to the
      *   <code>W3CEndpointReference</code>
@@ -224,7 +225,8 @@ public final class W3CEndpointReferenceBuilder {
 
     /**
      * Adds an extension attribute to the
-     * <code>W3CEndpointReference</code> instance.
+     * <code>W3CEndpointReference</code> instance's
+     * <code>wsa:EndpointReference</code> element.
      *
      * @param name The name of the extension attribute to be added to the
      *   <code>W3CEndpointReference</code>

@@ -5,9 +5,6 @@
 
 package javax.xml.ws.soap;
 
-import javax.xml.ws.Action;
-import javax.xml.ws.BindingProvider;
-import javax.xml.ws.FaultAction;
 import javax.xml.ws.WebServiceFeature;
 
 /**
@@ -68,7 +65,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * property only has meaning on the endpoint and has no
      * affect when used on the client.
      */
-    private final boolean required;
+    protected final boolean required;
 
     /**
      * If addressing is enabled, this property determines if endpoint requires
