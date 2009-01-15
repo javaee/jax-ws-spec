@@ -136,11 +136,15 @@ public @interface Addressing {
      * the use of anonymous responses, or non-anonymous responses, or all.
      *
      * <p>
+     * {@link Responses#ALL} supports all response types and this is the default
+     * value.
+     *
+     * <p>
      * {@link Responses#ANONYMOUS} requires the use of only anonymous
      * responses. It will result into wsam:AnonymousResponses nested assertion
      * as specified in
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyanonresponses">
-     * 3.1.2 AnonymousResponses Assertion</a> in the WSDL.
+     * 3.1.2 AnonymousResponses Assertion</a> in the generated WSDL.
      *
      * <p>
      * {@link Responses#NON_ANONYMOUS} requires the use of only non-anonymous
@@ -149,14 +153,8 @@ public @interface Addressing {
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicynonanonresponses">
      * 3.1.3 NonAnonymousResponses Assertion</a> in the generated WSDL.
      *
-     * <p>The default value supports all response types. Specifying both
-     * {@link Responses#ANONYMOUS}, and {@link Responses#NON_ANONYMOUS }
-     * would mean that the endpoint supports all response types. Similary,
-     * not specifying any one of them would mean that the endpoint supports
-     * all response types.
-     *
      * @since JAX-WS 2.2
      */
-    Responses[] responses() default { Responses.ANONYMOUS, Responses.NON_ANONYMOUS };
+    Responses responses() default Responses.ALL;
 
 }
