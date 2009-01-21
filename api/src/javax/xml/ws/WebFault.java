@@ -36,4 +36,12 @@ public @interface WebFault {
    *  Fault bean name.
   **/
   public String faultBean() default "";
+
+
+  /**
+   *  wsdl:Message's name. Default name is the exception's class name.
+   *  @since JAX-WS 2.2
+   */
+  public String messageName() default "";
+
 }

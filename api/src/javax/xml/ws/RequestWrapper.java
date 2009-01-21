@@ -43,5 +43,12 @@ public @interface RequestWrapper {
   **/
   public String className() default "";
 
+  /**
+   *  wsdl:part name for the wrapper
+   * @since JAX-WS 2.2
+   */
+  public String partName() default "parameters";
+
+
 }
 
