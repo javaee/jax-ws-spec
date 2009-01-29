@@ -75,6 +75,26 @@ public final class W3CEndpointReferenceBuilder {
         this.address = address;
         return this;
     }
+
+    /**
+     * Sets the <code>interfaceName</code> as the
+     * <code>wsam:InterfaceName</code> element in the
+     * <code>wsa:Metadata</code> element.
+     *
+     * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
+     * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
+     *
+     * @param interfaceName The port type name of the endpoint to be targeted
+     *      by the returned <code>W3CEndpointReference<code>.
+     *
+     * @return A <code>W3CEndpointReferenceBuilder</code> instance with
+     *   the <code>interfaceName</code> as <code>wsam:InterfaceName</code>
+     *   element added to the <code>wsa:Metadata</code> element
+     */
+    public W3CEndpointReferenceBuilder interfaceName(QName interfaceName) {
+        this.interfaceName = interfaceName;
+        return this;
+    }
     
     /**
      * Sets the <code>serviceName</code> as the
@@ -293,20 +313,21 @@ public final class W3CEndpointReferenceBuilder {
      *       
      */
     public W3CEndpointReference build() {
-        if (elements.isEmpty() && attributes.isEmpty()) {
+        if (elements.isEmpty() && attributes.isEmpty() && interfaceName == null) {
             // 2.1 API
             return Provider.provider().createW3CEndpointReference(address,
                 serviceName, endpointName, metadata, wsdlDocumentLocation,
                 referenceParameters);
         }
         return Provider.provider().createW3CEndpointReference(address,
-                serviceName, endpointName, metadata, wsdlDocumentLocation,
+                interfaceName, serviceName, endpointName, metadata, wsdlDocumentLocation,
                 referenceParameters, elements, attributes);
     }
     
     private String address;
     private List<Element> referenceParameters;
     private List<Element> metadata;
+    private QName interfaceName;
     private QName serviceName;
     private QName endpointName;
     private String wsdlDocumentLocation;

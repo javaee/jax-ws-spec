@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.11 2009-01-29 22:10:46 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.12 2009-01-29 22:39:04 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -422,7 +422,8 @@ public abstract class Provider {
      *                             <code>W3CEndpointReference</code>.
      * @since JAX-WS 2.2
      */
-    public W3CEndpointReference createW3CEndpointReference(String address, QName serviceName, QName portName,
+    public W3CEndpointReference createW3CEndpointReference(String address,
+            QName interfaceName, QName serviceName, QName portName,
             List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters,
             List<Element> elements, Map<QName, String> attributes) {
         throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
