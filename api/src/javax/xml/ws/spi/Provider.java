@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.10 2008-12-16 20:57:47 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.11 2009-01-29 22:10:46 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -164,6 +164,25 @@ public abstract class Provider {
     public abstract ServiceDelegate createServiceDelegate(
             java.net.URL wsdlDocumentLocation,
             QName serviceName, Class serviceClass);
+
+    /**
+     * Creates a service delegate object.
+     * <p>
+     * @param wsdlDocumentLocation A URL pointing to the WSDL document
+     *        for the service, or <code>null</code> if there isn't one.
+     * @param serviceName The qualified name of the service.
+     * @param serviceClass The service class, which MUST be either
+     *        <code>javax.xml.ws.Service</code> or a subclass thereof.
+     * @param features Web Service features that must be configured on
+     *        the service. If the provider doesn't understand a feature,
+     *        it must throw a WebServiceException.
+     * @return The newly created service delegate.
+     *
+     * @since JAX-WS 2.2
+     */
+    public abstract ServiceDelegate createServiceDelegate(
+            java.net.URL wsdlDocumentLocation,
+            QName serviceName, Class serviceClass, WebServiceFeature ... features);
     
     
     /**

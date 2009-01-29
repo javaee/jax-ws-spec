@@ -50,12 +50,18 @@ public class Service {
      * access to entire protocol message, <code>PAYLOAD</code> to protocol message
      * payload only.
      **/
-    public enum Mode { MESSAGE, PAYLOAD };
+    public enum Mode { MESSAGE, PAYLOAD }
     
     protected Service(java.net.URL wsdlDocumentLocation, QName serviceName) {
         delegate = Provider.provider().createServiceDelegate(wsdlDocumentLocation,
                 serviceName,
                 this.getClass());
+    }
+
+    protected Service(java.net.URL wsdlDocumentLocation, QName serviceName, WebServiceFeature ... features) {
+        delegate = Provider.provider().createServiceDelegate(wsdlDocumentLocation,
+                serviceName,
+                this.getClass(), features);
     }
     
     
@@ -679,6 +685,28 @@ public class Service {
             QName serviceName) {
         return new Service(wsdlDocumentLocation, serviceName);
     }
+
+    /**
+     * Creates a <code>Service</code> instance.
+     *
+     * The specified WSDL document location and service qualified name MUST
+     * uniquely identify a <code>wsdl:service</code> element.
+     *
+     * @param wsdlDocumentLocation <code>URL</code> for the WSDL document location
+     *                             for the service
+     * @param serviceName <code>QName</code> for the service
+     * @param features Web Service features that must be configured on
+     *        the service. If the provider doesn't understand a feature,
+     *        it must throw a WebServiceException.
+     * @throws WebServiceException If any error in creation of the
+     *                    specified service.
+     * @since JAX-WS 2.2
+     **/
+    public static Service create(
+            java.net.URL wsdlDocumentLocation,
+            QName serviceName, WebServiceFeature ... features) {
+        return new Service(wsdlDocumentLocation, serviceName, features);
+    }
     
     /**
      * Creates a <code>Service</code> instance.
@@ -689,6 +717,22 @@ public class Service {
      */
     public static Service create(QName serviceName) {
         return new Service(null, serviceName);
+    }
+
+    /**
+     * Creates a <code>Service</code> instance.
+     *
+     * @param serviceName <code>QName</code> for the service
+     * @param features Web Service features that must be configured on
+     *        the service. If the provider doesn't understand a feature,
+     *        it must throw a WebServiceException.
+     * @throws WebServiceException If any error in creation of the
+     *                    specified service
+     *
+     * @since JAX-WS 2.2
+     */
+    public static Service create(QName serviceName, WebServiceFeature ... features) {
+        return new Service(null, serviceName, features);
     }
 }
 
