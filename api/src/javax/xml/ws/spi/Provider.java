@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.12 2009-01-29 22:39:04 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.13 2009-01-30 03:08:33 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -16,7 +16,6 @@ import javax.xml.ws.WebServiceException;
 import javax.xml.ws.WebServiceFeature;
 import javax.xml.namespace.QName;
 import javax.xml.ws.EndpointReference;
-import javax.xml.ws.spi.http.HttpContext;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
 
 import org.w3c.dom.Element;
@@ -180,9 +179,11 @@ public abstract class Provider {
      *
      * @since JAX-WS 2.2
      */
-    public abstract ServiceDelegate createServiceDelegate(
+    public ServiceDelegate createServiceDelegate(
             java.net.URL wsdlDocumentLocation,
-            QName serviceName, Class serviceClass, WebServiceFeature ... features);
+            QName serviceName, Class serviceClass, WebServiceFeature ... features) {
+        throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
+    }
     
     
     /**
@@ -447,7 +448,7 @@ public abstract class Provider {
      *        endpoint.  Supported features not in the <code>features
      *        </code> parameter will have their default values.
      * @return The newly created endpoint.
-     * @since 2.2
+     * @since JAX-WS 2.2
      */
     public Endpoint createAndPublishEndpoint(String address,
             Object implementor, WebServiceFeature ... features) {
@@ -468,7 +469,7 @@ public abstract class Provider {
      *        endpoint.  Supported features not in the <code>features
      *        </code> parameter will have their default values.
      * @return The newly created endpoint.
-     * @since 2.2
+     * @since JAX-WS 2.2
      */
     public Endpoint createEndpoint(String bindingId, Object implementor,
             WebServiceFeature ... features) {
@@ -491,7 +492,7 @@ public abstract class Provider {
      *        endpoint.  Supported features not in the <code>features
      *        </code> parameter will have their default values.
      * @return The newly created endpoint.
-     * @since 2.2
+     * @since JAX-WS 2.2
      */
     public Endpoint createEndpoint(String bindingId, Class implementorClass,
             Invoker invoker, WebServiceFeature ... features) {
