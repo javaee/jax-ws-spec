@@ -33,7 +33,7 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * class.
  * <p>
  * This annotation has no affect when used with 
- * <code>WebServiceRef</code>, <code>WebServiceRefs</code> annotations that are used to specify a generated
+ * <code>WebServiceRef</code> annotations that are used to specify a generated
  * service class. When used with <code>WebServiceRef</code> that specifies a
  * service endpoint interface (SEI), the injected SEI proxy MUST
  * honor the values of the <code>Addressing</code> annotation.
