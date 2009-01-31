@@ -139,6 +139,8 @@ public final class AddressingFeature extends WebServiceFeature {
      * used on the client.
      * @param responses specifies whether endpoint requires
      * the use of anonymous responses.
+     *
+     * @since JAX-WS 2.2
      */
     public AddressingFeature(boolean enabled, boolean required, Responses responses) {
         this.enabled = enabled;
