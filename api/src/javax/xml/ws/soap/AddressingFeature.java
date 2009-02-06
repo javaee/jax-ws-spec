@@ -14,10 +14,10 @@ import javax.xml.ws.Dispatch;
  * the SOAP 1.1/HTTP or SOAP 1.2/HTTP binding. Using this feature
  * with any other binding is undefined.
  * <p>
- * This feature can be used during the creation of SEI proxy, {@link Dispatch}
- * instances on the client side and {@link Endpoint} instances on the server
- * side. This feature cannot be used for Service instance creation on the
- * client side.
+ * This feature can be used during the creation of SEI proxy, and
+ * {@link Dispatch} instances on the client side and {@link Endpoint}
+ * instances on the server side. This feature cannot be used for Service
+ * instance creation on the client side.
  * <p>
  * The following describes the effects of this feature with respect
  * to be enabled or disabled:
@@ -104,9 +104,7 @@ public final class AddressingFeature extends WebServiceFeature {
     /**
      * If addressing is enabled, this property determines whether the endpoint
      * requires WS-Addressing. If required is true, WS-Addressing headers MUST
-     * be present on incoming and outgoing messages. A corresponding
-     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyaddressing">
-     * 3.1.1 Addressing Assertion</a> must be generated in the WSDL.
+     * be present on incoming and outgoing messages.
      */
     // didn't make it as private final for compatibility
     protected /* final */ boolean required;
@@ -163,7 +161,7 @@ public final class AddressingFeature extends WebServiceFeature {
     }
 
     /** 
-     * Create and configure an <code>AddressingFeature</code> with the
+     * Creates and configures an <code>AddressingFeature</code> with the
      * use of addressing requirements. If <code>enabled</code> and
      * <code>required</code> are true, it enables ws-addressing and
      * requires its use. It also configures to accept all the response types.
@@ -177,11 +175,10 @@ public final class AddressingFeature extends WebServiceFeature {
     }
 
     /**
-     * Create and configure an <code>AddressingFeature</code> with the
-     * use of addressing parameters. The created feature's support
-     * and require the use of ws-addressing is configured using
-     * <code>enabled</enabled> and <code>required</code> paramters.
-     * Also, the response types can be configured using
+     * Creates and configures an <code>AddressingFeature</code> with the
+     * use of addressing requirements. If <code>enabled</code> and
+     * <code>required</code> are true, it enables ws-addressing and
+     * requires its use. Also, the response types can be configured using
      * <code>responses</code> parameter.
      *
      * @param enabled true enables ws-addressing i.e.ws-addressing
@@ -216,17 +213,17 @@ public final class AddressingFeature extends WebServiceFeature {
     }
 
     /**
-     * If addressing is enabled, this property determines if endpoint requires
-     * the use of anonymous responses, or non-anonymous responses,
+     * If addressing is enabled, this property determines whether endpoint
+     * requires the use of anonymous responses, or non-anonymous responses,
      * or all responses.
      *
      * <p>
      * @return {@link Responses#ALL} when endpoint supports all types of
      * responses
      *         {@link Responses#ANONYMOUS} when endpoint requires the use of
-     * only anonymous responses.
+     * only anonymous responses
      *         {@link Responses#NON_ANONYMOUS} when endpoint requires the use
-     * of only non-anonymous responses.
+     * of only non-anonymous responses
      *
      * @since JAX-WS 2.2
      */
