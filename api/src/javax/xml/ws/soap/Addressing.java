@@ -36,11 +36,12 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * The following describes the effects of this feature with respect
  * to be enabled or disabled:
  * <ul>
- *  <li> ENABLED: In this Mode, WS-Addressing will be enabled.
+ *  <li> ENABLED: In this Mode, WS-Addressing will be enabled. It means
+ *       the endpoint supports WS-Addressing but does not require its use.
  *       A sender could send messages with WS-Addressing headers or without
  *       WS-Addressing headers. But a receiver MUST consume both types of
  *       messages.
- *  <li> DISABLED: In this Mode, WS-Addressing will be disabled
+ *  <li> DISABLED: In this Mode, WS-Addressing will be disabled.
  *       At runtime, WS-Addressing headers MUST NOT be used by a sender or
  *       receiver.
  * </ul>
