@@ -118,7 +118,7 @@ JAX-WS ${release.spec.version} Runtime Library</h2>
 ${release.spec.title} specification, ${release.spec.date}<br>
 Comments to: <i><a href='mailto:${release.spec.feedback}'>${release.spec.feedback}</a></i><br>
 More information at: <i><a target='_top'
-href='http://java.sun.com/webservices/jaxws/'>http://java.sun.com/webservices/jaxws/</a></i><br>
+href='http://java.sun.com/webservices'>http://java.sun.com/webservices</a></i><br>
 &nbsp;<br>&nbsp;<br><hr width='65%'><h1>${release.spec.title}</h1><hr width='75%'>
 <br>&nbsp;<br>]]>
             </doctitle>
@@ -129,7 +129,7 @@ href='http://java.sun.com/webservices/jaxws/'>http://java.sun.com/webservices/ja
 <![CDATA[<font size=-1>
 <br>Comments to: <a href='mailto:${release.spec.feedback}'><i>${release.spec.feedback}</i></a>
 <br>More information at: <a target='_top'
-href='http://java.sun.com/xml/jax-ws'><i>http://java.sun.com/xml/jax-ws</i></a> 
+href='http://java.sun.com/webservices'><i>http://java.sun.com/webservices</i></a> 
 <p>Copyright &copy; 2007 by Sun Microsystems, Inc., 4150 Network Circle, 
 <br>Santa Clara, California 95054, U.S.A.  All Rights Reserved.  </font>]]>
             </bottom>
@@ -164,7 +164,7 @@ JAX-WS ${release.spec.version} Runtime Library</h2>
 ${release.spec.title} specification, ${release.spec.date}<br>
 Comments to: <i><a href='mailto:${release.spec.feedback}'>${release.spec.feedback}</a></i><br>
 More information at: <i><a target='_top'
-href='http://java.sun.com/webservices/jaxws/'>http://java.sun.com/webservices/jaxws/</a></i><br>
+href='http://java.sun.com/webservices'>http://java.sun.com/webservices</a></i><br>
 &nbsp;<br>&nbsp;<br><hr width='65%'><h1>${release.spec.title}</h1><hr width='75%'>
 <br>&nbsp;<br>]]>
             </doctitle>
@@ -175,7 +175,7 @@ href='http://java.sun.com/webservices/jaxws/'>http://java.sun.com/webservices/ja
 <![CDATA[<font size=-1>
 <br>Comments to: <a href='mailto:${release.spec.feedback}'><i>${release.spec.feedback}</i></a>
 <br>More information at: <a target='_top'
-href='http://java.sun.com/xml/jax-ws'><i>http://java.sun.com/xml/jax-ws</i></a> 
+href='http://java.sun.com/webservices'><i>http://java.sun.com/webservices</i></a> 
 <p>Copyright &copy; 2007 by Sun Microsystems, Inc., 4150 Network Circle, 
 <br>Santa Clara, California 95054, U.S.A.  All Rights Reserved.  </font>]]>
             </bottom>
