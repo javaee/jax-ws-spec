@@ -88,8 +88,8 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * It is legitimate to specify an explicit value for <code>Action</code> message addressing property for
- * <code>output</code> message only. In this case, <code>wsam:Action</code> values for the
- * WSDL <code>input</code> message are computed using the algorithm in the JAX-WS specification.
+ * <code>output</code> message only. In this case, <code>wsam:Action</code> value for the
+ * WSDL <code>input</code> message is computed using the algorithm in the JAX-WS specification.
  *
  * <p>
  * <b>Example 3</b>: See {@link FaultAction} annotation for an example of
