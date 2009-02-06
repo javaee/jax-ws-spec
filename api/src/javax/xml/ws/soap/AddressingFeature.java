@@ -103,9 +103,8 @@ public final class AddressingFeature extends WebServiceFeature {
   
     /**
      * If addressing is enabled, this property determines whether the endpoint
-     * requires WS-Addressing. If required is true, the endpoint requires
-     * WS-Addressing and WS-Addressing headers MUST
-     * be present on incoming messages. A corresponding
+     * requires WS-Addressing. If required is true, WS-Addressing headers MUST
+     * be present on incoming and outgoing messages. A corresponding
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyaddressing">
      * 3.1.1 Addressing Assertion</a> must be generated in the WSDL.
      */
@@ -138,50 +137,57 @@ public final class AddressingFeature extends WebServiceFeature {
      */
     public enum Responses { ANONYMOUS, NON_ANONYMOUS, ALL }
 
-
     private final Responses responses;
 
     /**
-     * Create an <code>AddressingFeature</code>
-     * The instance created will be enabled.
+     * Creates and configures an <code>AddressingFeature</code> with the
+     * use of addressing requirements. The created feature enables
+     * ws-addressing i.e. supports ws-addressing but doesn't require
+     * its use. It is also configured to accept all the response types.
      */
     public AddressingFeature() {
         this(true, false, Responses.ALL);
     }
     
-    /** 
-     * Create an <code>AddressingFeature</code> with addressing enabled or
-     * disabled.
+    /**
+     * Creates and configures an <code>AddressingFeature</code> with the
+     * use of addressing requirements. If <code>enabled</code> is true,
+     * it enables ws-addressing i.e. supports ws-addressing but doesn't
+     * require its use. It also configures to accept all the response types.
      * 
-     * @param enabled specifies whether this feature should be enabled or not.
+     * @param enabled true enables ws-addressing i.e.ws-addressing
+     * is supported but doesn't require its use
      */
     public AddressingFeature(boolean enabled) {
         this(enabled, false, Responses.ALL);
     }
 
     /** 
-     * Create an <code>AddressingFeature</code> with a configuration of supports
-     * and requires the use of addressing.
-     * <code>enabled</code> and
-     * <code>required</required>
-     * 
-     * @param enabled specifies whether this feature should
-     * be enabled or not.
-     * @param required specifies whether the endpoint requires ws-addressing.
+     * Create and configure an <code>AddressingFeature</code> with the
+     * use of addressing requirements. If <code>enabled</code> and
+     * <code>required</code> are true, it enables ws-addressing and
+     * requires its use. It also configures to accept all the response types.
+     *
+     * @param enabled true enables ws-addressing i.e.ws-addressing
+     * is supported but doesn't require its use
+     * @param required true means requires the use of ws-addressing .
      */
     public AddressingFeature(boolean enabled, boolean required) {
         this(enabled, required, Responses.ALL);
     }
 
     /**
-     * Create an <code>AddressingFeature</code> with a configuration of suppors
-     * and requires the use of addressing, and the type of responses.
+     * Create and configure an <code>AddressingFeature</code> with the
+     * use of addressing parameters. The created feature's support
+     * and require the use of ws-addressing is configured using
+     * <code>enabled</enabled> and <code>required</code> paramters.
+     * Also, the response types can be configured using
+     * <code>responses</code> parameter.
      *
-     * @param enabled specifies whether this feature should
-     * be enabled or not.
-     * @param required specifies whether the endpoint requires ws-addressing.
-     * @param responses specifies whether endpoint requires
-     * the use of anonymous responses.
+     * @param enabled true enables ws-addressing i.e.ws-addressing
+     * is supported but doesn't require its use
+     * @param required true means requires the use of ws-addressing .
+     * @param responses specifies what type of responses are required
      *
      * @since JAX-WS 2.2
      */
@@ -200,11 +206,8 @@ public final class AddressingFeature extends WebServiceFeature {
 
     /**
      * If addressing is enabled, this property determines whether the endpoint
-     * requires WS-Addressing. If required is true, the endpoint requires
-     * WS-Addressing and WS-Addressing headers MUST
-     * be present on incoming messages. A corresponding
-     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyaddressing">
-     * 3.1.1 Addressing Assertion</a> must be generated in the WSDL.
+     * requires WS-Addressing. If required is true, WS-Addressing headers MUST
+     * be present on incoming and outgoing messages.
      *
      * @return the current required value
      */
@@ -224,30 +227,6 @@ public final class AddressingFeature extends WebServiceFeature {
      * only anonymous responses.
      *         {@link Responses#NON_ANONYMOUS} when endpoint requires the use
      * of only non-anonymous responses.
-     *
-     * @since JAX-WS 2.2
-     */
-    /**
-     * If addressing is enabled, this property determines if endpoint requires
-     * the use of anonymous responses, or non-anonymous responses, or all.
-     *
-     * <p>
-     * @return {@link Responses#ALL} supports all response types and this is the
-     * default value.
-     *
-     * <p>
-     * {@link Responses#ANONYMOUS} requires the use of only anonymous
-     * responses. It will result into wsam:AnonymousResponses nested assertion
-     * as specified in
-     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyanonresponses">
-     * 3.1.2 AnonymousResponses Assertion</a> in the generated WSDL.
-     *
-     * <p>
-     * {@link Responses#NON_ANONYMOUS} requires the use of only non-anonymous
-     * responses. It will result into
-     * wsam:AnonymousResponses nested assertion as specified in
-     * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicynonanonresponses">
-     * 3.1.3 NonAnonymousResponses Assertion</a> in the generated WSDL.
      *
      * @since JAX-WS 2.2
      */
