@@ -64,8 +64,9 @@ public @interface Addressing {
     boolean required() default false;
 
     /**
-     * If addressing is enabled, this property determines if endpoint requires
-     * the use of anonymous responses, or non-anonymous responses, or all.
+     * If addressing is enabled, this property determines whether endpoint
+     * requires the use of anonymous responses, or non-anonymous responses,
+     * or all.
      *
      * <p>
      * {@link Responses#ALL} supports all response types and this is the

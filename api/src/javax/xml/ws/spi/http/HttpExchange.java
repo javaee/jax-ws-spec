@@ -52,7 +52,7 @@ import java.security.Principal;
  * @since JAX-WS 2.2
  */
 
-public interface HttpExchange {
+public abstract class HttpExchange {
 
     /**
      * Standard property: cipher suite value when the request is received over HTTPS
@@ -88,7 +88,7 @@ public interface HttpExchange {
      * The keys in Map are case-insensitive.
      * @return a read-only Map which can be used to access request headers
      */
-    Map<String, List<String>> getRequestHeaders();
+    public abstract Map<String, List<String>> getRequestHeaders();
 
     /**
      * Returns the value of the specified request header. If the request
@@ -101,7 +101,7 @@ public interface HttpExchange {
      * @return returns the value of the requested header,
      *         or null if the request does not have a header of that name
      */
-     String getRequestHeader(String name);
+     public abstract String getRequestHeader(String name);
 
     /**
      * Returns a mutable Map into which the HTTP response headers can be stored
@@ -113,7 +113,7 @@ public interface HttpExchange {
      * The keys in Map are case-insensitive.
      * @return a writable Map which can be used to set response headers.
      */
-    Map<String, List<String>> getResponseHeaders();
+    public abstract Map<String, List<String>> getResponseHeaders();
 
     /**
      * Adds a response header with the given name and value. This method allows
@@ -124,28 +124,28 @@ public interface HttpExchange {
      *        it should be encoded according to
      *        RFC 2047 (http://www.ietf.org/rfc/rfc2047.txt)
      */
-    void addHeader(String name, String value);
+    public abstract void addHeader(String name, String value);
 
     /**
      * Get the request URI
      *
      * @return the request URI 
      */
-    URI getRequestURI();
+    public abstract URI getRequestURI();
 
     /**
      * Get the request method
      *
      * @return the request method
      */
-    String getRequestMethod();
+    public abstract String getRequestMethod();
 
     /**
      * Get the HttpContext for this exchange
      *
      * @return the HttpContext
      */
-    HttpContext getHttpContext();
+    public abstract HttpContext getHttpContext();
 
     /**
      * This must be called to end the exchange.
@@ -155,7 +155,7 @@ public interface HttpExchange {
      * <li>close the response WritableByteChannel, if not already closed. </li>
      * </ol>
      */
-    void close();
+    public abstract void close();
 
     /**
      * returns a Channel from which the request body can be read.
@@ -167,7 +167,7 @@ public interface HttpExchange {
      * number of bytes).
      * @return the stream from which the request body can be read.
      */
-    InputStream getRequestBody();
+    public abstract InputStream getRequestBody();
 
     /**
      * returns a stream to which the response body must be
@@ -186,7 +186,7 @@ public interface HttpExchange {
      *
      * @return the stream to which the response body is written
      */
-    OutputStream getResponseBody();
+    public abstract OutputStream getResponseBody();
 
 
     /**
@@ -214,28 +214,28 @@ public interface HttpExchange {
      * @see HttpExchange#getResponseBody()
      * @throws IOException if there is i/o error
      */
-    void sendResponseHeaders(int rCode, long responseLength) throws IOException ;
+    public abstract void sendResponseHeaders(int rCode, long responseLength) throws IOException ;
 
     /**
      * Returns the address of the remote entity invoking this request
      *
      * @return the InetSocketAddress of the caller
      */
-    InetSocketAddress getRemoteAddress();
+    public abstract InetSocketAddress getRemoteAddress();
 
     /**
      * Returns the response code, if it has already been set
      *
      * @return the response code, if available. <code>-1</code> if not available yet.
      */
-    int getResponseCode();
+    public abstract int getResponseCode();
 
     /**
      * Returns the local address on which the request was received
      *
      * @return the InetSocketAddress of the local interface
      */
-    InetSocketAddress getLocalAddress();
+    public abstract InetSocketAddress getLocalAddress();
 
     /**
      * Returns the protocol string from the request in the form 
@@ -244,7 +244,7 @@ public interface HttpExchange {
      *
      * @return the protocol string from the request
      */
-    String getProtocol();
+    public abstract String getProtocol();
 
     /**
      * Returns an attribute that is associated with
@@ -265,7 +265,7 @@ public interface HttpExchange {
      * @param name attribute name
      * @return the attribute value, or null if they do not exist
      */
-    Object getAttribute(String name);
+    public abstract Object getAttribute(String name);
 
     /**
      * Gives all the attribute names that are associated with
@@ -274,7 +274,7 @@ public interface HttpExchange {
      * @return Iterator for all attribute names
      * @see #getAttribute(String)
      */
-    Iterator<String> getAttributeNames();
+    public abstract Iterator<String> getAttributeNames();
 
 
     /**
@@ -284,7 +284,7 @@ public interface HttpExchange {
      * @return Principal for an authenticated user
      *         null otherwise
      */
-    Principal getUserPrincipal();
+    public abstract Principal getUserPrincipal();
 
     /**
      * Returns a boolean indicating whether the authenticated user is
@@ -294,7 +294,7 @@ public interface HttpExchange {
      * @return true if the user making this request belongs to a given role
      *         false if the user has not been authenticated
      */
-    boolean isUserInRole(String role);
+    public abstract boolean isUserInRole(String role);
 
 
     /**
@@ -303,6 +303,6 @@ public interface HttpExchange {
      *
      * @return name of the scheme used to make this request
      */
-    String getScheme();
+    public abstract String getScheme();
 
 }

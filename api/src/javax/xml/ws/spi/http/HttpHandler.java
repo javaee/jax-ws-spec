@@ -19,7 +19,7 @@ import java.io.IOException;
  * @author Jitendra Kotamraju
  * @since JAX-WS 2.2
  */
-public interface HttpHandler {
+public abstract class HttpHandler {
     /**
      * Handles the given request and generate an appropriate response.
      * See {@link HttpExchange} for a description of the steps
@@ -31,5 +31,5 @@ public interface HttpHandler {
      * @throws IOException when an I/O error happens during request
      *      handling
      */
-    void handle(HttpExchange exchange) throws IOException;
+    public abstract void handle(HttpExchange exchange) throws IOException;
 }

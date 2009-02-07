@@ -21,6 +21,7 @@ import java.util.Set;
  * @since JAX-WS 2.2
  */
 public abstract class HttpContext {
+
     private HttpHandler httpHandler;
 
     /**

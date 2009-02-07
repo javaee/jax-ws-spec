@@ -93,7 +93,7 @@ public abstract class Endpoint {
      *
      *
      * @param implementor The endpoint implementor.
-     * @param features A list of WebServiceFeatures to configure on the
+     * @param features A list of WebServiceFeature to configure on the
      *        endpoint. Supported features not in the <code>features
      *        </code> parameter will have their default values.
      *
@@ -141,7 +141,7 @@ public abstract class Endpoint {
      *
      * @param implementor The endpoint implementor.
      *
-     * @param features A list of WebServiceFeatures to configure on the
+     * @param features A list of WebServiceFeature to configure on the
      *        endpoint. Supported features not in the <code>features
      *        </code> parameter will have their default values.
      *
@@ -237,7 +237,7 @@ public abstract class Endpoint {
      *        binding being used. Implementations may support other
      *        URI schemes.
      * @param implementor The endpoint implementor.
-     * @param features A list of WebServiceFeatures to configure on the
+     * @param features A list of WebServiceFeature to configure on the
      *        endpoint. Supported features not in the <code>features
      *        </code> parameter will have their default values.
      * @return The newly created endpoint.

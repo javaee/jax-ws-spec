@@ -303,7 +303,7 @@ public final class W3CEndpointReferenceBuilder {
      *            application.
      *        <li>If the <code>serviceName</code> is NOT <code>null</code>
      *             and is not present in the specified WSDL.
-     *        <li>If the <code>endpointName</code> port is not <code>null<code> and it
+     *        <li>If the <code>endpointName</code> port is not <code>null</code> and it
      *             is not present in <code>serviceName</code> service in the WSDL.
      *        <li>If the <code>wsdlDocumentLocation</code> is NOT <code>null</code>
      *            and does not represent a valid WSDL.

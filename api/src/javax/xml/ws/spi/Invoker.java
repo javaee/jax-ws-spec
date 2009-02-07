@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- * $Id: Invoker.java,v 1.1.2.3 2008-11-20 01:27:48 jitu Exp $
+ * $Id: Invoker.java,v 1.1.2.4 2009-02-07 00:36:36 jitu Exp $
  */
 package javax.xml.ws.spi;
 
@@ -17,16 +17,24 @@ import java.lang.reflect.InvocationTargetException;
  * for a web service invocation. Finally, Invoker does the actual
  * invocation of web service on endpoint instance.
  *
+ * Container also injects the provided <code>WebServiceContext</code> and takes
+ * care of invoking <code>javax.annotation.PostConstruct</code> methods,
+ * if present, on the endpoint implementation.
+ *
  * @see Provider#createEndpoint(String, Class, Invoker, WebServiceFeature[])
  * @author Jitendra Kotamraju
  * @since JAX-WS 2.2
  */
 
-public interface Invoker {
+public abstract class Invoker {
 
     /**
      * JAX-WS runtimes calls this method to ask container to inject
-     * WebServiceContext on the endpoint instance.
+     * WebServiceContext on the endpoint instance. The
+     * <code>WebServiceContext</code> object uses thread-local information
+     * to return the correct information during the actual endpoint invocation
+     * regardless of how many threads are concurrently being used to serve
+     * requests.
      *
      * @param webServiceContext a holder for MessageContext
      * @throws IllegalAccessException if the injection done
@@ -35,16 +43,15 @@ public interface Invoker {
      *         by reflection API throws this exception
      * @throws InvocationTargetException if the injection done
      *         by reflection API throws this exception
-     *
-     * TODO what about @PostConstruct, @PreDestroy. Whose responsibility
-     * TODO to invoke them ?
      */
-    void inject(WebServiceContext webServiceContext)
+    public abstract void inject(WebServiceContext webServiceContext)
     throws IllegalAccessException, IllegalArgumentException, InvocationTargetException;
     
     /**
      * JAX-WS runtime calls this method to do the actual web service
-     * invocation on endpoint instance.
+     * invocation on endpoint instance. The injected
+     * <code>WebServiceContext.getMessageContext()</code> gives the correct
+     * information for this invocation.
      *
      * @param m Method to be invoked on the service
      * @param args Method arguments
@@ -58,7 +65,7 @@ public interface Invoker {
 
      * @see Method#invoke
      */
-    Object invoke(Method m, Object... args )
+    public abstract Object invoke(Method m, Object... args)
     throws  IllegalAccessException, IllegalArgumentException, InvocationTargetException;
 
 }

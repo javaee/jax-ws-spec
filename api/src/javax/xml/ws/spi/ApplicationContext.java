@@ -8,12 +8,15 @@ import javax.xml.ws.Endpoint;
 import java.util.Set;
 
 /**
- * Capturs an application which may consists multiple endpoints.
- * For example, in servlet container a war represents an application
+ * Represents an application which may consist multiple endpoints.
+ * For example, in servlet application's war represents an application
  * and war may contain multiple endpoints. This context allows one
  * endpoint to get information about other endpoint, for example,
- *  address. It also allows all endpoints to share any other
+ * address of an endpoint. It also allows all endpoints to share any other
  * runtime information.
+ *
+ * Container or its extensions typically create this object during the
+ * deployment of a JAX-WS application.
  *
  * @author Jitendra Kotamraju
  * @since JAX-WS 2.2
