@@ -47,7 +47,7 @@ import javax.xml.ws.soap.AddressingFeature;
  *    <li>Server: throw a {@link WebServiceException} and the endpoint MUST fail to deploy
  *  </ul>
  *  <li> DISABLED: In this Mode, an implementation may choose whether
- *  to inspect the <code>wsdl:binding<code> or not and to what degree
+ *  to inspect the <code>wsdl:binding</code> or not and to what degree
  *  the <code>wsdl:binding</code> will be inspected.  For example,
  *  one implementation may choose to behave as if this feature is enabled,
  *  another implementation may only choose to verify the SEI's 

@@ -19,17 +19,14 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * <p>
  * This annotation MUST only be used in conjunction the
  * <code>javax.jws.WebService</code>, {@link WebServiceProvider},
- * {@link WebServiceRef}, or {@link WebServiceRefs} annotations.
- * <p>
+ * {@link WebServiceRef} annotations.
  * When used with the <code>javax.jws.WebService</code> annotation this
  * annotation MUST only be used on the service endpoint implementation
  * class.
- * <p>
- * This annotation has no affect when used with 
- * <code>WebServiceRef</code> annotations that are used to specify a generated
- * service class. When used with <code>WebServiceRef</code> that specifies a
- * service endpoint interface (SEI), the injected SEI proxy MUST
- * honor the values of the <code>RespectBinding</code> annotation.
+ * When used with a <code>WebServiceRef</code> annotation, this annotation
+ * MUST only be used when a proxy instance is created. The injected SEI
+ * proxy, and endpoint MUST honor the values of the <code>RespectBinding</code>
+ * annotation.
  * <p>
  * This feature is only useful with web services that have an
  * associated WSDL. Enabling this feature requires that a JAX-WS
