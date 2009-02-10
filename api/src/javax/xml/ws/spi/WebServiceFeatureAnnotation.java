@@ -32,10 +32,9 @@ import javax.xml.ws.soap.MTOM;
  * may define vendors specific annotations for other features.
  * <p>
  * Annotations annotated with <code>WebServiceFeatureAnnotation</code> MUST
- * have the same @Target of {@link WebServiceRef} and
- * {@link WebServiceRefs} annotations, so that the resulting
+ * have the same @Target of {@link WebServiceRef} annotation, so that the resulting
  * feature annotation can be used in conjunction with the {@link WebServiceRef}
- * and {@link WebServiceRefs} annotations if necessary.
+ * annotation if necessary.
  * <p>
  * If a JAX-WS implementation encounters an annotation annotated
  * with the <code>WebServiceFeatureAnnotation</code> that it does not
