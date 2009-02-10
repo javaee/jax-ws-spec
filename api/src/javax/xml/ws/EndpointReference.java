@@ -38,12 +38,12 @@ import java.io.StringWriter;
  * of addressing, they should write their own 
  * <code>EndpointReference</code> subclass for that version.
  * This will allow a JAX-WS implementation to create
- * vendor specific <code>EndpointReferences</code> that that
+ * a vendor specific <code>EndpointReferences</code> that the
  * vendor can use to flag a different version of
  * addressing.
  * <p>
  * Web service developers that wish to pass or return 
- * <code>EndpointReferences</code> in Java methods in an
+ * <code>EndpointReference</code> in Java methods in an
  * SEI should use
  * concrete instances of an <code>EndpointReference</code> such
  * as the <code>W3CEndpointReference</code>.  This way the 
@@ -98,7 +98,7 @@ public abstract class EndpointReference {
      *   <code>EndpointReference</code> to the specified <code>result</code>.
      *
      * @throws java.lang.IllegalArgumentException
-     *      If the <code>null</code> <code>result</tt> value is given.
+     *      If the <code>null</code> <code>result</code> value is given.
      */
     public abstract void writeTo(Result result);
 
