@@ -687,7 +687,8 @@ public class Service {
     }
 
     /**
-     * Creates a <code>Service</code> instance.
+     * Creates a <code>Service</code> instance. The created instance is
+     * configured with the web service features.
      *
      * The specified WSDL document location and service qualified name MUST
      * uniquely identify a <code>wsdl:service</code> element.
@@ -720,7 +721,8 @@ public class Service {
     }
 
     /**
-     * Creates a <code>Service</code> instance.
+     * Creates a <code>Service</code> instance. The created instance is
+     * configured with the web service features.
      *
      * @param serviceName <code>QName</code> for the service
      * @param features Web Service features that must be configured on
