@@ -1,74 +1,75 @@
+/*
+ * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
+ * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
 /**
-   Provides HTTP SPI that is used for portable deployment of JAX-WS
-   web services in containers(for e.g. servlet containers). This SPI
-   is not for end developers but provides a way for the container
-   developers to deploy JAX-WS services portably.
+  Provides HTTP SPI that is used for portable deployment of JAX-WS
+  web services in containers(for e.g. servlet containers). This SPI
+  is not for end developers but provides a way for the container
+  developers to deploy JAX-WS services portably.
 
-   <p>
-   The portable deployment happens in three steps:
-   <ol>
-   <li>Container needs to create {@link javax.xml.ws.spi.http.HttpContext} from the
-   deployment. For example, a HttpContext could be created using
-   ServletContext and url-pattern for the web service in servlet container case.
-   <li>It creates a {@link javax.xml.ws.Endpoint} using web service deployment
-   descriptor files.
-   <li>Then publishes the endpoint using {@link javax.xml.ws.Endpoint#publish(HttpContext)}
-   </ol>
-   <p>A sample JAX-WS deployment can be done as follows:
-   <blockquote><pre>
-   // Create service
-   // Endpoint endpoint = Provider.provider().createEndpoint(bindingId, impl, invoker, mtomFeature, ...)
-   Endpoint endpoint = Endpoint.create(impl, mtomFeature, ...)
-   // If DD overrides wsdl:service, wsdl:port names, configure them
-   endpoint.setProperties(...)
-   // Configure service with the packaged WSDL, Schema metadata(if any)
-   endpoint.setMetadata(...)
-   // Configure the handler chain from DD
-   endpoint.getBinding().setHandlerChain(...)
-   // Finally endpoint is ready to accept requests
-   endpoint.publish(httpContext)
-   </blockquote></pre>
+  <p>
+  The portable deployment is done as below:
+  <ol>
+  <li>Container creates {@link javax.xml.ws.Endpoint} objects for an
+  application. The necessary information to create Endpoint objects
+  may be got from web service deployment descriptor files.</li>
+  <li>Container needs to create {@link javax.xml.ws.spi.http.HttpContext}
+  objects for the deployment. For example, a HttpContext could be
+  created using servlet configuration(for e.g url-pattern) for the
+  web service in servlet container case.</li>
+  <li>Then publishes all the endpoints using
+  {@link javax.xml.ws.Endpoint#publish(HttpContext)}. During publish(),
+  JAX-WS runtime registers a {@link javax.xml.ws.spi.http.HttpHandler}
+  callback to handle incoming requests or
+  {@link javax.xml.ws.spi.http.HttpExchange} objects. The HttpExchange
+  object encapsulates a HTTP request and a response.
+  </ol>
 
-   <p>
-   During Endpoint.publish(HttpContext), JAX-WS runtime registers
-   {@link javax.xml.ws.spi.http.HttpHandler} callback with {@link javax.xml.ws.spi.http.HttpContext}.
-   JAX-WS runtimes must implement the {@link javax.xml.ws.spi.http.HttpHandler} interface and
-   this interface provides a callback that is invoked by containers
-   to handle incoming requests from clients. A HTTP request and its
-   response is known as an exchange. HTTP exchanges are represented
-   by the {@link javax.xml.ws.spi.http.HttpExchange} class.
+  <pre>
+  Container                               JAX-WS runtime
+  ---------                               --------------
+  1. Creates Invoker1, ... InvokerN
+  2. Provider.createEndpoint(...)     --> 3. creates Endpoint1
+     configures Endpoint1
+     ...
+  4. Provider.createEndpoint(...)     --> 5. creates EndpointN
+     configures EndpointN
+  6. Creates ApplicationContext
+  7. creates HttpContext1, ... HttpContextN
+  8. Endpoint1.publish(HttpContext1)  --> 9. creates HttpHandler1
+                                          HttpContext1.setHandler(HttpHandler1)
+     ...
+ 10. EndpointN.publish(HttpContextN)  --> 11. creates HttpHandlerN
+                                         HttpContextN.setHandler(HttpHandlerN)
 
-   The {@link javax.xml.ws.spi.http.HttpExchange} class encapsulates everything an
-   application needs to process incoming requests and to generate
-   appropriate responses.
-   <p>
-   A sample JAX-WS {@link javax.xml.ws.spi.http.HttpHandler} and its registration with
-   the {@link javax.xml.ws.spi.http.HttpContext} is shown below:
-   <blockquote><pre>
-   httpContext.setHandler(new HttpHandler() {
-       public void handle(HttpExchange t) throws IOException {
-           InputStream is = t.getRequestBody();
-           read(is); // .. read the request body
-           is.close();
-           // Invoke web service from the request, and send the response
-           ...
-           t.sendResponseHeaders(200, response.length());
-           OutputStream os = t.getResponseBody();
-           os.write(response.getBytes());
-           os.close();
-           t.close();
-       }
-   });
-   </blockquote></pre>
+  </pre>
 
-   <p>
-   A sample JAX-WS undeployment can be done as follows:
-   <p>
-   <blockquote><pre>
-   endpoint.stop();
-   </blockquote></pre>
+  The request processing is done as below(for every request):
+  <pre>
+  Container                               JAX-WS runtime
+  ---------                               --------------
+  1. Creates a HttpExchange
+  2. Gets handler: HttpContext.getHandler()
+  3. HttpHandler.handle(HttpExchange) --> 4. reads request from HttpExchange
+                                      <-- 5. Calls Invoker
+  6. Invokes the actual instance
+                                          7. Writes the response to HttpExchange
+  </pre>
 
-   @author Jitendra Kotamraju
-   @since 2.2
+  <p>
+  The portable undeployment is done as below:
+  <pre>
+  Container
+  ---------
+  1. @preDestroy on instances
+  2. Endpoint1.stop()
+  ...
+  3. EndpointN.stop()
+  </pre>
+
+  @author Jitendra Kotamraju
+  @since JAX-WS 2.2
  */
 package javax.xml.ws.spi.http;
