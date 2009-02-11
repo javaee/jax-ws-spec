@@ -5,22 +5,30 @@
 
 package javax.xml.ws.soap;
 
-import javax.xml.ws.Binding;
-import javax.xml.ws.BindingType;
 import javax.xml.ws.WebServiceFeature;
 import javax.xml.ws.WebServiceException;
-import javax.xml.ws.spi.Provider;
-
+import javax.xml.ws.Dispatch;
+import javax.xml.ws.Endpoint;
+import javax.xml.ws.Service;
 
 /**
  * This feature represents the use of MTOM with a 
  * web service.
  *
+ * This feature can be used during the creation of SEI proxy, and
+ * {@link Dispatch} instances on the client side and {@link Endpoint}
+ * instances on the server side. This feature cannot be used for {@link Service}
+ * instance creation on the client side.
+ *
  * <p>
  * The following describes the affects of this feature with respect
  * to being enabled or disabled:
  * <ul>
- *  <li> ENABLED: In this Mode, MTOM will be enabled.
+ *  <li> ENABLED: In this Mode, MTOM will be enabled. A receiver MUST accept
+ * both a non-optimized and an optimized message, and a sender MAY send an
+ * optimized message, or a non-optimized message. The heuristics used by a
+ * sender to determine whether to use optimization or not are
+ * implementation-specific.
  *  <li> DISABLED: In this Mode, MTOM will be disabled
  * </ul>
  * <p>

@@ -13,7 +13,6 @@ import java.lang.annotation.RetentionPolicy;
 
 import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 import javax.xml.ws.WebServiceRef;
-import javax.xml.ws.WebServiceRefs;
 import javax.xml.ws.WebServiceProvider;
 
 /**
@@ -31,15 +30,9 @@ import javax.xml.ws.WebServiceProvider;
  * proxy, and endpoint MUST honor the values of the <code>MTOM</code>
  * annotation.
  * <p>
- * The following describes the affects of this feature with respect
- * to being enabled or disabled:
- * <ul>
- *  <li> ENABLED: In this Mode, MTOM will be enabled.
- *  <li> DISABLED: In this Mode, MTOM will be disabled
- * </ul>
- * <p>
- * The {@link #threshold} property can be used to set the threshold 
- * value used to determine when binary data should be XOP encoded.
+ *
+ * This annotation's behaviour is defined by the corresponding feature
+ * {@link MTOMFeature}.
  *
  * @since JAX-WS 2.1
  */   
