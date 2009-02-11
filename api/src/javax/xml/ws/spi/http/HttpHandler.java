@@ -9,12 +9,11 @@ import javax.xml.ws.Endpoint;
 import java.io.IOException;
 
 /**
- * A handler which is invoked to process HTTP exchanges. Each
- * HTTP exchange is handled by one of these handlers.
- *
+ * A handler which is invoked to process HTTP requests.
  * <p>
  * JAX-WS runtime provides the implementation for this and sets
- * it in {@link HttpContext} during {@link Endpoint#publish(HttpContext) }
+ * it using {@link HttpContext#setHandler(HttpHandler)} during
+ * {@link Endpoint#publish(HttpContext) }
  *
  * @author Jitendra Kotamraju
  * @since JAX-WS 2.2
