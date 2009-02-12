@@ -22,18 +22,7 @@ import java.util.Set;
  */
 public abstract class HttpContext {
 
-    private HttpHandler httpHandler;
-
-    /**
-     * Returns the handler that handles HTTP requests for this context.
-     * Container or its extensions use this handler to process the
-     * received requests.
-     *
-     * @return the HttpHandler for this context
-     */
-    public HttpHandler getHandler() {
-        return httpHandler;
-    }
+    protected HttpHandler handler;
 
     /**
      * JAX-WS runtime sets its handler during
@@ -41,10 +30,10 @@ public abstract class HttpContext {
      * HTTP requests for this context. Container or its extensions
      * use this handler to process the requests.
      *
-     * @param httpHandler the handler to set for this context
+     * @param handler the handler to set for this context
      */
-    public void setHandler(HttpHandler httpHandler) {
-        this.httpHandler = httpHandler;
+    public void setHandler(HttpHandler handler) {
+        this.handler = handler;
     }
 
     /**
@@ -68,7 +57,7 @@ public abstract class HttpContext {
      * Returns all attribute names for container's configuration
      * and other data that can be used by jax-ws runtime.
      *
-     * @return iterator for all attribute names
+     * @return set of all attribute names
      */
     public abstract Set<String> getAttributeNames();
 
