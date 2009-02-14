@@ -458,9 +458,22 @@ public abstract class Endpoint {
             Element... referenceParameters);
 
     /**
+     * By settng a <code>EndpointContext</code>, JAX-WS runtime knows about
+     * addresses of other endpoints in an application. If multiple endpoints
+     * share different ports of a WSDL, then the multiple port addresses
+     * are patched when the WSDL is accessed.
+     *
+     * <p>
+     * This needs to be set by using {@link Endpoint#setEndpointContext}
+     * before publishing the endpoints.
+     *
+     * @param ctxt that is shared for multiple endpoints
+     * @throws java.lang.IllegalStateException
+     *        If the endpoint has been published already or it has been stopped.
+     *
      * @since JAX-WS 2.2
      */
-    public void setApplicationContext(ApplicationContext ctxt) {
+    public void setEndpointContext(EndpointContext ctxt) {
         throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
     }
 }
