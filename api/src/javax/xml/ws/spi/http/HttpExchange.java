@@ -14,6 +14,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Iterator;
+import java.util.Set;
 import java.nio.channels.WritableByteChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.security.Principal;
@@ -134,6 +135,41 @@ public abstract class HttpExchange {
     public abstract URI getRequestURI();
 
     /**
+     * Returns the portion of the request URI that indicates the context of
+     * the request. The context path always comes first in a request URI.
+     * The path starts with a "/" character but does not end with a "/"
+     * character. If this method returns "", the request is for default context.
+     * The container does not decode this string.
+     *
+     * Returns the context path of all the endpoints in an application.
+     * <code>
+        StringBuilder sb = new StringBuilder();
+        sb.append(getScheme());
+        sb.append("://");
+        sb.append(getLocalAddress().getHostName());
+        sb.append(":");
+        sb.append(getLocalAddress().getPort());
+        sb.append(getContextPath());
+        sb.append(
+       </code>
+     * getScheme()://getLocalAddress.getHostName():getLocalAddress().getPort()+context path+HttpContext.getPath() gives an endpoint's address.
+     *
+     * @return context path of all the endpoints in an application
+     */
+    public abstract String getContextPath();
+
+    public String getRequestAddress() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getScheme());
+        sb.append("://");
+        sb.append(getLocalAddress().getHostName());
+        sb.append(":");
+        sb.append(getLocalAddress().getPort());
+        sb.append(getContextPath());
+        return sb.toString();
+    }
+
+    /**
      * Get the request method
      *
      * @return the request method
@@ -188,7 +224,6 @@ public abstract class HttpExchange {
      */
     public abstract OutputStream getResponseBody();
 
-
     /**
      * Starts sending the response back to the client using the current set of response headers
      * and the numeric response code as specified in this method. The response body length is also specified
@@ -217,21 +252,15 @@ public abstract class HttpExchange {
     public abstract void sendResponseHeaders(int rCode, long responseLength) throws IOException ;
 
     /**
-     * Returns the address of the remote entity invoking this request
+     * Returns the unresolved address of the remote entity invoking
+     * this request.
      *
      * @return the InetSocketAddress of the caller
      */
     public abstract InetSocketAddress getRemoteAddress();
 
     /**
-     * Returns the response code, if it has already been set
-     *
-     * @return the response code, if available. <code>-1</code> if not available yet.
-     */
-    public abstract int getResponseCode();
-
-    /**
-     * Returns the local address on which the request was received
+     * Returns the unresolved local address on which the request was received.
      *
      * @return the InetSocketAddress of the local interface
      */
@@ -274,9 +303,8 @@ public abstract class HttpExchange {
      * @return Iterator for all attribute names
      * @see #getAttribute(String)
      */
-    public abstract Iterator<String> getAttributeNames();
-
-
+    public abstract Set<String> getAttributeNames();
+    
     /**
      * Returns the {@link Principal} that represents the authenticated
      * user for this HttpExchange.

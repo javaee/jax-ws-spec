@@ -456,4 +456,11 @@ public abstract class Endpoint {
      **/
     public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
             Element... referenceParameters);
+
+    /**
+     * @since JAX-WS 2.2
+     */
+    public void setApplicationContext(ApplicationContext ctxt) {
+        throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
+    }
 }

@@ -51,7 +51,7 @@
   Container                               JAX-WS runtime
   ---------                               --------------
   1. Creates a HttpExchange
-  2. Gets handler: HttpContext.getHandler()
+  2. Gets handler from HttpContext
   3. HttpHandler.handle(HttpExchange) --> 4. reads request from HttpExchange
                                       <-- 5. Calls Invoker
   6. Invokes the actual instance
