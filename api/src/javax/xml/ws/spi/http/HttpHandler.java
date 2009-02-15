@@ -20,7 +20,7 @@ import java.io.IOException;
  */
 public abstract class HttpHandler {
     /**
-     * Handles the given request and generate an appropriate response.
+     * Handles a given request and generates an appropriate response.
      * See {@link HttpExchange} for a description of the steps
      * involved in handling an exchange. Container invokes this method
      * when it receives an incoming request.

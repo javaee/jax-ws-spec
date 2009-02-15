@@ -5,6 +5,7 @@
 
 package javax.xml.ws.spi.http;
 
+import javax.xml.ws.Endpoint;
 import java.util.Set;
 
 /**
@@ -13,8 +14,7 @@ import java.util.Set;
  * destined for that path on the associated container.
  * <p>
  * Container provides the implementation for this and it matches
- * request URIs to HttpContext objects.
- * <p>
+ * web service requests to corresponding HttpContext objects.
  *
  * @author Jitendra Kotamraju
  * @since JAX-WS 2.2
@@ -25,7 +25,7 @@ public abstract class HttpContext {
 
     /**
      * JAX-WS runtime sets its handler during
-     * {@link javax.xml.ws.Endpoint#publish(HttpContext)} to handle
+     * {@link Endpoint#publish(HttpContext)} to handle
      * HTTP requests for this context. Container or its extensions
      * use this handler to process the requests.
      *
@@ -36,8 +36,13 @@ public abstract class HttpContext {
     }
 
     /**
-     * Returns the path for this context. Container should give this
+     * Returns the path for this context. This path uniquely identifies
+     * an endpoint inside an application and the path is relative to
+     * application's context path. Container should give this
      * path based on how it matches request URIs to this HttpContext object.
+     *
+     * <p>
+     * For servlet container, this is typically a url-pattern for an endpoint.
      *
      * <p>
      * Endpoint's address for this context can be computed as follows:
@@ -45,7 +50,8 @@ public abstract class HttpContext {
      *  HttpExchange exch = ...;
      *  String endpointAddress =
      *      exch.getScheme() + "://"
-     *      + exch.getLocalAddress().getHostName() + ":" + exch.getLocalAddress().getPort()
+     *      + exch.getLocalAddress().getHostName()
+     *      + ":" + exch.getLocalAddress().getPort()
      *      + exch.getContextPath()+ getPath();
      * </pre>
      * 

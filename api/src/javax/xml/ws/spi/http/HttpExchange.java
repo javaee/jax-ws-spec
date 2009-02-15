@@ -13,7 +13,6 @@ import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
-import java.util.Iterator;
 import java.util.Set;
 import java.nio.channels.WritableByteChannel;
 import java.nio.channels.ReadableByteChannel;
@@ -52,7 +51,6 @@ import java.security.Principal;
  * @author Jitendra Kotamraju
  * @since JAX-WS 2.2
  */
-
 public abstract class HttpExchange {
 
     /**
@@ -276,6 +274,39 @@ public abstract class HttpExchange {
     public abstract String getProtocol();
 
     /**
+     * Returns the name of the scheme used to make this request,
+     * for example, http, or https.
+     *
+     * @return name of the scheme used to make this request
+     */
+    public abstract String getScheme();
+
+    /**
+     * Returns any extra path information associated with the URL the client
+     * sent when it made this request. The extra path information follows
+     * the servlet path but precedes the query string and will start
+     * with a "/" character.
+     * This method returns null if there was no extra path information.
+     *
+     * Same as the value of the CGI variable PATH_INFO.
+     * @return a String, decoded by the web container, specifying
+     * extra path information that comes after the servlet path but
+     * before the query string in the request URL; or null if the
+     * URL does not have any extra path information
+     */
+    public abstract String getPathInfo();
+
+    /**
+     * Returns the query string that is contained in the request URL
+     * after the path. This method returns null  if the URL does not
+     * have a query string. Same as the value of the CGI variable QUERY_STRING.
+     * @return a String containing the query string or null if the URL
+     * contains no query string. The value is not decoded by the container.
+     */
+    public abstract String getQueryString();
+    
+
+    /**
      * Returns an attribute that is associated with
      * HttpExchange. Container may store this object with HttpExchange
      * instances as an out-of-band communication mechanism. JAX-WS handlers
@@ -323,14 +354,5 @@ public abstract class HttpExchange {
      *         false if the user has not been authenticated
      */
     public abstract boolean isUserInRole(String role);
-
-
-    /**
-     * Returns the name of the scheme used to make this request,
-     * for example, http, or https.
-     *
-     * @return name of the scheme used to make this request
-     */
-    public abstract String getScheme();
 
 }
