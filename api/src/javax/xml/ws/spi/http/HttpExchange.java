@@ -57,13 +57,15 @@ public abstract class HttpExchange {
      * Standard property: cipher suite value when the request is received over HTTPS
      * <p>Type: String
      */
-    public static final String REQUEST_CIPHER_SUITE = "javax.xml.ws.spi.http.request.cipher.suite";
+    public static final String REQUEST_CIPHER_SUITE =
+            "javax.xml.ws.spi.http.request.cipher.suite";
 
     /**
      * Standard property: bit size of the algorithm when the request is received over HTTPS
      * <p>Type: Integer
      */
-    public static final String REQUEST_KEY_SIZE = "javax.xml.ws.spi.http.request.key.size";
+    public static final String REQUEST_KEY_SIZE =
+            "javax.xml.ws.spi.http.request.key.size";
 
     /**
      * Standard property: A SSL certificate, if any, associated with the request
@@ -73,7 +75,8 @@ public abstract class HttpExchange {
      * The first certificate in the chain is the one set by the client, the next
      * is the one used to authenticate the first, and so on.
      */
-    public static final String REQUEST_X509CERTIFICATE = "javax.xml.ws.spi.http.request.cert.X509Certificate";
+    public static final String REQUEST_X509CERTIFICATE =
+            "javax.xml.ws.spi.http.request.cert.X509Certificate";
 
     /**
      * Returns an immutable Map containing the HTTP headers that were 
@@ -155,17 +158,6 @@ public abstract class HttpExchange {
      * @return context path of all the endpoints in an application
      */
     public abstract String getContextPath();
-
-    public String getRequestAddress() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getScheme());
-        sb.append("://");
-        sb.append(getLocalAddress().getHostName());
-        sb.append(":");
-        sb.append(getLocalAddress().getPort());
-        sb.append(getContextPath());
-        return sb.toString();
-    }
 
     /**
      * Get the request method
@@ -307,13 +299,13 @@ public abstract class HttpExchange {
     
 
     /**
-     * Returns an attribute that is associated with
-     * HttpExchange. Container may store this object with HttpExchange
-     * instances as an out-of-band communication mechanism. JAX-WS handlers
-     * and endpoints may then access this object via {@link MessageContext}.
+     * Returns an attribute that is associated with this
+     * <code>HttpExchange</code>. JAX-WS handlers and endpoints may then
+     * access the attribute via {@link MessageContext}.
      * <p>
      * Servlet containers must expose {@link MessageContext#SERVLET_CONTEXT},
-     * {@link MessageContext#SERVLET_REQUEST}, {@link MessageContext#SERVLET_RESPONSE}
+     * {@link MessageContext#SERVLET_REQUEST},
+     * {@link MessageContext#SERVLET_RESPONSE}
      * as attributes.
      *
      * <p>If the request has been received by the container using HTTPS, the
@@ -329,16 +321,16 @@ public abstract class HttpExchange {
 
     /**
      * Gives all the attribute names that are associated with
-     * HttpExchange.
+     * this <code>HttpExchange</code>.
      *
-     * @return Iterator for all attribute names
+     * @return set of all attribute names
      * @see #getAttribute(String)
      */
     public abstract Set<String> getAttributeNames();
     
     /**
      * Returns the {@link Principal} that represents the authenticated
-     * user for this HttpExchange.
+     * user for this <code>HttpExchange</code>.
      *
      * @return Principal for an authenticated user
      *         null otherwise
@@ -346,12 +338,12 @@ public abstract class HttpExchange {
     public abstract Principal getUserPrincipal();
 
     /**
-     * Returns a boolean indicating whether the authenticated user is
-     * included in the specified logical "role".
+     * Indicates whether an authenticated user is included in the specified
+     * logical "role".
      *
      * @param role specifies the name of the role
      * @return true if the user making this request belongs to a given role
-     *         false if the user has not been authenticated
+     *         false otherwise
      */
     public abstract boolean isUserInRole(String role);
 
