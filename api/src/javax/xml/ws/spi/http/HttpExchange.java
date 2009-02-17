@@ -14,39 +14,17 @@ import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.nio.channels.WritableByteChannel;
-import java.nio.channels.ReadableByteChannel;
 import java.security.Principal;
 
 /**
  * This class encapsulates a HTTP request received and a 
  * response to be generated in one exchange. It provides methods 
- * for examining the request from the client, and for building and 
- * sending the response. 
+ * for examining the request from the client, and for building and
+ * sending the response.
  * <p>
- * The typical life-cycle of a HttpExchange is shown in the sequence
- * below. 
- * <ol><li>{@link #getRequestMethod()} to determine the command
- * <li>{@link #getRequestHeaders()} to examine the request headers (if needed)
- * <li>{@link #getRequestBody()} returns a {@link ReadableByteChannel} for reading the request body.
- *     After reading the request body, the channel is closed.
- * <li>{@link #getResponseHeaders()} to set any response headers, except content-length
- * <li>{@link #sendResponseHeaders(int,long)} to send the response headers. Must be called before
- * next step.
- * <li>{@link #getResponseBody()} to get a {@link WritableByteChannel} to send the response body.
- *      When the response body has been written, the channel must be closed to terminate the exchange.
- * </ol>
- * <b>Terminating exchanges</b>
- * <br>
- * Exchanges are terminated when both the request Channel and response Channel are closed.
- * Closing the WritableByteChannel, implicitly closes the ReadableByteChannel (if it is not already closed).
- * However, it is recommended
- * to consume all the data from the ReadableByteChannel before closing it.
- * The convenience method {@link #close()} does all of these tasks.
- * Closing an exchange without consuming all of the request body is not an error
- * but may make the underlying TCP connection unusable for following exchanges.
- * The effect of failing to terminate an exchange is undefined, but will typically
- * result in resources failing to be freed/reused.
+ * An <code>HttpExchange</code> must be terminated to free or reuse
+ * underlying resources. The effect of failing to terminate an exchange
+ * is undefined.
  *
  * @author Jitendra Kotamraju
  * @since JAX-WS 2.2
@@ -54,14 +32,16 @@ import java.security.Principal;
 public abstract class HttpExchange {
 
     /**
-     * Standard property: cipher suite value when the request is received over HTTPS
+     * Standard property: cipher suite value when the request is received
+     * over HTTPS
      * <p>Type: String
      */
     public static final String REQUEST_CIPHER_SUITE =
             "javax.xml.ws.spi.http.request.cipher.suite";
 
     /**
-     * Standard property: bit size of the algorithm when the request is received over HTTPS
+     * Standard property: bit size of the algorithm when the request is
+     * received over HTTPS
      * <p>Type: Integer
      */
     public static final String REQUEST_KEY_SIZE =
@@ -129,38 +109,31 @@ public abstract class HttpExchange {
     public abstract void addHeader(String name, String value);
 
     /**
-     * Get the request URI
+     * Get the request URI of this http exchange.
      *
      * @return the request URI 
      */
     public abstract URI getRequestURI();
 
     /**
-     * Returns the portion of the request URI that indicates the context of
-     * the request. The context path always comes first in a request URI.
-     * The path starts with a "/" character but does not end with a "/"
-     * character. If this method returns "", the request is for default context.
-     * The container does not decode this string.
-     *
      * Returns the context path of all the endpoints in an application.
-     * <code>
-        StringBuilder sb = new StringBuilder();
-        sb.append(getScheme());
-        sb.append("://");
-        sb.append(getLocalAddress().getHostName());
-        sb.append(":");
-        sb.append(getLocalAddress().getPort());
-        sb.append(getContextPath());
-        sb.append(
-       </code>
-     * getScheme()://getLocalAddress.getHostName():getLocalAddress().getPort()+context path+HttpContext.getPath() gives an endpoint's address.
+     * This path is the portion of the request URI that indicates the
+     * context of the request. The context path always comes first in a
+     * request URI. The path starts with a "/" character but does not
+     * end with a "/" character. If this method returns "", the request
+     * is for default context. The container does not decode this string.
+     *
+     * <p>
+     * Context path is used in computing the endpoint address. See
+     * {@link HttpContext#getPath}
      *
      * @return context path of all the endpoints in an application
+     * @see HttpContext#getPath
      */
     public abstract String getContextPath();
 
     /**
-     * Get the request method
+     * Get the HTTP request method
      *
      * @return the request method
      */
@@ -169,46 +142,30 @@ public abstract class HttpExchange {
     /**
      * Get the HttpContext for this exchange
      *
-     * @return the HttpContext
+     * @return the HttpContext for this exchange
      */
     public abstract HttpContext getHttpContext();
 
     /**
-     * This must be called to end the exchange.
-     *
-     * Ends this exchange by doing the following in sequence:<p><ol>
-     * <li>close the request ReadableByteChannel, if not already closed<p></li>
-     * <li>close the response WritableByteChannel, if not already closed. </li>
-     * </ol>
+     * This must be called to end the exchange. Container takes care of
+     * closing request and response streams.
      */
     public abstract void close();
 
     /**
-     * returns a Channel from which the request body can be read.
-     * Multiple calls to this method will return the same Channel.
-     * It is recommended that applications should consume (read) all of the
-     * data from this Channel before closing it. If a Channel is closed
-     * before all data has been read, then the close() call will 
-     * read and discard remaining data (up to an implementation specific
-     * number of bytes).
+     * Returns a stream from which the request body can be read.
+     * Multiple calls to this method will return the same stream.
+     *
      * @return the stream from which the request body can be read.
      */
     public abstract InputStream getRequestBody();
 
     /**
-     * returns a stream to which the response body must be
-     * written. {@link #sendResponseHeaders(int,long)}) must be called prior to calling
+     * Returns a stream to which the response body must be
+     * written. {@link #sendResponseHeaders(int,long)}) must be called
+     * prior to calling
      * this method. Multiple calls to this method (for the same exchange)
-     * will return the same Channel. In order to correctly terminate
-     * each exchange, the output Channel must be closed, even if no
-     * response body is being sent.
-     * <p>
-     * If the call to sendResponseHeaders() specified a fixed response
-     * body length, then the exact number of bytes specified in that
-     * call must be written to this Channel. If too many bytes are written,
-     * then write() will throw an IOException. If too few bytes are written
-     * then the Channel close() will throw an IOException. In both cases,
-     * the exchange is aborted and the underlying TCP connection closed.
+     * will return the same stream.
      *
      * @return the stream to which the response body is written
      */
@@ -267,36 +224,39 @@ public abstract class HttpExchange {
 
     /**
      * Returns the name of the scheme used to make this request,
-     * for example, http, or https.
+     * for example: http, or https.
      *
      * @return name of the scheme used to make this request
      */
     public abstract String getScheme();
 
     /**
-     * Returns any extra path information associated with the URL the client
-     * sent when it made this request. The extra path information follows
-     * the servlet path but precedes the query string and will start
+     * Returns the extra path information that follows the web service
+     * path but precedes the query string in the request URI and will start
      * with a "/" character.
-     * This method returns null if there was no extra path information.
      *
-     * Same as the value of the CGI variable PATH_INFO.
-     * @return a String, decoded by the web container, specifying
-     * extra path information that comes after the servlet path but
-     * before the query string in the request URL; or null if the
-     * URL does not have any extra path information
+     * <p>
+     * This can be used for {@link MessageContext#PATH_INFO}
+     *
+     * @return decoded extra path information of web service.
+     *         It is the path that comes
+     *         after the web service path but before the query string in the
+     *         request URI
+     *         <tt>null</tt> if there is no extra path in the request URI
      */
     public abstract String getPathInfo();
 
     /**
-     * Returns the query string that is contained in the request URL
-     * after the path. This method returns null  if the URL does not
-     * have a query string. Same as the value of the CGI variable QUERY_STRING.
-     * @return a String containing the query string or null if the URL
-     * contains no query string. The value is not decoded by the container.
+     * Returns the query string that is contained in the request URI
+     * after the path.
+     *
+     * <p>
+     * This can be used for {@link MessageContext#QUERY_STRING}
+     *
+     * @return undecoded query string of request URI, or
+     *         <tt>null</tt> if the request URI doesn't have one
      */
     public abstract String getQueryString();
-    
 
     /**
      * Returns an attribute that is associated with this
@@ -304,18 +264,19 @@ public abstract class HttpExchange {
      * access the attribute via {@link MessageContext}.
      * <p>
      * Servlet containers must expose {@link MessageContext#SERVLET_CONTEXT},
-     * {@link MessageContext#SERVLET_REQUEST},
+     * {@link MessageContext#SERVLET_REQUEST}, and
      * {@link MessageContext#SERVLET_RESPONSE}
      * as attributes.
      *
      * <p>If the request has been received by the container using HTTPS, the
      * following information must be exposed as attributes. These attributes
-     * are {@link #REQUEST_CIPHER_SUITE}, {@link #REQUEST_KEY_SIZE}. If there
-     * is a SSL certificate associated with the request, it must be exposed
-     * using {@link #REQUEST_X509CERTIFICATE}
+     * are {@link #REQUEST_CIPHER_SUITE}, and {@link #REQUEST_KEY_SIZE}.
+     * If there is a SSL certificate associated with the request, it must
+     * be exposed using {@link #REQUEST_X509CERTIFICATE}
      *
      * @param name attribute name
-     * @return the attribute value, or null if they do not exist
+     * @return the attribute value, or <tt>null</tt> if the attribute doesn't
+     *         exist
      */
     public abstract Object getAttribute(String name);
 
@@ -332,8 +293,8 @@ public abstract class HttpExchange {
      * Returns the {@link Principal} that represents the authenticated
      * user for this <code>HttpExchange</code>.
      *
-     * @return Principal for an authenticated user
-     *         null otherwise
+     * @return Principal for an authenticated user, or
+     *         <tt>null</tt> if not authenticated
      */
     public abstract Principal getUserPrincipal();
 
@@ -342,8 +303,8 @@ public abstract class HttpExchange {
      * logical "role".
      *
      * @param role specifies the name of the role
-     * @return true if the user making this request belongs to a given role
-     *         false otherwise
+     * @return <tt>true</tt> if the user making this request belongs to a
+     *         given role
      */
     public abstract boolean isUserInRole(String role);
 

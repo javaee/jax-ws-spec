@@ -52,7 +52,7 @@ public abstract class HttpContext {
      *      exch.getScheme() + "://"
      *      + exch.getLocalAddress().getHostName()
      *      + ":" + exch.getLocalAddress().getPort()
-     *      + exch.getContextPath()+ getPath();
+     *      + exch.getContextPath() + getPath();
      * </pre>
      * 
      * @return this context's path
