@@ -220,9 +220,9 @@ public final class AddressingFeature extends WebServiceFeature {
      *
      * <p>
      * @return {@link Responses#ALL} when endpoint supports all types of
-     * responses
+     * responses,
      *         {@link Responses#ANONYMOUS} when endpoint requires the use of
-     * only anonymous responses
+     * only anonymous responses,
      *         {@link Responses#NON_ANONYMOUS} when endpoint requires the use
      * of only non-anonymous responses
      *
