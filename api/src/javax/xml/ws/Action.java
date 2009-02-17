@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  * for <code>input</code> and <code>output</code> messages.
  * 
  * <pre>
- * &#64;WebService
+ * &#64;WebService(targetNamespace="http://example.com/numbers")
  * public class AddNumbersImpl {
  *     <b>&#64;Action(
  *         input="http://example.com/inputAction",
@@ -62,7 +62,7 @@ import java.lang.annotation.Target;
  * WSDL <code>output</code> message are computed using the algorithm in the JAX-WS specification.
  *
  * <pre>
- * &#64;WebService
+ * &#64;WebService(targetNamespace="http://example.com/numbers")
  * public class AddNumbersImpl {
  *     <b>&#64;Action(input="http://example.com/inputAction")</b>
  *     public int addNumbers(int number1, int number2) {

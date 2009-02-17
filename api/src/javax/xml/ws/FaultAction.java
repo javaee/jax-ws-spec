@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  * if the Java method throws only one service specific exception.
  *
  * <pre>
- * &#64;WebService
+ * &#64;WebService(targetNamespace="http://example.com/numbers")
  * public class AddNumbersImpl {
  *     &#64;Action(
  *         fault = {
@@ -63,7 +63,7 @@ import java.lang.annotation.Target;
  * message addressing property for the service specific exception is not present.
  *
  * <pre>
- * &#64;WebService
+ * &#64;WebService(targetNamespace="http://example.com/numbers")
  * public class AddNumbersImpl {
  *     public int addNumbers(int number1, int number2)
  *         throws AddNumbersException {
@@ -93,11 +93,11 @@ import java.lang.annotation.Target;
  * message addressing property if the Java method throws more than one service specific exception.
  *
  * <pre>
- * &#64;WebService
+ * &#64;WebService(targetNamespace="http://example.com/numbers")
  * public class AddNumbersImpl {
  *     &#64;Action(
  *         fault = {
- *             <b>&#64;FaultAction(className=AddNumbersException.class, value="http://example.com/addFaultAction")
+ *             <b>&#64;FaultAction(className=AddNumbersException.class, value="http://example.com/addFaultAction"),
  *             &#64;FaultAction(className=TooBigNumbersException.class, value="http://example.com/toobigFaultAction")</b>
  *         })
  *     public int addNumbers(int number1, int number2)
