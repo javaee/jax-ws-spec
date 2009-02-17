@@ -99,7 +99,7 @@ public abstract class Endpoint {
      *
      *
      * @return The newly created endpoint.
-     * @since 2.2
+     * @since JAX-WS 2.2
      *
      */
     public static Endpoint create(Object implementor, WebServiceFeature ... features) {
@@ -146,7 +146,7 @@ public abstract class Endpoint {
      *        </code> parameter will have their default values.
      *
      * @return The newly created endpoint.
-     * @since 2.2
+     * @since JAX-WS 2.2
      */
     public static Endpoint create(String bindingId, Object implementor, WebServiceFeature ... features) {
         return Provider.provider().createEndpoint(bindingId, implementor, features);
@@ -246,7 +246,7 @@ public abstract class Endpoint {
      *          If a <code>java.lang.SecurityManger</code>
      *          is being used and the application doesn't have the
      *          <code>WebServicePermission("publishEndpoint")</code> permission.
-     * @since 2.2
+     * @since JAX-WS 2.2
      */
     public static Endpoint publish(String address, Object implementor, WebServiceFeature ... features) {
         return Provider.provider().createAndPublishEndpoint(address, implementor, features);
@@ -310,7 +310,7 @@ public abstract class Endpoint {
      *          If a <code>java.lang.SecurityManger</code>
      *          is being used and the application doesn't have the
      *          <code>WebServicePermission("publishEndpoint")</code> permission.
-     * @since 2.2
+     * @since JAX-WS 2.2
      */
     public void publish(HttpContext serverContext) {
         throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
@@ -464,8 +464,7 @@ public abstract class Endpoint {
      * are patched when the WSDL is accessed.
      *
      * <p>
-     * This needs to be set by using {@link Endpoint#setEndpointContext}
-     * before publishing the endpoints.
+     * This needs to be set before publishing the endpoints.
      *
      * @param ctxt that is shared for multiple endpoints
      * @throws java.lang.IllegalStateException
