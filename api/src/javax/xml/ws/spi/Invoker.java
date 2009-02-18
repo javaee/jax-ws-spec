@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- * $Id: Invoker.java,v 1.1.2.4 2009-02-07 00:36:36 jitu Exp $
+ * $Id: Invoker.java,v 1.1.2.5 2009-02-18 00:21:32 jitu Exp $
  */
 package javax.xml.ws.spi;
 
@@ -21,7 +21,7 @@ import java.lang.reflect.InvocationTargetException;
  * care of invoking <code>javax.annotation.PostConstruct</code> methods,
  * if present, on the endpoint implementation.
  *
- * @see Provider#createEndpoint(String, Class, Invoker, WebServiceFeature[])
+ * @see Provider#createEndpoint(String, Class, Invoker, WebServiceFeature...)
  * @author Jitendra Kotamraju
  * @since JAX-WS 2.2
  */
