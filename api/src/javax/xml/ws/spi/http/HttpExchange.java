@@ -10,7 +10,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -78,7 +77,8 @@ public abstract class HttpExchange {
      * did not include a header of the specified name, this method returns
      * null. If there are multiple headers with the same name, this method
      * returns the first header in the request. The header name is
-     * case-insensitive.
+     * case-insensitive. This is a convienence method to get a header
+     * (instead of using the {@link #getRequestHeaders}).
      *
      * @param name the name of the request header
      * @return returns the value of the requested header,
@@ -102,7 +102,7 @@ public abstract class HttpExchange {
     /**
      * Adds a response header with the given name and value. This method
      * allows a response header to have multiple values. This is a
-     * convenience method to add a header(instead of using the
+     * convenience method to add a response header(instead of using the
      * {link #getResponseHeaders()}).
      * 
      * @param name the name of the header
@@ -112,14 +112,16 @@ public abstract class HttpExchange {
      *
      * @see #getResponseHeaders
      */
-    public abstract void addHeader(String name, String value);
+    public abstract void addResponseHeader(String name, String value);
 
     /**
-     * Get the request URI of this http exchange.
+     * Returns the part of the request's URI from the protocol
+     * name up to the query string in the first line of the HTTP request.
+     * Container doesn't decode this string.
      *
      * @return the request URI 
      */
-    public abstract URI getRequestURI();
+    public abstract String getRequestURI();
 
     /**
      * Returns the context path of all the endpoints in an application.
