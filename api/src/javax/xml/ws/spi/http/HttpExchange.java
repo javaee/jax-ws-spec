@@ -6,7 +6,6 @@
 package javax.xml.ws.spi.http;
 
 import javax.xml.ws.handler.MessageContext;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
@@ -22,8 +21,8 @@ import java.security.Principal;
  * for examining the request from the client, and for building and
  * sending the response.
  * <p>
- * An <code>HttpExchange</code> must be terminated to free or reuse
- * underlying resources. The effect of failing to terminate an exchange
+ * A <code>HttpExchange</code> must be closed to free or reuse
+ * underlying resources. The effect of failing to close an exchange
  * is undefined.
  *
  * @author Jitendra Kotamraju
@@ -68,7 +67,8 @@ public abstract class HttpExchange {
      * presented in the order that they were included in the request.
      * <p>
      * The keys in Map are case-insensitive.
-     * @return a read-only Map which can be used to access request headers
+     *
+     * @return an immutable Map which can be used to access request headers
      */
     public abstract Map<String, List<String>> getRequestHeaders();
 
@@ -77,7 +77,7 @@ public abstract class HttpExchange {
      * did not include a header of the specified name, this method returns
      * null. If there are multiple headers with the same name, this method
      * returns the first header in the request. The header name is
-     * case-insensitive. You can use this method with any request header.
+     * case-insensitive.
      *
      * @param name the name of the request header
      * @return returns the value of the requested header,
@@ -93,18 +93,23 @@ public abstract class HttpExchange {
      * (in the order that they should be included).
      * <p>
      * The keys in Map are case-insensitive.
-     * @return a writable Map which can be used to set response headers.
+     *
+     * @return a mutable Map which can be used to set response headers.
      */
     public abstract Map<String, List<String>> getResponseHeaders();
 
     /**
-     * Adds a response header with the given name and value. This method allows
-     * response headers to have multiple values.
+     * Adds a response header with the given name and value. This method
+     * allows a response header to have multiple values. This is a
+     * convenience method to add a header(instead of using the
+     * {link #getResponseHeaders()}).
      * 
      * @param name the name of the header
-     * @param value the additional header value If it contains octet string,
+     * @param value the additional header value. If it contains octet string,
      *        it should be encoded according to
      *        RFC 2047 (http://www.ietf.org/rfc/rfc2047.txt)
+     *
+     * @see #getResponseHeaders
      */
     public abstract void addHeader(String name, String value);
 
@@ -140,15 +145,17 @@ public abstract class HttpExchange {
     public abstract String getRequestMethod();
 
     /**
-     * Get the HttpContext for this exchange
+     * Returns a {@link HttpContext} for this exchange.
+     * Container matches the request with the associated Endpoint's HttpContext
      *
      * @return the HttpContext for this exchange
      */
     public abstract HttpContext getHttpContext();
 
     /**
-     * This must be called to end the exchange. Container takes care of
-     * closing request and response streams.
+     * This must be called to end an exchange. Container takes care of
+     * closing request and response streams. This must be called so that
+     * the container can free or reuse underlying resources.
      */
     public abstract void close();
 
@@ -162,8 +169,7 @@ public abstract class HttpExchange {
 
     /**
      * Returns a stream to which the response body must be
-     * written. {@link #sendResponseHeaders(int,long)}) must be called
-     * prior to calling
+     * written. {@link #setStatus}) must be called prior to calling
      * this method. Multiple calls to this method (for the same exchange)
      * will return the same stream.
      *
@@ -172,31 +178,15 @@ public abstract class HttpExchange {
     public abstract OutputStream getResponseBody();
 
     /**
-     * Starts sending the response back to the client using the current set of response headers
-     * and the numeric response code as specified in this method. The response body length is also specified
-     * as follows. If the response length parameter is greater than zero, this specifies an exact
-     * number of bytes to send and the application must send that exact amount of data. 
-     * If the response length parameter is <code>zero</code>, then chunked transfer encoding is
-     * used and an arbitrary amount of data may be sent. The application terminates the
-     * response body by closing the WritableByteChannel. If response length has the value <code>-1</code>
-     * then no response body is being sent.
+     * Sets the HTTP status code for the response.
+     *
      * <p>
-     * If the content-length response header has not already been set then
-     * this is set to the apropriate value depending on the response length parameter.
-     * <p>
-     * This method must be called prior to calling {@link #getResponseBody()}.
-     * @param rCode the response code to send
-     * @param responseLength if > 0, specifies a fixed response body length
-     * 	      and that exact number of bytes must be written
-     *        to the WritableByteChannel acquired from getResponseBody(), or else
-     *        if equal to 0, then chunked encoding is used, 
-     *        and an arbitrary number of bytes may be written.
-     *	      if <= -1, then no response body length is specified and
-     *        no response body may be written.
-     * @see HttpExchange#getResponseBody()
-     * @throws IOException if there is i/o error
+     * This method must be called prior to calling {@link #getResponseBody}.
+     *
+     * @param status the response code to send
+     * @see #getResponseBody
      */
-    public abstract void sendResponseHeaders(int rCode, long responseLength) throws IOException ;
+    public abstract void setStatus(int status);
 
     /**
      * Returns the unresolved address of the remote entity invoking
