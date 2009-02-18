@@ -8,6 +8,7 @@ package javax.xml.ws.spi.http;
 import javax.xml.ws.handler.MessageContext;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.URI;
 import java.util.List;
@@ -156,16 +157,19 @@ public abstract class HttpExchange {
      * This must be called to end an exchange. Container takes care of
      * closing request and response streams. This must be called so that
      * the container can free or reuse underlying resources.
+     *
+     * @throws IOException if any i/o error
      */
-    public abstract void close();
+    public abstract void close() throws IOException;
 
     /**
      * Returns a stream from which the request body can be read.
      * Multiple calls to this method will return the same stream.
      *
      * @return the stream from which the request body can be read.
+     * @throws IOException if any i/o error during request processing
      */
-    public abstract InputStream getRequestBody();
+    public abstract InputStream getRequestBody() throws IOException;
 
     /**
      * Returns a stream to which the response body must be
@@ -174,8 +178,9 @@ public abstract class HttpExchange {
      * will return the same stream.
      *
      * @return the stream to which the response body is written
+     * @throws IOException if any i/o error during response processing
      */
-    public abstract OutputStream getResponseBody();
+    public abstract OutputStream getResponseBody() throws IOException;
 
     /**
      * Sets the HTTP status code for the response.
