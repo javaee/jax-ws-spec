@@ -7,7 +7,6 @@ package javax.xml.ws;
 
 import java.util.Map;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
-import org.w3c.dom.Element;
 
 /** 
  * The <code>BindingProvider</code> interface provides access to the
@@ -85,37 +84,6 @@ public interface BindingProvider {
     public static final String SOAPACTION_URI_PROPERTY =
             "javax.xml.ws.soap.http.soapaction.uri";
 
-    /**
-     * Standard property for wsa:To. If WS-Addressing
-     * is enabled, this value will be used for the value of the
-     * WS-Addressing To header.
-     *
-     * <p>Type: <code>javax.xml.ws.EndpointReference</code>
-     **/
-    public static final String TO_PROPERTY =
-            "javax.xml.ws.addressing.to";
-
-    /**
-     * Standard property for wsa:ReplyTo. If WS-Addressing
-     * is enabled, this value will be used for the value of the
-     * WS-Addressing ReplyTo header.
-     *
-     * <p>Type: <code>javax.xml.ws.EndpointReference</code>
-     **/
-    public static final String REPLYTO_PROPERTY =
-            "javax.xml.ws.addressing.replyto";
-
-    /**
-     * Standard property for wsa:FaultTo. If WS-Addressing
-     * is enabled, this value will be used for the value of the
-     * WS-Addressing FaultTo header.
-     *
-     * <p>Type: <code>javax.xml.ws.EndpointReference</code>
-     **/
-    public static final String FAULTTO_PROPERTY =
-            "javax.xml.ws.addressing.faultto";
-
-    
     /** 
      * Get the context that is used to initialize the message context
      * for request messages.
