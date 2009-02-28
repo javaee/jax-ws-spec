@@ -1,0 +1,566 @@
+Change Log: JSR 224 : Java API for XML-Based Web Services (JAX-WS) 2.2
+
+Description
+-----------
+Maintenance Review for JAX-WS 2.2
+
+Maintenance Lead
+----------------
+Jitendra Kotamraju, Sun Microsystems, Inc.
+
+Feedback
+--------
+Comments should be sent to jsr224-spec-comments@sun.com
+
+Rationale for proposed changes
+------------------------------
+This MR proposes to incorporate WS-Addressing 1.0 - Metadata specification so
+that the specification has complete addressing support. Also a few minor
+changes, clarifications and bug fixes are proposed.
+
+Changes
+-------
+The changes to the specification are listed below. Changes are listed in the
+order of sections as in 2.1 specification.
+
+1.1 Goals
+Add the following:
+JAX-WS 2.2 requires JAXB 2.2[36]
+
+1.5 Conventions
+
+Add the following namespace:
+
+Prefix    Namespace                                      Notes
+wsam      http://www.w3.org/2007/05/addressing/metadata  The namespace of the
+                                                         WS-Addressing 1.0 -
+							 Metadata[35] schema
+
+wsp       http://www.w3.org/ns/ws-policy                 The namespace of the 
+                                                         Web Services Policy
+							 1.5 - Framework[37]
+							 schema
+
+2.3.1 Message and Part
+
+Add the following:
+
+WSDL description may have wsam:Action attribute on wsdl:input, wsdl:output,
+wsdl:fault elements in a wsdl:operation. This wsam:Action attribute is
+used to explicitly define the value of the WS-Addressing Action header and
+this needs to be mapped on to the corresponding Java method.
+
+    * Conformance (Generating @Action): Generated Java Methods MUST be annotated with @Action and @FaultAction annotations for the corresponding  wsdl:input, wsdl:output and wsdl:fault messages that contain wsam:Action attributes
+
+    * Conformance (Generating @Action input): If a wsdl:input element contains a wsam:Action attribute, the value of the attribute MUST be set to the input element of @Action
+
+    * Conformance (Generating @Action output): If a wsdl:output element contains a wsam:Action attribute, the value of the attribute MUST be set to the output element of @Action
+
+    * Conformance (Generating @Action fault): If a wsdl:fault element contains a wsam:Action attribute, the value of the attribute MUST be set to the value element of @FaultAction. The className element of @FaultAction MUST be the exception class name associated with the wsdl:fault
+
+For example:
+
+<operation name="getPrice"> 
+  <input message="tns:getPrice" /> 
+  <output message="tns:getPriceResponse" wsam:Action="outAction"/> 
+  <fault name="InvalidTickerException"
+      message="tns:InvalidTickerException" wsam:Action="faultAction"/> 
+</operation> 
+
+// the mapped java method
+@Action(output="outAction", 
+        fault={ @FaultAction(className=InvalidTickerException.class,
+	                     value="faultAction") }
+)
+float getPrice(String ticker) throws InvalidTickerException;
+
+2.4.1 W3CEndpointReference
+
+Rewrite as follows for this section:
+
+JAXB 2.1 by default does not map wsa:EndpointReference to the javax.xml.ws.wsaddressing.W3CEndpointReference class. However, for JAX-WS developers to fully utilize the use of a wsa:EndpointReference, JAX-WS implementations MUST map the wsa:EndpointReference and its subtypes to javax.ws.xml.ws.W3CEndpointReference by default.  JAXB 2.1 provides a standard customization that can be used to cause this mapping. Implementations may provide a way to map these types differently.
+
+    * Conformance (javax.xml.ws.wsaddressing.W3CEndpointReference): Any schema element of the type wsa:EndpointReference or its subtypes MUST be mapped to javax.xml.ws.wsaddressing.W3CEndpointReference by default.
+
+2.6.3.1 mime:content
+
+Add the clarification above the first conformance requirement:
+
+This use of additional metadata in mime:content elements is disabled by default for WSDL to Java mapping, but can be enabled using jaxws:enableMIMEContent customization.
+
+3.3 Class
+
+Modify
+
+"Otherwise, the class implicitly defines a service endpoint interface (SEI) which comprises all of the public methods that satisfy one of the following
+conditions:"
+
+to
+
+"Otherwise, the class implicitly defines a service endpoint interface (SEI)
+which comprises all of the public non-static or non-final methods that satisfy one of the following
+
+3.5 Method
+Add to "The wsdl:operation element corresponding to each method has one or
+more child elements as follows:"
+    * wsdl:input, wsdl:output(if any), and wsdl:fault(if any) child elements must have wsam:Action attribute to describe WS-Addressing Action property. The value of the wsam:Action attribute is computed using the algorithm in section 3.5.2
+
+Below the paragraph "The value of a wsdl:message element's name", add the
+following:
+
+    * Conformance (Generating wsam:Action): wsdl:operation's child elements
+    wsdl:input, wsdl:output, and wsdl:fault MUST have the wsam:Action attribute. wsam:Action attribute MUST be computed using the algorithm that is specified in 3.5.2
+
+3.5.2 wsam:Action Computation Algorithm
+All wsdl:operation's child elements wsdl:input, wsdl:output and wsdl:fault must
+have the wsam:Action attribute in the the generated WSDL. The algorithm to
+compute wsam:Action from SEI method is as follows:
+  1. A non-default @Action(input=...) or @WebMethod(action=...) value on a SEI
+  method MUST result into wsdl:input[@wsam:Action] attribute in the corresponding wsdl:operation. Also, @Action(input=...) and @WebMethod(action=...) annotation element values MUST be same, if present.
+  2. A non-default @Action(output=...) value on a SEI method MUST result into wsdl:output[@wsam:Action] attribute in the corresponding wsdl:operation. 
+  3. A non-default @Action(@FaultAction=...) value on a SEI method MUST result into wsdl:fault[@wsam:Action] attribute in the corresponding wsdl:operation.  The wsdl:fault element MUST correspond to the exception specified by className annotated element value.
+  4. If wsdl:input[@wsam:Action] cannot be mapped from the above steps,  then wsam:Action is   generated using the metadata defaulting algorithm as if wsdl:input[@name] is not present in WSDL.
+  5. If wsdl:output[@wsam:Action] cannot be mapped from the above steps, then wsam:Action is   generated using the metadata defaulting algorithm as if wsdl:output[@name] is not present in WSDL.
+  6. If wsdl:fault[@wsam:Action] cannot be mapped from the above steps, then wsam:Action is   generated using the metadata defaulting algorithm as if wsdl:fault[@name] is the corresponding exception class name.
+
+For example:
+@Action(input="inAction") 
+public float getPrice(String ticker) throws InvalidTickerException; 
+
+// the mapped wsdl:operation if targetNamespace="http://example.com" and portType="StockQuoteProvider"
+<operation name="getPrice"> 
+  <input name="foo" message="tns:getPrice" wsam:Action="inAction"/> 
+  <output name="bar" message="tns:getPriceResponse"
+    wsam:Action="http://example.com/StockQuoteProvider/getPriceResponse" /> 
+  <fault name="FooTickerException" message="tns:InvalidTickerException"
+    wsam:Action="http://example.com/StockQuoteProvider/getPrice/Fault/InvalidTickerException"/> 
+</operation> 
+
+3.6 Method Parameters and Return Type
+
+Add the following:
+JAXB doesn't define any namespace by default to types and elements. In the web
+services, typically these entities that are created for method parameters and
+return parameters are qualified. 
+    * Conformance (use of JAXB annotations): JAX-WS tools and runtimes MUST override the default empty namespace for JAXB types and elements to SEI's targetNamespace.
+
+3.6.2.1 Document Wrapped
+
+Add the following:
+Application's programming model doesn't use these bean classes, so the
+applications need not package these classes. JAX-WS implementations may
+generate these classes dynamically as specified in this section.
+    * Conformance (Bundling wrapper beans): A JAX-WS implementation SHOULD not require an application to package request and response bean classes. However, when the bean classes are packaged, they MUST be used.
+
+Add the following:
+The name of wsdl:part for the wrapper must be named as "parameters" and
+"result" for input and output messages respectively in the generated WSDL.
+The javax.xml.ws.RequestWrapper and javax.xml.ws.ResponseWrapper annotations
+(see 7.3 and 7.4) MAY be used to customize the name of the wsdl:part for the
+wrapper part.
+    * Conformance (Default Wrapper wsdl:part names): In the absence of customizations, the name of the wsdl:part for the wrapper MUST be named as "parameters" and "result" for input and output messages respectively in the generated WSDL.
+    * Conformance (Customizing Wrapper wsdl:part names): Non-default partName values of the javax.xml.ws.RequestWrapper and javax.xml.ws.ResponseWrapper annotations, if specified on SEI method, MUST be used as wsdl:part name for input and output messages respectively in the generated WSDL.
+
+Add the following:
+If a SEI's method parameter or return type is annotated with @XmlElement,
+that annotation is used for the wrapper bean properties. This can be 
+used to map corresponding XML schema element declaration's attributes like
+minOccurs, maxOccurs, and nillable etc. It is an error to specify @XmlElement
+with a parameter or return type that is mapped to header part. If both
+@XmlElement and @WebParam/@WebResult are present, then it is an
+error to specify @XmlElement's name, and namespace elements different from
+@WebParam/@WebResult's name and targetNamespace elements respectively.
+    * Conformance (Wrapper property): If a SEI's method parameter or return type is annotated with @XmlElement, that annotation MUST be used on the wrapper bean property.
+
+3.7 Service Specific Exception
+
+Add the following:
+
+    * Conformance (Exception naming): In the absence of customizations, the name of the wsdl:message element MUST be the name of the Java exception.
+
+The javax.xml.ws.WebFault annotation may be used to customize the name of the
+wsdl:message element and also to resolve any conflicts.
+
+    * Conformance (Exception naming): If an exception has @WebFault, then messageName MUST be the name of the corresponding wsdl:message element.
+
+Add the following:
+Application's programming model doesn't use these bean classes, so the
+applications need not package these classes. JAX-WS implementations may
+generate these classes dynamically as specified in this section.
+    * Conformance (Bundling wrapper beans): JAX-WS implementations do not require an application to package exception bean classes. However, when the exception bean classes are packaged, they MUST be used.
+
+3.11 Service and Ports
+
+Add the following:
+
+If the endpoint enables Addressing, that can be indicated in the generated
+WSDL as per the Addressing 1.0 - Metadata[35].
+
+    * Conformance (Use of Addressing): Endpoint's use of addressing, if any, MUST be indicated in the wsdl:binding or wsdl:port sections of the WSDL 1.1 as per WS-Addressing 1.0 - Metadata[35].
+
+Example 1:
+Possible Policy assertion for @Addressing in the generated WSDL:
+
+<wsam:Addressing wsp:Optional="true">
+  <wsp:Policy/>
+</wsam:Addressing>
+
+Example 2:
+Possible Policy assertion for @Addressing(required=true) in the generated WSDL:
+
+<wsam:Addressing>
+ <wsp:Policy/>
+</wsam:Addressing>
+
+Example 3:
+Possible Policy assertion for @Addressing(responses=Responses.NON_ANONYMOUS) in the generated WSDL:
+
+<wsam:Addressing wsp:Optional="true">
+  <wsp:Policy>
+    <wsam:NonAnonymousResponses/>
+  </wsp:Policy>
+</wsam:Addressing>
+
+4.1.1.1 Dynamic case
+
+Add the following :
+
+create(URL wsdlLocation, QName serviceName, WebServiceFeature ... features) Returns a service object for the specified WSDL document and service name. The created service needs to be configured with the web service features.
+
+create(QName serviceName, WebServiceFeature ... features) Returns a service object for a service with the given name. No WSDL document is attached to the service. The created service needs to be configured with the web service features.
+
+    * Conformance (Service creation using features): The created service object must honor the web service features. If a JAX-WS implementation doesn't understand any passed-in feature, it must throw WebServiceException.
+
+4.1.1.2 Static case
+
+Rewrite the section as follows:
+When starting from a WSDL document, a concrete service implementation class
+MUST be generated as defined in section 2.7. The generated implementation
+class MUST have all the public constructors as shown in the example below.
+
+When using the constructors, the default WSDL location and service name are implicitly taken from the WebServiceClient annotation that decorates the generated class.
+
+The following code snippet shows the generated constructors:
+
+// Generated Service Class
+
+@WebServiceClient(name="StockQuoteService",
+                  targetNamespace="http://example.com/stocks",
+                  wsdlLocation="http://example.com/stocks.wsdl")
+public class StockQuoteService extends javax.xml.ws.Service {
+  public StockQuoteService() {
+    super(new URL("http://example.com/stocks.wsdl"),
+          new QName("http://example.com/stocks", "StockQuoteService"));
+  }
+
+  public StockQuoteService(WebServiceFeature ... features) {
+    super(new URL("http://example.com/stocks.wsdl"),
+          new QName("http://example.com/stocks", "StockQuoteService"),
+	  features);
+  }
+
+  public StockQuoteService(URL wsdlLocation) {
+    super(wsdlLocation,
+          new QName("http://example.com/stocks", "StockQuoteService"));
+  }
+
+  public StockQuoteService(URL wsdlLocation, WebServiceFeature ... features) {
+    super(wsdlLocation,
+          new QName("http://example.com/stocks", "StockQuoteService"),
+	  features);
+  }
+
+  public StockQuoteService(URL wsdlLocation, QName serviceName) {
+    super(wsdlLocation, serviceName);
+  }
+
+  public StockQuoteService(URL wsdlLocation, QName serviceName, WebServiceFeature ... features) {
+    super(wsdlLocation, serviceName, features);
+  }
+
+  ...
+}
+
+4.2 javax.xml.ws.BindingProvider
+
+Add the following:
+    * Conformance (BindingProvider's W3CEndpointReference): The returned W3CEndpointReference MUST contain wsam:ServiceName and wsam:ServiceName[@EndpointName] as per Addressing 1.0 - Metadata[35]. The wsam:InterfaceName MAY be present in the W3CEndpointReference. If there is an associated WSDL, then the WSDL location MUST be referenced using wsdli:wsdlLocation in the W3CEndpointReference's wsa:Metadata.  
+
+4.2.3 Proxies
+Add the following clarification:
+Proxy instances are not guaranteed to be thread safe. If the instances are
+accessed by multiple threads, usual synchronization techniques can be used to support multiple threads.
+
+Add the following:
+The use of WS-Addressing requirements can be indicated in a WSDL as per Addressing 1.0 - Metadata[35]. A proxy created using getPort() calls is configured with the addressing requirements as specified in the associated WSDL or explicitly passing javax.xml.ws.soap.AddressingFeature web service feature.
+    * Conformance (Proxy's Addressing use): A proxy MUST be configured with the use of addressing requirements as indicated in the associated WSDL. But if the proxy is created using javax.xml.ws.soap.AddressingFeature web service feature, the feature's addressing requirements MUST take precedence over WSDL's addressing requirements.
+
+5.1 javax.xml.ws.Provider
+
+Add the following clarification:
+In payload mode, to send a response with no payload, an empty Source payload
+can be used in payload mode. An empty source can be constructed using zero-argument default constructors of DOMSource, SAXSource, StreamSource. 
+
+5.1.1 Invocation
+
+Add the following clarification:
+When the invoke method returns null, it is considered that no response needs to be sent.
+
+5.2.1 Endpoint Usage
+
+Add the following to "Endpoints can be created using the following static methods on Endpoint:"
+create(Object implementor, WebServiceFeature ... features) Same as the above create() method. The created Endpoint is configured with the web service features. These features override the corresponding features that are specified in WSDL, if present.
+
+create(String bindingID, Object implementor, WebServiceFeature ...  features) Same as the above create() method. The created Endpoint is configured with the web service features. These features override the corresponding features that are specified in WSDL, if present.
+
+publish(String address, Object implementor, WebServiceFeature ...  features) Same as the above publish() method. The created Endpoint is configured with the web service features. These features override the corresponding features that are specified in WSDL, if present.
+
+5.2.8 javax.xml.ws.EndpointReference
+
+Add the following:
+    * Conformance (Endpoint's W3CEndpointReference): The returned W3EndpointReference MUST contain wsam:ServiceName and wsam:ServiceName[@EndpointName] as per Addressing 1.0 - Metadata[35]. The wsam:InterfaceName MAY be present in the W3CEndpointReference. If there is an associated WSDL, then the WSDL location MUST be referenced using wsdli:wsdlLocation in the W3CEndpointReference's wsa:Metadata.
+
+5.3 javax.xml.ws.WebServiceContext
+
+Add the following:
+An endpoint implementation can retrieve an javax.xml.ws.EndpointReference for
+the endpoint using getEndpointReference(List<Element> referenceParameters),
+and getEndpointReference(Class<T> clazz, List<Element> referenceParameters)
+methods. These methods have the same semantics as the Endpoint.getEndpointReference() methods specified in the section 5.2.8
+
+5.4 javax.xml.ws.wsaddressing.W3CEndpointReferenceBuilder
+
+Add the following:
+    * Conformance (Building W3CEndpointReference): W3CEndpointReferenceBuilder.build() method MUST construct an EndpointReference as per the Addressing 1.0 - Metadata[35].
+
+6.2.2 Creating Endpoint Objects
+
+Add the following:
+createEndpoint(String bindingID, Object implementor, WebServiceFeature ...
+features) Same as the above createEndpoint() method. The created Endpoint is configured with the web service features
+
+createAndPublishEndpoint(String address, Object implementor, WebServiceFeature ... features) Same as the above createAndPublishEndpoint() method. The created Endpoint is configured with the web service features
+
+createEndpoint(String bindingId, Class implementorClass, Invoker invoker, WebServiceFeature ... features) Creates an Endpoint for the implementor class and the endpoint invocation is handled by the Invoker. If the bindingId is null and no binding information is specified via the javax.xml.ws.BindingType annotation then a default SOAP1.1/HTTP binding MUST be used. The created Endpoint is configured with the web service features.
+
+6.2.3 Creating ServiceDelegate Objects
+
+Add the following:
+createServiceDelegate(URL wsdlDocumentLocation, QName serviceName, Class
+serviceClass, WebServiceFeature ... features) Same as the above
+createServiceDelegate() method and it also configures the delegate with all
+the web service features.
+
+6.2.4 EndpointReferences
+
+Update with the following:
+
+createW3CEndpointReference(String address, QName serviceName, QName portName, List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters) Creates W3CEndpointReference using the specified parameters.  
+
+createW3CEndpointReference(String address, QName interfaceName, QName serviceName, QName portName, List<Element> metadata, String wsdlDocumentLocation, List<Element> referenceParameters, List<Element> elements, Map<QName, String> attributes) Creates W3CEndpointReference using the specified parameters. This method adds support for extension elements, extension attributes, and porttype name.
+
+6.5 javax.xml.ws.WebServiceFeature
+
+Add the following:
+A feature can be used while creating service and proxy instances. There are no
+standard features for service creation in the current specification.
+
+6.5.1 javax.xml.ws.soap.AddressingFeature
+
+Rewrite the last two paragraphs:
+
+The AddressingFeature's required property can be configured to control whether all incoming messages MUST contain Addressing headers.
+
+The AddressingFeature's responses property can be configured to control
+whether the endpoint requires the use of anonymous, non-anonymous and all
+responses.
+
+This feature is automatically enabled if the WSDL indicates the use of addressing as per the WS-Addressing 1.0 - Metadata[35]. Developers may choose to prevent this from happening by explicitly disabling the AddressingFeature.
+
+6.5.3 javax.xml.ws.RespectBindingFeature
+Add the following:
+When this feature is enabled, a JAX-WS implementation must support and
+honor the addressing policy, if specified, in the WSDL. However, such
+addressing requirements can be explicitly disabled via AddressingFeature.
+
+6.6 javax.xml.ws.spi.http (HTTP SPI)
+The classes in this package can be used for a portable deployment of JAX-WS web services in a HTTP container(for example, servlet container). This SPI enables to decouple the JAX-WS deployment and runtime and is not meant for end developers but for container or its extension developers.
+
+The HTTP SPI allows a deployment to use any available web services runtime for
+HTTP transport. Java EE6 web profile vendors can support JSR-109[15]
+deployments using the JAX-WS 2.2 runtime in Java SE platform. For example, a
+Servlet 3.0 extension can be used to do the JSR-109 deployment by reading
+deployment descriptors and hand-off the request processing to the web services runtime that is in Java SE platform.
+
+The HTTP SPI consists of the following classes:
+  * javax.xml.ws.spi.http.HttpContext - HttpContext represents a mapping between the root URI path of a web service to a HttpHandler which is invoked to handle requests destined for that path on the associated container.
+  * javax.xml.ws.spi.http.HttpExchange - This class encapsulates a HTTP request received and a response to be generated in one exchange.
+  * javax.xml.ws.spi.http.HttpHandler - A handler which is invoked to process HTTP exchanges.
+  * javax.xml.ws.spi.Invoker - Invoker hides the detail of calling into application endpoint implementation.
+
+The portable deployment is done as below:
+   1. Container creates Endpoint objects for an application. The necessary information to create Endpoint objects may be got from web service deployment descriptor files.
+   2. Container creates HttpContext objects for the deployment. For example, a
+   HttpContext could be created using servlet configuration(for e.g. url-pattern) for a  web service in servlet container case.
+   3. Then publishes all the endpoints using Endpoint.publish(HttpContext). During publish(), JAX-WS runtime registers a HttpHandler callback to handle incoming requests or HttpExchange objects. The HttpExchange object encapsulates HTTP request and response. 
+
+  Container                               JAX-WS runtime
+  ---------                               --------------
+  1. Creates Invoker1, ... InvokerN                               
+  2. Provider.createEndpoint(...)     --> 3. creates Endpoint1
+     configures Endpoint1
+     ...
+  4. Provider.createEndpoint(...)     --> 5. creates EndpointN
+     configures EndpointN
+  6. Creates EndpointContext with
+     Endpoint1, ..., EndpointN
+     and sets it on all endpoints.
+  7. creates HttpContext1, ... HttpContextN
+  8. Endpoint1.publish(HttpContext1)  --> 9. creates HttpHandler1
+                                          HttpContext1.setHandler(HttpHandler1)
+     ...
+ 10. EndpointN.publish(HttpContextN)  --> 11. creates HttpHandlerN
+                                          HttpContextN.setHandler(HttpHandlerN)
+
+Typical request processing is done as below(for every request):
+  Container                               JAX-WS runtime
+  ---------                               --------------
+  1. Creates a HttpExchange
+  2. Gets handler from HttpContext
+  3. HttpHandler.handle(HttpExchange) --> 4. reads request from HttpExchange
+                                      <-- 5. Calls Invoker
+  6. Invokes the actual instance
+                                          7. Writes the response to HttpExchange
+
+Typical portable undeployment is done as below:
+  Container                               JAX-WS runtime
+  ---------                               --------------
+  1. @preDestroy on instances
+  2. Endpoint1.stop()
+  ...
+  3. EndpointN.stop()
+
+Having a support for this SPI in a JAX-WS implementation in Java SE platform would enable deployments to use the Java SE platform's web services runtime portably.
+
+    * Conformance (HTTP SPI in SE platform): A JAX-WS 2.2 implementation in Java SE platform MUST support Endpoint.publish(javax.xml.ws.spi.http.HttpContext).
+
+7.2 javax.xml.ws.WebFault
+Add the following to Table 7.2
+
+Property      Description                       Default
+messageName   The name of the wsdl:message      ""
+
+7.3 javax.xml.ws.RequestWrapper
+Add the following to Table 7.3
+
+Property      Description                       Default
+partName      The name of the wsdl:part         "parameters"
+
+7.4 javax.xml.ws.ResponseWrapper
+Add the following to Table 7.4
+
+Property      Description                       Default
+partName      The name of the wsdl:part         "result"
+
+7.9 javax.xml.ws.WebServiceRef
+
+Add the following:
+The injected references of WebServiceRef annotation are not guaranteed to be thread safe. If the references are accessed by multiple threads, usual synchronization techinques can be used to support multiple threads.
+
+Add the following:
+The injected references of WebServiceRef annotation can be configured with the corresponding features of annotations annotated with WebServiceFeatureAnnotation annotations. For example, a SEI reference can be configured with the MTOM web service feature using @MTOM. Similarly, a generated service reference can be configured with web service features using the corresponding WebServiceFeatureAnnotation annotations.
+
+If a JAX-WS implementation encounters an unsupported or unrecognized annotation annotated with the WebServiceFeatureAnnotation that is specified with @WebServiceRef, an ERROR MUST be given.
+
+Update the 7.9.1 example:
+
+// WebServiceRef using the SEI type
+// stockQuoteProvider proxy is configured with MTOM feature
+@MTOM
+@WebServiceRef(StockQuoteService.class)
+private StockQuoteProvider stockQuoteProvider;
+
+7.9 javax.xml.ws.WebServiceRefs
+
+Add the following:
+There is no way to associate web service features with the injected instances. If an instance needs to be configured with web service features, use @WebServiceRef to inject the resource along with its features.
+
+7.12 javax.xml.ws.Action
+
+Use the following for the first paragraph:
+The Action annotation is applied to the methods of a SEI. It is used to specify
+the input, output, fault WS-Addressing Action values associated with the annotated method.
+
+Remove the paragraph:
+"In this version of JAX-WS there is no standard way to ..."
+
+Add the paragraph:
+For such a method, the mapped operation in the generated WSDL's wsam:Action attribute on the WSDL input, output and fault messages of the WSDL operation is based upon which attributes of the Action annotation have been specified. The wsam:Action computation algorithm is specified in section 3.5.2
+
+7.13 javax.xml.ws.FaultAction
+
+Remove the paragraph:
+"In this version of JAX-WS there is no standard way to ..."
+
+Add the paragraph:
+The wsam:Action attribute value in the fault message in the generated WSDL
+operation mapped for an exception class is equal to the corresponding value in
+the FaultAction. The wsam:Action computation algorithm is specified in section 3.5.2
+
+7.14.1 javax.xml.ws.soap.Addressing
+
+Rewrite as the following:
+The Addressing annotation is applied to an endpoint implementation class and
+to an injected web service proxy reference. It is used to control the use of WS-Addressing[24][33][35]. It corresponds with the AddressingFeature described in section 6.5.1.
+
+                         Table 7.14: Addressing properties.
+Property     Description                                     Default
+enabled      Specifies if WS-Addressing is enabled or not.   true
+required     Specifies Addressing headers MUST be            false
+             present on incoming messages.
+responses    If addressing is enabled, this                  Responses.ALL
+             property determines if endpoint
+	     requires the use of anonymous responses,
+	     or non-anonymous responses, or all.
+
+The generated WSDL must indicate the use of addressing as specified in the
+sections[3.11]. The runtime requirements of enabling addressing for SOAP
+binding are specified in section [10.4.1.5]
+
+7.14.2 javax.xml.ws.soap.MTOM
+Modify the first sentence as follows:
+The MTOM annotation is applied to an endpoint implementation class and
+to an injected web service proxy reference. 
+
+7.14.3 javax.xml.ws.RespectBinding
+Modify the first sentence as follows:
+The RespectBinding annotation is applied to an endpoint implementation class and
+to an injected web service proxy reference. 
+
+10.4.1.5 Addressing
+
+Modify the first paragraph with the following:
+If addressing is enabled, implementations are required to follow WS-Addressing[24][33][35] protocols.
+
+Add the following:
+    * Conformance (wsa:Action value): wsa:Action value MUST be got from @Action annotation elements in SEI, if present. But if a client sets a BindingProvider.SOAPACTION_URI_PROPERTY then that MUST be used for wsa:Action header.
+
+If a receiver receives messages with the WS-Addressing headers that are non-conformant as per WS-Addressing 1.0- SOAP Binding[33], then appropriate addressing pre-defined faults must be generated.
+
+A JAX-WS application may send wsa:replyTo or wsa:FaultTo addressing header to receive non-anonymous responses at a different address other than the transport back channel. When the application receives a response at a different address, there is no standard way to communicate the response with the JAX-WS client runtime. Hence, there are no requirements on a JAX-WS client runtime to bind non-anonymous responses. A JAX-WS client runtime may start an endpoint to receive a non-anonymous response and may use the response to bind to the java parameters and return type. However, it is not required to do so.
+
+Bibliography
+[35] Martin Gudgin, Marc Hadley, Tony Rogers, and Ümit Yalçinalp. Web
+Services Addressing 1.0 - Metadata. Recommendation, W3C, September 2007. http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904
+TODO fix month and year in [36]
+[36] Kohsuke Kawaguchi. The Java Architecture for XML Binding (JAXB) 2.2. JSR,
+JCP, August 2003. See http://jcp.org/en/jsr/detail?id=222.
+[37] Asir S Vedamuthu, et al. Editors. Web Services Policy 1.5 - Framework,
+W3C, September 2007. http://www.w3.org/TR/2007/REC-ws-policy-20070904. 
+
+
+Accepted Changes
+None
+
+Deferred Changes
+None
