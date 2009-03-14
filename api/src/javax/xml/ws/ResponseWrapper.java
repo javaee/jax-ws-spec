@@ -4,6 +4,7 @@
  */
 
 package javax.xml.ws;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.Target;
 import java.lang.annotation.Retention;
@@ -27,25 +28,26 @@ import java.lang.annotation.RetentionPolicy;
 public @interface ResponseWrapper {
 
     /**
-     *  Element's local name.
+     * Element's local name.
      */
     public String localName() default "";
 
     /**
-     *  Element's namespace name.
+     * Element's namespace name.
      */
     public String targetNamespace() default "";
 
     /**
-     *  Response wrapper bean name.
+     * Response wrapper bean name.
      */
     public String className() default "";
 
     /**
-     *  wsdl:part name for the wrapper
-     *  @since JAX-WS 2.2
+     * wsdl:part name for the wrapper part
+     * 
+     * @since JAX-WS 2.2
      */
-    public String partName() default "result";
+    public String partName() default "";
 
 }
 
