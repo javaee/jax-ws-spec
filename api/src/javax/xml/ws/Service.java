@@ -16,11 +16,12 @@ import javax.xml.ws.spi.Provider;
  * <code>Service</code> objects provide the client view of a Web service.
  * <p><code>Service</code> acts as a factory of the following:
  * <ul>
- * <li>Proxies for a target service endpoint.
+ * <li>Proxies for a target service endpoint.</li>
  * <li>Instances of {@link javax.xml.ws.Dispatch} for
  *     dynamic message-oriented invocation of a remote
  *     operation.
  * </li>
+ * </ul>
  *
  * <p>The ports available on a service can be enumerated using the
  * <code>getPorts</code> method. Alternatively, you can pass a
