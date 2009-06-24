@@ -128,7 +128,6 @@ class FactoryFinder {
         return newInstance(fallbackClassName, classLoader);
     }
 
-    private static final String PLATFORM_DEFAULT_FACTORY_CLASS = "com.sun.xml.internal.ws.spi.ProviderImpl";
 
     /**
      * Loads the class, provided that the calling thread has an access to the class being loaded.
@@ -150,7 +149,7 @@ class FactoryFinder {
                 return classLoader.loadClass(className);
         } catch (SecurityException se) {
             // anyone can access the platform default factory class without permission
-            if (PLATFORM_DEFAULT_FACTORY_CLASS.equals(className))
+            if (Provider.DEFAULT_JAXWSPROVIDER.equals(className))
                 return Class.forName(className);
             throw se;
         }

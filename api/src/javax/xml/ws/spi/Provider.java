@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.13 2009-01-30 03:08:33 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.14 2009-06-24 23:07:58 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -41,8 +41,9 @@ public abstract class Provider {
      * A constant representing the name of the default
      * <code>Provider</code> implementation class.
      **/
-    static private final String DEFAULT_JAXWSPROVIDER
-            = "com.sun.xml.ws.spi.ProviderImpl";
+    // Using two strings so that package renaming doesn't change it 
+    static final String DEFAULT_JAXWSPROVIDER
+            = "com.sun"+".xml.internal.ws.spi.ProviderImpl";
 
     /**
      * Take advantage of Java SE 6's java.util.ServiceLoader API.
