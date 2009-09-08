@@ -1,7 +1,7 @@
 /*
  * Copyright 2007 Sun Microsystems, Inc. All rights reserved.
  * SUN PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
- *$Id: Provider.java,v 1.9.2.14 2009-06-24 23:07:58 jitu Exp $
+ *$Id: Provider.java,v 1.9.2.15 2009-09-08 20:27:02 jitu Exp $
  */
 
 package javax.xml.ws.spi;
@@ -11,11 +11,8 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.Map;
 import java.lang.reflect.Method;
-import javax.xml.ws.Endpoint;
-import javax.xml.ws.WebServiceException;
-import javax.xml.ws.WebServiceFeature;
 import javax.xml.namespace.QName;
-import javax.xml.ws.EndpointReference;
+import javax.xml.ws.*;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
 
 import org.w3c.dom.Element;
@@ -163,7 +160,7 @@ public abstract class Provider {
      */
     public abstract ServiceDelegate createServiceDelegate(
             java.net.URL wsdlDocumentLocation,
-            QName serviceName, Class serviceClass);
+            QName serviceName, Class<? extends Service> serviceClass);
 
     /**
      * Creates a service delegate object.
@@ -182,7 +179,7 @@ public abstract class Provider {
      */
     public ServiceDelegate createServiceDelegate(
             java.net.URL wsdlDocumentLocation,
-            QName serviceName, Class serviceClass, WebServiceFeature ... features) {
+            QName serviceName, Class<? extends Service> serviceClass, WebServiceFeature ... features) {
         throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
     }
     
@@ -380,6 +377,8 @@ public abstract class Provider {
      * <code>javax.lang.IllegalStateException</code> MUST be thrown.
      *
      * @param address Specifies the address of the target endpoint
+     * @param interfaceName the wsam:InterfaceName</code> element in the
+     * <code>wsa:Metadata</code> element.
      * @param serviceName Qualified name of the service in the WSDL.
      * @param portName Qualified name of the endpoint in the WSDL.
      * @param metadata A list of elements that should be added to the
@@ -495,7 +494,7 @@ public abstract class Provider {
      * @return The newly created endpoint.
      * @since JAX-WS 2.2
      */
-    public Endpoint createEndpoint(String bindingId, Class implementorClass,
+    public Endpoint createEndpoint(String bindingId, Class<?> implementorClass,
             Invoker invoker, WebServiceFeature ... features) {
         throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
     }

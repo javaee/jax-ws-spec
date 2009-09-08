@@ -135,7 +135,7 @@ public @interface FaultAction {
     /**
      * Name of the exception class
      */
-    Class className();
+    Class<? extends Exception> className();
 
     /**
      * Value of WS-Addressing <code>Action</code> message addressing property for the exception
