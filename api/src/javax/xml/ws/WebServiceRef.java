@@ -118,7 +118,7 @@ public @interface WebServiceRef {
     String wsdlLocation() default "";
 
     /**
-     * An optional portable JNDI lookup name that resolves to the target
+     * A portable JNDI lookup name that resolves to the target
      * web service reference.
      *
      * @since JAX-WS 2.2
