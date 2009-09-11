@@ -104,10 +104,10 @@ public @interface WebServiceRef {
      * The service class, always a type extending
      * <code>javax.xml.ws.Service</code>. This element MUST be specified
      * whenever the type of the reference is a service endpoint interface.
-     *
-     * JAX-WS 2.1 API has Class value() default Object.class;
-     * Fixing this raw Class type correctly in JAX-WS 2.2 API.
      */
+    // 2.1 has Class value() default Object.class;
+    // Fixing this raw Class type correctly in 2.2 API. This shouldn't cause
+    // any compatibility issues for applications.
     Class<? extends Service> value() default Service.class;
 
     /**
