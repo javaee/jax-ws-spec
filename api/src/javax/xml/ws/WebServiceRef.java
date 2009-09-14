@@ -71,6 +71,9 @@ public @interface WebServiceRef {
      * the default is the JavaBeans property name corresponding
      * to the method.  For class annotations, there is no default
      * and this MUST be specified.
+     *
+     * The JNDI name can be absolute(with any logical namespace) or relative
+     * to JNDI <code>java:comp/env</code> namespace.
      */
     String name() default "";
 
@@ -87,7 +90,8 @@ public @interface WebServiceRef {
      * A product specific name that this resource should be mapped to.
      * The name of this resource, as defined by the <code>name</code>
      * element or defaulted, is a name that is local to the application
-     * component using the resource.  (It's a name in the JNDI
+     * component using the resource.  (When a relative JNDI name
+     * is specified, then it's a name in the JNDI
      * <code>java:comp/env</code> namespace.)  Many application servers
      * provide a way to map these local names to names of resources
      * known to the application server.  This mapped name is often a
