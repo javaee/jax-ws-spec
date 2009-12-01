@@ -12,9 +12,9 @@
     </description>
 
     <!-- properties -->
-    <property name="release.spec.title"    value="Maintenance Review Draft"/>
+    <property name="release.spec.title"    value="Maintenance Release"/>
     <property name="release.spec.version"  value="2.2"/>
-    <property name="release.spec.date"     value="September 25, 2007"/>
+    <property name="release.spec.date"     value="December 10, 2009"/>
     <property name="release.spec.feedback" value="jsr224-spec-comments@sun.com"/>
 
     <!-- libraries that are referenced when compiling Java source files -->
@@ -130,7 +130,7 @@ href='http://java.sun.com/webservices'>http://java.sun.com/webservices</a></i><b
 <br>Comments to: <a href='mailto:${release.spec.feedback}'><i>${release.spec.feedback}</i></a>
 <br>More information at: <a target='_top'
 href='http://java.sun.com/webservices'><i>http://java.sun.com/webservices</i></a> 
-<p>Copyright &copy; 2007 by Sun Microsystems, Inc., 4150 Network Circle, 
+<p>Copyright &copy; 2009 by Sun Microsystems, Inc., 4150 Network Circle, 
 <br>Santa Clara, California 95054, U.S.A.  All Rights Reserved.  </font>]]>
             </bottom>
         </javadoc>
