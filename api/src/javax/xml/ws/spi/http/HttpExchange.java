@@ -138,7 +138,7 @@ public abstract class HttpExchange {
      * Adds a response header with the given name and value. This method
      * allows a response header to have multiple values. This is a
      * convenience method to add a response header(instead of using the
-     * {link #getResponseHeaders()}).
+     * {@link #getResponseHeaders()}).
      * 
      * @param name the name of the header
      * @param value the additional header value. If it contains octet string,
