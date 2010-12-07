@@ -45,7 +45,7 @@ import java.util.concurrent.Future;
 /** The <code>Dispatch</code> interface provides support 
  *  for the dynamic invocation of a service endpoint operations. The
  *  <code>javax.xml.ws.Service</code>
- *  interface acts as a factory for the creation of <code>Dispatch</code>
+ *  class acts as a factory for the creation of <code>Dispatch</code>
  *  instances.
  *
  *  @since JAX-WS 2.0
