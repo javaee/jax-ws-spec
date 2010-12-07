@@ -169,7 +169,30 @@ public final class AddressingFeature extends WebServiceFeature {
      *
      * @since JAX-WS 2.2
      */
-    public enum Responses { ANONYMOUS, NON_ANONYMOUS, ALL }
+    public enum Responses {
+        /**
+         * Specifies the use of only anonymous
+         * responses. It will result into wsam:AnonymousResponses nested assertion
+         * as specified in
+         * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyanonresponses">
+         * 3.1.2 AnonymousResponses Assertion</a> in the generated WSDL.
+         */
+        ANONYMOUS,
+
+        /**
+         * Specifies the use of only non-anonymous
+         * responses. It will result into
+         * wsam:NonAnonymousResponses nested assertion as specified in
+         * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicynonanonresponses">
+         * 3.1.3 NonAnonymousResponses Assertion</a> in the generated WSDL.
+         */
+        NON_ANONYMOUS, 
+
+        /**
+         * Supports all response types and this is the default
+         */
+        ALL
+    }
 
     private final Responses responses;
 
