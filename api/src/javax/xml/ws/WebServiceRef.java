@@ -140,7 +140,7 @@ public @interface WebServiceRef {
     String mappedName() default "";
 
     /**
-     * The service class, always a type extending
+     * The service class, alwiays a type extending
      * <code>javax.xml.ws.Service</code>. This element MUST be specified
      * whenever the type of the reference is a service endpoint interface.
      */
