@@ -100,7 +100,7 @@ public interface WebServiceContext {
      * Returns a boolean indicating whether the
      * authenticated user is included in the specified
      * logical role. If the user has not been
-     * authenticated, the method returns </code>false</code>.
+     * authenticated, the method returns <code>false</code>.
      *
      * @param role  A <code>String</code> specifying the name of the role
      *

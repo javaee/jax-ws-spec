@@ -110,7 +110,7 @@ public abstract class EndpointReference {
      * <code>eprInfoset</code>. This method delegates to the vendor specific
      * implementation of the {@link javax.xml.ws.spi.Provider#readEndpointReference} method.
      *
-     * @param eprInfoset The <code>EndpointReference<code> infoset to be unmarshalled
+     * @param eprInfoset The <code>EndpointReference</code> infoset to be unmarshalled
      *
      * @return the EndpointReference unmarshalled from <code>eprInfoset</code>
      *    never <code>null</code>
@@ -118,7 +118,7 @@ public abstract class EndpointReference {
      *    if an error occurs while creating the
      *    <code>EndpointReference</code> from the <CODE>eprInfoset</CODE>
      * @throws java.lang.IllegalArgumentException
-     *     if the <code>null</code> <code>eprInfoset</tt> value is given.
+     *     if the <code>null</code> <code>eprInfoset</code> value is given.
      */
     public static EndpointReference readFrom(Source eprInfoset) {
         return Provider.provider().readEndpointReference(eprInfoset);

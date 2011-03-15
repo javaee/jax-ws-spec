@@ -101,7 +101,7 @@ public final class W3CEndpointReferenceBuilder {
      * Java EE application or when running on Java SE.
      *
      * @param address The address of the endpoint to be targeted
-     *      by the returned <code>W3CEndpointReference<code>.
+     *      by the returned <code>W3CEndpointReference</code>.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>address</code> set to the <code>wsa:Address</code>.
@@ -120,7 +120,7 @@ public final class W3CEndpointReferenceBuilder {
      * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
      *
      * @param interfaceName The port type name of the endpoint to be targeted
-     *      by the returned <code>W3CEndpointReference<code>.
+     *      by the returned <code>W3CEndpointReference</code>.
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>interfaceName</code> as <code>wsam:InterfaceName</code>
@@ -140,7 +140,7 @@ public final class W3CEndpointReferenceBuilder {
      * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
      *
      * @param serviceName The service name of the endpoint to be targeted
-     *      by the returned <code>W3CEndpointReference<code>.  This property
+     *      by the returned <code>W3CEndpointReference</code>.  This property
      *      may also be used with the <code>endpointName</code> (portName) 
      *      property to lookup the <code>address</code> of a web service 
      *      endpoint that is published by the same Java EE application.
@@ -165,7 +165,7 @@ public final class W3CEndpointReferenceBuilder {
      * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
      *
      * @param endpointName The name of the endpoint to be targeted
-     *      by the returned <code>W3CEndpointReference<code>. The 
+     *      by the returned <code>W3CEndpointReference</code>. The
      *      <code>endpointName</code> (portName) property may also be
      *      used with the <code>serviceName</code> property to lookup 
      *      the <code>address</code> of a web service 
@@ -202,7 +202,7 @@ public final class W3CEndpointReferenceBuilder {
      *
      * @param wsdlDocumentLocation The location of the WSDL document to
      *      be referenced in the <code>wsa:Metadata</code> of the
-     *     <code>W3CEndpointReference<code>.
+     *     <code>W3CEndpointReference</code>.
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>wsdlDocumentLocation</code> that is to be referenced.
      */

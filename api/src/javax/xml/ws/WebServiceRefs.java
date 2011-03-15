@@ -69,8 +69,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  * proxy instance, and the <code>StockQuoteService</code> service
  * instance are injected using @WebServiceRefs.
  *
- * <code>
- * <pre>
+ * <pre><code>
  *    &#64;WebServiceRefs({&#64;WebServiceRef(name="service/stockquoteservice", value=StockQuoteService.class),
  *                     &#64;WebServiceRef(name="service/stockquoteprovider", type=StockQuoteProvider.class, value=StockQuoteService.class})
  *    public class MyClient {
@@ -82,8 +81,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  *       }
  *       ...
  *    }
- * </pre>
- * </code>
+ * </code></pre>
  *
  * @see WebServiceRef
  * @since 2.0

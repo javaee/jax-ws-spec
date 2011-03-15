@@ -73,16 +73,14 @@ import java.lang.annotation.RetentionPolicy;
  * {@link Addressing}
  * annotation.
  *
- * <code>
- * <pre>
+ * <pre><code>
  *    public class MyClient {
  *       &#64;Addressing
  *       &#64;WebServiceRef(StockQuoteService.class)
  *       private StockQuoteProvider stockQuoteProvider;
  *       ...
  *    }
- * </pre>
- * </code>
+ * </code></pre>
  *
  * <p>
  * If a JAX-WS implementation encounters an unsupported or unrecognized
@@ -130,8 +128,8 @@ public @interface WebServiceRef {
      * <code>java:comp/env</code> namespace.)  Many application servers
      * provide a way to map these local names to names of resources
      * known to the application server.  This mapped name is often a
-     * <i>global</i> JNDI name, but may be a name of any form. <p>
-     * <p/>
+     * <i>global</i> JNDI name, but may be a name of any form.
+     * <p>
      * Application servers are not required to support any particular
      * form or type of mapped name, nor the ability to use mapped names.
      * The mapped name is product-dependent and often installation-dependent.

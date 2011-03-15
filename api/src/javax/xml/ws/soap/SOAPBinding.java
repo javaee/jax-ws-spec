@@ -78,7 +78,7 @@ public interface SOAPBinding extends Binding {
   
   /** Gets the roles played by the SOAP binding instance.
    *
-   *  @return Set<String> The set of roles played by the binding instance.
+   *  @return Set&lt;String> The set of roles played by the binding instance.
   **/
   public Set<String> getRoles();
 

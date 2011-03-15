@@ -474,7 +474,7 @@ public abstract class Endpoint {
      * @param referenceParameters Reference parameters to be associated with the
      * returned <code>EndpointReference</code> instance.
      * @return EndpointReference of type <code>clazz</code> of this 
-     * <code>Endpoint<code> instance.
+     * <code>Endpoint</code> instance.
      * If the returned <code>EndpointReference</code> is of type
      * <code>W3CEndpointReference</code> then it MUST contain the
      * the specified <code>referenceParameters</code>.
