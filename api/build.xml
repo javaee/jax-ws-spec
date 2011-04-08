@@ -14,7 +14,7 @@
     <!-- properties -->
     <property name="release.spec.title"    value="Maintenance Release"/>
     <property name="release.spec.version"  value="2.2"/>
-    <property name="release.spec.date"     value="December 10, 2009"/>
+    <property name="release.spec.date"     value="Jun 15, 2010"/>
     <property name="release.spec.feedback" value="jsr224-spec-comments@sun.com"/>
 
     <!-- libraries that are referenced when compiling Java source files -->
@@ -118,7 +118,7 @@ JAX-WS ${release.spec.version} Runtime Library</h2>
 ${release.spec.title} specification, ${release.spec.date}<br>
 Comments to: <i><a href='mailto:${release.spec.feedback}'>${release.spec.feedback}</a></i><br>
 More information at: <i><a target='_top'
-href='http://java.sun.com/webservices'>http://java.sun.com/webservices</a></i><br>
+href='http://www.oracle.com/technetwork/java/index-jsp-137004.html'>Metro Web Services Overview</a></i><br>
 &nbsp;<br>&nbsp;<br><hr width='65%'><h1>${release.spec.title}</h1><hr width='75%'>
 <br>&nbsp;<br>]]>
             </doctitle>
@@ -129,9 +129,9 @@ href='http://java.sun.com/webservices'>http://java.sun.com/webservices</a></i><b
 <![CDATA[<font size=-1>
 <br>Comments to: <a href='mailto:${release.spec.feedback}'><i>${release.spec.feedback}</i></a>
 <br>More information at: <a target='_top'
-href='http://java.sun.com/webservices'><i>http://java.sun.com/webservices</i></a> 
-<p>Copyright &copy; 2009 by Sun Microsystems, Inc., 4150 Network Circle, 
-<br>Santa Clara, California 95054, U.S.A.  All Rights Reserved.  </font>]]>
+href='http://www.oracle.com/technetwork/java/index-jsp-137004.html'><i>Metro Web Services Overview</i></a> 
+<br>Copyright &copy; 2005, 2011, Oracle and/or its affiliates. All rights reserved.
+</font>]]>
             </bottom>
         </javadoc>
     </target>
