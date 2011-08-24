@@ -50,7 +50,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>javax.xml.ws</groupId>
     <artifactId>jaxws-api</artifactId>
-    <version>2.2.5</version>
+    <version>2.2.6-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>JAX-WS API</name>
@@ -59,9 +59,9 @@
     <url>http://jsr224.java.net/</url>
 
     <scm>
-        <connection>scm:svn:https://svn.java.net/svn/jsr224~svn/tags/jaxws-api-2.2.5</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/jsr224~svn/tags/jaxws-api-2.2.5</developerConnection>
-        <url>http://java.net/projects/stax-ex/sources/svn/show/tags/jaxws-api-2.2.5</url>
+        <connection>scm:svn:https://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</connection>
+        <developerConnection>scm:svn:https://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</developerConnection>
+        <url>http://java.net/projects/stax-ex/sources/svn/show/branches/mr_2_2_new/api</url>
     </scm>
 
     <licenses>
