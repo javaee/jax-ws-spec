@@ -96,6 +96,9 @@ class FactoryFinder {
      */
     static Object find(String factoryId, String fallbackClassName)
     {
+        if (isOsgi()) {
+            return lookupUsingOSGiServiceLoader(factoryId);
+        }
         ClassLoader classLoader;
         try {
             classLoader = Thread.currentThread().getContextClassLoader();
@@ -187,6 +190,32 @@ class FactoryFinder {
             if (Provider.DEFAULT_JAXWSPROVIDER.equals(className))
                 return Class.forName(className);
             throw se;
+        }
+    }
+
+    private static final String OSGI_SERVICE_LOADER_CLASS_NAME = "org.glassfish.hk2.osgiresourcelocator.ServiceLoader";
+
+    private static boolean isOsgi() {
+        try {
+            Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME);
+            return true;
+        } catch (ClassNotFoundException cnfe) {
+        }
+        return false;
+    }
+
+    private static Object lookupUsingOSGiServiceLoader(String factoryId) {
+        try {
+            // Use reflection to avoid having any dependendcy on ServiceLoader class
+            Class serviceClass = Class.forName(factoryId);
+            Class[] args = new Class[]{serviceClass};
+            Class target = Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME);
+            java.lang.reflect.Method m = target.getMethod("lookupProviderInstances");
+            java.util.Iterator iter = ((Iterable) m.invoke(null, args)).iterator();
+            return iter.hasNext() ? iter.next() : null;
+        } catch (Exception e) {
+            // log and continue
+            return null;
         }
     }
 
