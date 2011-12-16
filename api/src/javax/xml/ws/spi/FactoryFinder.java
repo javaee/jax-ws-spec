@@ -210,7 +210,7 @@ class FactoryFinder {
             Class serviceClass = Class.forName(factoryId);
             Class[] args = new Class[]{serviceClass};
             Class target = Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME);
-            java.lang.reflect.Method m = target.getMethod("lookupProviderInstances");
+            java.lang.reflect.Method m = target.getMethod("lookupProviderInstances", Class.class);
             java.util.Iterator iter = ((Iterable) m.invoke(null, args)).iterator();
             return iter.hasNext() ? iter.next() : null;
         } catch (Exception e) {
