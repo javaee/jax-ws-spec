@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2013 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -152,6 +152,7 @@ public final class W3CEndpointReference extends EndpointReference {
     List<Element> elements;
     
     
+    @XmlType(name="address", namespace=W3CEndpointReference.NS)
     private static class Address {
         protected Address() {}
         @XmlValue
@@ -161,6 +162,7 @@ public final class W3CEndpointReference extends EndpointReference {
     }
     
     
+    @XmlType(name="elements", namespace=W3CEndpointReference.NS)
     private static class Elements {
         protected Elements() {}
         @XmlAnyElement
