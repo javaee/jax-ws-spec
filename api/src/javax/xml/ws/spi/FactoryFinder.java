@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2011 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2013 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -109,7 +109,7 @@ class FactoryFinder {
         String serviceId = "META-INF/services/" + factoryId;
         // try to find services in CLASSPATH
         try {
-            InputStream is=null;
+            InputStream is;
             if (classLoader == null) {
                 is=ClassLoader.getSystemResourceAsStream(serviceId);
             } else {
@@ -211,7 +211,7 @@ class FactoryFinder {
             Class[] args = new Class[]{serviceClass};
             Class target = Class.forName(OSGI_SERVICE_LOADER_CLASS_NAME);
             java.lang.reflect.Method m = target.getMethod("lookupProviderInstances", Class.class);
-            java.util.Iterator iter = ((Iterable) m.invoke(null, args)).iterator();
+            java.util.Iterator iter = ((Iterable) m.invoke(null, (Object[]) args)).iterator();
             return iter.hasNext() ? iter.next() : null;
         } catch (Exception e) {
             // log and continue
