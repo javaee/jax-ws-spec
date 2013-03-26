@@ -8,7 +8,7 @@
  * and Distribution License("CDDL") (collectively, the "License").  You
  * may not use this file except in compliance with the License.  You can
  * obtain a copy of the License at
- * https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html
+ * http://glassfish.java.net/public/CDDL+GPL_1_1.html
  * or packager/legal/LICENSE.txt.  See the License for the specific
  * language governing permissions and limitations under the License.
  *
@@ -50,7 +50,7 @@ import javax.xml.ws.Service;
  * web service.
  *
  * This feature can be used during the creation of SEI proxy, and
- * {@link Dispatch} instances on the client side and {@link Endpoint}
+ * {@link javax.xml.ws.Dispatch} instances on the client side and {@link Endpoint}
  * instances on the server side. This feature cannot be used for {@link Service}
  * instance creation on the client side.
  *
