@@ -84,7 +84,7 @@ public final class MTOMFeature extends WebServiceFeature {
      * as attachment.
      * The value of this property MUST always be >= 0. Default value is 0.      
      */
-    private int threshold = 0;
+    private final int threshold;
     
 
     /**
@@ -93,7 +93,8 @@ public final class MTOMFeature extends WebServiceFeature {
      */
     public MTOMFeature() {
         this.enabled = true;
-    }    
+        this.threshold = 0;
+    }
     
     /**
      * Creates an <code>MTOMFeature</code>.
@@ -102,6 +103,7 @@ public final class MTOMFeature extends WebServiceFeature {
      */
     public MTOMFeature(boolean enabled) {
         this.enabled = enabled;
+        this.threshold = 0;
     }
 
 

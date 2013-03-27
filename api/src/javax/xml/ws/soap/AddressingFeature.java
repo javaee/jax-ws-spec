@@ -141,8 +141,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * requires WS-Addressing. If required is true, WS-Addressing headers MUST
      * be present on incoming and outgoing messages.
      */
-    // didn't make it as private final for compatibility
-    /* final */ boolean required;
+    private final boolean required;
 
     /**
      * If addressing is enabled, this property determines if endpoint requires
