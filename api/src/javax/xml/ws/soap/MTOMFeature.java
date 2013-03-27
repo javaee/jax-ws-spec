@@ -84,7 +84,7 @@ public final class MTOMFeature extends WebServiceFeature {
      * as attachment.
      * The value of this property MUST always be >= 0. Default value is 0.      
      */
-    protected int threshold = 0;
+    private int threshold = 0;
     
 
     /**

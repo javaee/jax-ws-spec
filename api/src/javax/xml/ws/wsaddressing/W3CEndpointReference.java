@@ -83,12 +83,11 @@ import java.util.Map;
 @XmlRootElement(name="EndpointReference",namespace=W3CEndpointReference.NS)
 @XmlType(name="EndpointReferenceType",namespace=W3CEndpointReference.NS)
 public final class W3CEndpointReference extends EndpointReference {
-    
+
     private final static JAXBContext w3cjc = getW3CJaxbContext();
 
-    protected W3CEndpointReference() {
-    }
-    
+    static final String NS = "http://www.w3.org/2005/08/addressing";
+
     /**
      * Creates an EPR from infoset representation
      *
@@ -171,5 +170,4 @@ public final class W3CEndpointReference extends EndpointReference {
         Map<QName,String> attributes;
     }
     
-    protected static final String NS = "http://www.w3.org/2005/08/addressing";
 }

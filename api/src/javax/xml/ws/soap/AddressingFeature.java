@@ -142,7 +142,7 @@ public final class AddressingFeature extends WebServiceFeature {
      * be present on incoming and outgoing messages.
      */
     // didn't make it as private final for compatibility
-    protected /* final */ boolean required;
+    /* final */ boolean required;
 
     /**
      * If addressing is enabled, this property determines if endpoint requires
