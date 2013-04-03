@@ -86,10 +86,12 @@ public final class W3CEndpointReference extends EndpointReference {
 
     private final static JAXBContext w3cjc = getW3CJaxbContext();
 
-    static final String NS = "http://www.w3.org/2005/08/addressing";
+    // should be changed to package private, keeping original modifier to keep backwards compatibility
+    protected static final String NS = "http://www.w3.org/2005/08/addressing";
 
     // default constructor forbidden ...
-    private W3CEndpointReference() {
+    // should be private, keeping original modifier to keep backwards compatibility
+    protected W3CEndpointReference() {
     }
 
     /**
