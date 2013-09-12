@@ -53,6 +53,12 @@
     <packaging>jar</packaging>
 
     <name>JAX-WS API</name>
+    
+    <organization>
+        <name>Oracle</name>
+        <url>http://www.oracle.com</url>
+    </organization>
+    
     <inceptionYear>2005</inceptionYear>
     <description>JAX-WS (JSR 224) API</description>
     <url>http://jsr224.java.net/</url>
@@ -98,20 +104,6 @@
             <artifactId>javax.xml.soap-api</artifactId>
             <version>1.3.5</version>
         </dependency>
-
-        <dependency>
-            <groupId>javax.annotation</groupId>
-            <artifactId>javax.annotation-api</artifactId>
-            <version>1.2-b03</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.jws</groupId>
-            <artifactId>jsr181-api</artifactId>
-            <version>1.0-MR1</version>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 
     <properties>
@@ -120,7 +112,9 @@
         <release.spec.feedback>jsr224-spec-comments@sun.com</release.spec.feedback>
 
         <extension.name>javax.xml.ws</extension.name>
-        <spec.version>1.1</spec.version>
+        <spec.version>2.2</spec.version>
+        
+        <non.final>false</non.final>        
 
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <findbugs.threshold>Low</findbugs.threshold>
@@ -241,58 +235,75 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.glassfish.build</groupId>
+                <artifactId>spec-version-maven-plugin</artifactId>
+                <version>1.2</version>
+                <configuration>
+                    <spec>
+                        <nonFinal>${non.final}</nonFinal>
+                        <jarType>api</jarType>
+                        <specVersion>${spec.version}</specVersion>
+                        <specImplVersion>${project.version}</specImplVersion>
+                        <apiPackage>${extension.name}</apiPackage>
+                    </spec>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>set-spec-properties</goal>
+                            <goal>check-module</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
                 <configuration>
-                    <archive>
-                        <manifestEntries>
-                            <Extension-Name>javax.xml.ws</Extension-Name>
-                        </manifestEntries>
-                        <manifest>
-                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-                        </manifest>
-                    </archive>
+                    <useDefaultManifestFile>true</useDefaultManifestFile>
+                    <excludes>
+                        <exclude>**/*.java</exclude>
+                    </excludes>
                 </configuration>
             </plugin>
-
             <plugin>
                 <!-- Configure maven-bundle-plugin which takes care of
                      OSGi packaging -->
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <!-- We don't use extensions as this interfers with
-                     HK2 and that results in hk2 artifacts
-                     being copied as .hk2-jar. Instead, we configure the
-                     plugin to run as part of package phase. By Sahoo.
-                <extensions>true</extensions>
-                -->
                 <configuration>
                     <supportedProjectTypes>
                         <supportedProjectType>jar</supportedProjectType>
-                        <supportedProjectType>bundle</supportedProjectType>
                     </supportedProjectTypes>
                     <instructions>
-                        <!-- embed all compile and runtime scope dependencies -->
-                        <!--<Embed-Dependency>*;scope=compile;inline=true</Embed-Dependency>-->
+                        <Bundle-Version>${spec.bundle.version}</Bundle-Version>
+                        <Bundle-SymbolicName>${spec.bundle.symbolic-name}</Bundle-SymbolicName>
+                        <Extension-Name>${spec.extension.name}</Extension-Name>
+                        <Implementation-Version>${spec.implementation.version}</Implementation-Version>
+                        <Specification-Version>${spec.specification.version}</Specification-Version> 
                         <Export-Package>${extension.name}.*; version=${spec.version}</Export-Package>
                         <DynamicImport-Package>org.glassfish.hk2.osgiresourcelocator</DynamicImport-Package>
-                        <_include>-osgi.bundle</_include>
+                        <Specification-Vendor>Oracle Corporation</Specification-Vendor>
+                        <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
+                        <Implementation-Vendor-Id>org.glassfish</Implementation-Vendor-Id>
                     </instructions>
-                    <!--<unpackBundle>true</unpackBundle>-->
                 </configuration>
                 <executions>
                     <execution>
-                        <id>osgi-bundle</id>
-                        <phase>package</phase>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
                         <goals>
-                            <goal>bundle</goal>
+                            <goal>manifest</goal>
                         </goals>
                     </execution>
                 </executions>
