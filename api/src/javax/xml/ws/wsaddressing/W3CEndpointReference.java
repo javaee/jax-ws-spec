@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2013 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -84,7 +84,7 @@ import java.util.Map;
 @XmlType(name="EndpointReferenceType",namespace=W3CEndpointReference.NS)
 public final class W3CEndpointReference extends EndpointReference {
 
-    private final static JAXBContext w3cjc = getW3CJaxbContext();
+    private final JAXBContext w3cjc = getW3CJaxbContext();
 
     // should be changed to package private, keeping original modifier to keep backwards compatibility
     protected static final String NS = "http://www.w3.org/2005/08/addressing";
