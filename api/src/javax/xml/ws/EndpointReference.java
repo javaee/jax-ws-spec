@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2011 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -96,7 +96,7 @@ import java.io.StringWriter;
  *
  * @see W3CEndpointReference
  * @see Service
- * @since JAX-WS 2.1
+ * @since 1.6, JAX-WS 2.1
  */
 @XmlTransient // to treat this class like Object as far as databinding is concerned (proposed JAXB 2.1 feature)
 public abstract class EndpointReference {

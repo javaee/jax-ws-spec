@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -53,7 +53,7 @@ package javax.xml.ws;
  *  the <code>Provider</code> instance will receive entire protocol messages
  *  or just message payloads.
  *
- *  @since JAX-WS 2.0
+ *  @since 1.6, JAX-WS 2.0
  *
  *  @see javax.xml.transform.Source
  *  @see javax.xml.soap.SOAPMessage

@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -44,7 +44,7 @@ package javax.xml.ws;
 /** The <code>Binding</code> interface is the base interface
  *  for JAX-WS protocol bindings.
  *
- *  @since JAX-WS 2.0
+ *  @since 1.6, JAX-WS 2.0
 **/
 public interface Binding {
 
@@ -76,7 +76,7 @@ public interface Binding {
      * @return String The binding identifier for the port.
      *    Never returns <code>null</code>
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      */
     String getBindingID();      
 }

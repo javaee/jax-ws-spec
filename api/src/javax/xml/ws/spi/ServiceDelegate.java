@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -62,7 +62,7 @@ import javax.xml.ws.WebServiceException;
  * @see javax.xml.ws.Service
  * @see javax.xml.ws.spi.Provider
  *
- * @since JAX-WS 2.0
+ * @since 1.6, JAX-WS 2.0
  */
 public abstract class ServiceDelegate {
     
@@ -134,7 +134,7 @@ public abstract class ServiceDelegate {
      * @see java.lang.reflect.InvocationHandler
      * @see WebServiceFeature
      * 
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      **/
     public abstract <T> T getPort(QName portName,
             Class<T> serviceEndpointInterface, WebServiceFeature... features);    
@@ -209,7 +209,7 @@ public abstract class ServiceDelegate {
      *                      with this port or is unsupported.
      *                  </UL>
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      **/
     public abstract <T> T getPort(EndpointReference endpointReference,
            Class<T> serviceEndpointInterface, WebServiceFeature... features);
@@ -271,7 +271,7 @@ public abstract class ServiceDelegate {
      *
      * @see WebServiceFeature
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      **/
     public abstract <T> T getPort(Class<T> serviceEndpointInterface, 
             WebServiceFeature... features);
@@ -349,7 +349,7 @@ public abstract class ServiceDelegate {
      * @see javax.xml.soap.SOAPMessage
      * @see WebServiceFeature
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      **/
     public abstract <T> Dispatch<T> createDispatch(QName portName, Class<T> type, 
             Service.Mode mode, WebServiceFeature... features);
@@ -421,7 +421,7 @@ public abstract class ServiceDelegate {
      * @see javax.xml.soap.SOAPMessage
      * @see WebServiceFeature
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      **/
     public abstract <T> Dispatch<T> createDispatch(EndpointReference endpointReference,
             Class<T> type, Service.Mode mode, 
@@ -477,7 +477,7 @@ public abstract class ServiceDelegate {
      * @see javax.xml.bind.JAXBContext
      * @see WebServiceFeature
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      **/
     public abstract Dispatch<Object> createDispatch(QName portName,
             JAXBContext context, Service.Mode mode, WebServiceFeature... features);
@@ -547,7 +547,7 @@ public abstract class ServiceDelegate {
      * @see javax.xml.bind.JAXBContext
      * @see WebServiceFeature
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
     **/
     public abstract Dispatch<Object> createDispatch(EndpointReference endpointReference,
             JAXBContext context, Service.Mode mode,

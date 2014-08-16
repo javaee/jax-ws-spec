@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2011 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -56,7 +56,7 @@ import org.w3c.dom.Element;
  *  into an endpoint implementation class using the
  *  <code>Resource</code> annotation.
  *
- *  @since JAX-WS 2.0
+ *  @since 1.6, JAX-WS 2.0
  *
  *  @see javax.annotation.Resource
  **/
@@ -135,7 +135,7 @@ public interface WebServiceContext {
      *
      * @see W3CEndpointReference
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      */
     public EndpointReference getEndpointReference(Element... referenceParameters);
 
@@ -159,7 +159,7 @@ public interface WebServiceContext {
      * @throws WebServiceException If the <code>clazz</code> type of
      * <code>EndpointReference</code> is not supported.
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      **/
     public <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
             Element... referenceParameters);

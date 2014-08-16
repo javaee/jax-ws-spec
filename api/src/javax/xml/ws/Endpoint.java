@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2011 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -76,7 +76,7 @@ import org.w3c.dom.Element;
  * as possible instead of generating new ones based on the annotations
  * present on the implementor.
  *
- * @since JAX-WS 2.0
+ * @since 1.6, JAX-WS 2.0
  *
  * @see javax.xml.ws.Binding
  * @see javax.xml.ws.BindingType
@@ -134,7 +134,7 @@ public abstract class Endpoint {
      *
      *
      * @return The newly created endpoint.
-     * @since JAX-WS 2.2
+     * @since 1.7, JAX-WS 2.2
      *
      */
     public static Endpoint create(Object implementor, WebServiceFeature ... features) {
@@ -181,7 +181,7 @@ public abstract class Endpoint {
      *        </code> parameter will have their default values.
      *
      * @return The newly created endpoint.
-     * @since JAX-WS 2.2
+     * @since 1.7, JAX-WS 2.2
      */
     public static Endpoint create(String bindingId, Object implementor, WebServiceFeature ... features) {
         return Provider.provider().createEndpoint(bindingId, implementor, features);
@@ -281,7 +281,7 @@ public abstract class Endpoint {
      *          If a <code>java.lang.SecurityManger</code>
      *          is being used and the application doesn't have the
      *          <code>WebServicePermission("publishEndpoint")</code> permission.
-     * @since JAX-WS 2.2
+     * @since 1.7, JAX-WS 2.2
      */
     public static Endpoint publish(String address, Object implementor, WebServiceFeature ... features) {
         return Provider.provider().createAndPublishEndpoint(address, implementor, features);
@@ -345,7 +345,7 @@ public abstract class Endpoint {
      *          If a <code>java.lang.SecurityManger</code>
      *          is being used and the application doesn't have the
      *          <code>WebServicePermission("publishEndpoint")</code> permission.
-     * @since JAX-WS 2.2
+     * @since 1.7, JAX-WS 2.2
      */
     public void publish(HttpContext serverContext) {
         throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
@@ -461,7 +461,7 @@ public abstract class Endpoint {
      *
      * @see W3CEndpointReference
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      **/
     public abstract EndpointReference getEndpointReference(Element... referenceParameters);
     
@@ -487,7 +487,7 @@ public abstract class Endpoint {
      * uses the XML/HTTP binding.
      *
      *
-     * @since JAX-WS 2.1
+     * @since 1.6, JAX-WS 2.1
      **/
     public abstract <T extends EndpointReference> T getEndpointReference(Class<T> clazz,
             Element... referenceParameters);
@@ -505,7 +505,7 @@ public abstract class Endpoint {
      * @throws java.lang.IllegalStateException
      *        If the endpoint has been published already or it has been stopped.
      *
-     * @since JAX-WS 2.2
+     * @since 1.7, JAX-WS 2.2
      */
     public void setEndpointContext(EndpointContext ctxt) {
         throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");

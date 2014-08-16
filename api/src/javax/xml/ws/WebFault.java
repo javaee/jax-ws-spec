@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2010 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -51,7 +51,7 @@ import java.lang.annotation.RetentionPolicy;
  * to the local and namespace name of the fault element and the name
  * of the fault bean.
  *
- *  @since JAX-WS 2.0
+ *  @since 1.6, JAX-WS 2.0
 **/
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
@@ -75,7 +75,7 @@ public @interface WebFault {
 
   /**
    *  wsdl:Message's name. Default name is the exception's class name.
-   *  @since JAX-WS 2.2
+   *  @since 1.7, JAX-WS 2.2
    */
   public String messageName() default "";
 
