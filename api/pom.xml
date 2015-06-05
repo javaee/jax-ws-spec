@@ -64,9 +64,9 @@
     <url>http://jsr224.java.net/</url>
 
     <scm>
-        <connection>scm:svn:https://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</developerConnection>
-        <url>http://java.net/projects/stax-ex/sources/svn/show/branches/mr_2_2_new/api</url>
+        <url>http://orahub.oraclecorp.com/fmw-infra-metro/jaxws-api.git</url>
+        <connection>scm:git:git://orahub.oraclecorp.com:fmw-infra-metro/jaxws-api.git</connection>
+        <developerConnection>scm:git:git@orahub.oraclecorp.com:fmw-infra-metro/jaxws-api.git</developerConnection>
     </scm>
 
     <licenses>
