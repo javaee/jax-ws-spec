@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -51,18 +51,18 @@ import javax.xml.ws.WebServiceRef;
 import javax.xml.ws.WebServiceProvider;
 
 /**
- * This feature represents the use of MTOM with a 
+ * This feature represents the use of MTOM with a
  * web service.
  * <p>
  * This annotation MUST only be used in conjunction the
- * <code>javax.jws.WebService</code>, {@link WebServiceProvider},
+ * {@code javax.jws.WebService}, {@link WebServiceProvider},
  * {@link WebServiceRef} annotations.
- * When used with the <code>javax.jws.WebService</code> annotation this
+ * When used with the {@code javax.jws.WebService} annotation this
  * annotation MUST only be used on the service endpoint implementation
  * class.
- * When used with a <code>WebServiceRef</code> annotation, this annotation
+ * When used with a {@code WebServiceRef} annotation, this annotation
  * MUST only be used when a proxy instance is created. The injected SEI
- * proxy, and endpoint MUST honor the values of the <code>MTOM</code>
+ * proxy, and endpoint MUST honor the values of the {@code MTOM}
  * annotation.
  * <p>
  *
@@ -70,7 +70,7 @@ import javax.xml.ws.WebServiceProvider;
  * {@link MTOMFeature}.
  *
  * @since 1.6, JAX-WS 2.1
- */   
+ */
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
@@ -79,12 +79,12 @@ public @interface MTOM {
     /**
      * Specifies if this feature is enabled or disabled.
      */
-    boolean enabled() default true; 
-     
+    boolean enabled() default true;
+
     /**
-     * Property for MTOM threshold value. When MTOM is enabled, binary data above this 
-     * size in bytes will be XOP encoded or sent as attachment. The value of this property 
-     * MUST always be >= 0. Default value is 0.      
-     */         
+     * Property for MTOM threshold value. When MTOM is enabled, binary data above this
+     * size in bytes will be XOP encoded or sent as attachment. The value of this property
+     * MUST always be {@literal >=} 0. Default value is 0.
+     */
     int threshold() default 0;
 }

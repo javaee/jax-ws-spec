@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -50,16 +50,14 @@ import java.security.BasicPermission;
  * with them.
  * <p>
  * The following permission target name is defined:
- * <p>
  * <dl>
  *   <dt>publishEndpoint
  * </dl>
+ * The {@code publishEndpoint} permission allows publishing a
+ * web service endpoint using the {@code publish} methods
+ * defined by the {@code javax.xml.ws.Endpoint} class.
  * <p>
- * The <code>publishEndpoint</code> permission allows publishing a
- * web service endpoint using the <code>publish</code> methods
- * defined by the <code>javax.xml.ws.Endpoint</code> class.
- * <p>
- * Granting <code>publishEndpoint</code> allows the application to be
+ * Granting {@code publishEndpoint} allows the application to be
  * exposed as a network service. Depending on the security of the runtime and
  * the security of the application, this may introduce a security hole that
  * is remotely exploitable.
@@ -79,7 +77,7 @@ public final class WebServicePermission extends BasicPermission {
     /**
      * Creates a new permission with the specified name.
      *
-     * @param name the name of the <code>WebServicePermission</code>
+     * @param name the name of the {@code WebServicePermission}
      */
     public WebServicePermission(String name) {
         super(name);
@@ -88,11 +86,11 @@ public final class WebServicePermission extends BasicPermission {
     /**
      * Creates a new permission with the specified name and actions.
      *
-     * The <code>actions</code> parameter is currently unused and
-     * it should be <code>null</code>.
+     * The {@code actions} parameter is currently unused and
+     * it should be {@code null}.
      *
-     * @param name the name of the <code>WebServicePermission</code>
-     * @param actions should be <code>null</code>
+     * @param name the name of the {@code WebServicePermission}
+     * @param actions should be {@code null}
      */
     public WebServicePermission(String name, String actions) {
         super(name, actions);

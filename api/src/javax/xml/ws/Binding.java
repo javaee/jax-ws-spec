@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -41,7 +41,7 @@
 package javax.xml.ws;
 
 
-/** The <code>Binding</code> interface is the base interface
+/** The {@code Binding} interface is the base interface
  *  for JAX-WS protocol bindings.
  *
  *  @since 1.6, JAX-WS 2.0
@@ -50,10 +50,10 @@ public interface Binding {
 
    /** 
     * Gets a copy of the handler chain for a protocol binding instance.
-    * If the returned chain is modified a call to <code>setHandlerChain</code>
+    * If the returned chain is modified a call to {@code setHandlerChain}
     * is required to configure the binding instance with the new chain.
     *
-    *  @return java.util.List&lt;Handler> Handler chain
+    *  @return {@code java.util.List<Handler>} Handler chain
     */
     public java.util.List<javax.xml.ws.handler.Handler> getHandlerChain();
 
@@ -74,7 +74,7 @@ public interface Binding {
      * Get the URI for this binding instance. 
      *
      * @return String The binding identifier for the port.
-     *    Never returns <code>null</code>
+     *    Never returns {@code null}
      *
      * @since 1.6, JAX-WS 2.1
      */

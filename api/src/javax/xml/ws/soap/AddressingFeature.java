@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -67,10 +67,10 @@ import javax.xml.ws.Service;
  *       receiver.
  * </ul>
  * <p>
- * If the feature is enabled, the <code>required</code> property determines
+ * If the feature is enabled, the {@code required} property determines
  * whether the endpoint requires WS-Addressing. If it is set true,
  * WS-Addressing headers MUST be present on incoming and outgoing messages.
- * By default the <code>required</code> property is <code>false</code>.
+ * By default the {@code required} property is {@code false}.
  *
  * <p>
  * If the web service developer has not explicitly enabled this feature,
@@ -90,31 +90,31 @@ import javax.xml.ws.Service;
  *
  * <p>
  * <b>Example 1: </b>Possible Policy Assertion in the generated WSDL for
- * <code>&#64;Addressing</code>
- * <pre>
- *   &lt;wsam:Addressing wsp:Optional="true">
- *     &lt;wsp:Policy/>
- *   &lt;/wsam:Addressing>
+ * {@code @Addressing}
+ * <pre> {@code
+ *   <wsam:Addressing wsp:Optional="true">
+ *     <wsp:Policy/>
+ *   </wsam:Addressing> }
  * </pre>
  *
  * <p>
  * <b>Example 2: </b>Possible Policy Assertion in the generated WSDL for
- * <code>&#64;Addressing(required=true)</code>
- * <pre>
- *   &lt;wsam:Addressing>
- *     &lt;wsp:Policy/>
- *   &lt;/wsam:Addressing>
+ * {@code @Addressing(required=true)}
+ * <pre> {@code
+ *   <wsam:Addressing>
+ *     <wsp:Policy/>
+ *   </wsam:Addressing> }
  * </pre>
  *
  * <p>
  * <b>Example 3: </b>Possible Policy Assertion in the generated WSDL for
- * <code>&#64;Addressing(required=true, responses=Responses.ANONYMOUS)</code>
- * <pre>
- *   &lt;wsam:Addressing>
- *      &lt;wsp:Policy>
- *        &lt;wsam:AnonymousResponses/>
- *      &lt;/wsp:Policy>
- *   &lt;/wsam:Addressing>
+ * {@code @Addressing(required=true, responses=Responses.ANONYMOUS)}
+ * <pre> {@code
+ *   <wsam:Addressing>
+ *      <wsp:Policy>
+ *        <wsam:AnonymousResponses/>
+ *      </wsp:Policy>
+ *   </wsam:Addressing> }
  * </pre>
  *
  * <p>
@@ -196,7 +196,7 @@ public final class AddressingFeature extends WebServiceFeature {
     private final Responses responses;
 
     /**
-     * Creates and configures an <code>AddressingFeature</code> with the
+     * Creates and configures an {@code AddressingFeature} with the
      * use of addressing requirements. The created feature enables
      * ws-addressing i.e. supports ws-addressing but doesn't require
      * its use. It is also configured to accept all the response types.
@@ -206,8 +206,8 @@ public final class AddressingFeature extends WebServiceFeature {
     }
     
     /**
-     * Creates and configures an <code>AddressingFeature</code> with the
-     * use of addressing requirements. If <code>enabled</code> is true,
+     * Creates and configures an {@code AddressingFeature} with the
+     * use of addressing requirements. If {@code enabled} is true,
      * it enables ws-addressing i.e. supports ws-addressing but doesn't
      * require its use. It also configures to accept all the response types.
      * 
@@ -219,9 +219,9 @@ public final class AddressingFeature extends WebServiceFeature {
     }
 
     /** 
-     * Creates and configures an <code>AddressingFeature</code> with the
-     * use of addressing requirements. If <code>enabled</code> and
-     * <code>required</code> are true, it enables ws-addressing and
+     * Creates and configures an {@code AddressingFeature} with the
+     * use of addressing requirements. If {@code enabled} and
+     * {@code required} are true, it enables ws-addressing and
      * requires its use. It also configures to accept all the response types.
      *
      * @param enabled true enables ws-addressing i.e.ws-addressing
@@ -233,11 +233,11 @@ public final class AddressingFeature extends WebServiceFeature {
     }
 
     /**
-     * Creates and configures an <code>AddressingFeature</code> with the
-     * use of addressing requirements. If <code>enabled</code> and
-     * <code>required</code> are true, it enables ws-addressing and
+     * Creates and configures an {@code AddressingFeature} with the
+     * use of addressing requirements. If {@code enabled} and
+     * {@code required} are true, it enables ws-addressing and
      * requires its use. Also, the response types can be configured using
-     * <code>responses</code> parameter.
+     * {@code responses} parameter.
      *
      * @param enabled true enables ws-addressing i.e.ws-addressing
      * is supported but doesn't require its use
@@ -275,7 +275,6 @@ public final class AddressingFeature extends WebServiceFeature {
      * requires the use of anonymous responses, or non-anonymous responses,
      * or all responses.
      *
-     * <p>
      * @return {@link Responses#ALL} when endpoint supports all types of
      * responses,
      *         {@link Responses#ANONYMOUS} when endpoint requires the use of

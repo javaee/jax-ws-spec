@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -42,12 +42,12 @@ package javax.xml.ws.handler;
 import java.util.Map;
 
 /**
- * The interface <code>MessageContext</code> abstracts the message
- * context that is processed by a handler in the <code>handle</code>
+ * The interface {@code MessageContext} abstracts the message
+ * context that is processed by a handler in the {@code handle}
  * method.
  *
- * <p>The <code>MessageContext</code> interface provides methods to
- * manage a property set. <code>MessageContext</code> properties
+ * <p>The {@code MessageContext} interface provides methods to
+ * manage a property set. {@code MessageContext} properties
  * enable handlers in a handler chain to share processing related
  * state.
  *
@@ -56,8 +56,8 @@ import java.util.Map;
 public interface MessageContext extends Map<String, Object> {
     
     /**
-     * Standard property: message direction, <code>true</code> for
-     * outbound messages, <code>false</code> for inbound.
+     * Standard property: message direction, {@code true} for
+     * outbound messages, {@code false} for inbound.
      * <p>Type: boolean
      */
     public static final String MESSAGE_OUTBOUND_PROPERTY =
@@ -66,7 +66,7 @@ public interface MessageContext extends Map<String, Object> {
     /**
      * Standard property: Map of attachments to a message for the inbound
      * message, key is  the MIME Content-ID, value is a DataHandler.
-     * <p>Type: java.util.Map&lt;String,DataHandler>
+     * <p>Type: {@code java.util.Map<String, DataHandler>}
      */
     public static final String INBOUND_MESSAGE_ATTACHMENTS =
             "javax.xml.ws.binding.attachments.inbound";
@@ -74,7 +74,7 @@ public interface MessageContext extends Map<String, Object> {
     /**
      * Standard property: Map of attachments to a message for the outbound
      * message, key is the MIME Content-ID, value is a DataHandler.
-     * <p>Type: java.util.Map&lt;String,DataHandler>
+     * <p>Type: {@code java.util.Map<String, DataHandler>}
      */
     public static final String OUTBOUND_MESSAGE_ATTACHMENTS =
             "javax.xml.ws.binding.attachments.outbound";
@@ -123,14 +123,14 @@ public interface MessageContext extends Map<String, Object> {
     
     /**
      * Standard property: HTTP request headers.
-     * <p>Type: java.util.Map&lt;java.lang.String, java.util.List&lt;java.lang.String>>
+     * <p>Type: {@code java.util.Map<java.lang.String, java.util.List<java.lang.String>>}
      */
     public static final String HTTP_REQUEST_HEADERS =
             "javax.xml.ws.http.request.headers";
     
     /**
      * Standard property: HTTP response headers.
-     * <p>Type: java.util.Map&lt;java.lang.String, java.util.List&lt;java.lang.String>>
+     * <p>Type: {@code java.util.Map<java.lang.String, java.util.List<java.lang.String>>}
      */
     public static final String HTTP_RESPONSE_HEADERS =
             "javax.xml.ws.http.response.headers";
@@ -181,7 +181,7 @@ public interface MessageContext extends Map<String, Object> {
      * Standard property: WS Addressing Reference Parameters.
      * The list MUST include all SOAP headers marked with the
      * wsa:IsReferenceParameter="true" attribute.
-     * <p>Type: List&lt;Element>
+     * <p>Type: {@code List<Element>}
      *
      * @since 1.6, JAX-WS 2.1
      */
@@ -189,10 +189,10 @@ public interface MessageContext extends Map<String, Object> {
             "javax.xml.ws.reference.parameters";
     
     /**
-     * Property scope. Properties scoped as <code>APPLICATION</code> are
+     * Property scope. Properties scoped as {@code APPLICATION} are
      * visible to handlers,
      * client applications and service endpoints; properties scoped as
-     * <code>HANDLER</code>
+     * {@code HANDLER}
      * are only normally visible to handlers.
      */
     public enum Scope {APPLICATION, HANDLER};
@@ -201,7 +201,7 @@ public interface MessageContext extends Map<String, Object> {
      * Sets the scope of a property.
      *
      * @param name Name of the property associated with the
-     *             <code>MessageContext</code>
+     *             {@code MessageContext}
      * @param scope Desired scope of the property
      * @throws java.lang.IllegalArgumentException if an illegal
      *             property name is specified

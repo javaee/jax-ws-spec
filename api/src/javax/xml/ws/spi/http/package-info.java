@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2009-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2009-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -62,7 +62,7 @@
   object encapsulates a HTTP request and a response.
   </ol>
 
-  <pre>
+  <pre>{@literal
   Container                               JAX-WS runtime
   ---------                               --------------
   1. Creates Invoker1, ... InvokerN
@@ -79,10 +79,10 @@
  10. EndpointN.publish(HttpContextN)  --> 11. creates HttpHandlerN
                                          HttpContextN.setHandler(HttpHandlerN)
 
-  </pre>
+  }</pre>
 
   The request processing is done as below(for every request):
-  <pre>
+  <pre>{@literal
   Container                               JAX-WS runtime
   ---------                               --------------
   1. Creates a HttpExchange
@@ -91,14 +91,14 @@
                                       <-- 5. Calls Invoker
   6. Invokes the actual instance
                                           7. Writes the response to HttpExchange
-  </pre>
+  }</pre>
 
   <p>
   The portable undeployment is done as below:
   <pre>
   Container
   ---------
-  1. @preDestroy on instances
+  1. {@literal @}preDestroy on instances
   2. Endpoint1.stop()
   ...
   3. EndpointN.stop()
