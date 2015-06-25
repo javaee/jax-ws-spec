@@ -174,13 +174,14 @@ public final class W3CEndpointReferenceBuilder {
      *
      * @return A <code>W3CEndpointReferenceBuilder</code> instance with
      *   the <code>endpointName</code> as
-     * <code>wsam:ServiceName/@EndpointName</code> in the
-     * <code>wsa:Metadata</code> element.
+     *   <code>wsam:ServiceName/@EndpointName</code> in the
+     *   <code>wsa:Metadata</code> element.
      *
-     * @throws IllegalStateException, if the <code>serviceName</code>
-     * has not been set.
-     * @throws IllegalArgumentException, if the <code>endpointName</code>'s
-     * Namespace URI doesn't match <code>serviceName</code>'s Namespace URI
+     * @throws java.lang.IllegalStateException if the <code>serviceName</code>
+     *   has not been set.
+     *
+     * @throws java.lang.IllegalArgumentException if the <code>endpointName</code>'s
+     *   Namespace URI doesn't match <code>serviceName</code>'s Namespace URI
      *
      */
     public W3CEndpointReferenceBuilder endpointName(QName endpointName) {

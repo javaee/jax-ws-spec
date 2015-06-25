@@ -70,7 +70,7 @@ public interface SOAPMessageContext
   /** Sets the SOAPMessage in this message context
    *
    *  @param  message SOAP message
-   *  @throws WebServiceException If any error during the setting
+   *  @throws javax.xml.ws.WebServiceException If any error during the setting
    *          of the <code>SOAPMessage</code> in this message context
    *  @throws java.lang.UnsupportedOperationException If this
    *          operation is not supported
@@ -91,7 +91,7 @@ public interface SOAPMessageContext
    *  @return An array of unmarshalled headers; returns an empty array if no 
    *          message is present in this message context or no headers match
    *          the supplied qualified name.
-   *  @throws WebServiceException If an error occurs when using the supplied
+   *  @throws javax.xml.ws.WebServiceException If an error occurs when using the supplied
    *     <code>JAXBContext</code> to unmarshall. The cause of
    *     the <code>WebServiceException</code> is the original <code>JAXBException</code>.
   **/
