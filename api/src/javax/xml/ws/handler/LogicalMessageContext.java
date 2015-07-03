@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (C) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -42,8 +42,8 @@ package javax.xml.ws.handler;
 
 import javax.xml.ws.LogicalMessage;
 
-/** The <code>LogicalMessageContext</code> interface extends 
- *  <code>MessageContext</code> to
+/** The {@code LogicalMessageContext} interface extends
+ *  {@code MessageContext} to
  *  provide access to a the contained message as a protocol neutral
  *  LogicalMessage
  * 
@@ -54,7 +54,7 @@ public interface LogicalMessageContext
 
   /** Gets the message from this message context
    *
-   *  @return The contained message; returns <code>null</code> if no 
+   *  @return The contained message; returns {@code null} if no
    *          message is present in this message context
   **/
   public LogicalMessage getMessage();

@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (C) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -44,7 +44,7 @@ import javax.xml.namespace.QName;
 import javax.xml.ws.handler.Handler;
 import java.util.Set;
 
-/** The <code>SOAPHandler</code> class extends <code>Handler</code>
+/** The {@code SOAPHandler} class extends {@code Handler}
  *  to provide typesafety for the message context parameter and add a method
  *  to obtain access to the headers that may be processed by the handler.
  * 
@@ -56,8 +56,8 @@ public interface SOAPHandler<T extends SOAPMessageContext>
   /** Gets the header blocks that can be processed by this Handler
    *  instance.
    *
-   *  @return Set of <code>QNames</code> of header blocks processed by this
-   *           handler instance. <code>QName</code> is the qualified 
+   *  @return Set of {@code QNames} of header blocks processed by this
+   *           handler instance. {@code QName} is the qualified
    *           name of the outermost element of the Header block.
   **/
   Set<QName> getHeaders();

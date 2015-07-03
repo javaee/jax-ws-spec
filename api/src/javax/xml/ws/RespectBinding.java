@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -49,18 +49,18 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 
 
 /**
- * This feature clarifies the use of the <code>wsdl:binding</code>
+ * This feature clarifies the use of the {@code wsdl:binding}
  * in a JAX-WS runtime.
  * <p>
  * This annotation MUST only be used in conjunction the
- * <code>javax.jws.WebService</code>, {@link WebServiceProvider},
+ * {@code javax.jws.WebService}, {@link WebServiceProvider},
  * {@link WebServiceRef} annotations.
- * When used with the <code>javax.jws.WebService</code> annotation this
+ * When used with the {@code javax.jws.WebService} annotation this
  * annotation MUST only be used on the service endpoint implementation
  * class.
- * When used with a <code>WebServiceRef</code> annotation, this annotation
+ * When used with a {@code WebServiceRef} annotation, this annotation
  * MUST only be used when a proxy instance is created. The injected SEI
- * proxy, and endpoint MUST honor the values of the <code>RespectBinding</code>
+ * proxy, and endpoint MUST honor the values of the {@code RespectBinding}
  * annotation.
  * <p>
  *

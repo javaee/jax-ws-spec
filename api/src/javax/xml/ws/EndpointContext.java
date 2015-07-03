@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2009-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2009-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -44,7 +44,7 @@ import javax.xml.ws.Endpoint;
 import java.util.Set;
 
 /**
- * <code>EndpointContext</code> allows multiple endpoints in an application
+ * {@code EndpointContext} allows multiple endpoints in an application
  * to share any information. For example, servlet application's war may
  * contain multiple endpoints and these endpoints can get addresses of each
  * other by sharing this context. If multiple endpoints share different

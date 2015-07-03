@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -47,7 +47,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- *  The <code>BindingType</code> annotation is used to
+ *  The {@code BindingType} annotation is used to
  *  specify the binding to use for a web service
  *  endpoint implementation class.
  *  <p>
@@ -65,7 +65,7 @@ public @interface BindingType {
       * A binding identifier (a URI).
       * If not specified, the default is the SOAP 1.1 / HTTP binding.
       * <p>
-      * See the <code>SOAPBinding</code> and <code>HTTPBinding</code>
+      * See the {@code SOAPBinding} and {@code HTTPBinding}
       * for the definition of the standard binding identifiers.
       *
       * @see javax.xml.ws.Binding

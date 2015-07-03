@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -49,7 +49,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * The <code>WebServiceRef</code> annotation is used to
+ * The {@code WebServiceRef} annotation is used to
  * define a reference to a web service and
  * (optionally) an injection target for it.
  * It can be used to inject both service and proxy
@@ -62,30 +62,30 @@ import java.lang.annotation.RetentionPolicy;
  * Web service references are resources in the Java EE 5 sense.
  * The annotations (for example, {@link Addressing}) annotated with
  * meta-annotation {@link WebServiceFeatureAnnotation}
- * can be used in conjunction with <code>WebServiceRef</code>.
+ * can be used in conjunction with {@code WebServiceRef}.
  * The created reference MUST be configured with annotation's web service
  * feature.
  *
  * <p>
  * For example, in the code below, the injected 
- * <code>StockQuoteProvider</code> proxy MUST
+ * {@code StockQuoteProvider} proxy MUST
  * have WS-Addressing enabled as specifed by the
  * {@link Addressing}
  * annotation.
  *
- * <pre><code>
+ * <pre>{@code
  *    public class MyClient {
  *       &#64;Addressing
  *       &#64;WebServiceRef(StockQuoteService.class)
  *       private StockQuoteProvider stockQuoteProvider;
  *       ...
  *    }
- * </code></pre>
+ * }</pre>
  *
  * <p>
  * If a JAX-WS implementation encounters an unsupported or unrecognized
- * annotation annotated with the <code>WebServiceFeatureAnnotation</code>
- * that is specified with <code>WebServiceRef</code>, an ERROR MUST be given.
+ * annotation annotated with the {@code WebServiceFeatureAnnotation}
+ * that is specified with {@code WebServiceRef}, an ERROR MUST be given.
  * 
  * @see javax.annotation.Resource
  * @see WebServiceFeatureAnnotation
@@ -106,7 +106,7 @@ public @interface WebServiceRef {
      * and this MUST be specified.
      *
      * The JNDI name can be absolute(with any logical namespace) or relative
-     * to JNDI <code>java:comp/env</code> namespace.
+     * to JNDI {@code java:comp/env} namespace.
      */
     String name() default "";
 
@@ -121,11 +121,11 @@ public @interface WebServiceRef {
 
     /**
      * A product specific name that this resource should be mapped to.
-     * The name of this resource, as defined by the <code>name</code>
+     * The name of this resource, as defined by the {@code name}
      * element or defaulted, is a name that is local to the application
      * component using the resource.  (When a relative JNDI name
      * is specified, then it's a name in the JNDI
-     * <code>java:comp/env</code> namespace.)  Many application servers
+     * {@code java:comp/env} namespace.)  Many application servers
      * provide a way to map these local names to names of resources
      * known to the application server.  This mapped name is often a
      * <i>global</i> JNDI name, but may be a name of any form.
@@ -139,7 +139,7 @@ public @interface WebServiceRef {
 
     /**
      * The service class, always a type extending
-     * <code>javax.xml.ws.Service</code>. This element MUST be specified
+     * {@code javax.xml.ws.Service}. This element MUST be specified
      * whenever the type of the reference is a service endpoint interface.
      */
     // 2.1 has Class value() default Object.class;

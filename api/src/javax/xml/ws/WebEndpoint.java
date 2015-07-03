@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -47,13 +47,13 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
 
 /** 
- *  Used to annotate the <code>get<em>PortName</em>()</code>
+ *  Used to annotate the {@code get<em>PortName</em>()}
  *  methods of a generated service interface.
  *
  *  <p>The information specified in this annotation is sufficient
- *  to uniquely identify a <code>wsdl:port</code> element
- *  inside a <code>wsdl:service</code>. The latter is
- *  determined based on the value of the <code>WebServiceClient</code>
+ *  to uniquely identify a {@code wsdl:port} element
+ *  inside a {@code wsdl:service}. The latter is
+ *  determined based on the value of the {@code WebServiceClient}
  *  annotation on the generated service interface itself.
  *
  *  @since 1.6, JAX-WS 2.0

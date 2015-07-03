@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -47,7 +47,7 @@ import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.*;
 
 /**
- * The <code>WebServiceRefs</code> annotation allows
+ * The {@code WebServiceRefs} annotation allows
  * multiple web service references to be declared at the
  * class level.
  *
@@ -65,11 +65,11 @@ import static java.lang.annotation.RetentionPolicy.*;
  * to inject the resource along with its features.
  *
  * <p>
- * <b>Example</b>: The <code>StockQuoteProvider</code>
- * proxy instance, and the <code>StockQuoteService</code> service
+ * <b>Example</b>: The {@code StockQuoteProvider}
+ * proxy instance, and the {@code StockQuoteService} service
  * instance are injected using @WebServiceRefs.
  *
- * <pre><code>
+ * <pre>{@code
  *    &#64;WebServiceRefs({&#64;WebServiceRef(name="service/stockquoteservice", value=StockQuoteService.class),
  *                     &#64;WebServiceRef(name="service/stockquoteprovider", type=StockQuoteProvider.class, value=StockQuoteService.class})
  *    public class MyClient {
@@ -81,7 +81,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  *       }
  *       ...
  *    }
- * </code></pre>
+ * }</pre>
  *
  * @see WebServiceRef
  * @since 1.6, JAX-WS 2.0

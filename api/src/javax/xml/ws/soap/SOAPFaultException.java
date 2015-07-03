@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (C) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -42,18 +42,18 @@ package javax.xml.ws.soap;
 
 import javax.xml.soap.SOAPFault;
 
-/** The <code>SOAPFaultException</code> exception represents a
+/** The {@code SOAPFaultException} exception represents a
  *  SOAP 1.1 or 1.2 fault.
  *
- *  <p>A <code>SOAPFaultException</code> wraps a SAAJ <code>SOAPFault</code>
+ *  <p>A {@code SOAPFaultException} wraps a SAAJ {@code SOAPFault}
  *  that manages the SOAP-specific representation of faults.
- *  The <code>createFault</code> method of
- *  <code>javax.xml.soap.SOAPFactory</code> may be used to create an instance
- *  of <code>javax.xml.soap.SOAPFault</code> for use with the
- *  constructor. <code>SOAPBinding</code> contains an accessor for the
- *  <code>SOAPFactory</code> used by the binding instance.
+ *  The {@code createFault} method of
+ *  {@code javax.xml.soap.SOAPFactory} may be used to create an instance
+ *  of {@code javax.xml.soap.SOAPFault} for use with the
+ *  constructor. {@code SOAPBinding} contains an accessor for the
+ *  {@code SOAPFactory} used by the binding instance.
  *
- *  <p>Note that the value of <code>getFault</code> is the only part of the
+ *  <p>Note that the value of {@code getFault} is the only part of the
  *  exception used when searializing a SOAP fault.
  *
  *  <p>Refer to the SOAP specification for a complete
@@ -70,7 +70,7 @@ public class SOAPFaultException extends javax.xml.ws.ProtocolException  {
     private SOAPFault fault;
     
     /** Constructor for SOAPFaultException
-     *  @param fault   <code>SOAPFault</code> representing the fault
+     *  @param fault   {@code SOAPFault} representing the fault
      *
      *  @see javax.xml.soap.SOAPFactory#createFault
      **/
@@ -79,9 +79,9 @@ public class SOAPFaultException extends javax.xml.ws.ProtocolException  {
         this.fault = fault;
     }
     
-    /** Gets the embedded <code>SOAPFault</code> instance.
+    /** Gets the embedded {@code SOAPFault} instance.
      *
-     *  @return <code>javax.xml.soap.SOAPFault</code> SOAP
+     *  @return {@code javax.xml.soap.SOAPFault} SOAP
      *          fault element
      **/
     public javax.xml.soap.SOAPFault getFault() {

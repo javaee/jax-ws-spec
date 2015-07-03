@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -43,7 +43,7 @@ package javax.xml.ws;
 import javax.xml.transform.Source;
 import javax.xml.bind.JAXBContext;
 
-/** The <code>LogicalMessage</code> interface represents a
+/** The {@code LogicalMessage} interface represents a
  *  protocol agnostic XML message and contains methods that
  *  provide access to the payload of the message.
  *
@@ -53,17 +53,17 @@ public interface LogicalMessage {
 
   /** Gets the message payload as an XML source, may be called
    *  multiple times on the same LogicalMessage instance, always
-   *  returns a new <code>Source</code> that may be used to retrieve the entire
+   *  returns a new {@code Source} that may be used to retrieve the entire
    *  message payload.
    *
-   *  <p>If the returned <code>Source</code> is an instance of 
-   *  <code>DOMSource</code>, then
+   *  <p>If the returned {@code Source} is an instance of
+   *  {@code DOMSource}, then
    *  modifications to the encapsulated DOM tree change the message
    *  payload in-place, there is no need to susequently call
-   *  <code>setPayload</code>. Other types of <code>Source</code> provide only
+   *  {@code setPayload}. Other types of {@code Source} provide only
    *  read access to the message payload.
    *
-   *  @return The contained message payload; returns <code>null</code> if no 
+   *  @return The contained message payload; returns {@code null} if no
    *          payload is present in this message.
   **/
   public Source getPayload();
@@ -80,11 +80,11 @@ public interface LogicalMessage {
 
   /** Gets the message payload as a JAXB object. Note that there is no
    *  connection between the returned object and the message payload,
-   *  changes to the payload require calling <code>setPayload</code>.
+   *  changes to the payload require calling {@code setPayload}.
    *
    *  @param  context The JAXBContext that should be used to unmarshall
    *          the message payload
-   *  @return The contained message payload; returns <code>null</code> if no 
+   *  @return The contained message payload; returns {@code null} if no
    *          payload is present in this message
    *  @throws WebServiceException If an error occurs when using a supplied
    *     JAXBContext to unmarshall the payload. The cause of
