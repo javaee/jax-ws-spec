@@ -178,7 +178,7 @@ public final class W3CEndpointReferenceBuilder {
      *   {@code wsa:Metadata} element.
      *
      * @throws java.lang.IllegalStateException if the {@code serviceName}
-     *   has not been set.
+     *   has not been set
      *
      * @throws java.lang.IllegalArgumentException if the {@code endpointName}'s
      *   Namespace URI doesn't match {@code serviceName}'s Namespace URI

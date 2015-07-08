@@ -87,7 +87,7 @@ import java.io.StringWriter;
  * <p>
  * JAX-WS implementors are expected to extract the XML infoset
  * from an {@code EndpointReferece} using the
- * {@code {@link EndpointReference#writeTo}}
+ * {@link EndpointReference#writeTo}
  * method.
  * <p>
  * JAXB will bind this class to xs:anyType. If a better binding

@@ -69,9 +69,9 @@ import static java.lang.annotation.RetentionPolicy.*;
  * proxy instance, and the {@code StockQuoteService} service
  * instance are injected using @WebServiceRefs.
  *
- * <pre>{@code
- *    &#64;WebServiceRefs({&#64;WebServiceRef(name="service/stockquoteservice", value=StockQuoteService.class),
- *                     &#64;WebServiceRef(name="service/stockquoteprovider", type=StockQuoteProvider.class, value=StockQuoteService.class})
+ * <pre>
+ *    {@literal @}WebServiceRefs({{@literal @}WebServiceRef(name="service/stockquoteservice", value=StockQuoteService.class),
+ *                     {@literal @}WebServiceRef(name="service/stockquoteprovider", type=StockQuoteProvider.class, value=StockQuoteService.class})
  *    public class MyClient {
  *        void init() {
  *            Context ic = new InitialContext();
@@ -81,7 +81,7 @@ import static java.lang.annotation.RetentionPolicy.*;
  *       }
  *       ...
  *    }
- * }</pre>
+ * </pre>
  *
  * @see WebServiceRef
  * @since 1.6, JAX-WS 2.0

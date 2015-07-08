@@ -73,14 +73,14 @@ import java.lang.annotation.RetentionPolicy;
  * {@link Addressing}
  * annotation.
  *
- * <pre>{@code
+ * <pre>
  *    public class MyClient {
- *       &#64;Addressing
- *       &#64;WebServiceRef(StockQuoteService.class)
+ *       {@literal @}Addressing
+ *       {@literal @}WebServiceRef(StockQuoteService.class)
  *       private StockQuoteProvider stockQuoteProvider;
  *       ...
  *    }
- * }</pre>
+ * </pre>
  *
  * <p>
  * If a JAX-WS implementation encounters an unsupported or unrecognized

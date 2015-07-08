@@ -44,9 +44,9 @@ package javax.xml.ws;
  *  <p>Service endpoints may implement the {@code Provider}
  *  interface as a dynamic alternative to an SEI.
  *
- *  <p>Implementations are required to support {@code Provider&lt;Source&gt;},
- *  {@code Provider&lt;SOAPMessage&gt;} and
- *  {@code Provider&lt;DataSource&gt;}, depending on the binding
+ *  <p>Implementations are required to support {@code Provider<Source>},
+ *  {@code Provider<SOAPMessage>} and
+ *  {@code Provider<DataSource>}, depending on the binding
  *  in use and the service mode.
  *
  *  <p>The {@code ServiceMode} annotation can be used to control whether

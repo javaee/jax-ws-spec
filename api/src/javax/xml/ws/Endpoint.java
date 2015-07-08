@@ -370,7 +370,7 @@ public abstract class Endpoint {
     /**
      * Returns a list of metadata documents for the service.
      *
-     * @return {@code List&lt;javax.xml.transform.Source&gt;} A list of metadata documents for the service
+     * @return {@code List<javax.xml.transform.Source>} A list of metadata documents for the service
      **/
     public abstract List<javax.xml.transform.Source> getMetadata();
     

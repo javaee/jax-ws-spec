@@ -47,7 +47,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
 
 /** 
- *  Used to annotate the {@code get<em>PortName</em>()}
+ *  Used to annotate the <code>get<em>PortName</em>()</code>
  *  methods of a generated service interface.
  *
  *  <p>The information specified in this annotation is sufficient
