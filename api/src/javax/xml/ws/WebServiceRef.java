@@ -67,32 +67,32 @@ import java.lang.annotation.RetentionPolicy;
  * feature.
  *
  * <p>
- * For example, in the code below, the injected 
+ * For example, in the code below, the injected
  * {@code StockQuoteProvider} proxy MUST
  * have WS-Addressing enabled as specifed by the
  * {@link Addressing}
  * annotation.
  *
- * <pre>
+ * <pre><code>
  *    public class MyClient {
  *       {@literal @}Addressing
  *       {@literal @}WebServiceRef(StockQuoteService.class)
  *       private StockQuoteProvider stockQuoteProvider;
  *       ...
  *    }
- * </pre>
+ * </code></pre>
  *
  * <p>
  * If a JAX-WS implementation encounters an unsupported or unrecognized
  * annotation annotated with the {@code WebServiceFeatureAnnotation}
  * that is specified with {@code WebServiceRef}, an ERROR MUST be given.
- * 
+ *
  * @see javax.annotation.Resource
  * @see WebServiceFeatureAnnotation
  *
  * @since 1.6, JAX-WS 2.0
  *
-**/
+ **/
 
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
