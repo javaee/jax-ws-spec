@@ -66,12 +66,12 @@
 #        15) - sys. property - > sys.property
 #
 
-#export JDK_CONF_DIR=lib
-export JDK_CONF_DIR=conf
+export JDK_CONF_DIR=jre/lib
+#export JDK_CONF_DIR=conf
 
 export ENDORSED_DIR="`pwd`/endorsed"
-#export ENDORSED="-Djava.endorsed.dirs=$ENDORSED_DIR"
-export ENDORSED=
+export ENDORSED="-Djava.endorsed.dirs=$ENDORSED_DIR"
+#export ENDORSED=
 
 echo "JAVA_HOME: " $JAVA_HOME
 echo "endorsed dirs: " $ENDORSED
@@ -110,6 +110,7 @@ test() {
     JVM_OPTS=$3
 
 #    echo - Test ---
+    echo java $JVM_OPTS $D $ENDORSED jaxws.test.Test $1 $2
     java $JVM_OPTS $D $ENDORSED jaxws.test.Test $1 $2
 
 #    prepareCtxClassloader

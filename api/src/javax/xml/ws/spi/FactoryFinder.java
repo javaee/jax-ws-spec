@@ -42,6 +42,8 @@ package javax.xml.ws.spi;
 
 import java.io.*;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -128,19 +130,19 @@ class FactoryFinder {
     private static Object fromJDKProperties(String factoryId,
                                             String fallbackClassName,
                                             ClassLoader classLoader) {
-        File f = null;
+        Path path = null;
         try {
             String JAVA_HOME = System.getProperty("java.home");
-            f = Paths.get(JAVA_HOME, "conf", "jaxws.properties").toFile();
+            path = Paths.get(JAVA_HOME, "conf", "jaxws.properties");
 
             // to ensure backwards compatibility
-            if (!f.exists()) {
-                f = Paths.get(JAVA_HOME, "lib", "jaxws.properties").toFile();
+            if (!Files.exists(path)) {
+                path = Paths.get(JAVA_HOME, "lib", "jaxws.properties");
             }
 
-            if (f.exists()) {
+            if (Files.exists(path)) {
                 Properties props = new Properties();
-                try (InputStream inStream = new FileInputStream(f)) {
+                try (InputStream inStream = Files.newInputStream(path)) {
                     props.load(inStream);
                 }
                 String factoryClassName = props.getProperty(factoryId);
@@ -148,9 +150,7 @@ class FactoryFinder {
                         fallbackClassName, classLoader, EXCEPTION_HANDLER);
             }
         } catch (Exception ignored) {
-            String absolutePath = f != null ? f.getAbsolutePath() : "null";
-            logger.log(Level.SEVERE, "Error reading JAX-WS configuration from ["  +
-                    absolutePath +
+            logger.log(Level.SEVERE, "Error reading JAX-WS configuration from ["  + path +
                     "] file. Check it is accessible and has correct format.", ignored);
         }
         return null;
