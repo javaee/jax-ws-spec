@@ -120,6 +120,7 @@
 
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <findbugs.threshold>Low</findbugs.threshold>
+        <maven.build.timestamp.format>yyMMdd.HHmm</maven.build.timestamp.format>
     </properties>
 
     <build>
@@ -310,7 +311,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
@@ -318,6 +318,9 @@
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <useReleaseProfile>false</useReleaseProfile>
                     <arguments>${release.arguments}</arguments>
+                    <releaseVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}-b${maven.build.timestamp}</releaseVersion>
+                    <tag>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}-b${maven.build.timestamp}</tag>
+                    <developmentVersion>${pom.version}</developmentVersion>
                 </configuration>
             </plugin>
             <plugin>
