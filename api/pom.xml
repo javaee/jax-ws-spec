@@ -65,7 +65,7 @@
 
     <scm>
         <connection>scm:svn:https://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</connection>
-        <developerConnection>scm:svn:https://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</developerConnection>
+        <developerConnection>${scm.developerConnection}</developerConnection>
         <url>http://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</url>
     </scm>
 
@@ -121,6 +121,7 @@
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <findbugs.threshold>Low</findbugs.threshold>
         <maven.build.timestamp.format>yyMMddHHmm</maven.build.timestamp.format>
+        <scm.developerConnection>scm:svn:https://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</scm.developerConnection>
     </properties>
 
     <build>
