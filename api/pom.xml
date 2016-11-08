@@ -121,7 +121,7 @@
 
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <findbugs.threshold>Low</findbugs.threshold>
-        <maven.build.timestamp.format>yyMMddHHmm</maven.build.timestamp.format>
+        <maven.build.timestamp.format>yyMMdd.HHmm</maven.build.timestamp.format>
         <scm.developerConnection>scm:svn:https://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</scm.developerConnection>
     </properties>
 
@@ -320,7 +320,7 @@
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <useReleaseProfile>false</useReleaseProfile>
                     <arguments>${release.arguments}</arguments>
-                    <releaseVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.b${maven.build.timestamp}</releaseVersion>
+                    <releaseVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}-b${maven.build.timestamp}</releaseVersion>
                     <developmentVersion>${pom.version}</developmentVersion>
                 </configuration>
             </plugin>
