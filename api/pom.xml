@@ -114,7 +114,7 @@
 
         <extension.name>javax.xml.ws</extension.name>
         <spec.version>2.3</spec.version>
-        <jaxb.version>2.3.0-b161101.1759</jaxb.version>
+        <jaxb.version>2.3.0-SNAPSHOT</jaxb.version>
         <soap.version>1.3.8</soap.version>
         
         <non.final>false</non.final>        
@@ -243,8 +243,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
             
