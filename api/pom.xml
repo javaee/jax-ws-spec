@@ -174,7 +174,7 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>2.3.7</version>
+                    <version>3.2.0</version>
                 </plugin>
 
                 <plugin>
@@ -241,11 +241,45 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <id>default-compile</id>
+                        <configuration>
+                            <source>1.7</source>
+                            <target>1.7</target>
+                            <excludes>
+                                <exclude>module-info.java</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jdk-9</id>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <source>1.9</source>
+                            <target>1.9</target>
+                            <includes>
+                                <include>module-info.java</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             
             <plugin>
@@ -279,6 +313,7 @@
                         <Specification-Vendor>Oracle Corporation</Specification-Vendor>
                         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
                         <Implementation-Vendor-Id>org.glassfish</Implementation-Vendor-Id>
+                        <_failok>true</_failok> <!-- FIXME: FELIX-5430 -->
                     </instructions>
                 </configuration>
                 <executions>
@@ -339,6 +374,7 @@ href='http://www.oracle.com/technetwork/java/index-jsp-137004.html'><i>Metro Web
                             <location>${basedir}/offline-javadoc</location>
                         </offlineLink>
                     </offlineLinks>
+                    <additionalparam>-Xdoclint:none --add-reads java.xml.ws=ALL-UNNAMED --upgrade-module-path ${javax.xml.bind:jaxb-api:jar}</additionalparam>
                 </configuration>
                 <executions>
                     <execution>
