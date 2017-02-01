@@ -374,7 +374,7 @@ href='http://www.oracle.com/technetwork/java/index-jsp-137004.html'><i>Metro Web
                             <location>${basedir}/offline-javadoc</location>
                         </offlineLink>
                     </offlineLinks>
-                    <additionalparam>-Xdoclint:none --add-reads java.xml.ws=ALL-UNNAMED --upgrade-module-path ${javax.xml.bind:jaxb-api:jar}</additionalparam>
+                    <additionalparam>-Xdoclint:none --add-reads java.xml.ws=ALL-UNNAMED</additionalparam>
                 </configuration>
                 <executions>
                     <execution>
