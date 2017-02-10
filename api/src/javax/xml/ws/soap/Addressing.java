@@ -46,9 +46,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-import javax.xml.ws.BindingProvider;
 import javax.xml.ws.WebServiceRef;
-import javax.xml.ws.WebServiceRefs;
 import javax.xml.ws.WebServiceProvider;
 import javax.xml.ws.soap.AddressingFeature.Responses;
 import javax.xml.ws.spi.WebServiceFeatureAnnotation;
@@ -59,7 +57,7 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * with any other binding is undefined.
  * <p>
  * This annotation MUST only be used in conjunction with the
- * {@link javax.jws.WebService}, {@link WebServiceProvider},
+ * {@code javax.jws.WebService}, {@link WebServiceProvider},
  *  and {@link WebServiceRef} annotations.
  * When used with a {@code javax.jws.WebService} annotation, this
  * annotation MUST only be used on the service endpoint implementation

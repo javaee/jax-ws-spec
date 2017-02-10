@@ -47,6 +47,7 @@ import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import javax.annotation.Resource;
 
 /**
  * The {@code WebServiceRef} annotation is used to
@@ -87,7 +88,7 @@ import java.lang.annotation.RetentionPolicy;
  * annotation annotated with the {@code WebServiceFeatureAnnotation}
  * that is specified with {@code WebServiceRef}, an ERROR MUST be given.
  *
- * @see javax.annotation.Resource
+ * @see Resource
  * @see WebServiceFeatureAnnotation
  *
  * @since 1.6, JAX-WS 2.0
