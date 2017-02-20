@@ -128,9 +128,6 @@
     </properties>
 
     <build>
-
-        <sourceDirectory>src</sourceDirectory>
-
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -528,7 +525,7 @@ href='http://www.oracle.com/technetwork/java/index-jsp-137004.html'><i>Metro Web
                                 </goals>
                                 <configuration>
                                     <sources>
-                                        <source>jdk9</source>
+                                        <source>src/main/jdk9</source>
                                     </sources>
                                 </configuration>
                             </execution>
