@@ -64,7 +64,7 @@
     <url>http://jsr224.java.net/</url>
 
     <scm>
-        <connection>scm:svn:https://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</connection>
+        <connection>scm:git:git://java.net/jsr224~git</connection>
         <developerConnection>${scm.developerConnection}</developerConnection>
         <url>http://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</url>
       <tag>HEAD</tag>
@@ -116,7 +116,7 @@
         <spec.version>2.3</spec.version>
         <old.spec.version>2.2</old.spec.version>
         <jaxb.version>2.3.0-b170201.1204</jaxb.version>
-        <soap.version>1.4.0-SNAPSHOT</soap.version>
+        <soap.version>1.4.0-b01</soap.version>
 
         <non.final>false</non.final>
         <mod.dir>${project.build.directory}/mods</mod.dir>
@@ -124,7 +124,7 @@
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <findbugs.threshold>Low</findbugs.threshold>
         <maven.build.timestamp.format>yyMMdd.HHmm</maven.build.timestamp.format>
-        <scm.developerConnection>scm:svn:https://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</scm.developerConnection>
+        <scm.developerConnection>scm:git:ssh://git.java.net/jsr224~git</scm.developerConnection>
     </properties>
 
     <build>
