@@ -39,10 +39,10 @@
  */
 
 module java.xml.ws {
-    requires java.annotations.common;
     requires java.xml.bind;
     requires java.logging;
     requires java.xml.soap;
+    requires java.xml.ws.annotation;
 
     exports javax.xml.ws;
     exports javax.xml.ws.handler;
