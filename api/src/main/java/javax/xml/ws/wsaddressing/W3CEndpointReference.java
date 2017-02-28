@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (C) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (C) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -73,7 +73,7 @@ import java.util.Map;
  * JAXB will use the JAXB annotations and bind this class to XML infoset
  * that is consistent with that defined by WS-Addressing.  See
  * <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">
- * WS-Addressing</a> 
+ * WS-Addressing</a>
  * for more information on WS-Addressing EndpointReferences.
  *
  * @since 1.6, JAX-WS 2.1
@@ -87,10 +87,18 @@ public final class W3CEndpointReference extends EndpointReference {
     private final JAXBContext w3cjc = getW3CJaxbContext();
 
     // should be changed to package private, keeping original modifier to keep backwards compatibility
+
+    /**
+     * Addressing namespace.
+     */
     protected static final String NS = "http://www.w3.org/2005/08/addressing";
 
     // default constructor forbidden ...
     // should be private, keeping original modifier to keep backwards compatibility
+
+    /**
+     * Default constructor.
+     */
     protected W3CEndpointReference() {
     }
 
@@ -101,10 +109,10 @@ public final class W3CEndpointReference extends EndpointReference {
      * instance consistent with the W3C WS-Addressing Core
      * recommendation.
      *
-     * @throws WebServiceException 
+     * @throws WebServiceException
      *   If the source does NOT contain a valid W3C WS-Addressing
      *   EndpointReference.
-     * @throws NullPointerException 
+     * @throws NullPointerException
      *   If the {@code null} {@code source} value is given
      */
     public W3CEndpointReference(Source source) {
@@ -121,10 +129,11 @@ public final class W3CEndpointReference extends EndpointReference {
             throw new WebServiceException("Source did not contain W3CEndpointReference", e);
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
+    @Override
     public void writeTo(Result result){
         try {
             Marshaller marshaller = w3cjc.createMarshaller();
@@ -133,7 +142,7 @@ public final class W3CEndpointReference extends EndpointReference {
             throw new WebServiceException("Error marshalling W3CEndpointReference. ", e);
         }
     }
-    
+
     private static JAXBContext getW3CJaxbContext() {
         try {
             return JAXBContext.newInstance(W3CEndpointReference.class);
@@ -141,7 +150,7 @@ public final class W3CEndpointReference extends EndpointReference {
             throw new WebServiceException("Error creating JAXBContext for W3CEndpointReference. ", e);
         }
     }
-    
+
     // private but necessary properties for databinding
     @XmlElement(name="Address",namespace=NS)
     private Address address;
@@ -155,8 +164,8 @@ public final class W3CEndpointReference extends EndpointReference {
     Map<QName,String> attributes;
     @XmlAnyElement
     List<Element> elements;
-    
-    
+
+
     @XmlType(name="address", namespace=W3CEndpointReference.NS)
     private static class Address {
         protected Address() {}
@@ -165,8 +174,8 @@ public final class W3CEndpointReference extends EndpointReference {
         @XmlAnyAttribute
         Map<QName,String> attributes;
     }
-    
-    
+
+
     @XmlType(name="elements", namespace=W3CEndpointReference.NS)
     private static class Elements {
         protected Elements() {}
@@ -175,5 +184,5 @@ public final class W3CEndpointReference extends EndpointReference {
         @XmlAnyAttribute
         Map<QName,String> attributes;
     }
-    
+
 }

@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -57,21 +57,29 @@ import java.lang.annotation.RetentionPolicy;
 public @interface WebServiceProvider {
     /**
      * Location of the WSDL description for the service.
+     *
+     * @return location of the WSDL description
      */
-    String wsdlLocation() default "";    
-    
+    String wsdlLocation() default "";
+
     /**
      * Service name.
+     *
+     * @return service name
      */
     String serviceName() default "";
-    
+
     /**
      * Target namespace for the service
+     *
+     * @return target namespace
      */
     String targetNamespace() default "";
 
     /**
      * Port name.
+     *
+     * @return port name
      */
     String portName() default "";
 }

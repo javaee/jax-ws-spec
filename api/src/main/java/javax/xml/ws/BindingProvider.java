@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -43,7 +43,7 @@ package javax.xml.ws;
 import java.util.Map;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
 
-/** 
+/**
  * The {@code BindingProvider} interface provides access to the
  * protocol binding and associated context objects for request and
  * response message processing.
@@ -53,21 +53,21 @@ import javax.xml.ws.wsaddressing.W3CEndpointReference;
  * @see javax.xml.ws.Binding
  **/
 public interface BindingProvider {
-    /** 
+    /**
      * Standard property: User name for authentication.
      * <p>Type: {@code java.lang.String}
      **/
     public static final String USERNAME_PROPERTY =
             "javax.xml.ws.security.auth.username";
-    
-    /** 
+
+    /**
      * Standard property: Password for authentication.
      * <p>Type: {@code java.lang.String}
      **/
     public static final String PASSWORD_PROPERTY =
             "javax.xml.ws.security.auth.password";
-    
-    /** 
+
+    /**
      * Standard property: Target service endpoint address. The
      * URI scheme for the endpoint address specification MUST
      * correspond to the protocol/transport binding for the
@@ -76,8 +76,8 @@ public interface BindingProvider {
      **/
     public static final String ENDPOINT_ADDRESS_PROPERTY =
             "javax.xml.ws.service.endpoint.address";
-    
-    /** 
+
+    /**
      * Standard property: This boolean property is used by a service
      * client to indicate whether or not it wants to participate in
      * a session with a service endpoint. If this property is set to
@@ -88,30 +88,30 @@ public interface BindingProvider {
      **/
     public static final String SESSION_MAINTAIN_PROPERTY =
             "javax.xml.ws.session.maintain";
-    
-    /** 
-     * Standard property for SOAPAction. This boolean property  
-     * indicates whether or not the value of the 
+
+    /**
+     * Standard property for SOAPAction. This boolean property
+     * indicates whether or not the value of the
      * {@code javax.xml.ws.soap.http.soapaction.uri} property
-     * is used for the value of the SOAPAction. The  
+     * is used for the value of the SOAPAction. The
      * default value of this property is {@code false} indicating
-     * that the 
+     * that the
      * {@code javax.xml.ws.soap.http.soapaction.uri} property
-     * is not used for the value of the SOAPAction, however, 
-     * if WS-Addressing is enabled, the default value is 
+     * is not used for the value of the SOAPAction, however,
+     * if WS-Addressing is enabled, the default value is
      * {@code true}.
-     * 
+     *
      * <p>Type: {@code java.lang.Boolean}
      **/
     public static final String SOAPACTION_USE_PROPERTY =
             "javax.xml.ws.soap.http.soapaction.use";
-    
+
     /**
-     * Standard property for SOAPAction. Indicates the SOAPAction  
+     * Standard property for SOAPAction. Indicates the SOAPAction
      * URI if the {@code javax.xml.ws.soap.http.soapaction.use}
      * property is set to {@code true}. If WS-Addressing
-     * is enabled, this value will also be used for the value of the  
-     * WS-Addressing Action header.  If this property is not set, 
+     * is enabled, this value will also be used for the value of the
+     * WS-Addressing Action header.  If this property is not set,
      * the default SOAPAction and WS-Addressing Action will be sent.
      *
      * <p>Type: {@code java.lang.String}
@@ -119,7 +119,7 @@ public interface BindingProvider {
     public static final String SOAPACTION_URI_PROPERTY =
             "javax.xml.ws.soap.http.soapaction.uri";
 
-    /** 
+    /**
      * Get the context that is used to initialize the message context
      * for request messages.
      *
@@ -130,8 +130,8 @@ public interface BindingProvider {
      * @return The context that is used in processing request messages.
      **/
     Map<String, Object> getRequestContext();
-    
-    /** 
+
+    /**
      * Get the context that resulted from processing a response message.
      *
      * The returned context is for the most recently completed synchronous
@@ -143,16 +143,16 @@ public interface BindingProvider {
      * response messages.
      **/
     Map<String, Object> getResponseContext();
-    
-    /** 
+
+    /**
      * Get the Binding for this binding provider.
      *
      * @return The Binding for this binding provider.
      **/
     Binding getBinding();
-    
-   
-    
+
+
+
     /**
      * Returns the {@code EndpointReference} associated with
      * this {@code BindingProvider} instance.
@@ -164,7 +164,7 @@ public interface BindingProvider {
      * @return EndpointReference of the target endpoint associated with this
      * {@code BindingProvider} instance.
      *
-     * @throws java.lang.UnsupportedOperationException If this 
+     * @throws java.lang.UnsupportedOperationException If this
      * {@code BindingProvider} uses the XML/HTTP binding.
      *
      * @see W3CEndpointReference
@@ -172,13 +172,14 @@ public interface BindingProvider {
      * @since 1.6, JAX-WS 2.1
      */
     public EndpointReference getEndpointReference();
-    
-    
+
+
     /**
      * Returns the {@code EndpointReference} associated with
      * this {@code BindingProvider} instance.  The instance
      * returned will be of type {@code clazz}.
      *
+     * @param <T> the type of {@code EndpointReference}
      * @param clazz Specifies the type of {@code EndpointReference}
      * that MUST be returned.
 
@@ -188,10 +189,10 @@ public interface BindingProvider {
 
      * @throws WebServiceException If the Class {@code clazz}
      * is not supported by this implementation.
-     * @throws java.lang.UnsupportedOperationException If this 
+     * @throws java.lang.UnsupportedOperationException If this
      * {@code BindingProvider} uses the XML/HTTP binding.
      *
      * @since 1.6, JAX-WS 2.1
      */
-    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz);  
+    public <T extends EndpointReference> T getEndpointReference(Class<T> clazz);
 }

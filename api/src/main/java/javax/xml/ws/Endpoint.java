@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -85,18 +85,17 @@ import org.w3c.dom.Element;
  *
  **/
 public abstract class Endpoint {
-    
+
     /** Standard property: name of WSDL service.
      *  <p>Type: javax.xml.namespace.QName
      **/
     public static final String WSDL_SERVICE = "javax.xml.ws.wsdl.service";
-    
+
     /** Standard property: name of WSDL port.
      *  <p>Type: javax.xml.namespace.QName
      **/
     public static final String WSDL_PORT = "javax.xml.ws.wsdl.port";
-    
-    
+
     /**
      * Creates an endpoint with the specified implementor object. If there is
      * a binding specified via a BindingType annotation then it MUST be used else
@@ -140,7 +139,7 @@ public abstract class Endpoint {
     public static Endpoint create(Object implementor, WebServiceFeature ... features) {
         return create(null, implementor, features);
     }
-    
+
     /**
      * Creates an endpoint with the specified binding type and
      * implementor object.
@@ -186,21 +185,21 @@ public abstract class Endpoint {
     public static Endpoint create(String bindingId, Object implementor, WebServiceFeature ... features) {
         return Provider.provider().createEndpoint(bindingId, implementor, features);
     }
-    
+
     /**
      * Returns the binding for this endpoint.
      *
      * @return The binding for this endpoint
      **/
     public abstract Binding getBinding();
-    
+
     /**
      * Returns the implementation object for this endpoint.
      *
      * @return The implementor for this endpoint
      **/
     public abstract Object getImplementor();
-    
+
     /**
      * Publishes this endpoint at the given address.
      * The necessary server infrastructure will be created and
@@ -212,20 +211,20 @@ public abstract class Endpoint {
      *        MUST be compatible with the binding specified at the
      *        time the endpoint was created.
      *
-     * @throws java.lang.IllegalArgumentException 
+     * @throws java.lang.IllegalArgumentException
      *          If the provided address URI is not usable
      *          in conjunction with the endpoint's binding.
      *
-     * @throws java.lang.IllegalStateException 
+     * @throws java.lang.IllegalStateException
      *          If the endpoint has been published already or it has been stopped.
      *
-     * @throws java.lang.SecurityException 
+     * @throws java.lang.SecurityException
      *          If a {@code java.lang.SecurityManger}
      *          is being used and the application doesn't have the
      *          {@code WebServicePermission("publishEndpoint")} permission.
      **/
     public abstract void publish(String address);
-    
+
     /**
      * Creates and publishes an endpoint for the specified implementor
      * object at the given address.
@@ -245,7 +244,7 @@ public abstract class Endpoint {
      *
      * @return The newly created endpoint.
      *
-     * @throws java.lang.SecurityException 
+     * @throws java.lang.SecurityException
      *          If a {@code java.lang.SecurityManger}
      *          is being used and the application doesn't have the
      *          {@code WebServicePermission("publishEndpoint")} permission.
@@ -287,7 +286,6 @@ public abstract class Endpoint {
         return Provider.provider().createAndPublishEndpoint(address, implementor, features);
     }
 
-
     /**
      * Publishes this endpoint at the provided server context.
      * A server context encapsulates the server infrastructure
@@ -299,16 +297,16 @@ public abstract class Endpoint {
      * @param serverContext An object representing a server
      *           context to be used for publishing the endpoint.
      *
-     * @throws java.lang.IllegalArgumentException 
+     * @throws java.lang.IllegalArgumentException
      *              If the provided server context is not
      *              supported by the implementation or turns
      *              out to be unusable in conjunction with the
      *              endpoint's binding.
      *
-     * @throws java.lang.IllegalStateException 
+     * @throws java.lang.IllegalStateException
      *         If the endpoint has been published already or it has been stopped.
      *
-     * @throws java.lang.SecurityException 
+     * @throws java.lang.SecurityException
      *          If a {@code java.lang.SecurityManger}
      *          is being used and the application doesn't have the
      *          {@code WebServicePermission("publishEndpoint")} permission.
@@ -350,7 +348,7 @@ public abstract class Endpoint {
     public void publish(HttpContext serverContext) {
         throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
     }
-    
+
     /**
      * Stops publishing this endpoint.
      *
@@ -359,21 +357,21 @@ public abstract class Endpoint {
      *
      **/
     public abstract void stop();
-    
+
     /**
      * Returns true if the endpoint is in the published state.
      *
      * @return {@code true} if the endpoint is in the published state.
      **/
     public abstract boolean isPublished();
-    
+
     /**
      * Returns a list of metadata documents for the service.
      *
      * @return {@code List<javax.xml.transform.Source>} A list of metadata documents for the service
      **/
     public abstract List<javax.xml.transform.Source> getMetadata();
-    
+
     /**
      * Sets the metadata for this endpoint.
      *
@@ -385,7 +383,7 @@ public abstract class Endpoint {
      *         has already been published.
      **/
     public abstract void setMetadata(List<javax.xml.transform.Source> metadata);
-    
+
     /**
      * Returns the executor for this {@code Endpoint}instance.
      *
@@ -398,7 +396,7 @@ public abstract class Endpoint {
      * @see java.util.concurrent.Executor
      **/
     public abstract java.util.concurrent.Executor getExecutor();
-    
+
     /**
      * Sets the executor for this {@code Endpoint} instance.
      *
@@ -420,8 +418,7 @@ public abstract class Endpoint {
      * @see java.util.concurrent.Executor
      **/
     public abstract void setExecutor(java.util.concurrent.Executor executor);
-    
-    
+
     /**
      * Returns the property bag for this {@code Endpoint} instance.
      *
@@ -429,7 +426,7 @@ public abstract class Endpoint {
      *         associated with this instance.
      **/
     public abstract Map<String,Object> getProperties();
-    
+
     /**
      * Sets the property bag for this {@code Endpoint} instance.
      *
@@ -437,7 +434,7 @@ public abstract class Endpoint {
      *        this instance.
      **/
     public abstract void setProperties(Map<String,Object> properties);
-    
+
     /**
      * Returns the {@code EndpointReference} associated with
      * this {@code Endpoint} instance.
@@ -464,12 +461,12 @@ public abstract class Endpoint {
      * @since 1.6, JAX-WS 2.1
      **/
     public abstract EndpointReference getEndpointReference(Element... referenceParameters);
-    
-    
+
     /**
      * Returns the {@code EndpointReference} associated with
      * this {@code Endpoint} instance.
      *
+     * @param <T> The type of EndpointReference.
      * @param clazz Specifies the type of EndpointReference  that MUST be returned.
      * @param referenceParameters Reference parameters to be associated with the
      * returned {@code EndpointReference} instance.
@@ -493,7 +490,7 @@ public abstract class Endpoint {
             Element... referenceParameters);
 
     /**
-     * By settng a {@code EndpointContext}, JAX-WS runtime knows about
+     * By setting a {@code EndpointContext}, JAX-WS runtime knows about
      * addresses of other endpoints in an application. If multiple endpoints
      * share different ports of a WSDL, then the multiple port addresses
      * are patched when the WSDL is accessed.

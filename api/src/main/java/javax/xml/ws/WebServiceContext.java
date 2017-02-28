@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -61,7 +61,7 @@ import org.w3c.dom.Element;
  *  @see javax.annotation.Resource
  **/
 public interface WebServiceContext {
-    
+
     /**
      * Returns the {@code MessageContext} for the request being served
      * at the time this method is called. Only properties with
@@ -78,7 +78,7 @@ public interface WebServiceContext {
      * @see java.lang.IllegalStateException
      **/
     public MessageContext getMessageContext();
-    
+
     /**
      * Returns the Principal that identifies the sender
      * of the request currently being serviced. If the
@@ -95,7 +95,7 @@ public interface WebServiceContext {
      * @see java.lang.IllegalStateException
      **/
     public Principal getUserPrincipal();
-    
+
     /**
      * Returns a boolean indicating whether the
      * authenticated user is included in the specified
@@ -112,7 +112,7 @@ public interface WebServiceContext {
      *         being serviced.
      **/
     public boolean isUserInRole(String role);
-    
+
     /**
      * Returns the {@code EndpointReference} for this
      * endpoint.
@@ -143,6 +143,7 @@ public interface WebServiceContext {
      * Returns the {@code EndpointReference} associated with
      * this endpoint.
      *
+     * @param <T> The type of {@code EndpointReference}.
      * @param clazz The type of {@code EndpointReference} that
      * MUST be returned.
      * @param referenceParameters Reference parameters to be associated with the
@@ -155,7 +156,7 @@ public interface WebServiceContext {
      *
      * @throws IllegalStateException This exception is thrown
      *         if the method is called while no request is
-     *         being serviced.     
+     *         being serviced.
      * @throws WebServiceException If the {@code clazz} type of
      * {@code EndpointReference} is not supported.
      *

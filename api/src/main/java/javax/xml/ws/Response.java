@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -51,9 +51,10 @@ import java.util.concurrent.Future;
  *  to check the status of the request. The {@code get(...)} methods may
  *  throw the standard
  *  set of exceptions and their cause may be a {@code RemoteException} or a
- *  {@link WebServiceException} that represents the error that occured during the
+ *  {@link WebServiceException} that represents the error that occurred during the
  *  asynchronous method invocation.</p>
  *
+ * @param <T> The type of the response
  *  @since 1.6, JAX-WS 2.0
 **/
 public interface Response<T> extends Future<T> {

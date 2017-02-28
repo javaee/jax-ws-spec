@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -41,11 +41,11 @@
 package javax.xml.ws.handler;
 
 import javax.xml.ws.ProtocolException;
-import javax.xml.ws.handler.MessageContext;
 
 /** The {@code Handler} interface
  *  is the base interface for JAX-WS handlers.
- * 
+ *
+ * @param <C> message context
  *  @since 1.6, JAX-WS 2.0
 **/
 public interface Handler<C extends MessageContext> {
@@ -75,7 +75,7 @@ public interface Handler<C extends MessageContext> {
    *  framework in the JAX-WS specification for full details.
    *
    *  @param context the message context
-   *  @return An indication of whether handler fault processing should continue 
+   *  @return An indication of whether handler fault processing should continue
    *  for the current message
    *                 <ul>
    *                 <li>Return {@code true} to continue

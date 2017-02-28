@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -48,7 +48,7 @@ import java.lang.annotation.Target;
 
 /**
  * The {@code FaultAction} annotation is used inside an {@link Action}
- * annotation to allow an explicit association of a WS-Addressing 
+ * annotation to allow an explicit association of a WS-Addressing
  * {@code Action} message addressing property with the {@code fault}
  * messages of the WSDL operation mapped from the exception class.
  * <p>
@@ -168,12 +168,16 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface FaultAction {
     /**
-     * Name of the exception class
+     * Name of the exception class.
+     *
+     * @return the name of the exception class
      */
     Class<? extends Exception> className();
 
     /**
-     * Value of WS-Addressing {@code Action} message addressing property for the exception
+     * Value of WS-Addressing {@code Action} message addressing property for the exception.
+     *
+     * @return WS-Addressing {@code Action} message addressing property for the exception
      */
     String value() default "";
 }

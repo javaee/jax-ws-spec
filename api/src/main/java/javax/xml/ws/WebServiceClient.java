@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -46,7 +46,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
 
-/** 
+/**
  *  Used to annotate a generated service interface.
  *
  *  <p>The information specified in this annotation is sufficient
@@ -61,18 +61,24 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface WebServiceClient {
-  /**
-   *  The local name of the Web service.
-  **/
-  String name() default "";
+    /**
+     * The local name of the Web service.
+     *
+     * @return local name
+     */
+    String name() default "";
 
-  /**
-   *  The namespace for the Web service.
-  **/
-  String targetNamespace() default "";
+    /**
+     * The namespace for the Web service.
+     *
+     * @return target namespace name
+     */
+    String targetNamespace() default "";
 
-  /**
-   *  The location of the WSDL document for the service (a URL).
-  **/
-  String wsdlLocation() default "";
+    /**
+     * The location of the WSDL document for the service (a URL).
+     *
+     * @return location of the WSDL document (a URL)
+     */
+    String wsdlLocation() default "";
 }

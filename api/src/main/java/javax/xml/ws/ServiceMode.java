@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -47,7 +47,7 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Inherited;
 
-/** 
+/**
  * Used to indicate whether a {@link Provider} implementation wishes to work
  * with entire protocol messages or just with protocol message payloads.
  *
@@ -63,6 +63,8 @@ public @interface ServiceMode {
    * wishes to work with protocol message payloads only. {@code MESSAGE} indicates
    * that the {@code Provider} implementation wishes to work with entire protocol
    * messages.
-  **/
+   *
+   * @return Service mode.
+   **/
   public Service.Mode value() default Service.Mode.PAYLOAD;
 }

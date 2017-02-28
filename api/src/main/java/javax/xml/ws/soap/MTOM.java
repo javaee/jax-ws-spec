@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -78,6 +78,8 @@ import javax.xml.ws.WebServiceProvider;
 public @interface MTOM {
     /**
      * Specifies if this feature is enabled or disabled.
+     *
+     * @return {@code true} if MTOM is supported, {@code false} otherwise
      */
     boolean enabled() default true;
 
@@ -85,6 +87,8 @@ public @interface MTOM {
      * Property for MTOM threshold value. When MTOM is enabled, binary data above this
      * size in bytes will be XOP encoded or sent as attachment. The value of this property
      * MUST always be {@literal >=} 0. Default value is 0.
+     *
+     * @return MTOM threshold in bytes
      */
     int threshold() default 0;
 }

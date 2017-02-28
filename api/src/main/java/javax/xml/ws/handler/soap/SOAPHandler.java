@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (C) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (C) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -47,7 +47,8 @@ import java.util.Set;
 /** The {@code SOAPHandler} class extends {@code Handler}
  *  to provide typesafety for the message context parameter and add a method
  *  to obtain access to the headers that may be processed by the handler.
- * 
+ *
+ * @param <T> message context
  *  @since 1.6, JAX-WS 2.0
 **/
 public interface SOAPHandler<T extends SOAPMessageContext>

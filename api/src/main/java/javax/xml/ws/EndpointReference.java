@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -50,34 +50,34 @@ import java.io.StringWriter;
 
 /**
  * This class represents an WS-Addressing EndpointReference
- * which is a remote reference to a web service endpoint. 
+ * which is a remote reference to a web service endpoint.
  * See <a href="http://www.w3.org/TR/2006/REC-ws-addr-core-20060509/">
- * Web Services Addressing 1.0 - Core</a> 
+ * Web Services Addressing 1.0 - Core</a>
  * for more information on WS-Addressing EndpointReferences.
- * <p>  
+ * <p>
  * This class is immutable as the typical web service developer
  * need not be concerned with its contents.  The web service
- * developer should use this class strictly as a mechanism to 
- * reference a remote web service endpoint. See the {@link Service} APIs 
+ * developer should use this class strictly as a mechanism to
+ * reference a remote web service endpoint. See the {@link Service} APIs
  * that clients can use to that utilize an {@code EndpointReference}.
- * See the {@link javax.xml.ws.Endpoint}, and 
- * {@link javax.xml.ws.BindingProvider} APIs on how 
+ * See the {@link javax.xml.ws.Endpoint}, and
+ * {@link javax.xml.ws.BindingProvider} APIs on how
  * {@code EndpointReferences} can be created for published
  * endpoints.
  * <p>
  * Concrete implementations of this class will represent
  * an {@code EndpointReference} for a particular version of Addressing.
  * For example the {@link W3CEndpointReference} is for use
- * with W3C Web Services Addressing 1.0 - Core Recommendation. 
+ * with W3C Web Services Addressing 1.0 - Core Recommendation.
  * If JAX-WS implementors need to support different versions
- * of addressing, they should write their own 
+ * of addressing, they should write their own
  * {@code EndpointReference} subclass for that version.
  * This will allow a JAX-WS implementation to create
  * a vendor specific {@code EndpointReferences} that the
  * vendor can use to flag a different version of
  * addressing.
  * <p>
- * Web service developers that wish to pass or return 
+ * Web service developers that wish to pass or return
  * {@code EndpointReference} in Java methods in an
  * SEI should use
  * concrete instances of an {@code EndpointReference} such
@@ -103,6 +103,10 @@ public abstract class EndpointReference {
     //
     //Default constructor to be only called by derived types.
     //
+
+    /**
+     * Default constructor.
+     */
     protected EndpointReference(){}
 
     /**
@@ -165,6 +169,7 @@ public abstract class EndpointReference {
      * method can be used to manually configure handlers for this port.
      *
      *
+     * @param <T> Service endpoint interface
      * @param serviceEndpointInterface Service endpoint interface
      * @param features  An array of {@code WebServiceFeatures} to configure on the
      *                proxy.  Supported features not in the {@code features
@@ -176,14 +181,14 @@ public abstract class EndpointReference {
      *                  <LI>If there is an error during creation
      *                      of the proxy
      *                  <LI>If there is any missing WSDL metadata
-     *                      as required by this method 
+     *                      as required by this method
      *                  <LI>If this
      *                      {@code endpointReference}
      *                      is invalid
      *                  <LI>If an illegal
      *                      {@code serviceEndpointInterface}
      *                      is specified
-     *                  <LI>If a feature is enabled that is not compatible with 
+     *                  <LI>If a feature is enabled that is not compatible with
      *                      this port or is unsupported.
      *                   </UL>
      *
@@ -198,7 +203,10 @@ public abstract class EndpointReference {
 
     /**
      * Displays EPR infoset for debugging convenience.
+     *
+     * @return a string representation of the object
      */
+    @Override
     public String toString() {
         StringWriter w = new StringWriter();
         writeTo(new StreamResult(w));

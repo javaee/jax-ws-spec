@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -49,12 +49,13 @@ import java.util.concurrent.Future;
  *  class acts as a factory for the creation of {@code Dispatch}
  *  instances.
  *
+ * @param <T> The type of the message or payload
  *  @since 1.6, JAX-WS 2.0
 **/
 public interface Dispatch<T> extends BindingProvider {
 
     /** Invoke a service operation synchronously.
-     * 
+     *
      * The client is responsible for ensuring that the {@code msg} object
      * when marshalled is formed according to the requirements of the protocol
      * binding in use.
@@ -78,7 +79,7 @@ public interface Dispatch<T> extends BindingProvider {
      * The client is responsible for ensuring that the {@code msg} object
      * when marshalled is formed according to the requirements of the protocol
      * binding in use.
-     * 
+     *
      * @param msg An object that will form the message or payload of
      *     the message used to invoke the operation.
      * @return The response message or message payload to the

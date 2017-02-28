@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -40,11 +40,8 @@
 
 package javax.xml.ws.spi;
 
-import java.net.URL;
 import java.util.List;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.ServiceLoader;
 import javax.xml.namespace.QName;
 import javax.xml.ws.*;
 import javax.xml.ws.wsaddressing.W3CEndpointReference;
@@ -58,12 +55,12 @@ import org.w3c.dom.Element;
  * @since 1.6, JAX-WS 2.0
  */
 public abstract class Provider {
-    
+
     /**
      * A constant representing the name of the default
      * {@code Provider} implementation class.
      **/
-    // Using two strings so that package renaming doesn't change it 
+    // Using two strings so that package renaming doesn't change it
     private static final String DEFAULT_JAXWSPROVIDER =
             "com.sun"+".xml.internal.ws.spi.ProviderImpl";
 
@@ -72,7 +69,7 @@ public abstract class Provider {
      */
     protected Provider() {
     }
-    
+
     /**
      *
      * Creates a new provider object.
@@ -92,6 +89,7 @@ public abstract class Provider {
      *  <li> Finally, a platform default implementation is used.
      * </ul>
      *
+     * @return provider object
      */
     public static Provider provider() {
         try {
@@ -100,7 +98,7 @@ public abstract class Provider {
             throw ex;
         } catch (Exception ex) {
             throw new WebServiceException("Unable to createEndpointReference Provider", ex);
-        } 
+        }
     }
 
     /**
@@ -137,8 +135,7 @@ public abstract class Provider {
             QName serviceName, Class<? extends Service> serviceClass, WebServiceFeature ... features) {
         throw new UnsupportedOperationException("JAX-WS 2.2 implementation must override this default behaviour.");
     }
-    
-    
+
     /**
      *
      * Creates an endpoint object with the provided binding and implementation
@@ -153,8 +150,7 @@ public abstract class Provider {
      */
     public abstract Endpoint createEndpoint(String bindingId,
             Object implementor);
-    
-    
+
     /**
      * Creates and publishes an endpoint object with the specified
      * address and implementation object.
@@ -190,8 +186,8 @@ public abstract class Provider {
      * @since 1.6, JAX-WS 2.1
      **/
     public abstract EndpointReference readEndpointReference(javax.xml.transform.Source eprInfoset);
-     
-    
+
+
     /**
      * The getPort method returns a proxy.  If there
      * are any reference parameters in the
@@ -214,6 +210,7 @@ public abstract class Provider {
      * {@code serviceName} metadata.
      *
      *
+     * @param <T> Service endpoint interface
      * @param endpointReference the EndpointReference that will
      * be invoked by the returned proxy.
      * @param serviceEndpointInterface Service endpoint interface
@@ -245,7 +242,7 @@ public abstract class Provider {
     public abstract <T> T getPort(EndpointReference endpointReference,
             Class<T> serviceEndpointInterface,
             WebServiceFeature... features);
-    
+
     /**
      * Factory method to create a {@code W3CEndpointReference}.
      *
@@ -268,12 +265,12 @@ public abstract class Provider {
      * @param address Specifies the address of the target endpoint
      * @param serviceName Qualified name of the service in the WSDL.
      * @param portName Qualified name of the endpoint in the WSDL.
-     * @param metadata A list of elements that should be added to the 
+     * @param metadata A list of elements that should be added to the
      * {@code W3CEndpointReference} instances {@code wsa:metadata}
      * element.
-     * @param wsdlDocumentLocation URL for the WSDL document location for 
-     * the service.  
-     * @param referenceParameters Reference parameters to be associated 
+     * @param wsdlDocumentLocation URL for the WSDL document location for
+     * the service.
+     * @param referenceParameters Reference parameters to be associated
      * with the returned {@code EndpointReference} instance.
      *
      * @return the {@code W3CEndpointReference} created from
@@ -299,7 +296,7 @@ public abstract class Provider {
      *        <li>If the {@code wsdlDocumentLocation} is NOT {@code null}
      *            and does not represent a valid WSDL.
      *     </ul>
-     * @throws WebServiceException If an error occurs while creating the 
+     * @throws WebServiceException If an error occurs while creating the
      *                             {@code W3CEndpointReference}.
      *
      * @since 1.6, JAX-WS 2.1

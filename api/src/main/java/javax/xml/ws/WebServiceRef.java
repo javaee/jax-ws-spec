@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -108,6 +108,8 @@ public @interface WebServiceRef {
      *
      * The JNDI name can be absolute(with any logical namespace) or relative
      * to JNDI {@code java:comp/env} namespace.
+     *
+     * @return absolute or relative JNDI name
      */
     String name() default "";
 
@@ -117,6 +119,8 @@ public @interface WebServiceRef {
      * the default is the type of the JavaBeans property.
      * For class annotations, there is no default and this MUST be
      * specified.
+     *
+     * @return type of the resource
      */
     Class<?> type() default Object.class;
 
@@ -135,6 +139,8 @@ public @interface WebServiceRef {
      * form or type of mapped name, nor the ability to use mapped names.
      * The mapped name is product-dependent and often installation-dependent.
      * No use of a mapped name is portable.
+     *
+     * @return product specific resource name
      */
     String mappedName() default "";
 
@@ -142,6 +148,8 @@ public @interface WebServiceRef {
      * The service class, always a type extending
      * {@code javax.xml.ws.Service}. This element MUST be specified
      * whenever the type of the reference is a service endpoint interface.
+     *
+     * @return the service class extending {@code javax.xml.ws.Service}
      */
     // 2.1 has Class value() default Object.class;
     // Fixing this raw Class type correctly in 2.2 API. This shouldn't cause
@@ -152,6 +160,8 @@ public @interface WebServiceRef {
      * A URL pointing to the WSDL document for the web service.
      * If not specified, the WSDL location specified by annotations
      * on the resource type is used instead.
+     *
+     * @return a URL pointing to the WSDL document
      */
     String wsdlLocation() default "";
 
@@ -159,6 +169,7 @@ public @interface WebServiceRef {
      * A portable JNDI lookup name that resolves to the target
      * web service reference.
      *
+     * @return portable JNDI lookup name
      * @since 1.7, JAX-WS 2.2
      */
     String lookup() default "";

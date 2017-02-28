@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2009-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2009-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -56,6 +56,9 @@ import java.util.Set;
  */
 public abstract class HttpContext {
 
+    /**
+     * The handler to set for this context.
+     */
     protected HttpHandler handler;
 
     /**
@@ -89,7 +92,7 @@ public abstract class HttpContext {
      *      + ":" + exch.getLocalAddress().getPort()
      *      + exch.getContextPath() + getPath();
      * </pre>
-     * 
+     *
      * @return this context's path
      */
     public abstract String getPath();

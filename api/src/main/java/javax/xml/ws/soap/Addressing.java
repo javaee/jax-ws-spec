@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (C) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (C) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -69,7 +69,7 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
  * <p>
  * This annotation's behaviour is defined by the corresponding feature
  * {@link AddressingFeature}.
- * 
+ *
  * @since 1.6, JAX-WS 2.1
  */
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
@@ -83,9 +83,11 @@ public @interface Addressing {
      * Corresponding
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyaddressing">
      * 3.1.1 Addressing Assertion</a> must be generated in the generated WSDL.
+     *
+     * @return {@code true} if endpoint supports WS-Addressing, {@code false} otherwise
      */
     boolean enabled() default true;
-    
+
     /**
      * If addressing is enabled, this property determines whether the endpoint
      * requires WS-Addressing. If required is true, the endpoint requires
@@ -93,6 +95,8 @@ public @interface Addressing {
      * be present on incoming messages. A corresponding
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicyaddressing">
      * 3.1.1 Addressing Assertion</a> must be generated in the WSDL.
+     *
+     * @return {@code true} if endpoint requires WS-Addressing, {@code false} otherwise
      */
     boolean required() default false;
 
@@ -119,6 +123,7 @@ public @interface Addressing {
      * <a href="http://www.w3.org/TR/ws-addr-metadata/#wspolicynonanonresponses">
      * 3.1.3 NonAnonymousResponses Assertion</a> in the generated WSDL.
      *
+     * @return supported response types
      * @since 1.7, JAX-WS 2.2
      */
     Responses responses() default Responses.ALL;

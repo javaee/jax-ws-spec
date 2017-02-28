@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -62,7 +62,7 @@ import java.lang.annotation.Target;
  * <p>
  * <b>Example 1</b>: Specify explicit values for {@code Action} message addressing property
  * for {@code input} and {@code output} messages.
- * 
+ *
  * <pre>
  * {@literal @}WebService(targetNamespace="http://example.com/numbers")
  *  public class AddNumbersImpl {
@@ -143,21 +143,27 @@ import java.lang.annotation.Target;
 public @interface Action {
     /**
      * Explicit value of the WS-Addressing {@code Action} message addressing property for the {@code input}
-     * message of the operation. 
+     * message of the operation.
+     *
+     * @return {@code Action} message addressing property for the {@code input} message
      */
     String input() default "";
 
     /**
      * Explicit value of the WS-Addressing {@code Action} message addressing property for the {@code output}
-     * message of the operation. 
+     * message of the operation.
+     *
+     * @return {@code Action} message addressing property for the {@code output} message
      */
     String output() default "";
-    
+
     /**
      * Explicit value of the WS-Addressing {@code Action} message addressing property for the {@code fault}
      * message(s) of the operation. Each exception that is mapped to a fault and requires an explicit WS-Addressing
      * {@code Action} message addressing property, needs to be specified as a value in this property
      * using {@link FaultAction} annotation.
+     *
+     * @return {@code Action} message addressing property for the {@code fault} message(s)
      */
     FaultAction[] fault() default { };
 }

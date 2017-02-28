@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2014 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -46,8 +46,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
 
-/** 
- * Used to annotate service specific exception classes to customize 
+/**
+ * Used to annotate service specific exception classes to customize
  * to the local and namespace name of the fault element and the name
  * of the fault bean.
  *
@@ -57,26 +57,33 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface WebFault {
-  /**
-   *  Element's local name.
-  **/
-  public String name() default "";
+    /**
+     * Element's local name.
+     *
+     * @return loxL name
+     */
+    public String name() default "";
 
-  /**
-   *  Element's namespace name.
-  **/
-  public String targetNamespace() default "";
+    /**
+     * Element's namespace name.
+     *
+     * @return target namespace name
+     */
+    public String targetNamespace() default "";
 
-  /**
-   *  Fault bean name.
-  **/
-  public String faultBean() default "";
+    /**
+     * Fault bean name.
+     *
+     * @return bean name
+     */
+    public String faultBean() default "";
 
-
-  /**
-   *  wsdl:Message's name. Default name is the exception's class name.
-   *  @since 1.7, JAX-WS 2.2
-   */
-  public String messageName() default "";
+    /**
+     * wsdl:Message's name. Default name is the exception's class name.
+     *
+     * @return wsdl:Message's name
+     * @since 1.7, JAX-WS 2.2
+     */
+    public String messageName() default "";
 
 }

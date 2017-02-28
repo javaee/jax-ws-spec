@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2005-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2005-2017 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -42,48 +42,49 @@ package javax.xml.ws;
 
 
 /**
- * A WebServiceFeature is used to represent a feature that can be 
- * enabled or disabled for a web service.  
+ * A WebServiceFeature is used to represent a feature that can be
+ * enabled or disabled for a web service.
  * <p>
  * The JAX-WS specification will define some standard features and
  * JAX-WS implementors are free to define additional features if
- * necessary.  Vendor specific features may not be portable so 
- * caution should be used when using them. Each Feature definition 
+ * necessary.  Vendor specific features may not be portable so
+ * caution should be used when using them. Each Feature definition
  * MUST define a {@code public static final String ID}
- * that can be used in the Feature annotation to refer 
+ * that can be used in the Feature annotation to refer
  * to the feature. This ID MUST be unique across all features
  * of all vendors.  When defining a vendor specific feature ID,
- * use a vendor specific namespace in the ID string. 
+ * use a vendor specific namespace in the ID string.
  *
  * @see javax.xml.ws.RespectBindingFeature
  * @see javax.xml.ws.soap.AddressingFeature
  * @see javax.xml.ws.soap.MTOMFeature
- * 
+ *
  * @since 1.6, JAX-WS 2.1
  */
 public abstract class WebServiceFeature {
    /**
-    * Each Feature definition MUST define a public static final 
-    * String ID that can be used in the Feature annotation to refer 
+    * Each Feature definition MUST define a public static final
+    * String ID that can be used in the Feature annotation to refer
     * to the feature.
     */
    // public static final String ID = "some unique feature Identifier";
-    
+
    /**
     * Get the unique identifier for this WebServiceFeature.
-    * 
+    *
     * @return the unique identifier for this feature.
     */
-   public abstract String getID(); 
-    
+   public abstract String getID();
+
    /**
     * Specifies if the feature is enabled or disabled
-    */    
+    */
    protected boolean enabled = false;
-   
-   
-   protected WebServiceFeature(){}
-   
+
+    /**
+     * Default constructor.
+     */
+    protected WebServiceFeature() {}
 
    /**
     * Returns {@code true} if this feature is enabled.
