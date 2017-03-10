@@ -115,7 +115,7 @@
         <extension.name>javax.xml.ws</extension.name>
         <spec.version>2.3</spec.version>
         <old.spec.version>2.2</old.spec.version>
-        <jaxb.version>2.3.0-b170201.1204</jaxb.version>
+        <jaxb.version>2.3.0-b170310.1728</jaxb.version>
         <soap.version>1.4.0-b01</soap.version>
 
         <non.final>false</non.final>
