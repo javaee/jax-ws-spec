@@ -45,7 +45,6 @@ import javax.xml.ws.spi.WebServiceFeatureAnnotation;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Target;
 import java.lang.annotation.ElementType;
-import java.lang.annotation.Repeatable;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import javax.annotation.Resource;
@@ -99,7 +98,6 @@ import javax.annotation.Resource;
 @Target({ElementType.TYPE, ElementType.METHOD, ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Repeatable(WebServiceRefs.class)
 public @interface WebServiceRef {
     /**
      * The JNDI name of the resource.  For field annotations,
