@@ -131,7 +131,7 @@
         <spec.version>2.3</spec.version>
         <old.spec.version>2.2</old.spec.version>
         <jaxb.version>2.3.0-b170526.0356</jaxb.version>
-        <soap.version>1.4.0-b02</soap.version>
+        <soap.version>1.4.0-b03</soap.version>
 
         <non.final>false</non.final>
         <mod.dir>${project.build.directory}/mods</mod.dir>
