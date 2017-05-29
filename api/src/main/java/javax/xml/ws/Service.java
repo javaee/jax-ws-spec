@@ -242,12 +242,13 @@ public class Service {
 
 
     /**
-     * The {@code getPort} method returns a proxy.The parameter
-    {@code serviceEndpointInterface} specifies the service
- endpoint interface that is supported by the returned proxy. In the implementation of this method, the JAX-WS
- runtime system takes the responsibility of selecting a protocol
- binding (and a port) and configuring the proxy accordingly.
- The returned proxy should not be reconfigured by the client.
+     * The {@code getPort} method returns a proxy. The parameter
+     * {@code serviceEndpointInterface} specifies the service
+     * endpoint interface that is supported by the returned proxy.
+     * In the implementation of this method, the JAX-WS
+     * runtime system takes the responsibility of selecting a protocol
+     * binding (and a port) and configuring the proxy accordingly.
+     * The returned proxy should not be reconfigured by the client.
      *
      * @param <T> Service endpoint interface.
      * @param serviceEndpointInterface Service endpoint interface.

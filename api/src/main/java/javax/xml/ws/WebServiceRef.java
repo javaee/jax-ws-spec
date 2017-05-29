@@ -153,9 +153,9 @@ public @interface WebServiceRef {
      *
      * @return the service class extending {@code javax.xml.ws.Service}
      */
-    // 2.1 has Class value() default Object.class;
-    // Fixing this raw Class type correctly in 2.2 API. This shouldn't cause
-    // any compatibility issues for applications.
+     // 2.1 has Class value() default Object.class;
+     // Fixing this raw Class type correctly in 2.2 API. This shouldn't cause
+     // any compatibility issues for applications.
     Class<? extends Service> value() default Service.class;
 
     /**
