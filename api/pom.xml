@@ -62,26 +62,40 @@
 
     <inceptionYear>2005</inceptionYear>
     <description>JAX-WS (JSR 224) API</description>
-    <url>http://jsr224.java.net/</url>
+    <url>https://github.com/javaee/jax-ws-spec</url>
 
     <scm>
-        <connection>scm:git:git://java.net/jsr224~git</connection>
+        <connection>scm:git:git://github.com/javaee/jax-ws-spec.git</connection>
         <developerConnection>${scm.developerConnection}</developerConnection>
-        <url>http://svn.java.net/svn/jsr224~svn/branches/mr_2_2_new/api</url>
-      <tag>HEAD</tag>
-  </scm>
+        <url>https://github.com/javaee/jax-ws-spec</url>
+    </scm>
 
     <licenses>
         <license>
-            <name>
-                Dual license consisting of the CDDL v1.1 and GPL v2
-            </name>
-            <url>http://glassfish.java.net/public/CDDL+GPL_1_1.html</url>
+            <name>CDDL + GPLv2 with classpath exception</name>
+            <url>https://oss.oracle.com/licenses/CDDL+GPL-1.1</url>
             <distribution>repo</distribution>
         </license>
     </licenses>
 
+    <issueManagement>
+        <system>IssueTracker</system>
+        <url>https://github.com/javaee/jax-ws-spec/issues</url>
+    </issueManagement>
+
+    <mailingLists>
+        <mailingList>
+            <name>JAX-WS API Developer</name>
+            <archive>javaee-spec@javaee.groups.io</archive>
+        </mailingList>
+    </mailingLists>
+
     <developers>
+        <developer>
+            <name>Lukas Jungmann</name>
+            <email>lukas.jungmann@oracle.com</email>
+            <organization>Oracle Corporation</organization>
+        </developer>
         <developer>
             <name>Martin Grebac</name>
             <email>martin.grebac@oracle.com</email>
@@ -111,7 +125,7 @@
     <properties>
         <release.spec.title>Maintenance Release</release.spec.title>
         <release.spec.date>Jun 15, 2010</release.spec.date>
-        <release.spec.feedback>jsr224-spec-comments@sun.com</release.spec.feedback>
+        <release.spec.feedback>javaee-spec@javaee.groups.io</release.spec.feedback>
 
         <extension.name>javax.xml.ws</extension.name>
         <spec.version>2.3</spec.version>
@@ -125,7 +139,7 @@
         <findbugs.exclude>${project.basedir}/exclude.xml</findbugs.exclude>
         <findbugs.threshold>Low</findbugs.threshold>
         <maven.build.timestamp.format>yyMMdd.HHmm</maven.build.timestamp.format>
-        <scm.developerConnection>scm:git:ssh://git.java.net/jsr224~git</scm.developerConnection>
+        <scm.developerConnection>scm:git:git@github.com:javaee/jax-ws-spec.git</scm.developerConnection>
     </properties>
 
     <build>
