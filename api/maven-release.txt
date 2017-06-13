@@ -37,4 +37,4 @@
 # holder.
 #
 
-mvn clean package javadoc:javadoc javadoc:jar source:jar gpg:sign deploy
+mvn clean package source:jar gpg:sign install:install deploy:deploy
