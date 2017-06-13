@@ -44,7 +44,7 @@
     <parent>
         <groupId>net.java</groupId>
         <artifactId>jvnet-parent</artifactId>
-        <version>4</version>
+        <version>5</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -132,10 +132,10 @@
         <release.spec.feedback>javaee-spec@javaee.groups.io</release.spec.feedback>
 
         <extension.name>javax.xml.ws</extension.name>
-        <spec.version>2.3</spec.version>
-        <old.spec.version>2.2</old.spec.version>
-        <jaxb.version>2.3.0-b170526.0356</jaxb.version>
-        <soap.version>1.4.0-b03</soap.version>
+        <spec.version>2.4</spec.version>
+        <old.spec.version>2.3</old.spec.version>
+        <jaxb.version>2.3.0</jaxb.version>
+        <soap.version>1.4.0</soap.version>
 
         <non.final>false</non.final>
         <mod.dir>${project.build.directory}/mods</mod.dir>
@@ -188,21 +188,22 @@
                     <artifactId>maven-javadoc-plugin</artifactId>
                     <version>2.10.4</version>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
                     <version>3.2.0</version>
                 </plugin>
-
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>1.2</version>
                 </plugin>
-
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <version>2.5.3</version>
+                </plugin>
             </plugins>
-
         </pluginManagement>
 
         <plugins>
@@ -330,8 +331,10 @@
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <useReleaseProfile>false</useReleaseProfile>
                     <arguments>${release.arguments}</arguments>
+                    <!--
                     <releaseVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}-b${maven.build.timestamp}</releaseVersion>
                     <developmentVersion>${project.version}</developmentVersion>
+                    -->
                 </configuration>
             </plugin>
             <plugin>
