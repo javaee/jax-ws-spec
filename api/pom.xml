@@ -72,11 +72,12 @@
   </scm>
 
     <licenses>
-        <license>
-            <name>CDDL + GPLv2 with classpath exception</name>
-            <url>https://oss.oracle.com/licenses/CDDL+GPL-1.1</url>
-            <distribution>repo</distribution>
-        </license>
+      <license>
+        <name>CDDL + GPLv2 with classpath exception</name>
+        <url>https://github.com/javaee/jax-ws-spec/blob/master/LICENSE.md</url>
+        <distribution>repo</distribution>
+        <comments>A business-friendly OSS license</comments>
+      </license>
     </licenses>
 
     <issueManagement>
@@ -86,8 +87,10 @@
 
     <mailingLists>
         <mailingList>
-            <name>JAX-WS API Developer</name>
-            <archive>javaee-spec@javaee.groups.io</archive>
+            <name>Java EE Group</name>
+            <subscribe>javaee-spec+subscribe@javaee.groups.io</subscribe>
+            <post>javaee-spec@javaee.groups.io</post>
+            <archive>https://javaee.groups.io/g/javaee-spec/topics</archive>
         </mailingList>
     </mailingLists>
 
@@ -125,7 +128,7 @@
 
     <properties>
         <release.spec.title>Maintenance Release</release.spec.title>
-        <release.spec.date>Jun 15, 2010</release.spec.date>
+        <release.spec.date>Jul 11, 2017</release.spec.date>
         <release.spec.feedback>javaee-spec@javaee.groups.io</release.spec.feedback>
 
         <extension.name>javax.xml.ws</extension.name>
