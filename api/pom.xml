@@ -525,7 +525,7 @@ href='http://www.oracle.com/technetwork/java/index-jsp-137004.html'><i>Metro Web
                                 <includeDependencySources>false</includeDependencySources>
                                 <additionalJOptions>
                                     <additionalJOption>--add-modules</additionalJOption>
-                                    <additionalJOption>java.xml.soap,java.xml.bind,java.xml.ws.annotation</additionalJOption>
+                                    <additionalJOption>java.xml.bind,java.xml.ws.annotation</additionalJOption>
                                     <additionalJOption>--module-path</additionalJOption>
                                     <additionalJOption>${mod.dir}</additionalJOption>
                                 </additionalJOptions>
