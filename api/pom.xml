@@ -462,7 +462,7 @@ href='http://www.oracle.com/technetwork/java/index-jsp-137004.html'><i>Metro Web
         <profile>
             <id>jdk9</id>
             <activation>
-                <jdk>9</jdk>
+                <jdk>[9,)</jdk>
             </activation>
             <build>
                 <pluginManagement>
