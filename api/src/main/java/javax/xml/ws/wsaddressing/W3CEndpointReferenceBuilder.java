@@ -160,7 +160,7 @@ public final class W3CEndpointReferenceBuilder {
      * Sets the {@code endpointName} as
      * {@code wsam:ServiceName/@EndpointName} in the
      * {@code wsa:Metadata} element. This method can only be called
-     * after the {@link #serviceName} method has been called.
+     * after the {@link #serviceName(QName)} method has been called.
      * <p>
      * See <a href="http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#refmetadatfromepr">
      * 2.1 Referencing WSDL Metadata from an EPR</a> for more details.
