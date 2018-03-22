@@ -3,10 +3,3 @@
 /exclude.xml
 /LICENSE.txt
 /offline-javadoc/package-list
-/test/README.txt
-/test/runtests.sh
-/test/src/jaxws/factory/Invalid.java
-/test/src/jaxws/factory/Valid.java
-/test/src/jaxws/factory/Valid2.java
-/test/src/jaxws/factory/Valid3.java
-/test/src/jaxws/test/Test.java
