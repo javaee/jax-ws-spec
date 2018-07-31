@@ -2,7 +2,7 @@
 
     DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
 
-    Copyright (c) 1997-2017 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 1997-2018 Oracle and/or its affiliates. All rights reserved.
 
     The contents of this file are subject to the terms of either the GNU
     General Public License Version 2 only ("GPL") or the Common Development
@@ -124,6 +124,11 @@
             <artifactId>javax.xml.soap-api</artifactId>
             <version>${soap.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>${javax.annotation-api.version}</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -134,7 +139,7 @@
         <extension.name>javax.xml.ws</extension.name>
         <spec.version>2.4</spec.version>
         <old.spec.version>2.3</old.spec.version>
-        <jaxb.version>2.3.1-b171012.0343</jaxb.version>
+        <jaxb.version>2.4.0-b180725.0427</jaxb.version>
         <soap.version>1.4.0</soap.version>
 
         <non.final>false</non.final>
@@ -144,6 +149,7 @@
         <findbugs.threshold>Low</findbugs.threshold>
         <maven.build.timestamp.format>yyMMdd.HHmm</maven.build.timestamp.format>
         <scm.developerConnection>scm:git:git@github.com:javaee/jax-ws-spec.git</scm.developerConnection>
+        <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
     </properties>
 
     <build>
@@ -186,12 +192,12 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>3.0.0-M1</version>
+                    <version>3.0.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <version>3.5.1</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -311,7 +317,6 @@
                         <Specification-Vendor>Oracle Corporation</Specification-Vendor>
                         <Implementation-Vendor>${project.organization.name}</Implementation-Vendor>
                         <Implementation-Vendor-Id>org.glassfish</Implementation-Vendor-Id>
-                        <_failok>true</_failok> <!-- FIXME: FELIX-5430 -->
                     </instructions>
                 </configuration>
                 <executions>
@@ -524,8 +529,6 @@ href='http://www.oracle.com/technetwork/java/index-jsp-137004.html'><i>Metro Web
                             <configuration>
                                 <includeDependencySources>false</includeDependencySources>
                                 <additionalJOptions>
-                                    <additionalJOption>--add-modules</additionalJOption>
-                                    <additionalJOption>java.xml.soap,java.xml.bind,java.xml.ws.annotation</additionalJOption>
                                     <additionalJOption>--module-path</additionalJOption>
                                     <additionalJOption>${mod.dir}</additionalJOption>
                                 </additionalJOptions>
