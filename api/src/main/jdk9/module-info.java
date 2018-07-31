@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2017 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2017-2018 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -42,7 +42,7 @@ module java.xml.ws {
     requires java.xml.bind;
     requires java.logging;
     requires java.xml.soap;
-    requires java.xml.ws.annotation;
+    requires java.annotation;
 
     exports javax.xml.ws;
     exports javax.xml.ws.handler;
