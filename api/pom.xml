@@ -336,8 +336,6 @@
                     <mavenExecutorId>forked-path</mavenExecutorId>
                     <useReleaseProfile>false</useReleaseProfile>
                     <arguments>${release.arguments}</arguments>
-                    <releaseVersion>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}-b${maven.build.timestamp}</releaseVersion>
-                    <developmentVersion>${project.version}</developmentVersion>
                 </configuration>
             </plugin>
             <plugin>
